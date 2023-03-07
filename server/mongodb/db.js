@@ -6,18 +6,21 @@ const {
     password,
     nodeEnv,
   } = require("./config");
-  
-// Sample URI : mongodb://myuser:mypassword@localhost:27017/mydb
-
-// const uri = 'mongodb://localhost:27017/mydb';
 
 const uri = `mongodb://${userName}:${password}@${hostUrl}:27017/${dbName}`
 
 console.log("URI of mongodb to connect : ", uri);
 
-mongoose.connect(uri);
-const db = mongoose.connection;
-db.on('error', (error) => {console.log(error)});
-db.once('open', () => {console.log("Connected to DB")});
+async function connectToDB(){
+  console.log(" ******** Inside Connect to DB function ******** ");
+  try{
+    await mongoose.connect(uri);
+    console.log('Connected to DB successfully');
+  }catch(error){
+    console.error(error);
+  }
+}
 
-module.exports = db;
+// connectToDB();
+
+module.exports = {mongoose};
