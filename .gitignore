@@ -105,3 +105,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Ignore DS_store in all the directories
+**/.DS_Store
