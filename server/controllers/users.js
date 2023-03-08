@@ -3,24 +3,27 @@ const authUtils = require("../utils/authUtils");
 
 const userService = new UserService();
 
-exports.createUser = (req, res) => {
+exports.createUser = async (req, res) => {
     console.log("Inside create User POST API");
     const {first_name, last_name, password, username} = req.body;
-    authUtils.generateHash(password)
-    .then(hash => {
-        console.log("Hash : ", hash);
+    try{
+        const hash = await authUtils.generateHash(password);
+        console.log("Hash created : ", hash);
         const payload = { password : hash, first_name, last_name, username};
         userService.createUser(payload)
-        .then(result =>{
+        .then(userRow => {
             res.status(201).send({
-                result
+                userRow
             });
         })
-        .catch((error) => {
-            res.status(400).send({"message" : "400 Bad Request", error : error.message});
+        .catch(e => {
+            res.status(500).send({ message : "Internal Server Error", 
+                 error : e.message});
         })
 
-    })
+    }catch(e){
+        res.status(400).send({"message" : "400 Bad Request", error : error.message});
+    }
 };
 
 
