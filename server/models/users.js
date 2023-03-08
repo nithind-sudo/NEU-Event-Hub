@@ -4,12 +4,32 @@ const { Schema, model } = mongoose;
 
 
 const userSchema = new Schema({
-  username : String,
-  password : String,
-  firstName : String,
-  lastName : String,
-  createdAt: Date,
-  updatedAt: Date,
+  username : {
+    type : String,
+    required : true,
+  },
+  password : {
+    type : String,
+    required : true,
+  },
+  first_name : {
+    type : String,
+    required : true,
+  },
+  last_name : {
+    type : String,
+    required : true,
+  },
+  created_time : {
+    type : Date,
+    default : () => Date.now(),
+    immutable : true
+  },
+  updated_time : {
+    type : Date,
+    default : () => Date.now(),
+    immutable : true
+  },
 });
 
 // userSchema.plugin(AutoIncrement, { inc_field: 'userId' });
