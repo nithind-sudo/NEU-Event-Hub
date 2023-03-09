@@ -53,18 +53,19 @@ exports.deleteUserInfo = async (req, res) => {
 }
 
 exports.patchUserInfo = async (req, res) => {
+    const {user_id} = req.params;
     const {first_name, last_name, password, username} = req.body;
     const patchInfo = { 
         ...(first_name && { first_name }), 
         ...(last_name && { last_name }),
         ...(username && { username}),
-        // account_updated : new Date()
+        account_updated : new Date()
     };
     if(!password){
         // password field is not present
         try{
-            const updatedInfo = await userService.patchUser(patchInfo);
-            res.status(201).send(updatedInfo);
+            const updatedInfo = await userService.patchUser(user_id, patchInfo);
+            res.status(200).send(updatedInfo);
         }catch(e){
             res.status(400).send({message : "400 Bad Request", error : e.message});
         }
@@ -74,8 +75,8 @@ exports.patchUserInfo = async (req, res) => {
         try{
             const hash = await authUtils.generateHash(password);
             const updatedPatchPayload = {password : hash, ...patchInfo};
-            const updatedInfo = await userService.patchUser(patchInfo);
-            res.status(201).send(updatedInfo);    
+            const updatedInfo = await userService.patchUser(user_id, patchInfo);
+            res.status(200).send(updatedInfo);    
         }catch(e){
             res.status(400).send({message : "400 Bad Request", error : e.message});
         }  

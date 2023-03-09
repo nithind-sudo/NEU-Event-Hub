@@ -14,8 +14,9 @@ class UserService{
         return await User.deleteOne({ 'user_id' : user_id}).exec();
     }
 
-    async patchUser(payload){
-        return await User.findOneAndUpdate({...payload});
+    async patchUser(user_id, payload){
+        console.log("payload to update the patch  : ", payload)
+        return await User.findOneAndUpdate({user_id}, {...payload});
     }
 
 }
