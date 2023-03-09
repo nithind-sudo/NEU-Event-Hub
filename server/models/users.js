@@ -36,12 +36,12 @@ const userSchema = new Schema({
   created_time : {
     type : Date,
     default : () => Date.now(),
-    immutable : true
+    // immutable : true
   },
   updated_time : {
     type : Date,
     default : () => Date.now(),
-    immutable : true
+    // immutable : true
   },
 });
 
