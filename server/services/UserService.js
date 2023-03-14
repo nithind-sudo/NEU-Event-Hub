@@ -15,8 +15,13 @@ class UserService{
     }
 
     async patchUser(user_id, payload){
-        console.log("payload to update the patch  : ", payload)
+        // console.log("payload to update the patch  : ", payload)
         return await User.findOneAndUpdate({user_id}, {...payload});
+    }
+
+    async findUserByUserName(username){
+        console.log( "Searching for user : ",  username );
+        return await User.find({username}).exec();
     }
 
 }
