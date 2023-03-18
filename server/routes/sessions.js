@@ -3,11 +3,12 @@ const router = express.Router()
 
 const sessionController = require("../controllers/sessions");
 const authMiddleWare = require('../middleware/authMiddleware');
+const sessionMiddleware = require("../middleware/sessionMiddleware");
 
-router.get("/", sessionController.getSessionInfo);
+router.get("/", sessionMiddleware, sessionController.getSessionInfo);
 
-router.post("/", [authMiddleWare],  sessionController.generateSession);
+router.post("/", [authMiddleWare, sessionMiddleware],  sessionController.generateSession);
 
-router.delete("/", sessionController.deleteSession);
+router.delete("/", [authMiddleWare, sessionMiddleware], sessionController.deleteSession);
 
 module.exports = router;
