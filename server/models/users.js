@@ -33,6 +33,33 @@ const userSchema = new Schema({
     type : String,
     required : true,
   },
+  role: {
+    type: String,
+    enum: ["event-manager", "admin", "user", "performer"],
+    default: "user",
+  },
+  phone_number: {
+    type: String,
+    required: true,
+  },
+  events_booked: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Event",
+    },
+  ],
+  favorites: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Listing",
+    },
+  ],
+  listings: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Listing",
+    },
+  ],
   created_time : {
     type : Date,
     default : () => Date.now(),
