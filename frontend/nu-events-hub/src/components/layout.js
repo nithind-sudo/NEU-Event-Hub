@@ -7,7 +7,7 @@
 
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby";
-import Navbar from "./ReusableComponents/Navbar/navbar";
+import Navbar from "./ReusableComponents/Navbar/Navbar";
 import Footer from "./ReusableComponents/Footer/Footer";
 
 const Layout = ({ children }) => {

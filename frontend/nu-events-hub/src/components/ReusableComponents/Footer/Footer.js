@@ -4,7 +4,7 @@ import '../../../styles/ReusableStyles/Footer/footer.css'
 
 const Footer = ()=>{
     return (
-        <footer className='container-fluid applyNUTheme border-top'>
+        <footer className='container-fluid fixed-bottom applyNUTheme border-top'>
             <div className='container'>
                 <div className='py-3 my-4'>
                 <b><p className='text-center text-muted'>Developers</p></b>
