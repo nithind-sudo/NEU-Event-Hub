@@ -6,11 +6,16 @@
  */
 
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby";
+import Navbar from "./ReusableComponents/Navbar/navbar";
+import Footer from "./ReusableComponents/Footer/Footer";
 
 const Layout = ({ children }) => {
   return (
-    <div>My name is layout</div>
+    <div>
+      <Navbar></Navbar>
+      <Footer></Footer>
+    </div>
   )
 }
 
