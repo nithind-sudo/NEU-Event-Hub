@@ -1,0 +1,16 @@
+@import '../colors/colors.scss';
+
+.applyNUTheme {
+    background-color: $primary-background-color;
+    color: $primary-text-color;
+}
+.nuLink {
+    color: $primary-text-color;
+}
+.nuLink:hover {
+    color: $primary-text-hover-color;
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-color: $primary-nu-theme-color;
+    text-decoration-thickness: 3px;
+}

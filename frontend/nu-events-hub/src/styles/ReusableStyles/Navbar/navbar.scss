@@ -1,0 +1,17 @@
+@import '../colors//colors.scss';
+@import '../Footer/footer.scss';
+
+.nuThemeText {
+    color: $primary-text-color;
+}
+.nuThemeText:hover {
+    color: $primary-text-hover-color;
+}
+.nuButton {
+    background-color: $primary-nu-theme-color;
+    color: $primary-text-color;
+}
+.nuButton:hover {
+    background-color: $primary-text-hover-color;
+    color: $primary-background-color;
+}
