@@ -9,10 +9,10 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `NU Events Hub`,
+    description: `This is a frontend development project for NU Events Hub. This is a frontend React part of the full stack application of MERN technologies.`,
+    author: `@teamVishalChawla`,
+    siteUrl: `https://github.com/nithin-bharadwaj-369-NEU/NEU-Event-Hub.git`,
   },
   plugins: [
     `gatsby-plugin-image`,
