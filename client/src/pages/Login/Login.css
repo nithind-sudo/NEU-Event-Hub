@@ -1,17 +1,23 @@
-.login-container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .flex-column {
-    flex: 1;
-    flex-basis: 50%;
-    background-color: blue;
+  flex: 1;
+  flex-basis: 50%;
+  background-color: blue;
 }
 
 .login-content {
-    flex: 1;
-    flex-basis: 50%;
-    background-color: green;
+  flex: 1;
+  flex-basis: 50%;
+  background-color: green;
 }
