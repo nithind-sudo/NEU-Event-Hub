@@ -6,17 +6,17 @@ import CustomLabel from "../../components/form/Label";
 import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
 import "./Login.css";
-import loginImage from '../../assets/login_image.jpg'
+import loginImage from "../../assets/login_image.jpg";
 
 export default function Login() {
   return (
     <div className="login-container">
       <div className="flex-column">
-        <ImageComponent src={loginImage} />
+        <ImageComponent src={loginImage} className="image-fit" />
       </div>
 
-      <Form>
-        <Container className="login-content">
+      <Form className="login-content">
+        <Container>
           <Form.Group controlId="userEmail">
             <CustomLabel>
               Username
