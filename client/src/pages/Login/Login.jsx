@@ -5,11 +5,15 @@ import TextInput from "../../components/form/TextInput";
 import CustomLabel from "../../components/form/Label";
 import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
+import "./Login.css";
 
 export default function Login() {
   return (
     <div className="login-container">
-      <ImageComponent />
+      <div className="flex-column">
+        <ImageComponent />
+      </div>
+
       <Form>
         <Container className="login-content">
           <Form.Group controlId="userEmail">
@@ -24,7 +28,7 @@ export default function Login() {
               <TextInput type="password" />
             </CustomLabel>
           </Form.Group>
-          <Button variant="primary" text={"Login"} ></Button>
+          <Button variant="primary" text={"Login"}></Button>
         </Container>
       </Form>
     </div>

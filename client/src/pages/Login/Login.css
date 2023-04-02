@@ -1,4 +1,17 @@
 .login-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.flex-column {
+    flex: 1;
+    flex-basis: 50%;
+    background-color: blue;
+}
+
+.login-content {
+    flex: 1;
+    flex-basis: 50%;
+    background-color: green;
 }
