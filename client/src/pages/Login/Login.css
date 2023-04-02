@@ -13,6 +13,7 @@
 .flex-column {
   flex: 1;
   flex-basis: 50%;
+  /* flex: 0 0 50%; */
   background-color: blue;
 }
 
@@ -20,4 +21,9 @@
   flex: 1;
   flex-basis: 50%;
   background-color: green;
+}
+
+.image-fit {
+  width: 100%;
+  height: auto;
 }
