@@ -10,26 +10,33 @@ import loginImage from "../../assets/login_image.jpg";
 
 export default function Login() {
   return (
-    <div className="login-container">
+    <div className="login-page">
       <div className="flex-column">
         <ImageComponent src={loginImage} className="image-fit" />
       </div>
 
       <Form className="login-content">
         <Container>
-          <Form.Group controlId="userEmail">
-            <CustomLabel>
-              Username
-              <TextInput type="text" />
-            </CustomLabel>
-          </Form.Group>
-          <Form.Group controlId="userPassword">
-            <CustomLabel>
-              Password
-              <TextInput type="password" />
-            </CustomLabel>
-          </Form.Group>
-          <Button variant="primary" text={"Login"}></Button>
+          <div className="login-container">
+            <Form.Group controlId="userEmail">
+              <CustomLabel>
+                Username
+                <TextInput type="text" className="login-input" />
+              </CustomLabel>
+            </Form.Group>
+            <Form.Group controlId="userPassword">
+              <CustomLabel>
+                Password
+                <TextInput type="password" className="login-input" />
+              </CustomLabel>
+            </Form.Group>
+            <Button
+              variant="danger"
+              text={"Sign In"}
+              className="login-button"
+            ></Button>
+            <CustomLabel>Don't have an account? Create account</CustomLabel>
+          </div>
         </Container>
       </Form>
     </div>
