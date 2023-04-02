@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'react-bootstrap/Image'
 
-export default function ImageComponent() {
+export default function ImageComponent({src}) {
   return (
-    <div>ImageComponent</div>
+    <div><Image src={src} responsive /></div>
   )
 }
