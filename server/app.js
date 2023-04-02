@@ -1,6 +1,8 @@
 const express = require('express')
 const { v4: uuidv4 } = require('uuid');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 
 const {mongoose, mongooseConnection} = require('./mongodb/db');
 
@@ -13,6 +15,7 @@ app.use(
     extended: true,
   })
 );
+app.use(cors());
 
 const index_routes = require('./routes/index');
 const userRoutes = require('./routes/users');
