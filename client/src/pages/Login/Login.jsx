@@ -12,13 +12,12 @@ import { useState } from "react";
 import axios from "axios";
 import MyToast from "../../components/ui/Toast";
 
-
 const LOGIN_URL = "http://localhost:3000/v1/session";
 
 export default function Login({ ...props }) {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
@@ -27,7 +26,18 @@ export default function Login({ ...props }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post(LOGIN_URL, { email, password });
+      const authString = `${username}:${password}`;
+      const base64AuthString = btoa(authString);
+
+      const response = await axios.post(
+        LOGIN_URL,
+        {
+          headers: {
+            Authorization: `Basic ${base64AuthString}`,
+          },
+        },
+        { username, password }
+      );
       console.log(` *** Response from Login End Point : ${response}`);
       if (response.data.success) {
         props.handleLogin();
@@ -57,10 +67,10 @@ export default function Login({ ...props }) {
                 Username
                 <TextInput
                   type="text"
-                  value={email}
+                  value={username}
                   className="login-input"
                   placeholder={"Email..."}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </CustomLabel>
             </Form.Group>
