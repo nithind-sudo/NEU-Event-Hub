@@ -9,10 +9,9 @@ import "./Login.css";
 import loginImage from "../../assets/login_image.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import { login } from '../../apiClient';
 import MyToast from "../../components/ui/Toast";
 
-const LOGIN_URL = "http://localhost:3000/v1/session";
 
 export default function Login({ ...props }) {
   const navigate = useNavigate();
@@ -26,19 +25,8 @@ export default function Login({ ...props }) {
     e.preventDefault();
 
     try {
-      const authString = `${username}:${password}`;
-      const base64AuthString = btoa(authString);
-
-      const response = await axios.post(
-        LOGIN_URL,
-        {
-          headers: {
-            Authorization: `Basic ${base64AuthString}`,
-          },
-        },
-        { username, password }
-      );
-      console.log(` *** Response from Login End Point : ${response}`);
+      const response = await login(username, password);
+      console.log(` *** Response from Login End Point : ${response.data}`);
       if (response.data.success) {
         props.handleLogin();
         navigate("/main");

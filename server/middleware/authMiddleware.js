@@ -4,7 +4,6 @@ const UserService = require("../services/UserService");
 
 const authMiddleWare = async (req, res, next) => {
   console.log("********* Inside AUTH MIDDLEWARE ********* ");
-  // console.log("Request-body : ", req);
   const user = basicAuth(req);
   console.log("User Info after using basicAuth : ", user);
   if (!user || !user.name || !user.pass) {
@@ -20,7 +19,7 @@ const authMiddleWare = async (req, res, next) => {
         res.status(401).send({ message: "Invalid Username or Password" });
       } else {
         const userInfoRow = userInfo[0];
-        console.log("userInfoRow from AUTH MIDDLEWARE : ", userInfoRow);
+        
         if (userInfoRow.username === user.name) {
           const cmpPass = await authUtils.comparePassword(
             user.pass,
