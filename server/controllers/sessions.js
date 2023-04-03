@@ -16,9 +16,10 @@ exports.getSessionInfo = async (req, res) => {
 exports.generateSession = async (req, res) => {
   console.log('Inside generate Session of Session Controller');
   console.log("Req.session : ", req.session)
+  console.log("Session ID : ", req.sessionID);
   req.session.user = req.username;
   req.session.authorized = true;
-  res.status(201).send({ message: `Session Created for User: ${req.username}` });
+  res.status(201).send({ message: `Session Created for User: ${req.username}`, success : true });
 };
 
 exports.deleteSession = async (req, res) => {
