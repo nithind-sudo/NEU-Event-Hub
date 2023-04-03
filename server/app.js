@@ -2,12 +2,14 @@ const express = require('express')
 const { v4: uuidv4 } = require('uuid');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 
 const {mongoose, mongooseConnection} = require('./mongodb/db');
 
 const app = express()
 
+app.use(cookieParser());
 app.use(express.json())
 app.use(bodyParser.json());
 app.use(
