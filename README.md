@@ -16,7 +16,7 @@ A One stop solution to display events in and around Northeastern University so t
 
 * Go inside server directory using command `cd server`
 * Run `npm i ` or `npm install` to install the dependencies present in package.json
-* Add a new hidden file called .evn which will have all your project config including database host, port etc 
+* Add a new hidden file called **`.env`** which will have all your project config including database host, port etc 
 * After successful installation of dependencies, run `npm run start` to start the application
 * Use Postman to hit the APIs with out any front end application to test and develop the APIs  
 
