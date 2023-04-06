@@ -1,11 +1,11 @@
 module.exports = [
-    "/studentOrganized", 
-    "/professorOrganized", 
-    "/speakerOrganized", 
-    "/managementOrganized",
-    "/csOrganized",
-    "/engineeringOrganized",
-    "/cpsOrganized",
-    "/cosOrganized",
-    "/dAmoreOrganized"
+  "/category/studentOrganized",
+  "/category/professorOrganized",
+  "/category/speakerOrganized",
+  "/category/managementOrganized",
+  "/category/csOrganized",
+  "/category/engineeringOrganized",
+  "/category/cpsOrganized",
+  "/category/cosOrganized",
+  "/category/dAmoreOrganized",
 ];
