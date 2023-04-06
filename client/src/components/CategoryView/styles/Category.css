@@ -1,0 +1,32 @@
+.explore-view {
+  background-color: #d00404;
+}
+
+.colorCodeNortheastern {
+  color: #d00404;
+}
+
+.card-specs {
+  min-height: 80px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  transition: 0.3s;
+}
+
+.text-item {
+  size: 10px;
+}
+
+@media (max-width: 1200px) {
+  .card-specs {
+    min-height: 100px;
+  }
+}
+@media (max-width: 768px) {
+  .card-specs {
+    min-height: 80px;
+  }
+}
+.card-specs:hover {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}/*# sourceMappingURL=Category.css.map */

@@ -2,6 +2,7 @@ import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CategoryView from "./components/CategoryView/CategoryView";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,9 +16,10 @@ function App() {
       {isLoggedIn && <LandingPage />}
       <Routes>
         <Route path="/" element={<Login handleLogin={handleLogin} />}></Route>
+        <Route path="/category" element={<CategoryView />}></Route>
         {isLoggedIn && <>
           Need to Add paths here to multiple pages for navigation
-        </>}
+        </> }
       </Routes>
     </BrowserRouter>
   );
