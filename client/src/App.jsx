@@ -4,6 +4,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoryView from "./components/CategoryView/CategoryView";
+import Category from "./components/Category/Category";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,9 +25,10 @@ function App() {
         <Route path="/login" element={<Login handleLogin={handleLogin} />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/category" element={<CategoryView />}></Route>
-        {isLoggedIn && <>
-          Need to Add paths here to multiple pages for navigation
-        </> }
+        <Route path="/category/:categoryName" element={<Category />}></Route>
+        {isLoggedIn && (
+          <>Need to Add paths here to multiple pages for navigation</>
+        )}
       </Routes>
     </BrowserRouter>
   );
