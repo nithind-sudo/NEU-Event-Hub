@@ -15,6 +15,10 @@
     size: 10px;
 }
 
+a:link {
+    text-decoration: none;
+}
+
 @media (max-width: 1200px) {
     .card-specs {
         min-height: 100px;
