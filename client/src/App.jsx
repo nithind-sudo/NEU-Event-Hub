@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import SignUp from "./pages/SignUp/SignUp";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CategoryView from "./components/CategoryView/CategoryView";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,9 +23,10 @@ function App() {
         <Route path="/" element={<Login handleLogin={handleLogin} />}></Route>
         <Route path="/login" element={<Login handleLogin={handleLogin} />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/category" element={<CategoryView />}></Route>
         {isLoggedIn && <>
           Need to Add paths here to multiple pages for navigation
-        </>}
+        </> }
       </Routes>
     </BrowserRouter>
   );
