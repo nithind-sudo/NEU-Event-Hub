@@ -21,11 +21,13 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [ alertClass, setAlertClass ] = useState('danger');
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     // TODO Form Validation code should be written here
     // Call the user creation end point
+    // Need to mention the class to show if the post was successful
     const payload = {
       first_name: firstName,
       last_name: lastName,
@@ -38,18 +40,18 @@ export default function SignUp() {
       console.log(` *** Response from SignUp End Point : ${response.data}`);
       if (response.data.success) {
         setShowAlert(true);
-        <MyToast
-          bg={"Success"}
-          show={showAlert}
-          onClose={() => setShowAlert(false)}
-          message={"Created Account Successfully!! Redirecting to Login Page..."}
-        />
-        navigate("/");
-      }else{
+        setAlertClass("success");
+        setError("Account Created Successfully!!!")
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      } else {
+        setAlertClass("Danger");
         setError("Invalid Data In Form");
         setShowAlert(true);
       }
     } catch (error) {
+      setAlertClass("Danger");
       setError("Invalid Data In Form");
       setShowAlert(true);
     }
@@ -59,9 +61,9 @@ export default function SignUp() {
     <div>
       <Form>
         <Container>
-          <Row>
+          {/* <Row>
             <h3>Get Started Now!!! </h3>
-          </Row>
+          </Row> */}
           <Row className="justify-content-center">
             <Col>
               <Form.Group controlId="userFirstName">
@@ -167,7 +169,7 @@ export default function SignUp() {
       </Form>
       {showAlert && (
         <MyToast
-          bg={"danger"}
+          bg={alertClass}
           show={showAlert}
           onClose={() => setShowAlert(false)}
           message={error}
