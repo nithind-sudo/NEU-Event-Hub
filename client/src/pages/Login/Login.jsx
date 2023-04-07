@@ -11,7 +11,15 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../../apiClient";
 import MyToast from "../../components/ui/Toast";
+import Joi from "joi";
 import { Link } from "react-router-dom";
+
+const schema = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
+  password: Joi.string().min(6).required(),
+});
 
 export default function Login({ ...props }) {
   const navigate = useNavigate();
@@ -20,6 +28,10 @@ export default function Login({ ...props }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleSignIn = async (e) => {
     e.preventDefault();
