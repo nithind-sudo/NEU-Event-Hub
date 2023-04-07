@@ -6,14 +6,54 @@ import Form from "react-bootstrap/Form";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "../../components/ui/Button";
 import { useState } from "react";
+import "./SignUp.css";
+import { signUp } from "../../apiClient";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    // TODO Form Validation code should be written here
+    // Call the user creation end point
+    const payload = {
+      first_name: firstName,
+      last_name: lastName,
+      username: email,
+      phone_number: phoneNumber,
+      password,
+    };
+    try {
+      const response = await signUp(payload);
+      console.log(` *** Response from SignUp End Point : ${response.data}`);
+      if (response.data.success) {
+        setShowAlert(true);
+        <MyToast
+          bg={"Success"}
+          show={showAlert}
+          onClose={() => setShowAlert(false)}
+          message={"Created Account Successfully!! Redirecting to Login Page..."}
+        />
+        navigate("/");
+      }else{
+        setError("Invalid Data In Form");
+        setShowAlert(true);
+      }
+    } catch (error) {
+      setError("Invalid Data In Form");
+      setShowAlert(true);
+    }
+  };
 
   return (
     <div>
@@ -119,11 +159,20 @@ export default function SignUp() {
             <Button
               variant="danger"
               text={"Create Account"}
+              onClick={handleSignUp}
               className="login-button"
             ></Button>
           </Row>
         </Container>
       </Form>
+      {showAlert && (
+        <MyToast
+          bg={"danger"}
+          show={showAlert}
+          onClose={() => setShowAlert(false)}
+          message={error}
+        />
+      )}
     </div>
   );
 }

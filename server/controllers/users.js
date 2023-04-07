@@ -4,7 +4,7 @@ const authUtils = require("../utils/authUtils");
 const userService = new UserService();
 
 exports.createUser = async (req, res) => {
-  const { first_name, last_name, password, username, phone_number, role } =
+  const { first_name, last_name, password, username, phone_number, role, isVerified } =
     req.body;
   try {
     const hash = await authUtils.generateHash(password);
@@ -14,22 +14,24 @@ exports.createUser = async (req, res) => {
       last_name,
       username,
       phone_number,
-      role,
+      role, isVerified
     };
     console.log(payload);
     userService
       .createUser(payload)
       .then((userRow) => {
         res.status(201).send({
-          userRow,
+          userRow, success : true
         });
       })
       .catch((e) => {
+        console.log(e.message);
         res
           .status(500)
           .send({ message: "500 Internal Server Error", error: e.message });
       });
   } catch (e) {
+    console.log(e.message);
     res.status(400).send({ message: "400 Bad Request", error: error.message });
   }
 };

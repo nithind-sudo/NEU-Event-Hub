@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 import "./Login.css";
 import loginImage from "../../assets/login_image.jpg";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { login } from "../../apiClient";
 import MyToast from "../../components/ui/Toast";
 import { Link } from "react-router-dom";
@@ -20,10 +20,6 @@ export default function Login({ ...props }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-
-  useEffect(() => {
-    document.title = "Northeastern Events";
-  }, []);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
