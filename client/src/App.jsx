@@ -1,5 +1,6 @@
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import SignUp from "./pages/SignUp/SignUp";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -15,6 +16,7 @@ function App() {
       {isLoggedIn && <LandingPage />}
       <Routes>
         <Route path="/" element={<Login handleLogin={handleLogin} />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
         {isLoggedIn && <>
           Need to Add paths here to multiple pages for navigation
         </>}
