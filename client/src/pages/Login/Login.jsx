@@ -8,12 +8,10 @@ import { Container } from "react-bootstrap";
 import "./Login.css";
 import loginImage from "../../assets/login_image.jpg";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { login } from '../../apiClient';
+import { useState, useEffect } from "react";
+import { login } from "../../apiClient";
 import MyToast from "../../components/ui/Toast";
-import { Link } from 'react-router-dom';
-
-
+import { Link } from "react-router-dom";
 
 export default function Login({ ...props }) {
   const navigate = useNavigate();
@@ -22,6 +20,10 @@ export default function Login({ ...props }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    document.title = "Northeastern Events";
+  }, []);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -54,12 +56,12 @@ export default function Login({ ...props }) {
           <div className="login-container">
             <Form.Group controlId="userEmail">
               <CustomLabel>
-                Username
+                Username/Email
                 <TextInput
                   type="text"
                   value={username}
                   className="login-input"
-                  placeholder={"Email..."}
+                  // placeholder={"Email..."}
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </CustomLabel>
@@ -69,7 +71,7 @@ export default function Login({ ...props }) {
                 Password
                 <TextInput
                   type="password"
-                  placeholder={"Password..."}
+                  // placeholder={"Password..."}
                   value={password}
                   className="login-input"
                   onChange={(e) => setPassword(e.target.value)}
@@ -82,7 +84,9 @@ export default function Login({ ...props }) {
               onClick={handleSignIn}
               className="login-button"
             ></Button>
-            <CustomLabel>Don't have an account?{' '} <Link to="/signup">Sign up here</Link></CustomLabel>
+            <CustomLabel>
+              Don't have an account? <Link to="/signup">Sign up here</Link>
+            </CustomLabel>
           </div>
         </Container>
       </Form>

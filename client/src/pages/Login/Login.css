@@ -49,9 +49,9 @@ html, body {
 }
 
 .login-button {
-  width: 12.75rem;
+  width: 18rem;
 }
 
-.login-input {
-  width: 70%;
+.form-control.login-input {
+  width: 18rem;
 }
