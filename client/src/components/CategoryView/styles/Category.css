@@ -12,9 +12,14 @@
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   transition: 0.3s;
 }
+/* .smaller-text {
+  font-size: 0.8rem;
+  line-height: 1rem;
+} */
 
 .text-item {
   size: 10px;
+  margin-left: 20px;
 }
 
 a:link {
