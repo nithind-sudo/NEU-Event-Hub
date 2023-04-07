@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { login } from '../../apiClient';
 import MyToast from "../../components/ui/Toast";
+import { Link } from 'react-router-dom';
+
 
 
 export default function Login({ ...props }) {
@@ -80,7 +82,7 @@ export default function Login({ ...props }) {
               onClick={handleSignIn}
               className="login-button"
             ></Button>
-            <CustomLabel>Don't have an account? Create account</CustomLabel>
+            <CustomLabel>Don't have an account?{' '} <Link to="/signup">Sign up here</Link></CustomLabel>
           </div>
         </Container>
       </Form>
