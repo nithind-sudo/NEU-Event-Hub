@@ -9,9 +9,24 @@ import { useState } from "react";
 import "./SignUp.css";
 import { signUp } from "../../apiClient";
 import { useNavigate } from "react-router-dom";
+import Joi from "joi";
 
 export default function SignUp() {
   const navigate = useNavigate();
+
+  const schema = Joi.object({
+    firstName: Joi.string().min(2).required(),
+    lastName: Joi.string().min(2).required(),
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .required(),
+    password: Joi.string().min(6).required(),
+    phone: Joi.string()
+      .pattern(/^[0-9]+$/)
+      .min(10)
+      .max(15)
+      .required(),
+  });
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -21,7 +36,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-  const [ alertClass, setAlertClass ] = useState('danger');
+  const [alertClass, setAlertClass] = useState("danger");
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -41,7 +56,7 @@ export default function SignUp() {
       if (response.data.success) {
         setShowAlert(true);
         setAlertClass("success");
-        setError("Account Created Successfully!!!")
+        setError("Account Created Successfully!!!");
         setTimeout(() => {
           navigate("/");
         }, 2000);
