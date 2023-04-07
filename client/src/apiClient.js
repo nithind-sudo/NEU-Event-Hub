@@ -20,3 +20,18 @@ export const login = async (username, password) => {
     throw error;
   }
 };
+
+export const signUp = async (payload) => {
+  try{
+    const createUserPayload = {...payload, role : "user", isVerified : false}
+    const headers = {
+      "Content-Type": "application/json",
+    }
+    console.log("FE payload : ", createUserPayload);
+    const response = await instance.post("/v1/user", createUserPayload, {headers});
+    console.log("****** Response from user API POST : ", response);
+    return response
+  }catch(error){
+    throw error;
+  }
+}
