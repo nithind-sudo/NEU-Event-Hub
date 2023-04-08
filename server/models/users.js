@@ -28,7 +28,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     // this field will not be returned when a document is retrieved from the database
-    select: false
+    // select: false
   },
   first_name: {
     type: String,
