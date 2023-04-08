@@ -21,34 +21,50 @@ export default function SignUp() {
       .email({ tlds: { allow: false } })
       .required(),
     password: Joi.string().min(6).required(),
-    phone: Joi.string()
+    confirmPassword: Joi.ref("password"),
+    phoneNumber: Joi.string()
       .pattern(/^[0-9]+$/)
-      .min(10)
-      .max(15)
       .required(),
   });
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertClass, setAlertClass] = useState("danger");
+  const [errorValidation, setErrorValidation] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleFieldChange = (name, value) => {
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFieldBlur = (name) => {
+    const validationResult = schema.validate(formData, { abortEarly: false });
+    if (validationResult.error) {
+      const newErrors = validationResult.error.details.reduce((acc, error) => {
+        acc[error.path[0]] = error.message;
+        return acc;
+      }, {});
+      setErrorValidation(newErrors);
+    } else {
+      setErrorValidation({});
+    }
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    // TODO Form Validation code should be written here
-    // Call the user creation end point
-    // Need to mention the class to show if the post was successful
     const payload = {
-      first_name: firstName,
-      last_name: lastName,
-      username: email,
-      phone_number: phoneNumber,
-      password,
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      username: formData.email,
+      phone_number: formData.phoneNumber,
+      password: formData.password,
     };
     try {
       const response = await signUp(payload);
@@ -86,10 +102,13 @@ export default function SignUp() {
                   First Name
                   <TextInput
                     type="text"
-                    value={firstName}
+                    value={formData.firstName}
                     className="login-input"
-                    // placeholder={"First Name..."}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    onChange={(e) =>
+                      handleFieldChange("firstName", e.target.value)
+                    }
+                    onBlur={() => handleFieldBlur("firstName")}
+                    isInvalid={!!errorValidation.firstName}
                   />
                 </CustomLabel>
               </Form.Group>
@@ -100,10 +119,13 @@ export default function SignUp() {
                   Last Name
                   <TextInput
                     type="text"
-                    value={lastName}
+                    value={formData.lastName}
                     className="login-input"
-                    // placeholder={"Last Name..."}
-                    onChange={(e) => setLastName(e.target.value)}
+                    onChange={(e) =>
+                      handleFieldChange("lastName", e.target.value)
+                    }
+                    onBlur={() => handleFieldBlur("lastName")}
+                    isInvalid={!!errorValidation.lastName}
                   />
                 </CustomLabel>
               </Form.Group>
@@ -115,10 +137,11 @@ export default function SignUp() {
                 Email
                 <TextInput
                   type="text"
-                  value={email}
+                  value={formData.email}
                   className="login-input"
-                  // placeholder={"Email..."}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleFieldChange("email", e.target.value)}
+                  onBlur={() => handleFieldBlur("email")}
+                  isInvalid={!!errorValidation.email}
                 />
               </CustomLabel>
             </Form.Group>
@@ -128,10 +151,13 @@ export default function SignUp() {
               Phone
               <TextInput
                 type="text"
-                value={phoneNumber}
+                value={formData.phoneNumber}
                 className="login-input"
-                // placeholder={"Phone..."}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) =>
+                  handleFieldChange("phoneNumber", e.target.value)
+                }
+                onBlur={() => handleFieldBlur("phoneNumber")}
+                isInvalid={!!errorValidation.phoneNumber}
               />
             </CustomLabel>
           </Form.Group>
@@ -142,10 +168,13 @@ export default function SignUp() {
                   Password
                   <TextInput
                     type="password"
-                    value={password}
+                    value={formData.password}
                     className="login-input"
-                    placeholder={""}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) =>
+                      handleFieldChange("password", e.target.value)
+                    }
+                    onBlur={() => handleFieldBlur("password")}
+                    isInvalid={!!errorValidation.password}
                   />
                 </CustomLabel>
               </Form.Group>
@@ -156,10 +185,13 @@ export default function SignUp() {
                   Confirm Password
                   <TextInput
                     type="password"
-                    value={confirmPassword}
+                    value={formData.confirmPassword}
                     className="login-input"
-                    placeholder={""}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) =>
+                      handleFieldChange("confirmPassword", e.target.value)
+                    }
+                    onBlur={() => handleFieldBlur("confirmPassword")}
+                    isInvalid={!!errorValidation.confirmPassword}
                   />
                 </CustomLabel>
               </Form.Group>
