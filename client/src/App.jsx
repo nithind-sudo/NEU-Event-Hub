@@ -1,11 +1,11 @@
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import Navbar from "./components/Navbar/Navbar";
 import SignUp from "./pages/SignUp/SignUp";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoryView from "./components/CategoryView/CategoryView";
 import Category from "./components/Category/Category";
-import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,29 +20,25 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Navbar />
       {isLoggedIn && <LandingPage />}
       <Routes>
         <Route path="/" element={<Login handleLogin={handleLogin} />}></Route>
-        <Route path="/login" element={<Login handleLogin={handleLogin} />}></Route>
+        <Route path="/category" element={<CategoryView />}></Route>
+        <Route path="/category/:categoryName" element={<Category />}></Route>
+        <Route
+          path="/login"
+          element={<Login handleLogin={handleLogin} />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/category" element={<CategoryView />}></Route>
         <Route path="/category/:categoryName" element={<Category />}></Route>
         <Route
           path="/login"
           element={<Login handleLogin={handleLogin} />}></Route>
-        
-        {isLoggedIn && (
-          <>Need to Add paths here to multiple pages for navigation</>
-        )}
+   
+      
       </Routes>
-      <Navbar />
-        {isLoggedIn && <LandingPage />}
-        <Routes>
-        <Route path="/login" element={<Login handleLogin={handleLogin} />}></Route>
-        {isLoggedIn && <>
-          Need to Add paths here to multiple pages for navigation
-        </>}
-        </Routes>
+
     </BrowserRouter>
   );
 }
