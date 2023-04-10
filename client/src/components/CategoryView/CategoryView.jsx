@@ -3,7 +3,27 @@ import "./styles/Category.css";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCoffee,
+  faMusic,
+  faGraduationCap,
+  faMicrophone,
+  faBuilding,
+  faCode,
+  faUserTie,
+  faFlask,
+} from "@fortawesome/free-solid-svg-icons";
+
+const icons = [
+  faCoffee,
+  faGraduationCap,
+  faMicrophone,
+  faBuilding,
+  faCode,
+  faUserTie,
+  faMusic,
+  faFlask,
+];
 
 const CategoryView = () => {
   var [eventCategories, setEventCategories] = useState([]);
@@ -20,6 +40,11 @@ const CategoryView = () => {
       });
   }, []);
 
+  const getIcon = (index) => {
+    const iconIndex = index % icons.length;
+    return icons[iconIndex];
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -34,15 +59,16 @@ const CategoryView = () => {
             {eventCategories.map((item, index) => (
               <div
                 className="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3"
-                key={index}>
+                key={index}
+              >
                 <Link to={eventLinks[index]}>
                   <div className="card mx-2 my-2 card-specs rounded d-flex align-items-center">
                     <div className="card-body d-flex align-items-center">
                       <FontAwesomeIcon
-                        icon={faCoffee}
+                        icon={getIcon(index)}
                         size="2x"
                         className="mr-3"
-                        style={{color: '#B9B9B9'}}
+                        style={{ color: "#B9B9B9" }}
                       />
                       <div
                         className={`text-item text-dark ${
