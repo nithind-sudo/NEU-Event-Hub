@@ -28,7 +28,7 @@ const icons = [
 const CategoryView = () => {
   var [eventCategories, setEventCategories] = useState([]);
   var [eventLinks, setEventLinks] = useState([]);
-  let eventCategoryURL = "http://localhost:4565/category/getCategories";
+  let eventCategoryURL = "http://localhost:3000/category/getCategories";
 
   useEffect(() => {
     axios
