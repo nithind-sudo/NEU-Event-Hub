@@ -1,6 +1,5 @@
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import SignUp from "./pages/SignUp/SignUp";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoryView from "./components/CategoryView/CategoryView";
@@ -29,7 +28,7 @@ function App() {
         <Route
           path="/login"
           element={<Login handleLogin={handleLogin} />}></Route>
-        <Route path="/signup" element={<SignUp />}></Route>
+        
         {isLoggedIn && (
           <>Need to Add paths here to multiple pages for navigation</>
         )}
