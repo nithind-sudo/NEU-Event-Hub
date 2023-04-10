@@ -1,7 +1,6 @@
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Navbar from "./components/Navbar/Navbar";
-import { useState } from "react";
 import SignUp from "./pages/SignUp/SignUp";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

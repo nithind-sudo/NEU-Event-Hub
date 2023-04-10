@@ -89,7 +89,7 @@ export default function SignUp() {
   };
 
   return (
-    <div>
+    <div className="pt-5">
       <Form>
         <Container>
           {/* <Row>
