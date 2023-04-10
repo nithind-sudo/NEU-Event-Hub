@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoryView from "./components/CategoryView/CategoryView";
 import Category from "./components/Category/Category";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
