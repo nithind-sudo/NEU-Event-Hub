@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 
 
 const {mongoose, mongooseConnection} = require('./mongodb/db');
+const categoryRouter = require('./routes/category');
 
 const app = express()
 
@@ -26,5 +27,6 @@ const sessionRoutes = require('./routes/sessions');
 app.use('/', index_routes);
 app.use('/v1/session', sessionRoutes);
 app.use('/v1/user', userRoutes);
+app.use('/category', categoryRouter);
 
 module.exports = app;

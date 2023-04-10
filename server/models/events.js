@@ -60,6 +60,10 @@ const eventSchema = new Schema({
     type: Date,
     default: () => Date.now(),
   },
+  category: {
+    type: String,
+    required: true
+  }
 });
 
 eventSchema.pre('save', async function(next) {
