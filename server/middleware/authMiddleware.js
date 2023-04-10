@@ -19,7 +19,7 @@ const authMiddleWare = async (req, res, next) => {
         res.status(401).send({ message: "Invalid Username or Password" });
       } else {
         const userInfoRow = userInfo[0];
-        
+        console.log("userInfoRow : ", userInfoRow);
         if (userInfoRow.username === user.name) {
           const cmpPass = await authUtils.comparePassword(
             user.pass,
