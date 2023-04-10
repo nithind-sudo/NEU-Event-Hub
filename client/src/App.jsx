@@ -1,11 +1,11 @@
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
+import SignUp from "./pages/SignUp/SignUp";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoryView from "./components/CategoryView/CategoryView";
 import Category from "./components/Category/Category";
-import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
