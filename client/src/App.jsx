@@ -36,17 +36,13 @@ function App() {
         )}
       </Routes>
       <Navbar />
-      {
-        /*
-          {isLoggedIn && <LandingPage />}
-          <Routes>
-          <Route path="/" element={<Login handleLogin={handleLogin} />}></Route>
-          {isLoggedIn && <>
-            Need to Add paths here to multiple pages for navigation
-          </>}
-          </Routes>
-        */
-      }
+        {isLoggedIn && <LandingPage />}
+        <Routes>
+        <Route path="/login" element={<Login handleLogin={handleLogin} />}></Route>
+        {isLoggedIn && <>
+          Need to Add paths here to multiple pages for navigation
+        </>}
+        </Routes>
     </BrowserRouter>
   );
 }
