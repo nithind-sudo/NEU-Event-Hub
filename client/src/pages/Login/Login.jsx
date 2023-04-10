@@ -9,34 +9,66 @@ import "./Login.css";
 import loginImage from "../../assets/login_image.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { login } from '../../apiClient';
+import { login } from "../../apiClient";
 import MyToast from "../../components/ui/Toast";
+import Joi from "joi";
+import { Link } from "react-router-dom";
 
+const schema = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
+  password: Joi.string().min(6).required(),
+});
 
 export default function Login({ ...props }) {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [errorValidation, setErrorValidation] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleFieldChange = (name, value) => {
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFieldBlur = (name) => {
+    const validationResult = schema.validate(formData, { abortEarly: false });
+    if (validationResult.error) {
+      const newErrors = validationResult.error.details.reduce((acc, error) => {
+        acc[error.path[0]] = error.message;
+        return acc;
+      }, {});
+      setErrorValidation(newErrors);
+    } else {
+      setErrorValidation({});
+    }
+  };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await login(username, password);
-      console.log(` *** Response from Login End Point : ${response.data}`);
-      if (response.data.success) {
-        props.handleLogin();
-        navigate("/main");
-      } else {
-        setError("Invalid Email or Address");
+    if (!Object.keys(errorValidation).length) {
+      try {
+        const response = await login(formData.email, formData.password);
+        console.log(` *** Response from Login End Point : ${response.data}`);
+        if (response.data.success) {
+          props.handleLogin();
+          navigate("/main");
+        } else {
+          setError("Invalid Username/password");
+          setShowAlert(true);
+        }
+      } catch (e) {
+        console.log("**** Error while logging in:", e);
+        setError("Error while hitting backend login API");
         setShowAlert(true);
       }
-    } catch (e) {
-      console.log("**** Error while logging in:", e);
-      setError("Invalid Email or Address");
+    } else {
+      setError("Invalid Data Entered in Username/Password");
       setShowAlert(true);
     }
   };
@@ -52,27 +84,39 @@ export default function Login({ ...props }) {
           <div className="login-container">
             <Form.Group controlId="userEmail">
               <CustomLabel>
-                Username
+                Username/Email
                 <TextInput
                   type="text"
-                  value={username}
+                  value={formData.username}
                   className="login-input"
-                  placeholder={"Email..."}
-                  onChange={(e) => setUsername(e.target.value)}
+                  // onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => handleFieldChange("email", e.target.value)}
+                  onBlur={() => handleFieldBlur("email")}
+                  isInvalid={!!errorValidation.email}
                 />
               </CustomLabel>
+              <Form.Control.Feedback type="invalid">
+                {errorValidation.email}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="userPassword">
               <CustomLabel>
                 Password
                 <TextInput
                   type="password"
-                  placeholder={"Password..."}
-                  value={password}
+                  value={formData.password}
                   className="login-input"
-                  onChange={(e) => setPassword(e.target.value)}
+                  // onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) =>
+                    handleFieldChange("password", e.target.value)
+                  }
+                  onBlur={() => handleFieldBlur("password")}
+                  isInvalid={!!errorValidation.password}
                 />
               </CustomLabel>
+              <Form.Control.Feedback type="invalid">
+                {errorValidation.password}
+              </Form.Control.Feedback>
             </Form.Group>
             <Button
               variant="danger"
@@ -80,7 +124,9 @@ export default function Login({ ...props }) {
               onClick={handleSignIn}
               className="login-button"
             ></Button>
-            <CustomLabel>Don't have an account? Create account</CustomLabel>
+            <CustomLabel>
+              Don't have an account? <Link to="/signup">Sign up here</Link>
+            </CustomLabel>
           </div>
         </Container>
       </Form>
