@@ -13,6 +13,7 @@ import {
   faUserTie,
   faFlask,
 } from "@fortawesome/free-solid-svg-icons";
+import Footer from "../Footer/footer";
 
 const icons = [
   faCoffee,
@@ -62,7 +63,7 @@ const CategoryView = () => {
                 key={index}
               >
                 <Link to={eventLinks[index]}>
-                  <div className="card mx-2 my-2 card-specs rounded d-flex align-items-center">
+                  <div className="card mx-2 my-2 card-specs rounded d-flex align-items-left">
                     <div className="card-body d-flex align-items-center">
                       <FontAwesomeIcon
                         icon={getIcon(index)}
@@ -85,6 +86,7 @@ const CategoryView = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </React.Fragment>
   );
 };

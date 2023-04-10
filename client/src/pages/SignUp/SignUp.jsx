@@ -10,6 +10,7 @@ import "./SignUp.css";
 import { signUp } from "../../apiClient";
 import { useNavigate } from "react-router-dom";
 import Joi from "joi";
+import Footer from "../../components/Footer/footer";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -222,6 +223,7 @@ export default function SignUp() {
           message={error}
         />
       )}
+      <Footer />
     </div>
   );
 }
