@@ -30,10 +30,15 @@ function App() {
           path="/login"
           element={<Login handleLogin={handleLogin} />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
-        {isLoggedIn && (
-          <>Need to Add paths here to multiple pages for navigation</>
-        )}
+        <Route path="/category" element={<CategoryView />}></Route>
+        <Route path="/category/:categoryName" element={<Category />}></Route>
+        <Route
+          path="/login"
+          element={<Login handleLogin={handleLogin} />}></Route>
+   
+      
       </Routes>
+
     </BrowserRouter>
   );
 }
