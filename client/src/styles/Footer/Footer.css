@@ -1,13 +1,16 @@
 .footer-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: auto;
   }
   
   .footer-content {
     margin-top: auto;
     padding: 1rem;
     background-color: #f8f9fa;
-    text-align: center;
+    text-align: left;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
   }
   
