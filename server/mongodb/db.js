@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
-// const {
-//     dbName,
-//     hostUrl,
-//     userName,
-//     password,
-//     nodeEnv,
-//   } = require("./config");
+const {
+    dbName,
+    hostUrl,
+    userName,
+    password,
+    nodeEnv,
+  } = require("./config");
 
-const uri = `mongodb+srv://saitejsunkara:saitejsunkara@gcloud-cluster-assignme.mf1pyhg.mongodb.net/test`
+const uri = `mongodb://${userName}:${password}@${hostUrl}:27017/${dbName}`
 let mongooseConnection = ""
 console.log("URI of mongodb to connect : ", uri);
 
