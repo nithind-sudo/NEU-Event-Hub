@@ -17,7 +17,7 @@ const Category = () => {
   let { categoryName } = useParams();
   let [category, setCategory] = useState({});
   let getCategoryURL =
-    "http://localhost:4565/category/getCategories/" + categoryName;
+    "http://localhost:3000/category/getCategories/" + categoryName;
   useEffect(() => {
     axios
       .get(getCategoryURL)
