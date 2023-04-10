@@ -47,7 +47,7 @@ const CategoryView = () => {
 
   return (
     <React.Fragment>
-      <div>
+      <div className="pt-3">
         <div className="container">
           <div>
             <b>

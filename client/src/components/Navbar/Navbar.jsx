@@ -46,7 +46,7 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/categories"
+                  to="/category"
                   className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
                   Categories
                 </Link>
