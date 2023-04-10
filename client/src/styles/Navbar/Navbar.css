@@ -1,0 +1,48 @@
+.n-item {
+  color: #eeeeee;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.n-item:hover {
+  color: #eeeeee;
+  text-decoration: underline;
+  text-decoration-thickness: 7px;
+  text-decoration-color: #d5202d;
+  text-underline-offset: 15px;
+  cursor: pointer;
+}
+
+.btn-events-hub {
+  background: #d5202d !important;
+  transition: 0.3s;
+}
+
+.btn-events-hub:hover {
+  background: #ab0712 !important;
+}
+
+@media (max-width: 1200px) {
+  .n-item:hover {
+    color: #d5202d;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+/*
+
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) { ... }
+
+*//*# sourceMappingURL=Navbar.css.map */

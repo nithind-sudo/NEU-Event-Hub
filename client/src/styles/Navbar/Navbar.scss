@@ -1,0 +1,51 @@
+@import "../Colors/Colors.scss";
+
+.n-item {
+    color: $primary-light;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.n-item:hover {
+    color: $primary-light;
+    text-decoration: underline;
+    text-decoration-thickness: 7px;
+    text-decoration-color: $primary-red;
+    text-underline-offset: 15px;
+    cursor: pointer;
+}
+
+.btn-events-hub {
+    background: $primary-red !important;
+    transition: 0.3s;
+}
+
+.btn-events-hub:hover {
+    background: $secondary-red !important;
+}
+
+@media (max-width: 1200px) {
+    .n-item:hover {
+        color: $primary-red;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+/*
+
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) { ... }
+
+*/

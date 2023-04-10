@@ -1,9 +1,11 @@
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoryView from "./components/CategoryView/CategoryView";
 import Category from "./components/Category/Category";
+import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,6 +35,18 @@ function App() {
           <>Need to Add paths here to multiple pages for navigation</>
         )}
       </Routes>
+      <Navbar />
+      {
+        /*
+          {isLoggedIn && <LandingPage />}
+          <Routes>
+          <Route path="/" element={<Login handleLogin={handleLogin} />}></Route>
+          {isLoggedIn && <>
+            Need to Add paths here to multiple pages for navigation
+          </>}
+          </Routes>
+        */
+      }
     </BrowserRouter>
   );
 }
