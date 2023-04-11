@@ -20,25 +20,25 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      {/* <Navbar /> */}
       {isLoggedIn && <LandingPage />}
       <Routes>
-        <Route path="/" element={<Login handleLogin={handleLogin} />}></Route>
+        <Route path="/" 
+          element={isLoggedIn ? <LandingPage /> : <Login handleLogin={handleLogin} />}></Route>
         <Route path="/category" element={<CategoryView />}></Route>
         <Route path="/category/:categoryName" element={<Category />}></Route>
         <Route
           path="/login"
-          element={<Login handleLogin={handleLogin} />}></Route>
+          element={isLoggedIn ? <LandingPage /> : <Login handleLogin={handleLogin} />} 
+        ></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/category" element={<CategoryView />}></Route>
         <Route path="/category/:categoryName" element={<Category />}></Route>
         <Route
           path="/login"
-          element={<Login handleLogin={handleLogin} />}></Route>
-   
-      
+          element={<Login handleLogin={handleLogin} />}
+        ></Route>
       </Routes>
-
     </BrowserRouter>
   );
 }
