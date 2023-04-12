@@ -12,8 +12,16 @@ exports.getEventInfo = async (req, res) => {
 };
 
 exports.createEvent = async (req, res) => {
-  const { title, description, date, location, startTime, endTime, organizer, category } =
-    req.body;
+  const {
+    title,
+    description,
+    date,
+    location,
+    startTime,
+    endTime,
+    organizer,
+    category,
+  } = req.body;
   try {
     const payload = {
       title,
@@ -26,7 +34,8 @@ exports.createEvent = async (req, res) => {
       category,
     };
     console.log("Event Payload : ", payload);
-    eventService.createEvent(payload)
+    eventService
+      .createEvent(payload)
       .then((eventRow) => {
         res.status(201).send({
           eventRow,
@@ -64,4 +73,34 @@ exports.deleteEventInfo = async (req, res) => {
   }
 };
 
-exports.patchEventInfo = async (req, res) => {};
+exports.patchEventInfo = async (req, res) => {
+  const { event_id } = req.params;
+  const {
+    title,
+    description,
+    date,
+    location,
+    startTime,
+    endTime,
+    organizer,
+    category,
+  } = req.body;
+  try {
+    const payloadToSend = {
+      ...(title && { title }),
+      ...(description && { description }),
+      ...(date && { date }),
+      ...(location && { location }),
+      ...(startTime && { startTime }),
+      ...(endTime && { endTime }),
+      ...(organizer && { organizer }),
+      ...(category && { category }),
+      updated_time: new Date(),
+    };
+    const updatedInfo = await eventService.patchEvent(event_id, payloadToSend);
+    res.status(200).send(updatedInfo);
+  } catch (e) {
+    console.log(e.message);
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
+  }
+};
