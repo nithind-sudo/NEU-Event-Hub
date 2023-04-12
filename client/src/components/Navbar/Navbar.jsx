@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/Navbar/Navbar.css";
+import { Container } from "react-bootstrap";
 
 const Navbar = () => {
   return (
     <header>
       <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
-        <div className="container-fluid">
+        <Container fluid>
           <div className="navbar-brand">Northeastern's Events Hub</div>
           <button
             className="navbar-toggler"
@@ -58,7 +59,7 @@ const Navbar = () => {
                   Create an Event
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link
                   to="/login"
                   className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
@@ -71,7 +72,7 @@ const Navbar = () => {
                   className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
                   Signup
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link
                   to="/contact"
@@ -92,7 +93,7 @@ const Navbar = () => {
               </button>
             </form>
           </div>
-        </div>
+        </Container>
       </nav>
       <br />
       <br />

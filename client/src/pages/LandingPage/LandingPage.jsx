@@ -1,7 +1,19 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Layout/Footer";
+import { Container } from "react-bootstrap";
+import MyCarousel from "../../components/Layout/MyCarousel";
+import carouselData from "./CarouselData.json";
 
 export default function LandingPage() {
   return (
-    <div>You are at Landing Page</div>
-  )
+    <Container fluid>
+      <Navbar />
+      <MyCarousel carouselData={carouselData} />
+      {/* Add Image carousel */}
+      {/* Add Events Happening */}
+      {/* Add Categories */}
+      <Footer />
+    </Container>
+  );
 }
