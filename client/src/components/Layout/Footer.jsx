@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 export default function Footer() {
   return (
     <>
-      <footer className="bg-dark py-3 fixed-bottom">
+      <footer className="bg-dark py-3">
         <Container>
           <div className="text-center">
             <p className="mb-0 text-light">
