@@ -9,8 +9,7 @@ export default function LandingPage() {
   return (
     <Container fluid>
       <Navbar />
-      <MyCarousel carouselData={carouselData} />
-      {/* Add Image carousel */}
+      <MyCarousel className="" carouselData={carouselData} />
       {/* Add Events Happening */}
       {/* Add Categories */}
       <Footer />
