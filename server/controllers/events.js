@@ -7,25 +7,26 @@ exports.getEventInfo = async (req, res) => {
     const eventInfo = await eventService.getEventInfo(event_id);
     res.status(200).send(eventInfo);
   } catch (e) {
-    res.status(400).send({ message: "400 Bad Request", error: error.message });
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
   }
 };
 
 exports.createEvent = async (req, res) => {
-  const { title, description, date, startTime, endTime, organizer, category } =
+  const { title, description, date, location, startTime, endTime, organizer, category } =
     req.body;
   try {
     const payload = {
       title,
       description,
+      location,
       date,
       startTime,
       endTime,
       organizer,
       category,
     };
-    console.log(payload);
-    EventService.createEvent(payload)
+    console.log("Event Payload : ", payload);
+    eventService.createEvent(payload)
       .then((eventRow) => {
         res.status(201).send({
           eventRow,
@@ -40,7 +41,7 @@ exports.createEvent = async (req, res) => {
       });
   } catch (e) {
     console.log(e.message);
-    res.status(400).send({ message: "400 Bad Request", error: error.message });
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
   }
 };
 
@@ -48,7 +49,7 @@ exports.deleteEventInfo = async (req, res) => {
   const { event_id } = req.params;
   console.log("Event-id input : ", event_id);
   try {
-    const deletedCnt = await eventService.deleteUser(event_id);
+    const deletedCnt = await eventService.deleteEvent(event_id);
     // Sample successful o/p : { acknowledged: true, deletedCount: 1 }
     console.log("Deleted Row count : ", deletedCnt);
     if (deletedCnt.deletedCount === 1) {

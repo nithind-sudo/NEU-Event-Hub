@@ -23,10 +23,12 @@ app.use(cors());
 const index_routes = require('./routes/index');
 const userRoutes = require('./routes/users');
 const sessionRoutes = require('./routes/sessions');
+const eventRoute = require('./routes/events');
 
 app.use('/', index_routes);
 app.use('/v1/session', sessionRoutes);
 app.use('/v1/user', userRoutes);
+app.use('/v1/event', eventRoute);
 app.use('/category', categoryRouter);
 
 module.exports = app;

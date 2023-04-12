@@ -24,6 +24,11 @@ class UserService{
         return await User.find({username}).exec();
     }
 
+    async getUserById(user_id){
+        console.log( "Searching for user with Id : ", user_id );
+        return await User.find({user_id}).exec();
+    }
+
 }
 
 module.exports = UserService;
