@@ -86,7 +86,7 @@ const CategoryView = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </React.Fragment>
   );
 };

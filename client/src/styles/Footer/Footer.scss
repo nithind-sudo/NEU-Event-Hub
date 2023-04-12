@@ -2,13 +2,18 @@
 .footer-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
   }
   
   .footer-content {
     margin-top: auto;
     padding: 1rem;
-    background-color: #f8f9fa;
-    text-align: center;
+    background-color: $primary-red;
+    text-align: left;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    color: $primary-light;
   }
-  
+.about{
+    text-align: right;
+}
