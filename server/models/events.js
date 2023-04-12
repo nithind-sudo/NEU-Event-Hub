@@ -57,6 +57,18 @@ const eventSchema = new Schema({
       ref: "User",
     },
   ],
+  imageUrl: 
+    {
+      type: String,
+      validate: {
+        validator: function (url) {
+          // Simple URL validation regex
+          const urlRegex = /^https?:\/\/(?:[a-zA-Z0-9_-]{1,256}\.[a-zA-Z0-9_-]{1,6})?\S*$/;
+          return urlRegex.test(url);
+        },
+        message: (props) => `${props.value} is not a valid URL.`,
+      },
+    },
   created_time: {
     type: Date,
     default: () => Date.now(),
