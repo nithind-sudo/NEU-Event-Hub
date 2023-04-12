@@ -21,6 +21,7 @@ exports.createEvent = async (req, res) => {
     endTime,
     organizer,
     category,
+    imageUrl,
   } = req.body;
   try {
     const payload = {
@@ -32,8 +33,9 @@ exports.createEvent = async (req, res) => {
       endTime,
       organizer,
       category,
+      imageUrl,
     };
-    console.log("Event Payload : ", payload);
+    // console.log("Event Payload : ", payload);
     eventService
       .createEvent(payload)
       .then((eventRow) => {
