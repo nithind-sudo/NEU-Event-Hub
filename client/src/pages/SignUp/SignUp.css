@@ -11,4 +11,34 @@ body {
   padding: 0;
 }
 
+.signup-page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* Makes sure the container occupies the whole view port */
+  height: 100vh;
+}
 
+.flex-column {
+  flex: 1;
+  flex-basis: 50%;
+  /* flex: 0 0 50%; */
+  background-color: blue;
+}
+
+.signup-content {
+  flex: 1;
+  flex-basis: 50%;
+}
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  /* Center the content in the container */
+  justify-content: center;
+  align-items: center;
+  /* Add some space between the elements */
+  gap: 15px;
+  height: 100%;
+  margin-top: 10px;
+}
