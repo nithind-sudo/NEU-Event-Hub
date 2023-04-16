@@ -57,7 +57,7 @@ export default function Login({ ...props }) {
         const response = await login(formData.email, formData.password);
         console.log(` *** Response from Login End Point : ${response.data}`);
         if (response.data.success) {
-          props.handleLogin();
+          props.handleLogin(response.data.user);
           navigate("/main");
         } else {
           setError("Invalid Username/password");
