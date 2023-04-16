@@ -19,7 +19,7 @@ const authMiddleWare = async (req, res, next) => {
         res.status(401).send({ message: "Invalid Username or Password" });
       } else {
         const userInfoRow = userInfo[0];
-        console.log("userInfoRow : ", userInfoRow);
+        // console.log("userInfoRow : ", userInfoRow);
         if (userInfoRow.username === user.name) {
           const cmpPass = await authUtils.comparePassword(
             user.pass,
@@ -27,7 +27,7 @@ const authMiddleWare = async (req, res, next) => {
           );
           if (cmpPass) {
             console.log(" **** Authorized User **** ");
-            req.username = user.name;
+            req.userInfo = userInfoRow;
             next();
           } else {
             res.status(401).send({ message: "401 Unauthorized " });
