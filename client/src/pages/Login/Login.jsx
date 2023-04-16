@@ -13,6 +13,7 @@ import { login } from "../../apiClient";
 import MyToast from "../../components/ui/Toast";
 import Joi from "joi";
 import { Link } from "react-router-dom";
+import loginLogo from "../../assets/login-logo.svg";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -82,6 +83,7 @@ export default function Login({ ...props }) {
       <Form className="login-content">
         <Container>
           <div className="login-container">
+            <img src={loginLogo} style={{ width:"290px", height:"100px"}} alt="Northeastern-Events" />
             <Form.Group controlId="userEmail">
               <CustomLabel>
                 Username/Email
