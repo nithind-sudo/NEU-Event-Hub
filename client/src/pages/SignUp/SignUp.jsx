@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import Joi from "joi";
 import ImageComponent from "../../components/ui/ImageComponent";
 import SignUpImage from "../../assets/signup-image.svg";
+import loginLogo from "../../assets/login-logo.svg";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -95,6 +97,11 @@ export default function SignUp() {
       <Form className="signup-content">
         <Container>
           <div className="signup-container">
+            <img
+              src={loginLogo}
+              style={{ width: "290px", height: "100px" }}
+              alt="Northeastern-Events"
+            />
             <Row className="justify-content-center">
               <Col>
                 <Form.Group controlId="userFirstName">
@@ -103,7 +110,7 @@ export default function SignUp() {
                     <TextInput
                       type="text"
                       value={formData.firstName}
-                      className="login-input"
+                      className="signup-input"
                       onChange={(e) =>
                         handleFieldChange("firstName", e.target.value)
                       }
@@ -113,8 +120,7 @@ export default function SignUp() {
                   </CustomLabel>
                 </Form.Group>
               </Col>
-            </Row>
-            <Row>
+
               <Col>
                 <Form.Group controlId="userLastName">
                   <CustomLabel>
@@ -122,7 +128,7 @@ export default function SignUp() {
                     <TextInput
                       type="text"
                       value={formData.lastName}
-                      className="login-input"
+                      className="signup-input"
                       onChange={(e) =>
                         handleFieldChange("lastName", e.target.value)
                       }
@@ -140,7 +146,7 @@ export default function SignUp() {
                   <TextInput
                     type="text"
                     value={formData.email}
-                    className="login-input"
+                    className="signup-input-personal"
                     onChange={(e) => handleFieldChange("email", e.target.value)}
                     onBlur={() => handleFieldBlur("email")}
                     isInvalid={!!errorValidation.email}
@@ -154,7 +160,7 @@ export default function SignUp() {
                 <TextInput
                   type="text"
                   value={formData.phoneNumber}
-                  className="login-input"
+                  className="signup-input-personal"
                   onChange={(e) =>
                     handleFieldChange("phoneNumber", e.target.value)
                   }
@@ -171,7 +177,7 @@ export default function SignUp() {
                     <TextInput
                       type="password"
                       value={formData.password}
-                      className="login-input"
+                      className="signup-input"
                       onChange={(e) =>
                         handleFieldChange("password", e.target.value)
                       }
@@ -181,8 +187,7 @@ export default function SignUp() {
                   </CustomLabel>
                 </Form.Group>
               </Col>
-            </Row>
-            <Row>
+
               <Col>
                 <Form.Group controlId="userConfirmPassword">
                   <CustomLabel>
@@ -190,7 +195,7 @@ export default function SignUp() {
                     <TextInput
                       type="password"
                       value={formData.confirmPassword}
-                      className="login-input"
+                      className="signup-input"
                       onChange={(e) =>
                         handleFieldChange("confirmPassword", e.target.value)
                       }
@@ -208,18 +213,20 @@ export default function SignUp() {
                 label={`I agree to the User Agreement and Conditions `}
               />
             </Row>
-            <Row>
-              <Button
-                variant="danger"
-                text={"Create Account"}
-                onClick={handleSignUp}
-                className="login-button"
-              ></Button>
-            </Row>
+
+            <Button
+              variant="danger"
+              text={"Create Account"}
+              onClick={handleSignUp}
+              className="signup-button"
+            ></Button>
+            <CustomLabel>
+              Have an account? <Link to="/login">Login here</Link>
+            </CustomLabel>
           </div>
         </Container>
       </Form>
-      <div className="flex-column">
+      <div className="flex-col">
         <ImageComponent src={SignUpImage} className="image-fit" />
       </div>
       {showAlert && (
