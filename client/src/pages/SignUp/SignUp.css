@@ -57,3 +57,10 @@ body {
   padding: 10px 20px;
   width: 25rem;
 }
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 150px);
+}

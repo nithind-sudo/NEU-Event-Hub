@@ -1,9 +1,9 @@
 import Container from "react-bootstrap/Container";
 
-export default function Footer() {
+export default function Footer({ fixed }) {
   return (
     <>
-      <footer className="bg-dark py-3">
+      <footer className={`bg-dark py-3 ${fixed ? 'fixed-bottom' : ''}`}>
         <Container>
           <div className="text-center">
             <p className="mb-0 text-light">
