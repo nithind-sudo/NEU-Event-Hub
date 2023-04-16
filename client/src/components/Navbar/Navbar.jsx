@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../styles/Navbar/Navbar.css";
 import { Container } from "react-bootstrap";
 
-const Navbar = () => {
+const Navbar = ({handleLogout}) => {
   return (
     <header>
       <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
@@ -85,12 +85,15 @@ const Navbar = () => {
               <input
                 className="form-control shadow-none me-2"
                 type="search"
-                placeholder="Check Events"
+                placeholder="Search Events"
                 aria-label="Check Events"
               />
               <button className="btn btn-events-hub text-light" type="submit">
                 Search
               </button>
+              {handleLogout && <button className="btn btn-events-hub text-light" onClick={handleLogout} type="submit">
+                 Logout
+              </button>}
             </form>
           </div>
         </Container>
