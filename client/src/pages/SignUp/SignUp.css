@@ -19,11 +19,10 @@ body {
   height: 100vh;
 }
 
-.flex-column {
+.flex-col {
   flex: 1;
   flex-basis: 50%;
   /* flex: 0 0 50%; */
-  background-color: blue;
 }
 
 .signup-content {
@@ -41,4 +40,20 @@ body {
   gap: 15px;
   height: 100%;
   margin-top: 10px;
+  overflow: auto; /* enable scrollbar */
+}
+
+.form-control.signup-input {
+  width: 15rem;
+}
+
+.form-control.signup-input-personal {
+  width: 31.5rem;
+}
+
+.signup-button {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  width: 25rem;
 }
