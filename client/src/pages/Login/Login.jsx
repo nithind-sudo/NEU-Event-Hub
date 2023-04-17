@@ -9,7 +9,7 @@ import "./Login.css";
 import loginImage from "../../assets/login_image.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { login } from "../../apiClient";
+// import { login, logout } from "../../apiClient";
 import MyToast from "../../components/ui/Toast";
 import Joi from "joi";
 import { Link } from "react-router-dom";
@@ -24,9 +24,9 @@ const schema = Joi.object({
 
 export default function Login({ ...props }) {
   const navigate = useNavigate();
-
-  const [error, setError] = useState(null);
-  const [showAlert, setShowAlert] = useState(false);
+  const { error, setError, showAlert, setShowAlert, onLogin } = props;
+  // const [error , setError] = props;
+  // const [showAlert, setShowAlert] = props;
   const [errorValidation, setErrorValidation] = useState("");
   const [formData, setFormData] = useState({
     email: "",
@@ -54,17 +54,20 @@ export default function Login({ ...props }) {
     e.preventDefault();
     if (!Object.keys(errorValidation).length) {
       try {
-        const response = await login(formData.email, formData.password);
-        console.log(` *** Response from Login End Point : ${response.data}`);
-        if (response.data.success) {
-          props.handleLogin(response.data.user);
+        // const response = await login(formData.email, formData.password);
+        // console.log(` *** Response from Login End Point : ${response.data}`);
+        const response = await onLogin(formData.email, formData.password);
+        console.log("Response after calling onLogin function : ", response);
+        if (response.success) {
+          // props.onLogin(response.data.user);
+          setShowAlert(false);
           navigate("/main");
         } else {
           setError("Invalid Username/password");
           setShowAlert(true);
         }
       } catch (e) {
-        console.log("**** Error while logging in:", e);
+        console.log("**** Error while logging in LOGIN COMPONENT:", e);
         setError("Error while hitting backend login API");
         setShowAlert(true);
       }
@@ -73,6 +76,24 @@ export default function Login({ ...props }) {
       setShowAlert(true);
     }
   };
+
+  // const handleLogOut = async (e) => {
+  //   try {
+  //     const response = await logout();
+  //     console.log(` *** Response from Login End Point : ${response.data}`);
+  //     if (response.data.success) {
+  //       props.handleLogin(response.data.user);
+  //       navigate("/main");
+  //     } else {
+  //       setError("Invalid Username/password");
+  //       setShowAlert(true);
+  //     }
+  //   } catch (e) {
+  //     console.log("**** Error while logging in:", e);
+  //     setError("Error while hitting backend login API");
+  //     setShowAlert(true);
+  //   }
+  // };
 
   return (
     <div className="login-page">
@@ -83,7 +104,11 @@ export default function Login({ ...props }) {
       <Form className="login-content">
         <Container>
           <div className="login-container">
-            <img src={loginLogo} style={{ width:"290px", height:"100px"}} alt="Northeastern-Events" />
+            <img
+              src={loginLogo}
+              style={{ width: "290px", height: "100px" }}
+              alt="Northeastern-Events"
+            />
             <Form.Group controlId="userEmail">
               <CustomLabel>
                 Username/Email
