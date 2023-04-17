@@ -1,17 +1,18 @@
-const express = require('express')
-const { v4: uuidv4 } = require('uuid');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
+const express = require("express");
+const { v4: uuidv4 } = require("uuid");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
+const sessionMiddleware = require("./middleware/sessionMiddleware");
 
-const {mongoose, mongooseConnection} = require('./mongodb/db');
-const categoryRouter = require('./routes/category');
+const { mongoose, mongooseConnection } = require("./mongodb/db");
+const categoryRouter = require("./routes/category");
 
-const app = express()
+const app = express();
 
 app.use(cookieParser());
-app.use(express.json())
+app.use(express.json());
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -19,16 +20,17 @@ app.use(
   })
 );
 app.use(cors());
+app.use(sessionMiddleware);
 
-const index_routes = require('./routes/index');
-const userRoutes = require('./routes/users');
-const sessionRoutes = require('./routes/sessions');
-const eventRoute = require('./routes/events');
+const index_routes = require("./routes/index");
+const userRoutes = require("./routes/users");
+const sessionRoutes = require("./routes/sessions");
+const eventRoute = require("./routes/events");
 
-app.use('/', index_routes);
-app.use('/v1/session', sessionRoutes);
-app.use('/v1/user', userRoutes);
-app.use('/v1/event', eventRoute);
-app.use('/category', categoryRouter);
+app.use("/", index_routes);
+app.use("/v1/session", sessionRoutes);
+app.use("/v1/user", userRoutes);
+app.use("/v1/event", eventRoute);
+app.use("/category", categoryRouter);
 
 module.exports = app;
