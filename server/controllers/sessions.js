@@ -1,9 +1,10 @@
 exports.getSessionInfo = async (req, res) => {
+  console.log("Session info : ", req.session);
   if (req.session) {
     const sessionData = req.session.sessionData;
     res.json({
       success: true,
-      sessionData,
+      ...sessionData,
     });
   } else {
     res.status(404).json({
@@ -27,6 +28,7 @@ exports.generateSession = async (req, res) => {
     isActivated: userInfo.isActivated,
     isVerified: userInfo.isVerified,
   };
+  req.session.user_id = userInfo.user_id;
   req.session.sessionData = sessionData;
 
   res.status(201).send({
