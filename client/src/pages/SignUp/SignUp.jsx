@@ -206,13 +206,13 @@ export default function SignUp() {
                 </Form.Group>
               </Col>
             </Row>
-            <Row>
+            {/* <Row>
               <Form.Check
                 type={"checkbox"}
                 id={`default-checkbox}`}
                 label={`I agree to the User Agreement and Conditions `}
               />
-            </Row>
+            </Row> */}
 
             <Button
               variant="danger"
