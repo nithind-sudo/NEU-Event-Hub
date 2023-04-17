@@ -29,10 +29,12 @@ exports.generateSession = async (req, res) => {
     isVerified: userInfo.isVerified,
   };
   req.session.user_id = userInfo.user_id;
+  res.clearCookie('sid');
+  res.cookie('sid', req.sessionID);
   req.session.sessionData = sessionData;
 
   res.status(201).send({
-    message: `Session Created for User: ${req.username}`,
+    message: `Session Created for User: ${userInfo.username}`,
     success: true,
     sessionData,
   });
