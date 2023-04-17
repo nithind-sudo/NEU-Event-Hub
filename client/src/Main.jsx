@@ -1,48 +1,85 @@
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import Navbar from "./components/Navbar/Navbar";
 import SignUp from "./pages/SignUp/SignUp";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import CategoryView from "./components/CategoryView/CategoryView";
 import Category from "./components/Category/Category";
-import {
-  useAuthState,
-  useAuthDispatch,
-  loginUser,
-  logoutUser,
-} from "./contexts/AuthContext";
+import { EventManagementState } from "./contexts/context";
+import { LOGIN_STATUS, ACTIONS } from "./contexts/constants";
+import { fetchLogin, fetchLogOut } from "./apiClient";
 
 function Main() {
-  const { isLoggedIn } = useAuthState();
-  const authDispatch = useAuthDispatch();
+  const [error, setError] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const { state, dispatch } = EventManagementState();
+
   const navigate = useNavigate();
-
-  const handleLogin = (user) => {
-    authDispatch(loginUser(user));
-  };
-
-  const handleLogout = () => {
-    authDispatch(logoutUser());
-    navigate("/login");
-  };
 
   useEffect(() => {
     document.title = "NEU Events";
   }, []);
 
+  async function onLogin(username, password) {
+    try {
+      const response = await fetchLogin(username, password);
+      console.log("Got Data from RESPONSE : ", response);
+      const fetchData = response.data;
+      dispatch({ type: ACTIONS.PENDING });
+      setTimeout(() => {
+        console.log("Got Data from fetch LOGIN : ", fetchData);
+        dispatch({
+          type: ACTIONS.LOG_IN,
+          username: fetchData.sessionData.username,
+          user_id: fetchData.sessionData.user_id,
+          events_booked: fetchData.sessionData.events_booked,
+          favorites: fetchData.sessionData.favorites,
+          listings: fetchData.sessionData.listings,
+          role: fetchData.sessionData.role,
+          isActivated: fetchData.sessionData.isActivated,
+          isVerified: fetchData.sessionData.isVerified,
+        });
+      }, 1000);
+      return fetchData;
+    } catch (error) {
+      console.log("**** Error while logging in MAIN COMPONENT:", error);
+      throw new Error("Error while hitting backend login API");
+    }
+  }
+
+  async function onLogout() {
+    try {
+      dispatch({ type: ACTIONS.PENDING });
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      dispatch({ type: ACTIONS.LOG_OUT });
+      await fetchLogOut();
+      navigate("/");
+    } catch (error) {
+      dispatch({ type: ACTIONS.REPORT_ERROR, error: error?.error });
+    }
+  }
+
   return (
     <>
       {/* <Navbar /> */}
-      {isLoggedIn && <LandingPage handleLogout={handleLogout} />}
+      {state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN && (
+        <LandingPage handleLogout={onLogout} />
+      )}
       <Routes>
         <Route
           path="/"
           element={
-            isLoggedIn ? (
-              <LandingPage handleLogout={handleLogout} />
+            state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
+              <LandingPage handleLogout={onLogout} />
             ) : (
-              <Login handleLogin={handleLogin} />
+              <Login
+                onLogin={onLogin}
+                error={error}
+                setError={setError}
+                showAlert={showAlert}
+                setShowAlert={setShowAlert}
+              />
             )
           }
         ></Route>
@@ -51,10 +88,16 @@ function Main() {
         <Route
           path="/login"
           element={
-            isLoggedIn ? (
-              <LandingPage handleLogout={handleLogout} />
+            state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
+              <LandingPage handleLogout={onLogout} />
             ) : (
-              <Login handleLogin={handleLogin} />
+              <Login
+                onLogin={onLogin}
+                error={error}
+                setError={setError}
+                showAlert={showAlert}
+                setShowAlert={setShowAlert}
+              />
             )
           }
         ></Route>
@@ -63,7 +106,15 @@ function Main() {
         <Route path="/category/:categoryName" element={<Category />}></Route>
         <Route
           path="/login"
-          element={<Login handleLogin={handleLogin} />}
+          element={
+            <Login
+              onLogin={onLogin}
+              error={error}
+              setError={setError}
+              showAlert={showAlert}
+              setShowAlert={setShowAlert}
+            />
+          }
         ></Route>
       </Routes>
     </>

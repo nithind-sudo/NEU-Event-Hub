@@ -9,6 +9,6 @@ router.get("/", sessionMiddleware, sessionController.getSessionInfo);
 
 router.post("/", [authMiddleWare, sessionMiddleware],  sessionController.generateSession);
 
-router.delete("/", [authMiddleWare, sessionMiddleware], sessionController.deleteSession);
+router.delete("/", sessionMiddleware, sessionController.deleteSession);
 
 module.exports = router;
