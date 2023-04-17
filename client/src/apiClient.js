@@ -34,7 +34,7 @@ export const fetchLogOut = async () => {
   }
 };
 
-export const signUp = async (payload) => {
+export const fetchSignUp = async (payload) => {
   try {
     const createUserPayload = { ...payload, role: "user", isVerified: false };
     const headers = {
