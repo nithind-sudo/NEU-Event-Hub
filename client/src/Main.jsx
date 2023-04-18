@@ -1,3 +1,4 @@
+import React from "react";
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import SignUp from "./pages/SignUp/SignUp";
@@ -9,6 +10,8 @@ import { EventManagementState } from "./contexts/context";
 import { LOGIN_STATUS, ACTIONS } from "./contexts/constants";
 import { fetchLogin, fetchLogOut } from "./apiClient";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
+import { Navbar } from "react-bootstrap";
+import Footer from "./components/Layout/Footer";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -62,11 +65,7 @@ function Main() {
   }
 
   return (
-    <>
-      {/* <Navbar /> */}
-      {state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN && (
-        <LandingPage handleLogout={onLogout} />
-      )}
+    <React.Fragment>
       <Routes>
         <Route
           path="/"
@@ -82,10 +81,27 @@ function Main() {
                 setShowAlert={setShowAlert}
               />
             )
-          }
-        ></Route>
-        <Route path="/category" element={<CategoryView />}></Route>
-        <Route path="/category/:categoryName" element={<Category />}></Route>
+          }></Route>
+
+        <Route
+          path="/main"
+          element={
+            state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
+              <LandingPage handleLogout={onLogout} />
+            ) : (
+              <Login
+                onLogin={onLogin}
+                error={error}
+                setError={setError}
+                showAlert={showAlert}
+                setShowAlert={setShowAlert}
+              />
+            )
+          }></Route>
+
+        <Route path="/category" element={<CategoryView handleLogout={onLogout} />}></Route>
+        <Route path="/category/:categoryName" element={<Category handleLogout={onLogout} />}></Route>
+
         <Route
           path="/login"
           element={
@@ -100,12 +116,13 @@ function Main() {
                 setShowAlert={setShowAlert}
               />
             )
-          }
-        ></Route>
+          }></Route>
+
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/createEvent" element={<CreateEvent />}></Route>
-        <Route path="/category" element={<CategoryView />}></Route>
-        <Route path="/category/:categoryName" element={<Category />}></Route>
+        <Route path="/category" element={<CategoryView handleLogout={onLogout} />}></Route>
+        <Route path="/category/:categoryName" element={<Category handleLogout={onLogout} />}></Route>
+
         <Route
           path="/login"
           element={
@@ -116,10 +133,9 @@ function Main() {
               showAlert={showAlert}
               setShowAlert={setShowAlert}
             />
-          }
-        ></Route>
+          }></Route>
       </Routes>
-    </>
+    </React.Fragment>
   );
 }
 

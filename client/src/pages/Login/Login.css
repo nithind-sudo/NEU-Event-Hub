@@ -10,14 +10,6 @@ html, body {
   padding: 0;
 }
 
-.login-page {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  /* Makes sure the container occupies the whole view port */
-  height: 100vh;
-}
-
 .flex-column {
   flex: 1;
   flex-basis: 50%;
@@ -28,6 +20,10 @@ html, body {
 .login-content {
   flex: 1;
   flex-basis: 50%;
+}
+
+.cursorPointer {
+  cursor: pointer;
 }
 
 .login-container {
@@ -46,6 +42,7 @@ html, body {
   width: 100%;
   object-fit: cover;
   height: 100vh; 
+  transition: clip-path 1s;
 }
 
 .login-button {

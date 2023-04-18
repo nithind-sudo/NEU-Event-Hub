@@ -6,15 +6,17 @@ import MyCarousel from "../../components/Layout/MyCarousel";
 import carouselData from "./CarouselData.json";
 import CategoryView from "../../components/CategoryView/CategoryView";
 
-export default function LandingPage({handleLogout}) {
+export default function LandingPage({ handleLogout }) {
   return (
-    <Container fluid>
-      <Navbar handleLogout={handleLogout} />
-      <MyCarousel className="" carouselData={carouselData} />
-      {/* Add Events Happening */}
-      {/* Add Categories */}
-      <CategoryView />
+    <div>
+    <Navbar handleLogout={handleLogout} />
+      <Container fluid>
+        <MyCarousel className="" carouselData={carouselData} />
+        {/* Add Events Happening */}
+        {/* Add Categories */}
+        <CategoryView />
+      </Container>
       <Footer />
-    </Container>
+    </div>
   );
 }

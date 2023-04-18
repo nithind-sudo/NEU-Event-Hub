@@ -1,13 +1,72 @@
 import { Carousel } from "react-bootstrap";
 import holi from "../../assets/holi.jpeg";
+import garageBand from "../../assets/images/garageBand.jpeg";
+import audience from "../../assets/images/audience.jpeg";
+import disco from "../../assets/images/disco.jpeg";
+import concert from "../../assets/images/concert.jpeg";
+import bulbs from "../../assets/images/bulbs.jpeg";
+import christmas from "../../assets/images/christmas.jpeg";
 import professorsOrganized from "../../assets/professorsOrganized.jpeg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 import React from "react";
 import "./Carousel.css";
 
 export default function MyCarousel({ carouselData }) {
   console.log("carousel Data :", carouselData);
   return (
-    <Carousel>
+    <div className="my-3">
+      <div className="mt-5">
+        <div className="container">
+          <b>
+            <div className="display-6 colorCodeNortheastern">HIGHLIGHTS</div>
+            <blockquote className="blockquote">by Previous Events</blockquote>
+          </b>
+        </div>
+      </div>
+
+      <Swiper
+        modules={[Autoplay, Navigation]}
+        scrollbar={{ draggable: true }}
+        slidesPerView={3}
+        loop={true}
+        navigation={true}
+        centeredSlides={true}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        className="mySwiper">
+        <SwiperSlide>
+          <img className="carousel-image" src={holi} alt="First slide" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img className="carousel-image" src={garageBand} alt="Second slide" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img className="carousel-image" src={audience} alt="Third slide" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img className="carousel-image" src={concert} alt="Fourth slide" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img className="carousel-image" src={disco} alt="Fift slide" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img className="carousel-image" src={bulbs} alt="Fift slide" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img className="carousel-image" src={christmas} alt="Fift slide" />
+        </SwiperSlide>
+      </Swiper>
+    </div>
+  );
+  /*
+<Carousel>
       <Carousel.Item>
         <img className="carousel-image" src={holi} alt="First slide" />
         <Carousel.Caption>
@@ -36,5 +95,5 @@ export default function MyCarousel({ carouselData }) {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
-  );
+  */
 }

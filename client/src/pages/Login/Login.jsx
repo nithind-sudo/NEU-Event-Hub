@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
 import "./Login.css";
 import loginImage from "../../assets/login_image.jpg";
+import loginImageNew from "../../assets/images/login.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 // import { login, logout } from "../../apiClient";
@@ -97,66 +98,78 @@ export default function Login({ ...props }) {
 
   return (
     <div className="login-page">
-      <div className="flex-column">
-        <ImageComponent src={loginImage} className="image-fit" />
+      <div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div className="">
+              <ImageComponent src={loginImageNew} className="image-fit" />
+            </div>
+          </div>
+          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <Form className="login-content">
+              <Container>
+                <div className="login-container">
+                  <img
+                    src={loginLogo}
+                    style={{ width: "290px", height: "100px" }}
+                    alt="Northeastern-Events"
+                  />
+                  <Form.Group controlId="userEmail">
+                    <CustomLabel>
+                      <label className="lead mt-3 mb-1">Username</label>
+                      <TextInput
+                        type="text"
+                        value={formData.username}
+                        className="login-input"
+                        onChange={(e) =>
+                          handleFieldChange("email", e.target.value)
+                        }
+                        placeholder={"Enter your Email ID"}
+                        onBlur={() => handleFieldBlur("email")}
+                        isInvalid={!!errorValidation.email}
+                      />
+                    </CustomLabel>
+                    <Form.Control.Feedback type="invalid">
+                      {errorValidation.email}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group controlId="userPassword">
+                    <CustomLabel>
+                    <label className="lead mt-3 mb-1">Password</label>
+                      <TextInput
+                        type="password"
+                        value={formData.password}
+                        className="login-input"
+                        placeholder={"Enter your Password"}
+                        onChange={(e) =>
+                          handleFieldChange("password", e.target.value)
+                        }
+                        onBlur={() => handleFieldBlur("password")}
+                        isInvalid={!!errorValidation.password}
+                      />
+                    </CustomLabel>
+                    <Form.Control.Feedback type="invalid">
+                      {errorValidation.password}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Button
+                    variant="danger"
+                    text={"Sign In"}
+                    onClick={handleSignIn}
+                    className="login-button mt-3 mb-1"></Button>
+                  <CustomLabel className="mt-3 mb-1">
+                    <label className="lead">Don't have an account?</label>
+                    <Link to="/signup"><label className="lead ms-2 cursorPointer">Sign up here</label></Link>
+                  </CustomLabel>
+                </div>
+              </Container>
+            </Form>
+          </div>
+        </div>
       </div>
 
-      <Form className="login-content">
-        <Container>
-          <div className="login-container">
-            <img
-              src={loginLogo}
-              style={{ width: "290px", height: "100px" }}
-              alt="Northeastern-Events"
-            />
-            <Form.Group controlId="userEmail">
-              <CustomLabel>
-                Username/Email
-                <TextInput
-                  type="text"
-                  value={formData.username}
-                  className="login-input"
-                  // onChange={(e) => setUsername(e.target.value)}
-                  onChange={(e) => handleFieldChange("email", e.target.value)}
-                  onBlur={() => handleFieldBlur("email")}
-                  isInvalid={!!errorValidation.email}
-                />
-              </CustomLabel>
-              <Form.Control.Feedback type="invalid">
-                {errorValidation.email}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="userPassword">
-              <CustomLabel>
-                Password
-                <TextInput
-                  type="password"
-                  value={formData.password}
-                  className="login-input"
-                  // onChange={(e) => setPassword(e.target.value)}
-                  onChange={(e) =>
-                    handleFieldChange("password", e.target.value)
-                  }
-                  onBlur={() => handleFieldBlur("password")}
-                  isInvalid={!!errorValidation.password}
-                />
-              </CustomLabel>
-              <Form.Control.Feedback type="invalid">
-                {errorValidation.password}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Button
-              variant="danger"
-              text={"Sign In"}
-              onClick={handleSignIn}
-              className="login-button"
-            ></Button>
-            <CustomLabel>
-              Don't have an account? <Link to="/signup">Sign up here</Link>
-            </CustomLabel>
-          </div>
-        </Container>
-      </Form>
+      <div className="flex-column"></div>
+
       {showAlert && (
         <MyToast
           bg={"danger"}
