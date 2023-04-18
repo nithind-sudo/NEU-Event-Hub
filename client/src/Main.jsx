@@ -137,7 +137,7 @@ function Main() {
           path="/category/:categoryName"
           element={<Category handlelogout={onLogout} />}
         ></Route>
-        <Route path="/account" element={<MyAccount />}></Route>
+        <Route path="/account" element={<MyAccount handlelogout={onLogout} />}></Route>
         <Route
           path="/login"
           element={
