@@ -1,5 +1,8 @@
+const sessionMiddleware = require("../middleware/sessionMiddleware");
+const customSessionMiddleware = require("../middleware/customSessionMiddleware");
+
 exports.getSessionInfo = async (req, res) => {
-  console.log("Inside *** GET Session info ***** ")
+  console.log("Inside *** GET Session info ***** ");
   console.log("Cookies : ", req.cookies);
   const sessionId = req.cookies.sid;
   console.log("Session Id from req.cookies : ", sessionId);
@@ -9,26 +12,29 @@ exports.getSessionInfo = async (req, res) => {
       message: "No session found",
     });
   } else {
-    const sessionId = req.cookies.sid.split("s:")[1].split(".")[0];
-    req.sessionStore.get(sessionId, (err, session) => {
-      console.log("Session inside get : ", session);
-      if (err) {
-        res.status(500).json({
-          status: "error",
-          message: "Error retrieving session data",
-        });
-      } else if (!session) {
-        res.status(404).json({
-          status: "error",
-          message: "Session not found",
-        });
-      } else {
-        const sessionData = session.sessionData;
-        res.json({
-          success: true,
-          ...sessionData,
-        });
-      }
+    const sessionMiddlewareWrapper = customSessionMiddleware(sessionMiddleware);
+    sessionMiddlewareWrapper(req, res, () => {
+      const sessionId = req.cookies.sid.split("s:")[1].split(".")[0];
+      req.sessionStore.get(sessionId, (err, session) => {
+        console.log("Session inside get : ", session);
+        if (err) {
+          res.status(500).json({
+            status: "error",
+            message: "Error retrieving session data",
+          });
+        } else if (!session) {
+          res.status(404).json({
+            status: "error",
+            message: "Session not found",
+          });
+        } else {
+          const sessionData = session.sessionData;
+          res.json({
+            success: true,
+            ...sessionData,
+          });
+        }
+      });
     });
   }
 };
@@ -51,12 +57,6 @@ exports.generateSession = async (req, res) => {
   req.session.user_id = userInfo.user_id;
   req.session.sessionData = sessionData;
 
-  res.clearCookie("sid");
-  res.cookie("sid", req.sessionID, {
-    httpOnly: true,
-    secure: false, // Set to true if using HTTPS
-  });
-
   console.log("Session being saved to MongoStore : ", req.session);
   req.session.save((err) => {
     if (err) {
@@ -75,15 +75,45 @@ exports.generateSession = async (req, res) => {
 };
 
 exports.deleteSession = async (req, res) => {
-  const username = req.session.user;
-  req.session.destroy((err) => {
-    if (err) {
-      res.status(500).json({
-        status: "error",
-        message: "Error deleting session",
+  console.log("Inside DELETE SESSION with session info : ");
+  const sessionId = req.cookies.sid;
+  console.log("Session Id DELETE from req.cookies : ", sessionId);
+  if (!sessionId) {
+    console.log("*** Inside If Block of DELETE SESSION **** ");
+    res.status(404).json({
+      status: "error",
+      message: "Error deleting session",
+    });
+  } else {
+    const sessionMiddlewareWrapper = customSessionMiddleware(sessionMiddleware);
+    sessionMiddlewareWrapper(req, res, () => {
+      const sessionId = req.cookies.sid.split("s:")[1].split(".")[0];
+      req.sessionStore.get(sessionId, (err, session) => {
+        console.log("Session inside DELETE : ", session);
+        if (err) {
+          res.status(500).json({
+            status: "error",
+            message: "Error retrieving session data",
+          });
+        } else if (!session) {
+          res.status(404).json({
+            status: "error",
+            message: "Session not found",
+          });
+        } else {
+          req.session.destroy((err) => {
+            if (err) {
+              res.status(500).json({
+                status: "error",
+                message: "Error deleting session",
+              });
+            } else {
+              res.clearCookie('sid');
+              res.json({ success: true, message: "Session deleted" });
+            }
+          });
+        }
       });
-    } else {
-      res.json({ username, success: true, message: "Session deleted" });
-    }
-  });
+    });
+  }
 };

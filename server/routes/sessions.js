@@ -14,6 +14,6 @@ router.post(
   sessionController.generateSession
 );
 
-router.delete("/", sessionChecker, sessionController.deleteSession);
+router.delete("/", sessionController.deleteSession);
 
 module.exports = router;

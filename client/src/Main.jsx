@@ -71,7 +71,7 @@ function Main() {
           path="/"
           element={
             state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-              <LandingPage handleLogout={onLogout} />
+              <LandingPage handlelogout={onLogout} />
             ) : (
               <Login
                 onLogin={onLogin}
@@ -87,7 +87,7 @@ function Main() {
           path="/main"
           element={
             state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-              <LandingPage handleLogout={onLogout} />
+              <LandingPage handlelogout={onLogout} />
             ) : (
               <Login
                 onLogin={onLogin}
@@ -99,14 +99,14 @@ function Main() {
             )
           }></Route>
 
-        <Route path="/category" element={<CategoryView handleLogout={onLogout} />}></Route>
-        <Route path="/category/:categoryName" element={<Category handleLogout={onLogout} />}></Route>
+        <Route path="/category" element={<CategoryView handlelogout={onLogout} />}></Route>
+        <Route path="/category/:categoryName" element={<Category handlelogout={onLogout} />}></Route>
 
         <Route
           path="/login"
           element={
             state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-              <LandingPage handleLogout={onLogout} />
+              <LandingPage handlelogout={onLogout} />
             ) : (
               <Login
                 onLogin={onLogin}
@@ -120,8 +120,8 @@ function Main() {
 
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/createEvent" element={<CreateEvent />}></Route>
-        <Route path="/category" element={<CategoryView handleLogout={onLogout} />}></Route>
-        <Route path="/category/:categoryName" element={<Category handleLogout={onLogout} />}></Route>
+        <Route path="/category" element={<CategoryView handlelogout={onLogout} />}></Route>
+        <Route path="/category/:categoryName" element={<Category handlelogout={onLogout} />}></Route>
 
         <Route
           path="/login"

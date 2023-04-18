@@ -76,6 +76,7 @@ export default function SignUp() {
       username: formData.email,
       phone_number: formData.phoneNumber,
       password: formData.password,
+      role : selectedRole
     };
     try {
       const response = await fetchSignUp(payload);
@@ -206,8 +207,8 @@ export default function SignUp() {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                              <Dropdown.Item eventKey="Customer">
-                                Customer
+                              <Dropdown.Item eventKey="User">
+                                User
                               </Dropdown.Item>
                               <Dropdown.Item eventKey="Admin">
                                 Admin

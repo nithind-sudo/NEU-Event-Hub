@@ -24,7 +24,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(sessionMiddleware);
+// app.use(sessionMiddleware);
 
 const index_routes = require("./routes/index");
 const userRoutes = require("./routes/users");

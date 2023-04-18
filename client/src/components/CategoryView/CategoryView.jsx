@@ -27,7 +27,7 @@ const icons = [
   faFlask,
 ];
 
-const CategoryView = ({ handleLogout }) => {
+const CategoryView = ({ handlelogout }) => {
   var [eventCategories, setEventCategories] = useState([]);
   var [eventLinks, setEventLinks] = useState([]);
   let eventCategoryURL = "http://localhost:3000/category/getCategories";
@@ -49,7 +49,7 @@ const CategoryView = ({ handleLogout }) => {
 
   return (
     <React.Fragment>
-    <Navbar handleLogout={handleLogout} />
+    <Navbar handlelogout={handlelogout} />
       <div className="pt-3">
         <div className="container">
           <div>
