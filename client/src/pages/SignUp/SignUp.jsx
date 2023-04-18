@@ -236,7 +236,7 @@ export default function SignUp() {
                       onClick={handleSignUp}
                       className="signup-button mt-3 mb-1"></Button>
                     <CustomLabel>
-                      <label className="lead mt-3 mb-1">Have an Account?</label>{" "}
+                      <label className="lead mt-3 mb-1">Have an Account?</label>
                       <Link to="/login">
                         <label className="lead ms-2 cursorPointer">
                           Login here

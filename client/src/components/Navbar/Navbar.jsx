@@ -2,13 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/Navbar/Navbar.css";
 import { Container } from "react-bootstrap";
+import brandIcon from "../../assets/images/BrandIcon.png";
 
 const Navbar = ({ handleLogout }) => {
   return (
     <header>
       <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
         <Container fluid>
-          <div className="navbar-brand">Northeastern's Events Hub</div>
+          <Link to="/">
+            <div className="navbar-brand">
+              <img
+                src={brandIcon}
+                alt="Bootstrap"
+                width="40"
+                height="40"
+                className="img img-circle"
+              />
+            </div>
+          </Link>
+          <Link to="/">
+            <div className="navbar-brand">NEU - Events Hub</div>
+          </Link>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -29,15 +44,18 @@ const Navbar = ({ handleLogout }) => {
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
+
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <ul className="navbar-nav me-auto ms-auto mb-2 mb-md-0">
-              <li className="nav-item">
+              
+            <li className="nav-item">
                 <Link
-                  to="/"
+                  to="/main"
                   className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
                   Home
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link
                   to="/allEvents"
@@ -45,6 +63,7 @@ const Navbar = ({ handleLogout }) => {
                   All Events
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link
                   to="/category"
@@ -52,6 +71,7 @@ const Navbar = ({ handleLogout }) => {
                   Categories
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link
                   to="/createEvent"
@@ -59,6 +79,7 @@ const Navbar = ({ handleLogout }) => {
                   Create an Event
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link
                   to="/contact"
@@ -66,7 +87,9 @@ const Navbar = ({ handleLogout }) => {
                   Contact
                 </Link>
               </li>
+
             </ul>
+
             <form className="d-flex me-5" role="search">
               <input
                 className="form-control shadow-none me-2"
@@ -75,14 +98,16 @@ const Navbar = ({ handleLogout }) => {
                 aria-label="Check Events"
               />
             </form>
+
             {handleLogout && (
               <button
-                className="btn btn-events-hub text-light ms-5"
+                className="btn btn-events-hub text-light ms-xs-0 ms-sm-0 ms-md-5 ms-lg-5 ms-xl-5"
                 onClick={handleLogout}
                 type="submit">
                 Logout
               </button>
             )}
+            
           </div>
         </Container>
       </nav>

@@ -13,6 +13,8 @@ import {
   faUserTie,
   faFlask,
 } from "@fortawesome/free-solid-svg-icons";
+import { Navbar } from "react-bootstrap";
+import Footer from "../Layout/Footer";
 
 const icons = [
   faCoffee,
@@ -25,7 +27,7 @@ const icons = [
   faFlask,
 ];
 
-const CategoryView = () => {
+const CategoryView = ({ handleLogout }) => {
   var [eventCategories, setEventCategories] = useState([]);
   var [eventLinks, setEventLinks] = useState([]);
   let eventCategoryURL = "http://localhost:3000/category/getCategories";
@@ -47,6 +49,7 @@ const CategoryView = () => {
 
   return (
     <React.Fragment>
+    <Navbar handleLogout={handleLogout} />
       <div className="pt-3">
         <div className="container">
           <div>
@@ -85,6 +88,7 @@ const CategoryView = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </React.Fragment>
   );
 };
