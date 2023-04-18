@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../styles/Navbar/Navbar.css";
 import { Container } from "react-bootstrap";
 
-const Navbar = ({handleLogout}) => {
+const Navbar = ({ handleLogout }) => {
   return (
     <header>
       <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
@@ -59,20 +59,6 @@ const Navbar = ({handleLogout}) => {
                   Create an Event
                 </Link>
               </li>
-              {/* <li className="nav-item">
-                <Link
-                  to="/login"
-                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/signup"
-                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
-                  Signup
-                </Link>
-              </li> */}
               <li className="nav-item">
                 <Link
                   to="/contact"
@@ -81,20 +67,22 @@ const Navbar = ({handleLogout}) => {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <form className="d-flex me-5" role="search">
               <input
                 className="form-control shadow-none me-2"
                 type="search"
                 placeholder="Search Events"
                 aria-label="Check Events"
               />
-              <button className="btn btn-events-hub text-light" type="submit">
-                Search
-              </button>
-              {handleLogout && <button className="btn btn-events-hub text-light" onClick={handleLogout} type="submit">
-                 Logout
-              </button>}
             </form>
+            {handleLogout && (
+              <button
+                className="btn btn-events-hub text-light ms-5"
+                onClick={handleLogout}
+                type="submit">
+                Logout
+              </button>
+            )}
           </div>
         </Container>
       </nav>

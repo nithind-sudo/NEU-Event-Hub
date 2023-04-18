@@ -1,3 +1,4 @@
+import React from "react";
 import Login from "./pages/Login/Login";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import SignUp from "./pages/SignUp/SignUp";
@@ -61,12 +62,12 @@ function Main() {
   }
 
   return (
-    <>
-      {/* <Navbar /> */}
+    <React.Fragment>
       {state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN && (
         <LandingPage handleLogout={onLogout} />
       )}
       <Routes>
+
         <Route
           path="/"
           element={
@@ -83,8 +84,10 @@ function Main() {
             )
           }
         ></Route>
+
         <Route path="/category" element={<CategoryView />}></Route>
         <Route path="/category/:categoryName" element={<Category />}></Route>
+
         <Route
           path="/login"
           element={
@@ -101,9 +104,11 @@ function Main() {
             )
           }
         ></Route>
+
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/category" element={<CategoryView />}></Route>
         <Route path="/category/:categoryName" element={<Category />}></Route>
+
         <Route
           path="/login"
           element={
@@ -116,8 +121,9 @@ function Main() {
             />
           }
         ></Route>
+
       </Routes>
-    </>
+    </React.Fragment>
   );
 }
 
