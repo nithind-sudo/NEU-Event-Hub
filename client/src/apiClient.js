@@ -15,6 +15,8 @@ export const fetchLogin = async (username, password) => {
     const payload = { username, password };
     const response = await instance.post("/v1/session", payload, { headers });
     console.log("**** RESPONSE from session API ****** : ", response.data);
+    localStorage.setItem("sessionId", response.data.sessionId);
+
     return response;
   } catch (error) {
     throw error;
@@ -28,6 +30,7 @@ export const fetchLogOut = async () => {
     };
     const response = await instance.delete("/v1/session", { headers });
     console.log("**** RESPONSE from session API ****** : ", response.data);
+    localStorage.removeItem("sessionId");
     return response;
   } catch (error) {
     throw error;
