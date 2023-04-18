@@ -100,9 +100,9 @@ function Main() {
             )
           }></Route>
 
-        <Route path="/category" element={<CategoryView handleLogout={onLogout} />}></Route>
-        <Route path="/allEvents" element={<AllEvents handleLogout={onLogout} />}></Route>
-        <Route path="/category/:categoryName" element={<Category handleLogout={onLogout} />}></Route>
+        <Route path="/category" element={<CategoryView handlelogout={onLogout} />}></Route>
+        <Route path="/allEvents" element={<AllEvents handlelogout={onLogout} />}></Route>
+        <Route path="/category/:categoryName" element={<Category handlelogout={onLogout} />}></Route>
 
         <Route
           path="/login"

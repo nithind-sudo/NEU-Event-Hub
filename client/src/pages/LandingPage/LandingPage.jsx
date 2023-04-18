@@ -10,7 +10,7 @@ import AllEvents from "../AllEvents/AllEvents";
 export default function LandingPage({ handlelogout }) {
   return (
     <div className="pb-5">
-    <Navbar handleLogout={handleLogout} />
+    <Navbar handlelogout={handlelogout} />
       <Container fluid>
         <MyCarousel className="" carouselData={carouselData} />
         {/* Add Events Happening */}
