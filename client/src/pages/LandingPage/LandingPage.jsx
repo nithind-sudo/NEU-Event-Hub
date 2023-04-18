@@ -7,10 +7,10 @@ import carouselData from "./CarouselData.json";
 import CategoryView from "../../components/CategoryView/CategoryView";
 import AllEvents from "../AllEvents/AllEvents";
 
-export default function LandingPage({ handlelogout }) {
+export default function LandingPage(props) {
   return (
     <div className="pb-5">
-    <Navbar handleLogout={handleLogout} />
+    <Navbar handleLogout={props.handleLogout} />
       <Container fluid>
         <MyCarousel className="" carouselData={carouselData} />
         {/* Add Events Happening */}
