@@ -12,6 +12,7 @@ import { fetchLogin, fetchLogOut } from "./apiClient";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
 import Footer from "./components/Layout/Footer";
 import MyAccount from "./pages/MyAccountPage/MyAccount";
+import AllEvents from "./pages/AllEvents/AllEvents";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -109,6 +110,8 @@ function Main() {
           path="/category/:categoryName"
           element={<Category handlelogout={onLogout} />}
         ></Route>
+
+        <Route path="/allEvents" element={<AllEvents handlelogout={onLogout} />}></Route>
 
         <Route
           path="/login"
