@@ -12,6 +12,7 @@ import { fetchLogin, fetchLogOut } from "./apiClient";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
 import { Navbar } from "react-bootstrap";
 import Footer from "./components/Layout/Footer";
+import AllEvents from "./pages/AllEvents/AllEvents";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -99,8 +100,9 @@ function Main() {
             )
           }></Route>
 
-        <Route path="/category" element={<CategoryView handlelogout={onLogout} />}></Route>
-        <Route path="/category/:categoryName" element={<Category handlelogout={onLogout} />}></Route>
+        <Route path="/category" element={<CategoryView handleLogout={onLogout} />}></Route>
+        <Route path="/allEvents" element={<AllEvents handleLogout={onLogout} />}></Route>
+        <Route path="/category/:categoryName" element={<Category handleLogout={onLogout} />}></Route>
 
         <Route
           path="/login"
