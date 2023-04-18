@@ -6,7 +6,7 @@ const authMiddleWare = require("../middleware/authMiddleware");
 const sessionMiddleware = require("../middleware/sessionMiddleware");
 const sessionChecker = require("../middleware/sessionChecker");
 
-router.get("/", sessionChecker, sessionController.getSessionInfo);
+router.get("/", sessionController.getSessionInfo);
 
 router.post(
   "/",

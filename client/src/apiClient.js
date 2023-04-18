@@ -2,7 +2,22 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000", // Replace with your API base URL
+  withCredentials: true,
 });
+
+axios.defaults.withCredentials = true;
+
+export const fetchSession = async () => {
+  try {
+    const sid = localStorage.getItem("sid");
+    console.log(" ******** sid from local storage : ", sid);
+    const response = await instance.get("/v1/session");
+    console.log("**** RESPONSE from session API ****** : ", response.data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const fetchLogin = async (username, password) => {
   try {
@@ -13,8 +28,13 @@ export const fetchLogin = async (username, password) => {
       "Content-Type": "application/json",
     };
     const payload = { username, password };
-    const response = await instance.post("/v1/session", payload, { headers });
+    const response = await instance.post("/v1/session", payload, {
+      withCredentials: true,
+      headers,
+    });
     console.log("**** RESPONSE from session API ****** : ", response.data);
+    localStorage.setItem("sid", response.data.sessionData.sid);
+
     return response;
   } catch (error) {
     throw error;
@@ -28,6 +48,7 @@ export const fetchLogOut = async () => {
     };
     const response = await instance.delete("/v1/session", { headers });
     console.log("**** RESPONSE from session API ****** : ", response.data);
+    localStorage.removeItem("sid");
     return response;
   } catch (error) {
     throw error;

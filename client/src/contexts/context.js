@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { ACTIONS } from "./constants";
 import { useNavigate } from "react-router-dom";
+import { fetchSession } from "../apiClient";
 
 const EventManagement = createContext();
 
@@ -12,8 +13,7 @@ const Context = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/v1/session")
+    fetchSession()
       .then((response) => {
         if (response.data.success) {
           dispatch({
