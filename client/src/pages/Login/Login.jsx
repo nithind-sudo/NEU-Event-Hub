@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
 import "./Login.css";
 import loginImage from "../../assets/login_image.jpg";
-import loginImageNew from "../../assets/images/holi.jpeg";
+import loginImageNew from "../../assets/images/login.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 // import { login, logout } from "../../apiClient";

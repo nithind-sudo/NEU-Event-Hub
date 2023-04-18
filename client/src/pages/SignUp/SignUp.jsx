@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Joi from "joi";
 import ImageComponent from "../../components/ui/ImageComponent";
 import SignUpImage from "../../assets/signup-image.jpg";
+import SignUpImageNew from "../../assets/images/singup.jpeg";
 import loginLogo from "../../assets/login-logo.svg";
 import { Link } from "react-router-dom";
 
@@ -94,119 +95,134 @@ export default function SignUp() {
 
   return (
     <div className="signup-page">
-      <Form className="signup-content">
-        <Container>
-          <div className="signup-container">
-            <img
-              src={loginLogo}
-              style={{ width: "290px", height: "100px" }}
-              alt="Northeastern-Events"
-            />
-            <Row className="justify-content-center">
-              <Col>
-                <Form.Group controlId="userFirstName">
-                  <CustomLabel>
-                    First Name
-                    <TextInput
-                      type="text"
-                      value={formData.firstName}
-                      className="signup-input"
-                      onChange={(e) =>
-                        handleFieldChange("firstName", e.target.value)
-                      }
-                      onBlur={() => handleFieldBlur("firstName")}
-                      isInvalid={!!errorValidation.firstName}
-                    />
-                  </CustomLabel>
-                </Form.Group>
-              </Col>
-
-              <Col>
-                <Form.Group controlId="userLastName">
-                  <CustomLabel>
-                    Last Name
-                    <TextInput
-                      type="text"
-                      value={formData.lastName}
-                      className="signup-input"
-                      onChange={(e) =>
-                        handleFieldChange("lastName", e.target.value)
-                      }
-                      onBlur={() => handleFieldBlur("lastName")}
-                      isInvalid={!!errorValidation.lastName}
-                    />
-                  </CustomLabel>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Form.Group controlId="userEmail">
-                <CustomLabel>
-                  Email
-                  <TextInput
-                    type="text"
-                    value={formData.email}
-                    className="signup-input-personal"
-                    onChange={(e) => handleFieldChange("email", e.target.value)}
-                    onBlur={() => handleFieldBlur("email")}
-                    isInvalid={!!errorValidation.email}
+      <div className="container-fluid p-0">
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div>
+              <div className="row">
+                <div className="text-center">
+                  <img
+                    src={loginLogo}
+                    style={{ width: "290px", height: "100px" }}
+                    alt="Northeastern-Events"
                   />
-                </CustomLabel>
-              </Form.Group>
-            </Row>
-            <Form.Group controlId="userPhone">
-              <CustomLabel>
-                Phone
-                <TextInput
-                  type="text"
-                  value={formData.phoneNumber}
-                  className="signup-input-personal"
-                  onChange={(e) =>
-                    handleFieldChange("phoneNumber", e.target.value)
-                  }
-                  onBlur={() => handleFieldBlur("phoneNumber")}
-                  isInvalid={!!errorValidation.phoneNumber}
-                />
-              </CustomLabel>
-            </Form.Group>
-            <Row>
-              <Col>
-                <Form.Group controlId="userPassword">
-                  <CustomLabel>
-                    Password
-                    <TextInput
-                      type="password"
-                      value={formData.password}
-                      className="signup-input"
-                      onChange={(e) =>
-                        handleFieldChange("password", e.target.value)
-                      }
-                      onBlur={() => handleFieldBlur("password")}
-                      isInvalid={!!errorValidation.password}
-                    />
-                  </CustomLabel>
-                </Form.Group>
-              </Col>
+                </div>
+              </div>
+              <Form>
+                <Container>
+                  <div className="signup-container">
+                    <Row className="justify-content-center">
+                      <Col>
+                        <Form.Group controlId="userFirstName">
+                          <CustomLabel>
+                            <label className="lead mt-3 mb-1">First Name</label>
+                            <TextInput
+                              type="text"
+                              value={formData.firstName}
+                              className="signup-input"
+                              onChange={(e) =>
+                                handleFieldChange("firstName", e.target.value)
+                              }
+                              onBlur={() => handleFieldBlur("firstName")}
+                              isInvalid={!!errorValidation.firstName}
+                            />
+                          </CustomLabel>
+                        </Form.Group>
+                      </Col>
 
-              <Col>
-                <Form.Group controlId="userConfirmPassword">
-                  <CustomLabel>
-                    Confirm Password
-                    <TextInput
-                      type="password"
-                      value={formData.confirmPassword}
-                      className="signup-input"
-                      onChange={(e) =>
-                        handleFieldChange("confirmPassword", e.target.value)
-                      }
-                      onBlur={() => handleFieldBlur("confirmPassword")}
-                      isInvalid={!!errorValidation.confirmPassword}
-                    />
-                  </CustomLabel>
-                </Form.Group>
-              </Col>
-            </Row>
-            {/* <Row>
+                      <Col>
+                        <Form.Group controlId="userLastName">
+                          <CustomLabel>
+                            <label className="lead mt-3 mb-1">Last Name</label>
+                            <TextInput
+                              type="text"
+                              value={formData.lastName}
+                              className="signup-input"
+                              onChange={(e) =>
+                                handleFieldChange("lastName", e.target.value)
+                              }
+                              onBlur={() => handleFieldBlur("lastName")}
+                              isInvalid={!!errorValidation.lastName}
+                            />
+                          </CustomLabel>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Form.Group controlId="userEmail">
+                        <CustomLabel>
+                          <label className="lead mt-3 mb-1">Email</label>
+                          <TextInput
+                            type="text"
+                            value={formData.email}
+                            className="signup-input-personal"
+                            onChange={(e) =>
+                              handleFieldChange("email", e.target.value)
+                            }
+                            onBlur={() => handleFieldBlur("email")}
+                            isInvalid={!!errorValidation.email}
+                          />
+                        </CustomLabel>
+                      </Form.Group>
+                    </Row>
+                    <Form.Group controlId="userPhone">
+                      <CustomLabel>
+                        <label className="lead mt-3 mb-1">Mobile Number</label>
+                        <TextInput
+                          type="text"
+                          value={formData.phoneNumber}
+                          className="signup-input-personal"
+                          onChange={(e) =>
+                            handleFieldChange("phoneNumber", e.target.value)
+                          }
+                          onBlur={() => handleFieldBlur("phoneNumber")}
+                          isInvalid={!!errorValidation.phoneNumber}
+                        />
+                      </CustomLabel>
+                    </Form.Group>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="userPassword">
+                          <CustomLabel>
+                            <label className="lead mt-3 mb-1">Password</label>
+                            <TextInput
+                              type="password"
+                              value={formData.password}
+                              className="signup-input"
+                              onChange={(e) =>
+                                handleFieldChange("password", e.target.value)
+                              }
+                              onBlur={() => handleFieldBlur("password")}
+                              isInvalid={!!errorValidation.password}
+                            />
+                          </CustomLabel>
+                        </Form.Group>
+                      </Col>
+
+                      <Col>
+                        <Form.Group controlId="userConfirmPassword">
+                          <CustomLabel>
+                            <label className="lead mt-3 mb-1">
+                              Confirm Password
+                            </label>
+                            <TextInput
+                              type="password"
+                              value={formData.confirmPassword}
+                              className="signup-input"
+                              onChange={(e) =>
+                                handleFieldChange(
+                                  "confirmPassword",
+                                  e.target.value
+                                )
+                              }
+                              onBlur={() => handleFieldBlur("confirmPassword")}
+                              isInvalid={!!errorValidation.confirmPassword}
+                            />
+                          </CustomLabel>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    {/* <Row>
               <Form.Check
                 type={"checkbox"}
                 id={`default-checkbox}`}
@@ -214,22 +230,37 @@ export default function SignUp() {
               />
             </Row> */}
 
-            <Button
-              variant="danger"
-              text={"Create Account"}
-              onClick={handleSignUp}
-              className="signup-button"
-            ></Button>
-            <CustomLabel>
-              Have an account? <Link to="/login">Login here</Link>
-            </CustomLabel>
+                    <Button
+                      variant="danger"
+                      text={"Create Account"}
+                      onClick={handleSignUp}
+                      className="signup-button mt-3 mb-1"></Button>
+                    <CustomLabel>
+                      <label className="lead mt-3 mb-1">Have an Account?</label>{" "}
+                      <Link to="/login">
+                        <label className="lead ms-2 cursorPointer">
+                          Login here
+                        </label>
+                      </Link>
+                    </CustomLabel>
+                  </div>
+                </Container>
+              </Form>
+            </div>
           </div>
-        </Container>
-      </Form>
-      {/* <Footer fixed={"fixed-bottom"} /> */}
-      <div className="flex-col">
-        <ImageComponent src={SignUpImage} className="image-fit image-container" />
+          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div>
+              <ImageComponent
+                src={SignUpImageNew}
+                className="image-fit image-container"
+              />
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* <Footer fixed={"fixed-bottom"} /> */}
+      <div className="flex-col"></div>
 
       {showAlert && (
         <MyToast
