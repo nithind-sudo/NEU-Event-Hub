@@ -132,6 +132,7 @@ export default function SignUp() {
                               }
                               onBlur={() => handleFieldBlur("firstName")}
                               isInvalid={!!errorValidation.firstName}
+                              placeholder={"Enter your First Name"}
                             />
                           </CustomLabel>
                         </Form.Group>
@@ -150,6 +151,7 @@ export default function SignUp() {
                               }
                               onBlur={() => handleFieldBlur("lastName")}
                               isInvalid={!!errorValidation.lastName}
+                              placeholder={"Enter your Last Name"}
                             />
                           </CustomLabel>
                         </Form.Group>
@@ -168,6 +170,7 @@ export default function SignUp() {
                             }
                             onBlur={() => handleFieldBlur("email")}
                             isInvalid={!!errorValidation.email}
+                            placeholder={"Enter your Email ID"}
                           />
                         </CustomLabel>
                       </Form.Group>
@@ -218,6 +221,7 @@ export default function SignUp() {
                         </CustomLabel>
                       </Form.Group>
                     </Row>
+
                     <Row>
                       <Col>
                         <Form.Group controlId="userPassword">
@@ -232,6 +236,7 @@ export default function SignUp() {
                               }
                               onBlur={() => handleFieldBlur("password")}
                               isInvalid={!!errorValidation.password}
+                              placeholder={"Enter Password"}
                             />
                           </CustomLabel>
                         </Form.Group>
@@ -255,6 +260,7 @@ export default function SignUp() {
                               }
                               onBlur={() => handleFieldBlur("confirmPassword")}
                               isInvalid={!!errorValidation.confirmPassword}
+                              placeholder={"Re-Enter your Password"}
                             />
                           </CustomLabel>
                         </Form.Group>
@@ -297,8 +303,6 @@ export default function SignUp() {
           </div>
         </div>
       </div>
-
-      {/* <Footer fixed={"fixed-bottom"} /> */}
       <div className="flex-col"></div>
 
       {showAlert && (

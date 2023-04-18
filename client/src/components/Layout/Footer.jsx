@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 
 export default function Footer({ fixed }) {
   return (
-    <>
+    <div>
       <footer className={`bg-dark py-3 ${fixed ? 'fixed-bottom' : ''}`}>
         <Container>
           <div className="text-center">
@@ -13,6 +13,6 @@ export default function Footer({ fixed }) {
           </div>
         </Container>
       </footer>
-    </>
+    </div>
   );
 }

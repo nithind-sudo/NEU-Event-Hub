@@ -108,7 +108,6 @@ const Category = ({ handlelogout }) => {
           </div>
         </div>
       </div>
-      <Footer />
     </React.Fragment>
   );
 };
