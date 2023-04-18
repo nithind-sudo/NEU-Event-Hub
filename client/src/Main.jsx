@@ -10,8 +10,8 @@ import { EventManagementState } from "./contexts/context";
 import { LOGIN_STATUS, ACTIONS } from "./contexts/constants";
 import { fetchLogin, fetchLogOut } from "./apiClient";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
-import { Navbar } from "react-bootstrap";
 import Footer from "./components/Layout/Footer";
+import MyAccount from "./pages/MyAccountPage/MyAccount";
 import AllEvents from "./pages/AllEvents/AllEvents";
 
 function Main() {
@@ -82,7 +82,8 @@ function Main() {
                 setShowAlert={setShowAlert}
               />
             )
-          }></Route>
+          }
+        ></Route>
 
         <Route
           path="/main"
@@ -98,11 +99,19 @@ function Main() {
                 setShowAlert={setShowAlert}
               />
             )
-          }></Route>
+          }
+        ></Route>
 
-        <Route path="/category" element={<CategoryView handlelogout={onLogout} />}></Route>
+        <Route
+          path="/category"
+          element={<CategoryView handlelogout={onLogout} />}
+        ></Route>
+        <Route
+          path="/category/:categoryName"
+          element={<Category handlelogout={onLogout} />}
+        ></Route>
+
         <Route path="/allEvents" element={<AllEvents handlelogout={onLogout} />}></Route>
-        <Route path="/category/:categoryName" element={<Category handlelogout={onLogout} />}></Route>
 
         <Route
           path="/login"
@@ -118,13 +127,20 @@ function Main() {
                 setShowAlert={setShowAlert}
               />
             )
-          }></Route>
+          }
+        ></Route>
 
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/createEvent" element={<CreateEvent />}></Route>
-        <Route path="/category" element={<CategoryView handlelogout={onLogout} />}></Route>
-        <Route path="/category/:categoryName" element={<Category handlelogout={onLogout} />}></Route>
-
+        <Route
+          path="/category"
+          element={<CategoryView handlelogout={onLogout} />}
+        ></Route>
+        <Route
+          path="/category/:categoryName"
+          element={<Category handlelogout={onLogout} />}
+        ></Route>
+        <Route path="/account" element={<MyAccount handlelogout={onLogout} />}></Route>
         <Route
           path="/login"
           element={
@@ -135,7 +151,8 @@ function Main() {
               showAlert={showAlert}
               setShowAlert={setShowAlert}
             />
-          }></Route>
+          }
+        ></Route>
       </Routes>
     </React.Fragment>
   );
