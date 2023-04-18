@@ -15,6 +15,7 @@ import SignUpImage from "../../assets/signup-image.jpg";
 import SignUpImageNew from "../../assets/images/singup.jpeg";
 import loginLogo from "../../assets/login-logo.svg";
 import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export default function SignUp() {
       .required(),
   });
 
+  const [selectedRole, setSelectedRole] = useState("Select a Role");
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertClass, setAlertClass] = useState("danger");
@@ -47,6 +49,10 @@ export default function SignUp() {
 
   const handleFieldChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSelect = (e) => {
+    setSelectedRole(e);
   };
 
   const handleFieldBlur = (name) => {
@@ -70,6 +76,7 @@ export default function SignUp() {
       username: formData.email,
       phone_number: formData.phoneNumber,
       password: formData.password,
+      role : selectedRole
     };
     try {
       const response = await fetchSignUp(payload);
@@ -168,22 +175,53 @@ export default function SignUp() {
                         </CustomLabel>
                       </Form.Group>
                     </Row>
-                    <Form.Group controlId="userPhone">
-                      <CustomLabel>
-                        <label className="lead mt-3 mb-1">Mobile Number</label>
-                        <TextInput
-                          type="text"
-                          value={formData.phoneNumber}
-                          className="signup-input-personal"
-                          onChange={(e) =>
-                            handleFieldChange("phoneNumber", e.target.value)
-                          }
-                          onBlur={() => handleFieldBlur("phoneNumber")}
-                          isInvalid={!!errorValidation.phoneNumber}
-                          placeholder={"Enter your Mobile Number"}
-                        />
-                      </CustomLabel>
-                    </Form.Group>
+                    <Row>
+                      <Form.Group controlId="userPhone">
+                        <CustomLabel>
+                          <label className="lead mt-3 mb-1">
+                            Mobile Number
+                          </label>
+                          <TextInput
+                            type="text"
+                            value={formData.phoneNumber}
+                            className="signup-input-personal"
+                            onChange={(e) =>
+                              handleFieldChange("phoneNumber", e.target.value)
+                            }
+                            onBlur={() => handleFieldBlur("phoneNumber")}
+                            isInvalid={!!errorValidation.phoneNumber}
+                          />
+                        </CustomLabel>
+                      </Form.Group>
+                    </Row>
+                    <Row>
+                      <Form.Group controlId="role">
+                        <CustomLabel>
+                          <label className="lead mt-3 mb-1">Role</label>
+                          <Dropdown
+                            className="custom-dropdown-width"
+                            onSelect={handleSelect}
+                          >
+                            <Dropdown.Toggle
+                              variant="outline-secondary"
+                              id="dropdown-basic"
+                            >
+                              {selectedRole}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                              <Dropdown.Item eventKey="User">
+                                User
+                              </Dropdown.Item>
+                              <Dropdown.Item eventKey="Admin">
+                                Admin
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </CustomLabel>
+                      </Form.Group>
+                    </Row>
+
                     <Row>
                       <Col>
                         <Form.Group controlId="userPassword">
@@ -240,7 +278,8 @@ export default function SignUp() {
                       variant="danger"
                       text={"Create Account"}
                       onClick={handleSignUp}
-                      className="signup-button mt-3 mb-1"></Button>
+                      className="signup-button mt-3 mb-1"
+                    ></Button>
                     <CustomLabel>
                       <label className="lead mt-3 mb-1">Have an Account?</label>
                       <Link to="/login">

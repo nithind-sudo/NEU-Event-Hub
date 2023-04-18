@@ -4,9 +4,8 @@ const router = express.Router();
 const sessionController = require("../controllers/sessions");
 const authMiddleWare = require("../middleware/authMiddleware");
 const sessionMiddleware = require("../middleware/sessionMiddleware");
-const sessionChecker = require("../middleware/sessionChecker");
 
-router.get("/", sessionChecker, sessionController.getSessionInfo);
+router.get("/", sessionController.getSessionInfo);
 
 router.post(
   "/",
@@ -14,6 +13,6 @@ router.post(
   sessionController.generateSession
 );
 
-router.delete("/", sessionChecker, sessionController.deleteSession);
+router.delete("/", sessionController.deleteSession);
 
 module.exports = router;

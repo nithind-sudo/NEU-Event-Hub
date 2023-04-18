@@ -15,7 +15,7 @@ import otherOrganized from "../../assets/holi.jpeg";
 import Footer from "../Layout/Footer";
 import { Navbar } from "react-bootstrap";
 
-const Category = ({ handleLogout }) => {
+const Category = ({ handlelogout }) => {
   let { categoryName } = useParams();
   let [category, setCategory] = useState({});
   let getCategoryURL =

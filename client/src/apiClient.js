@@ -2,7 +2,22 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000", // Replace with your API base URL
+  withCredentials: true,
 });
+
+axios.defaults.withCredentials = true;
+
+export const fetchSession = async () => {
+  try {
+    const sid = localStorage.getItem("sid");
+    console.log(" ******** sid from local storage : ", sid);
+    const response = await instance.get("/v1/session");
+    console.log("**** RESPONSE from session API ****** : ", response.data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const fetchLogin = async (username, password) => {
   try {
@@ -13,8 +28,15 @@ export const fetchLogin = async (username, password) => {
       "Content-Type": "application/json",
     };
     const payload = { username, password };
-    const response = await instance.post("/v1/session", payload, { headers });
+    const response = await instance.post("/v1/session", payload, {
+      withCredentials: true,
+      headers,
+    });
     console.log("**** RESPONSE from session API ****** : ", response.data);
+    if (response.data.success) {
+      localStorage.setItem("sid", response.data.sessionData.sid);
+    }
+
     return response;
   } catch (error) {
     throw error;
@@ -27,7 +49,13 @@ export const fetchLogOut = async () => {
       "Content-Type": "application/json",
     };
     const response = await instance.delete("/v1/session", { headers });
-    console.log("**** RESPONSE from session API ****** : ", response.data);
+    console.log(
+      "**** RESPONSE from session DELETE API ****** : ",
+      response.data
+    );
+    if (response.data.success) {
+      localStorage.removeItem("sid");
+    }
     return response;
   } catch (error) {
     throw error;
@@ -35,8 +63,19 @@ export const fetchLogOut = async () => {
 };
 
 export const fetchSignUp = async (payload) => {
+  console.log("Initial Payload inside signUP : ", payload);
   try {
-    const createUserPayload = { ...payload, role: "user", isVerified: false };
+    const createUserPayload = (() => {
+      const defaultRole = "user";
+      const role = payload.role.toLowerCase();
+
+      if (role !== "user" && role !== "admin") {
+        return { ...payload, role: defaultRole, isVerified: false };
+      } else {
+        return { ...payload, role, isVerified: false };
+      }
+    })();
+
     const headers = {
       "Content-Type": "application/json",
     };

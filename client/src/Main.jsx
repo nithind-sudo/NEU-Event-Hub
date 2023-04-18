@@ -9,6 +9,7 @@ import Category from "./components/Category/Category";
 import { EventManagementState } from "./contexts/context";
 import { LOGIN_STATUS, ACTIONS } from "./contexts/constants";
 import { fetchLogin, fetchLogOut } from "./apiClient";
+import CreateEvent from "./pages/CreateEvent/CreateEvent";
 import { Navbar } from "react-bootstrap";
 import Footer from "./components/Layout/Footer";
 import AllEvents from "./pages/AllEvents/AllEvents";
@@ -71,7 +72,7 @@ function Main() {
           path="/"
           element={
             state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-              <LandingPage handleLogout={onLogout} />
+              <LandingPage handlelogout={onLogout} />
             ) : (
               <Login
                 onLogin={onLogin}
@@ -87,7 +88,7 @@ function Main() {
           path="/main"
           element={
             state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-              <LandingPage handleLogout={onLogout} />
+              <LandingPage handlelogout={onLogout} />
             ) : (
               <Login
                 onLogin={onLogin}
@@ -107,7 +108,7 @@ function Main() {
           path="/login"
           element={
             state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-              <LandingPage handleLogout={onLogout} />
+              <LandingPage handlelogout={onLogout} />
             ) : (
               <Login
                 onLogin={onLogin}
@@ -120,8 +121,9 @@ function Main() {
           }></Route>
 
         <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/category" element={<CategoryView handleLogout={onLogout} />}></Route>
-        <Route path="/category/:categoryName" element={<Category handleLogout={onLogout} />}></Route>
+        <Route path="/createEvent" element={<CreateEvent />}></Route>
+        <Route path="/category" element={<CategoryView handlelogout={onLogout} />}></Route>
+        <Route path="/category/:categoryName" element={<Category handlelogout={onLogout} />}></Route>
 
         <Route
           path="/login"
