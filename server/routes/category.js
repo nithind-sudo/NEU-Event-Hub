@@ -2,11 +2,13 @@ const express = require("express");
 const events = require("./eventCategories");
 const categories = require("./getCategories");
 const links = require("./eventLinks");
+const eventIcons = require("./eventIcons");
 const router = express.Router();
 
 const getCategories = (req, res, err) => {
   const categoriesJson = {
     categories: events,
+    icons: eventIcons,
     links: links,
   };
   res.json(categoriesJson);
