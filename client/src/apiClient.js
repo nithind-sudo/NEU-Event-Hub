@@ -72,7 +72,7 @@ export const fetchSignUp = async (payload) => {
       if (role !== "user" && role !== "admin") {
         return { ...payload, role: defaultRole, isVerified: false };
       } else {
-        return { ...payload, isVerified: false };
+        return { ...payload, role, isVerified: false };
       }
     })();
 
