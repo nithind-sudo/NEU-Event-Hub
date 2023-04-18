@@ -1,8 +1,17 @@
 exports.getSessionInfo = async (req, res) => {
-  console.log("Session info : ", req.session);
-  if (req.session) {
-    const sessionId = req.session.id;
+  console.log("Inside *** GET Session info ***** ")
+  console.log("Cookies : ", req.cookies);
+  const sessionId = req.cookies.sid;
+  console.log("Session Id from req.cookies : ", sessionId);
+  if (!sessionId) {
+    res.status(404).json({
+      status: "error",
+      message: "No session found",
+    });
+  } else {
+    const sessionId = req.cookies.sid.split("s:")[1].split(".")[0];
     req.sessionStore.get(sessionId, (err, session) => {
+      console.log("Session inside get : ", session);
       if (err) {
         res.status(500).json({
           status: "error",
@@ -21,11 +30,6 @@ exports.getSessionInfo = async (req, res) => {
         });
       }
     });
-  } else {
-    res.status(404).json({
-      status: "error",
-      message: "No session found",
-    });
   }
 };
 
@@ -42,10 +46,18 @@ exports.generateSession = async (req, res) => {
     listings: userInfo.listings,
     isActivated: userInfo.isActivated,
     isVerified: userInfo.isVerified,
+    sid: req.sessionID,
   };
   req.session.user_id = userInfo.user_id;
   req.session.sessionData = sessionData;
 
+  res.clearCookie("sid");
+  res.cookie("sid", req.sessionID, {
+    httpOnly: true,
+    secure: false, // Set to true if using HTTPS
+  });
+
+  console.log("Session being saved to MongoStore : ", req.session);
   req.session.save((err) => {
     if (err) {
       res.status(500).json({

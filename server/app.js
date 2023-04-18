@@ -4,10 +4,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const sessionMiddleware = require("./middleware/sessionMiddleware");
-
 const { mongoose, mongooseConnection } = require("./mongodb/db");
 const categoryRouter = require("./routes/category");
+const sessionMiddleware  = require("./middleware/sessionMiddleware");
 
 const app = express();
 
@@ -19,7 +18,12 @@ app.use(
     extended: true,
   })
 );
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    credentials: true,
+  })
+);
 app.use(sessionMiddleware);
 
 const index_routes = require("./routes/index");
