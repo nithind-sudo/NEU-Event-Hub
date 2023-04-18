@@ -63,12 +63,13 @@ export const fetchLogOut = async () => {
 };
 
 export const fetchSignUp = async (payload) => {
+  console.log("Initial Payload inside signUP : ", payload);
   try {
     const createUserPayload = (() => {
       const defaultRole = "user";
-      const role = payload.role;
+      const role = payload.role.toLowerCase();
 
-      if (role !== "user" && role !== "customer") {
+      if (role !== "user" && role !== "admin") {
         return { ...payload, role: defaultRole, isVerified: false };
       } else {
         return { ...payload, isVerified: false };
