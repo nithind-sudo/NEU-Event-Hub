@@ -14,7 +14,7 @@ import {
   faFlask,
 } from "@fortawesome/free-solid-svg-icons";
 import { Navbar } from "react-bootstrap";
-import Footer from "../Layout/Footer";
+// import Footer from "../Layout/Footer";
 
 const icons = [
   faCoffee,
@@ -88,7 +88,7 @@ const CategoryView = ({ handleLogout }) => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </React.Fragment>
   );
 };
