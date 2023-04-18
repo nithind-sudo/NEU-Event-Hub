@@ -258,8 +258,6 @@ export default function SignUp() {
           </div>
         </div>
       </div>
-
-      {/* <Footer fixed={"fixed-bottom"} /> */}
       <div className="flex-col"></div>
 
       {showAlert && (

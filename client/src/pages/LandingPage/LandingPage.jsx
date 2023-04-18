@@ -16,7 +16,6 @@ export default function LandingPage({ handleLogout }) {
         {/* Add Categories */}
         <CategoryView />
       </Container>
-      <Footer />
     </div>
   );
 }

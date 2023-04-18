@@ -4,31 +4,34 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCoffee,
-  faMusic,
   faGraduationCap,
-  faMicrophone,
-  faBuilding,
   faCode,
   faUserTie,
-  faFlask,
+  faCommenting,
+  faBuildingColumns,
+  faMicrochip,
+  faFlaskVial,
+  faBook,
+  faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
 import { Navbar } from "react-bootstrap";
 import Footer from "../Layout/Footer";
 
 const icons = [
-  faCoffee,
   faGraduationCap,
-  faMicrophone,
-  faBuilding,
-  faCode,
   faUserTie,
-  faMusic,
-  faFlask,
+  faCommenting,
+  faBuildingColumns,
+  faCode,
+  faMicrochip,
+  faBook,
+  faFlaskVial,
+  faBriefcase
 ];
 
 const CategoryView = ({ handleLogout }) => {
   var [eventCategories, setEventCategories] = useState([]);
+  var [eventIcons, setEventIcons] = useState([]);
   var [eventLinks, setEventLinks] = useState([]);
   let eventCategoryURL = "http://localhost:3000/category/getCategories";
 
@@ -37,7 +40,9 @@ const CategoryView = ({ handleLogout }) => {
       .get(eventCategoryURL)
       .then((response) => response.data)
       .then((data) => {
+        console.log(data);
         setEventCategories(data.categories);
+        setEventIcons(data.icons);
         setEventLinks(data.links);
       });
   }, []);
@@ -49,7 +54,7 @@ const CategoryView = ({ handleLogout }) => {
 
   return (
     <React.Fragment>
-    <Navbar handleLogout={handleLogout} />
+      <Navbar handleLogout={handleLogout} />
       <div className="pt-3">
         <div className="container">
           <div>
@@ -62,22 +67,19 @@ const CategoryView = ({ handleLogout }) => {
             {eventCategories.map((item, index) => (
               <div
                 className="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3"
-                key={index}
-              >
+                key={index}>
                 <Link to={eventLinks[index]}>
-                  <div className="card mx-2 my-2 card-specs rounded d-flex align-items-center">
+                  <div className="card border border-dark mx-2 my-2 card-specs rounded d-flex align-items-center" style={{"--bs-border-opacity": 0.2}}>
                     <div className="card-body d-flex align-items-center">
                       <FontAwesomeIcon
-                        icon={getIcon(index)}
-                        size="2x"
-                        className="mr-3"
+                        icon={eventIcons(index)}
+                        className="me-3"
                         style={{ color: "#B9B9B9" }}
                       />
                       <div
                         className={`text-item text-dark ${
                           item.length > 40 ? "smaller-text" : ""
-                        }`}
-                      >
+                        }`}>
                         {item}
                       </div>
                     </div>
@@ -88,7 +90,6 @@ const CategoryView = ({ handleLogout }) => {
           </div>
         </div>
       </div>
-      <Footer />
     </React.Fragment>
   );
 };
