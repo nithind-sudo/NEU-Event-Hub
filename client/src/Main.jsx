@@ -8,6 +8,7 @@ import Category from "./components/Category/Category";
 import { EventManagementState } from "./contexts/context";
 import { LOGIN_STATUS, ACTIONS } from "./contexts/constants";
 import { fetchLogin, fetchLogOut } from "./apiClient";
+import CreateEvent from "./pages/CreateEvent/CreateEvent";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -102,6 +103,7 @@ function Main() {
           }
         ></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/createEvent" element={<CreateEvent />}></Route>
         <Route path="/category" element={<CategoryView />}></Route>
         <Route path="/category/:categoryName" element={<Category />}></Route>
         <Route
