@@ -6,7 +6,6 @@ const cookieParser = require("cookie-parser");
 
 const { mongoose, mongooseConnection } = require("./mongodb/db");
 const categoryRouter = require("./routes/category");
-const sessionMiddleware  = require("./middleware/sessionMiddleware");
 
 const app = express();
 
@@ -24,7 +23,6 @@ app.use(
     credentials: true,
   })
 );
-// app.use(sessionMiddleware);
 
 const index_routes = require("./routes/index");
 const userRoutes = require("./routes/users");
