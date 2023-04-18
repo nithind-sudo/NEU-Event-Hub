@@ -6,7 +6,9 @@ import disco from "../../assets/images/disco.jpeg";
 import concert from "../../assets/images/concert.jpeg";
 import bulbs from "../../assets/images/bulbs.jpeg";
 import christmas from "../../assets/images/christmas.jpeg";
-import professorsOrganized from "../../assets/professorsOrganized.jpeg";
+import party from "../../assets/images/party.jpeg";
+import pub from "../../assets/images/pub.jpeg";
+import basketball from "../../assets/images/basketball.jpeg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
 import "swiper/css";
@@ -28,41 +30,55 @@ export default function MyCarousel({ carouselData }) {
           </b>
         </div>
       </div>
-
-      <Swiper
-        modules={[Autoplay, Navigation]}
-        scrollbar={{ draggable: true }}
-        slidesPerView={3}
-        loop={true}
-        navigation={true}
-        centeredSlides={true}
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-        }}
-        className="mySwiper">
-        <SwiperSlide>
-          <img className="carousel-image" src={holi} alt="First slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="carousel-image" src={garageBand} alt="Second slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="carousel-image" src={audience} alt="Third slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="carousel-image" src={concert} alt="Fourth slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="carousel-image" src={disco} alt="Fift slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="carousel-image" src={bulbs} alt="Fift slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="carousel-image" src={christmas} alt="Fift slide" />
-        </SwiperSlide>
-      </Swiper>
+      <div className="container">
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          scrollbar={{ draggable: true }}
+          slidesPerView={4}
+          loop={true}
+          navigation={true}
+          centeredSlides={true}
+          autoplay={{
+            delay: 1500,
+            disableOnInteraction: false,
+          }}
+          className="mySwiper">
+          <SwiperSlide>
+            <img className="carousel-image" src={holi} alt="First slide" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              className="carousel-image"
+              src={garageBand}
+              alt="Second slide"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="carousel-image" src={audience} alt="Third slide" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="carousel-image" src={concert} alt="Fourth slide" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="carousel-image" src={disco} alt="Fift slide" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="carousel-image" src={bulbs} alt="Fift slide" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="carousel-image" src={christmas} alt="Fift slide" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="carousel-image" src={party} alt="Fift slide" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="carousel-image" src={pub} alt="Fift slide" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="carousel-image" src={basketball} alt="Fift slide" />
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </div>
   );
   /*
