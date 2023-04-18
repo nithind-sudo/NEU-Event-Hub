@@ -29,7 +29,7 @@ const icons = [
   faBriefcase
 ];
 
-const CategoryView = ({ handleLogout }) => {
+const CategoryView = () => {
   var [eventCategories, setEventCategories] = useState([]);
   var [eventIcons, setEventIcons] = useState([]);
   var [eventLinks, setEventLinks] = useState([]);
@@ -40,7 +40,6 @@ const CategoryView = ({ handleLogout }) => {
       .get(eventCategoryURL)
       .then((response) => response.data)
       .then((data) => {
-        console.log(data);
         setEventCategories(data.categories);
         setEventIcons(data.icons);
         setEventLinks(data.links);
@@ -54,7 +53,6 @@ const CategoryView = ({ handleLogout }) => {
 
   return (
     <React.Fragment>
-      <Navbar handleLogout={handleLogout} />
       <div className="pt-3">
         <div className="container">
           <div>
@@ -72,7 +70,7 @@ const CategoryView = ({ handleLogout }) => {
                   <div className="card border border-dark mx-2 my-2 card-specs rounded d-flex align-items-center" style={{"--bs-border-opacity": 0.2}}>
                     <div className="card-body d-flex align-items-center">
                       <FontAwesomeIcon
-                        icon={eventIcons(index)}
+                        icon={getIcon(index)}
                         className="me-3"
                         style={{ color: "#B9B9B9" }}
                       />
