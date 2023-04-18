@@ -4,6 +4,8 @@ import garageBand from "../../assets/images/garageBand.jpeg";
 import audience from "../../assets/images/audience.jpeg";
 import disco from "../../assets/images/disco.jpeg";
 import concert from "../../assets/images/concert.jpeg";
+import bulbs from "../../assets/images/bulbs.jpeg";
+import christmas from "../../assets/images/christmas.jpeg";
 import professorsOrganized from "../../assets/professorsOrganized.jpeg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
@@ -15,13 +17,20 @@ import React from "react";
 import "./Carousel.css";
 
 export default function MyCarousel({ carouselData }) {
-  
   console.log("carousel Data :", carouselData);
   return (
     <div className="my-3">
+      <div className="mt-5">
+        <div className="container">
+          <b>
+            <div className="display-6 colorCodeNortheastern">HIGHLIGHTS</div>
+            <blockquote className="blockquote">by Previous Events</blockquote>
+          </b>
+        </div>
+      </div>
+
       <Swiper
-        modules={[Autoplay, Navigation, Pagination]}
-        pagination={{ clickable: true }}
+        modules={[Autoplay, Navigation]}
         scrollbar={{ draggable: true }}
         slidesPerView={3}
         loop={true}
@@ -46,6 +55,12 @@ export default function MyCarousel({ carouselData }) {
         </SwiperSlide>
         <SwiperSlide>
           <img className="carousel-image" src={disco} alt="Fift slide" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img className="carousel-image" src={bulbs} alt="Fift slide" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img className="carousel-image" src={christmas} alt="Fift slide" />
         </SwiperSlide>
       </Swiper>
     </div>
