@@ -91,7 +91,7 @@ const Navbar = ({ handlelogout }) => {
 
               <li className="nav-item">
                 <Link
-                  to="/contact"
+                  to="/account"
                   className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3"
                 >
                   My Account
