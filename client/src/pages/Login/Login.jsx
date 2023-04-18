@@ -78,7 +78,7 @@ export default function Login({ ...props }) {
     }
   };
 
-  // const handleLogOut = async (e) => {
+  // const handlelogout = async (e) => {
   //   try {
   //     const response = await logout();
   //     console.log(` *** Response from Login End Point : ${response.data}`);

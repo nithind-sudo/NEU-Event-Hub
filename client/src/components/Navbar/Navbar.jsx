@@ -4,7 +4,7 @@ import "../../styles/Navbar/Navbar.css";
 import { Container } from "react-bootstrap";
 import brandIcon from "../../assets/images/BrandIcon.png";
 
-const Navbar = ({ handleLogout }) => {
+const Navbar = ({ handlelogout }) => {
   return (
     <header>
       <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
@@ -99,10 +99,10 @@ const Navbar = ({ handleLogout }) => {
               />
             </form>
 
-            {handleLogout && (
+            {handlelogout && (
               <button
                 className="btn btn-events-hub text-light ms-xs-0 ms-sm-0 ms-md-5 ms-lg-5 ms-xl-5"
-                onClick={handleLogout}
+                onClick={handlelogout}
                 type="submit">
                 Logout
               </button>

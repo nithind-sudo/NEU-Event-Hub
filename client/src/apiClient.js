@@ -33,7 +33,9 @@ export const fetchLogin = async (username, password) => {
       headers,
     });
     console.log("**** RESPONSE from session API ****** : ", response.data);
-    localStorage.setItem("sid", response.data.sessionData.sid);
+    if (response.data.success) {
+      localStorage.setItem("sid", response.data.sessionData.sid);
+    }
 
     return response;
   } catch (error) {
@@ -47,8 +49,13 @@ export const fetchLogOut = async () => {
       "Content-Type": "application/json",
     };
     const response = await instance.delete("/v1/session", { headers });
-    console.log("**** RESPONSE from session API ****** : ", response.data);
-    localStorage.removeItem("sid");
+    console.log(
+      "**** RESPONSE from session DELETE API ****** : ",
+      response.data
+    );
+    if (response.data.success) {
+      localStorage.removeItem("sid");
+    }
     return response;
   } catch (error) {
     throw error;
@@ -56,8 +63,19 @@ export const fetchLogOut = async () => {
 };
 
 export const fetchSignUp = async (payload) => {
+  console.log("Initial Payload inside signUP : ", payload);
   try {
-    const createUserPayload = { ...payload, role: "user", isVerified: false };
+    const createUserPayload = (() => {
+      const defaultRole = "user";
+      const role = payload.role.toLowerCase();
+
+      if (role !== "user" && role !== "admin") {
+        return { ...payload, role: defaultRole, isVerified: false };
+      } else {
+        return { ...payload, role, isVerified: false };
+      }
+    })();
+
     const headers = {
       "Content-Type": "application/json",
     };

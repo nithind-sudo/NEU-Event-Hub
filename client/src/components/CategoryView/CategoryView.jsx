@@ -15,7 +15,7 @@ import {
   faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
 import { Navbar } from "react-bootstrap";
-import Footer from "../Layout/Footer";
+// import Footer from "../Layout/Footer";
 
 const icons = [
   faGraduationCap,
@@ -29,7 +29,8 @@ const icons = [
   faBriefcase
 ];
 
-const CategoryView = () => {
+const CategoryView = ({ handlelogout }) => {
+
   var [eventCategories, setEventCategories] = useState([]);
   var [eventIcons, setEventIcons] = useState([]);
   var [eventLinks, setEventLinks] = useState([]);
@@ -53,6 +54,8 @@ const CategoryView = () => {
 
   return (
     <React.Fragment>
+    <Navbar handlelogout={handlelogout} />
+
       <div className="pt-3">
         <div className="container">
           <div>
@@ -88,6 +91,8 @@ const CategoryView = () => {
           </div>
         </div>
       </div>
+      {/* <Footer /> */}
+
     </React.Fragment>
   );
 };

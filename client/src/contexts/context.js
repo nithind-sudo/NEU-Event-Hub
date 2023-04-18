@@ -15,6 +15,7 @@ const Context = ({ children }) => {
   useEffect(() => {
     fetchSession()
       .then((response) => {
+        console.log(" *********** FetchSession Response : ", response);
         if (response.data.success) {
           dispatch({
             type: ACTIONS.LOG_IN,

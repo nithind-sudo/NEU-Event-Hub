@@ -51,6 +51,10 @@ body {
   width: 31.5rem;
 }
 
+.form-control.custom-dropdown-width .dropdown-menu {
+  width: 31.5rem;
+}
+
 .signup-button {
   width: 32rem;
 }
@@ -89,7 +93,6 @@ body {
     object-fit: cover;
   }
 }
-
 
 @media (max-width: 320px) {
   .image-container {
