@@ -1,10 +1,25 @@
 exports.getSessionInfo = async (req, res) => {
   console.log("Session info : ", req.session);
   if (req.session) {
-    const sessionData = req.session.sessionData;
-    res.json({
-      success: true,
-      ...sessionData,
+    const sessionId = req.session.id;
+    req.sessionStore.get(sessionId, (err, session) => {
+      if (err) {
+        res.status(500).json({
+          status: "error",
+          message: "Error retrieving session data",
+        });
+      } else if (!session) {
+        res.status(404).json({
+          status: "error",
+          message: "Session not found",
+        });
+      } else {
+        const sessionData = session.sessionData;
+        res.json({
+          success: true,
+          ...sessionData,
+        });
+      }
     });
   } else {
     res.status(404).json({
@@ -29,14 +44,21 @@ exports.generateSession = async (req, res) => {
     isVerified: userInfo.isVerified,
   };
   req.session.user_id = userInfo.user_id;
-  res.clearCookie('sid');
-  res.cookie('sid', req.sessionID);
   req.session.sessionData = sessionData;
 
-  res.status(201).send({
-    message: `Session Created for User: ${userInfo.username}`,
-    success: true,
-    sessionData,
+  req.session.save((err) => {
+    if (err) {
+      res.status(500).json({
+        status: "error",
+        message: "Error creating session",
+      });
+    } else {
+      res.status(201).send({
+        message: `Session Created for User: ${userInfo.username}`,
+        success: true,
+        sessionData,
+      });
+    }
   });
 };
 
@@ -49,7 +71,7 @@ exports.deleteSession = async (req, res) => {
         message: "Error deleting session",
       });
     } else {
-      res.json({ username, message: "Session deleted" });
+      res.json({ username, success: true, message: "Session deleted" });
     }
   });
 };
