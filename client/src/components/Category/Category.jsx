@@ -12,8 +12,10 @@ import cpsOrganized from "../../assets/professionalStudies.jpeg";
 import scienceOrganized from "../../assets/science.jpeg";
 import managementOrganized from "../../assets/management.jpeg";
 import otherOrganized from "../../assets/holi.jpeg";
+import Footer from "../Layout/Footer";
+import { Navbar } from "react-bootstrap";
 
-const Category = () => {
+const Category = ({ handleLogout }) => {
   let { categoryName } = useParams();
   let [category, setCategory] = useState({});
   let getCategoryURL =
@@ -106,6 +108,7 @@ const Category = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </React.Fragment>
   );
 };
