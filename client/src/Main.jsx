@@ -10,7 +10,6 @@ import { EventManagementState } from "./contexts/context";
 import { LOGIN_STATUS, ACTIONS } from "./contexts/constants";
 import { fetchLogin, fetchLogOut } from "./apiClient";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
-import { Navbar } from "react-bootstrap";
 import Footer from "./components/Layout/Footer";
 
 function Main() {
