@@ -106,7 +106,9 @@ export default function MyAccount({ handlelogout }) {
         <Nav.Item>
           <tr className="text-center">
             <td className="setSizeForNavBox">
-              <Nav.Link eventKey="profile"><span className="setNavText">Profile</span></Nav.Link>
+              <Nav.Link eventKey="profile">
+                <span className="setNavText">Profile</span>
+              </Nav.Link>
             </td>
           </tr>
         </Nav.Item>
@@ -138,27 +140,35 @@ export default function MyAccount({ handlelogout }) {
   );
 
   return (
-    <div>
+    <div className="py-5">
       <Navbar handlelogout={handlelogout} />
       <div className="myAccount-page">
         <Container fluid>
           <div className="container">
             <div className="card">
               <div className="card-body">
-                <div className="card-title display-6">My Account</div>
-                <br/>
-                <h6 className="card-subtitle mb-2 text-muted">
-                  {firstName} {lastName}
-                </h6>
-                <br/>
-                <h6 className="card-subtitle mb-2 text-muted">
-                  {role == "admin" ? "Admin" : "User"} Account
-                </h6>
-                <br/>
-                <h6 className="card-subtitle mb-2 text-muted">
-                  Username: {username}
-                </h6>
-                <br/>
+                <div className="row">
+                  <div className="text-center">
+                    <div className="card-title h3">My Account</div>
+                    <hr />
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    {role == "admin" ? "Admin" : "User"} Account
+                  </h6>
+                  <br />
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    {firstName} {lastName}
+                  </h6>
+                  <br />
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    Username: {username}
+                  </h6>
+                  <br />
+                </div>
+
                 <MyAccountCard
                   navContent={navContent}
                   pageContent={pageContent}

@@ -83,24 +83,23 @@ export default function Profile({ user }) {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col md={4}>
-          <div className="profile-image-container">
+    <div>
+      <div className="container">
+        <div className="row">
+          <div className="col-12 text-center justify-content-center align-items-center">
             <img
-              src="https://via.placeholder.com/150"
-              alt=""
-              className="profile-image"
+              src="https://media.istockphoto.com/id/1206439390/photo/silhouette-of-profile-guy-in-shirt-with-white-button-in-aqua-menthe-circle-on-black.jpg?s=170667a&w=0&k=20&c=xIcUug38E_KlqT3HjxDYSQE7ZlMyV0y0vKmkXmr016U="
+              className="img-thumbnail"
+              alt="Profile Picture"
+              height="250"
+              width="250"
             />
           </div>
-          <div className="profile-details">
-            <h5>{username}</h5>
-            <p>{role}</p>
-          </div>
-        </Col>
-        <Col md={8}>
-          <div className="profile-form">
-            <h5>Edit Profile</h5>
+        </div>
+        <div className="display-6">Edit Profile</div>
+        <br />
+        <div className="row">
+          <div className="col-12 justify-content-center align-items-center">
             <Form>
               <Form.Group controlId="firstName">
                 <Form.Label>First Name</Form.Label>
@@ -109,9 +108,10 @@ export default function Profile({ user }) {
                   placeholder="Enter first name"
                   value={firstName}
                   onChange={handleFirstNameChange}
+                  className="shadow-none"
                 />
               </Form.Group>
-
+              <br />
               <Form.Group controlId="lastName">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
@@ -119,9 +119,10 @@ export default function Profile({ user }) {
                   placeholder="Enter last name"
                   value={lastName}
                   onChange={handleLastNameChange}
+                  className="shadow-none"
                 />
               </Form.Group>
-
+              <br />
               <Form.Group controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
@@ -129,16 +130,21 @@ export default function Profile({ user }) {
                   placeholder="Enter phone number"
                   value={phoneNumber}
                   onChange={handlePhoneNumberChange}
+                  className="shadow-none"
                 />
               </Form.Group>
-
-              <Button variant="primary" onClick={handleSaveChanges}>
-                Save Changes
-              </Button>
+              <br />
+              <div className="row">
+                <div className="text-center">
+                  <Button variant="primary" onClick={handleSaveChanges}>
+                    Save Changes
+                  </Button>
+                </div>
+              </div>
             </Form>
           </div>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 }
