@@ -9,9 +9,12 @@ import MyAccountCard from "../../components/ui/MyAccountCard";
 import { Nav } from "react-bootstrap";
 import MyTickets from "../MyTickets/MyTickets";
 import Favorites from "../Favorites/Favorites";
+import { EventManagementState } from "../../contexts/context";
+import ManageAccounts from "../ManageAccounts/ManageAccounts";
 
 export default function MyAccount({ handlelogout }) {
   const [selectedNavItem, setSelectedNavItem] = useState("profile");
+  const { state, dispatch } = EventManagementState();
 
   const handleNavItemSelect = (selectedKey) => {
     setSelectedNavItem(selectedKey);
@@ -20,7 +23,7 @@ export default function MyAccount({ handlelogout }) {
   const profileContent = <p>This is the profile content.</p>;
   const ticketsContent = <MyTickets />;
   const favoritesContent = <Favorites />;
-  const manageAccount = <p>This is the to manage Account.</p>;
+  const manageAccount = <ManageAccounts />;
 
   let pageContent;
   console.log("selected Nav Item : ", selectedNavItem);
@@ -52,9 +55,11 @@ export default function MyAccount({ handlelogout }) {
       <Nav.Item>
         <Nav.Link eventKey="favorites">Favorites</Nav.Link>
       </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="settings">Settings</Nav.Link>
-      </Nav.Item>
+      {state.role === "admin" && (
+        <Nav.Item>
+          <Nav.Link eventKey="manageAccounts">Manage Accounts</Nav.Link>
+        </Nav.Item>
+      )}
     </Nav>
   );
 
