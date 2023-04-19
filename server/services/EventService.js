@@ -33,6 +33,11 @@ class EventService {
     // console.log("payload to update the patch  : ", payload)
     return await Event.findOneAndUpdate({ event_id }, { ...payload });
   }
+
+  async getAllEvents() {
+    return await Event.find({ }).exec();
+  }
+  
 }
 
 module.exports = EventService;
