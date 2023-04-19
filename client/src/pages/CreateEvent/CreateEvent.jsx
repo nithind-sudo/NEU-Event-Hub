@@ -11,23 +11,15 @@ import Joi from "joi";
 import { TimeInput, DatePicker } from "react-widgets";
 import LocationInput from "../../components/Layout/LocationInput";
 import Button from "../../components/ui/Button";
-import fetchCreateEvent from "../../apiClient";
+import { fetchCreateEvent } from "../../apiClient";
+import { EventManagementState } from "../../contexts/context";
 
-
-export default function CreateEvent({handlelogout, setShowAlert, setAlertClass, setError}) {
-  const [errorValidation, setErrorValidation] = useState("");
-  const [selectedTag, setSelectedTag] = useState("Select a Event");
-  const [location, setLocation] = useState("");
-  const navigate = useNavigate();
-
-  const handleLocationChange = (value) => {
-    setLocation(value);
-  };
-
-  const handleSelect = (e) => {
-    setSelectedTag(e);
-  };
-
+export default function CreateEvent({
+  handlelogout,
+  setShowAlert,
+  setAlertClass,
+  setError,
+}) {
   const schema = Joi.object({
     title: Joi.string().min(2).required(),
     description: Joi.string().min(2).required(),
@@ -36,7 +28,44 @@ export default function CreateEvent({handlelogout, setShowAlert, setAlertClass, 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    imageUrl: "",
   });
+
+  const [errorValidation, setErrorValidation] = useState("");
+  const [selectedTag, setSelectedTag] = useState("Select a Event");
+  const [location, setLocation] = useState("");
+  const navigate = useNavigate();
+
+  const [startDate, setStartDate] = useState(new Date("2022-06-12"));
+  const [startTime, setStartTime] = useState(new Date("2022-06-12T09:00:00"));
+  const [endDate, setEndDate] = useState(new Date("2022-06-12"));
+  const [endTime, setEndTime] = useState(new Date("2022-06-12T10:00:00"));
+
+  const { state, dispatch } = EventManagementState();
+
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleStartTimeChange = (time) => {
+    setStartTime(time);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
+
+  const handleEndTimeChange = (time) => {
+    setEndTime(time);
+  };
+
+  const handleLocationChange = (value) => {
+    setLocation(value);
+  };
+
+  const handleSelect = (e) => {
+    setSelectedTag(e);
+  };
 
   const handleFieldChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
@@ -59,12 +88,20 @@ export default function CreateEvent({handlelogout, setShowAlert, setAlertClass, 
     e.preventDefault();
     const payload = {
       title: formData.title,
-      description : formData.description
-      
+      description: formData.description,
+      location: { lat: location.split(",")[0], lng: location.split(",")[0] },
+      category: selectedTag,
+      date: startDate,
+      startTime,
+      endTime,
+      organizer: state.user_id,
+      imageUrl: formData.imageUrl,
     };
     try {
       const response = await fetchCreateEvent(payload);
-      console.log(` *** Response from Create Event End Point : ${response.data}`);
+      console.log(
+        ` *** Response from Create Event End Point : ${response.data}`
+      );
       if (response.data.success) {
         setShowAlert(true);
         setAlertClass("success");
@@ -83,7 +120,6 @@ export default function CreateEvent({handlelogout, setShowAlert, setAlertClass, 
       setShowAlert(true);
     }
   };
-
 
   return (
     <div>
@@ -213,9 +249,16 @@ export default function CreateEvent({handlelogout, setShowAlert, setAlertClass, 
                       Pick Start Date and Time
                     </label>
                     <div className="">
-                      <DatePicker defaultValue={new Date()} className="w-3/5" />
+                      <DatePicker
+                        defaultValue={new Date()}
+                        value={startDate}
+                        onChange={handleStartDateChange}
+                        className="w-3/5"
+                      />
                       <TimeInput
                         defaultValue={new Date()}
+                        value={startTime}
+                        onChange={handleStartTimeChange}
                         className="w-2/5 mt-0"
                         use12HourClock
                       />
@@ -230,9 +273,16 @@ export default function CreateEvent({handlelogout, setShowAlert, setAlertClass, 
                       Pick End Date and Time
                     </label>
                     <div className="">
-                      <DatePicker defaultValue={new Date()} className="w-3/5" />
+                      <DatePicker
+                        defaultValue={new Date()}
+                        value={endDate}
+                        onChange={handleEndDateChange}
+                        className="w-3/5"
+                      />
                       <TimeInput
                         defaultValue={new Date()}
+                        value={endTime}
+                        onChange={handleEndTimeChange}
                         className="w-2/5 mt-0"
                         use12HourClock
                       />
@@ -241,9 +291,29 @@ export default function CreateEvent({handlelogout, setShowAlert, setAlertClass, 
                 </Form.Group>
               </Col>
             </Row>
+            <Row className="justify-content-center">
+              <Col>
+                <Form.Group controlId="eventImageURL">
+                  <CustomLabel>
+                    <label className="lead mt-3 mb-1">Event Image Url</label>
+                    <TextInput
+                      type="text"
+                      value={formData.imageUrl}
+                      className=""
+                      onChange={(e) =>
+                        handleFieldChange("imageUrl", e.target.value)
+                      }
+                      onBlur={() => handleFieldBlur("imageUrl")}
+                      isInvalid={!!errorValidation.imageUrl}
+                      placeholder={"https://example.com/images/123.jpeg"}
+                    />
+                  </CustomLabel>
+                </Form.Group>
+              </Col>
+            </Row>
             <Button
               variant="danger"
-              text={"Create Account"}
+              text={"Create Event"}
               onClick={handleCreateEvent}
               className="mt-3 mb-1"
             ></Button>
