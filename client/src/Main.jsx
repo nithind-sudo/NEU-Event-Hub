@@ -57,10 +57,12 @@ function Main() {
   }
 
   async function onLogout() {
+    console.log("Inside 1st line of logout function");
     try {
       dispatch({ type: ACTIONS.PENDING });
       await new Promise((resolve) => setTimeout(resolve, 1500));
       dispatch({ type: ACTIONS.LOG_OUT });
+      console.log("Inside onLogout call to logout of the application");
       await fetchLogOut();
       navigate("/");
     } catch (error) {
