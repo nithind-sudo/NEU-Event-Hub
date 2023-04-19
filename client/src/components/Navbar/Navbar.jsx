@@ -108,7 +108,7 @@ const Navbar = ({ handlelogout }) => {
               />
             </form>
 
-            {handlelogout && (
+            {(
               <button
                 className="btn btn-events-hub text-light ms-xs-0 ms-sm-0 ms-md-5 ms-lg-5 ms-xl-5"
                 onClick={handlelogout}

@@ -12,10 +12,10 @@ class EventService {
     if (!user) {
       throw new Error("User not found");
     }
-    
+
     const event = new Event({
       ...restPayload,
-      organizer : user[0]._id,
+      organizer: user[0]._id,
     });
 
     return await event.save();
@@ -32,6 +32,10 @@ class EventService {
   async patchEvent(event_id, payload) {
     // console.log("payload to update the patch  : ", payload)
     return await Event.findOneAndUpdate({ event_id }, { ...payload });
+  }
+
+  async getAllEvents() {
+    return await Event.find({ event_id }).exec();
   }
 }
 
