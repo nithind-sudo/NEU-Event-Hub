@@ -17,8 +17,9 @@ import loginLogo from "../../assets/login-logo.svg";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 
-export default function SignUp() {
+export default function SignUp({ ...props }) {
   const navigate = useNavigate();
+  const { error, setError, showAlert, setShowAlert, onLogin } = props;
 
   const schema = Joi.object({
     firstName: Joi.string().min(2).required(),
@@ -34,8 +35,6 @@ export default function SignUp() {
   });
 
   const [selectedRole, setSelectedRole] = useState("Select a Role");
-  const [error, setError] = useState(null);
-  const [showAlert, setShowAlert] = useState(false);
   const [alertClass, setAlertClass] = useState("danger");
   const [errorValidation, setErrorValidation] = useState("");
   const [formData, setFormData] = useState({
@@ -329,7 +328,10 @@ export default function SignUp() {
                       <MyToast
                         bg={"danger"}
                         show={showAlert}
-                        onClose={() => setShowAlert(false)}
+                        onClose={() => {
+                          setShowAlert(false);
+                          setError("");
+                        }}
                         message={error}
                       />
                     )}

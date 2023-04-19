@@ -157,7 +157,7 @@ export default function Login({ ...props }) {
                       <MyToast
                         bg={"danger"}
                         show={showAlert}
-                        onClose={() => setShowAlert(false)}
+                        onClose={() => {setShowAlert(false);setError("")}}
                         message={error}
                       />
                     )}

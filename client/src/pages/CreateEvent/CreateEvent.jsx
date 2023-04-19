@@ -337,7 +337,7 @@ export default function CreateEvent({
         <MyToast
           bg={"danger"}
           show={showAlert}
-          onClose={() => setShowAlert(false)}
+          onClose={() => {setShowAlert(false);setError("")}}
           message={error}
         />
       )}
