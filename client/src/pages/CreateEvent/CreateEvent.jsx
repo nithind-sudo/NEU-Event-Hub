@@ -23,6 +23,7 @@ export default function CreateEvent({
   const schema = Joi.object({
     title: Joi.string().min(2).required(),
     description: Joi.string().min(2).required(),
+    imageUrl: Joi.string().uri().trim().required()
   });
 
   const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ export default function CreateEvent({
 
   const [errorValidation, setErrorValidation] = useState("");
   const [selectedTag, setSelectedTag] = useState("Select a Event");
-  const [location, setLocation] = useState("");
+  const [enteredlocation, setEnteredLocation] = useState("");
   const navigate = useNavigate();
 
   const [startDate, setStartDate] = useState(new Date("2022-06-12"));
@@ -60,7 +61,7 @@ export default function CreateEvent({
   };
 
   const handleLocationChange = (value) => {
-    setLocation(value);
+    setEnteredLocation(value);
   };
 
   const handleSelect = (e) => {
@@ -85,11 +86,13 @@ export default function CreateEvent({
   };
 
   const handleCreateEvent = async (e) => {
+    const mapsLocation = enteredlocation;
+    console.log("LAT and LONG for location : ", { lat: parseFloat(mapsLocation.split(",")[0]), lng: parseFloat(mapsLocation.split(",")[1]) });
     e.preventDefault();
     const payload = {
       title: formData.title,
       description: formData.description,
-      location: { lat: location.split(",")[0], lng: location.split(",")[0] },
+      location: { lat: mapsLocation.split(",")[0], lng: mapsLocation.split(",")[1] },
       category: selectedTag,
       date: startDate,
       startTime,
