@@ -5,9 +5,9 @@ const eventController = require("../controllers/events");
 
 const loggerMiddleware = require("../middleware/loggerMiddleware");
 
-router.get("/:event_id", [loggerMiddleware], eventController.getEventInfo);
-
 router.get("/all", [loggerMiddleware], eventController.getAllEventsInfo);
+
+router.get("/:event_id", [loggerMiddleware], eventController.getEventInfo);
 
 router.post("/", [loggerMiddleware], eventController.createEvent);
 

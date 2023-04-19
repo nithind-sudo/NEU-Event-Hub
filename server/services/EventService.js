@@ -35,7 +35,7 @@ class EventService {
   }
 
   async getAllEvents() {
-    return await Event.find({ event_id }).exec();
+    return await Event.find({ }).exec();
   }
 }
 

@@ -13,7 +13,7 @@ exports.getEventInfo = async (req, res) => {
 
 exports.getAllEventsInfo = async (req, res) => {
   try {
-    const eventInfo = await eventService.getEventInfo();
+    const eventInfo = await eventService.getAllEvents();
     res.status(200).send(eventInfo);
   } catch (e) {
     res.status(400).send({ message: "400 Bad Request", error: e.message });
