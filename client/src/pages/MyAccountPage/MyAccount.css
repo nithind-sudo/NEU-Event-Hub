@@ -6,6 +6,19 @@
   padding: 50px;
 }
 
+.setSizeForNavBox {
+  width: 260px !important;
+  border-radius: 5px;
+}
+
+.setNavText:hover {
+    /* text-decoration: underline;
+    text-decoration-thickness: 6px;
+    text-decoration-color: #d5202d;
+    text-underline-offset: 16px; */
+    cursor: pointer;
+}
+
 .account-ul {
   list-style: none; /* removes bullet points */
   padding: 0; /* removes padding */
