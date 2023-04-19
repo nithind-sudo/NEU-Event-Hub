@@ -86,7 +86,7 @@ export default function SignUp({ ...props }) {
         setError("Account Created Successfully!!!");
         setTimeout(() => {
           navigate("/");
-        }, 2000);
+        }, 1000);
       } else {
         setAlertClass("Danger");
         setError("Invalid Data In Form");
