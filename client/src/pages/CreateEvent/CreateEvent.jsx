@@ -9,10 +9,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { TimeInput, DatePicker } from "react-widgets";
+import LocationInput from "../../components/Layout/LocationInput";
+
+const API_KEY = "AIzaSyAE1TXk9IfcTk-cM1B1Oo4ykcmh9EhCu6c";
 
 export default function CreateEvent(props) {
   const [errorValidation, setErrorValidation] = useState("");
   const [selectedTag, setSelectedTag] = useState("Select a Event");
+  const [location, setLocation] = useState("");
+
+  const handleLocationChange = (value) => {
+    setLocation(value);
+  };
 
   const handleSelect = (e) => {
     setSelectedTag(e);
@@ -155,7 +163,9 @@ export default function CreateEvent(props) {
                 know where to show up.
               </h6>
             </Row>
-            <Row>{/* Add Location here Integration of Google Maps API */}</Row>
+            <Row>
+              <LocationInput onLocationChange={handleLocationChange} />
+            </Row>
             <Row>
               <h1>Date and time</h1>
               <h6>
