@@ -4,11 +4,15 @@ import "../../styles/Navbar/Navbar.css";
 import { Container } from "react-bootstrap";
 import brandIcon from "../../assets/images/BrandIcon.png";
 import { EventManagementState } from "../../contexts/context";
+import LogoutContext from "../../contexts/LogoutContext";
+import { useContext } from "react";
 
-const Navbar = ({ handlelogout }) => {
+
+const Navbar = (props) => {
   const { state, dispatch } = EventManagementState();
   console.log("State:");
   console.log(state);
+  const handlelogout = useContext(LogoutContext); // Add this line
 
   return (
     <header>
@@ -38,14 +42,16 @@ const Navbar = ({ handlelogout }) => {
             data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse"
             aria-expanded="false"
-            aria-label="Toggle navigation">
+            aria-label="Toggle navigation"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#ffffff">
+              stroke="#ffffff"
+            >
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -71,7 +77,8 @@ const Navbar = ({ handlelogout }) => {
               <li className="nav-item nav-item-width-set">
                 <Link
                   to="/main"
-                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
+                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3"
+                >
                   <span>Home</span>
                 </Link>
               </li>
@@ -79,7 +86,8 @@ const Navbar = ({ handlelogout }) => {
               <li className="nav-item">
                 <Link
                   to="/allEvents"
-                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
+                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3"
+                >
                   All Events
                 </Link>
               </li>
@@ -87,7 +95,8 @@ const Navbar = ({ handlelogout }) => {
               <li className="nav-item">
                 <Link
                   to="/category"
-                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
+                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3"
+                >
                   Categories
                 </Link>
               </li>
@@ -95,7 +104,8 @@ const Navbar = ({ handlelogout }) => {
                 <li className="nav-item">
                   <Link
                     to="/createEvent"
-                    className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
+                    className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3"
+                  >
                     Create an Event
                   </Link>
                 </li>
@@ -107,8 +117,11 @@ const Navbar = ({ handlelogout }) => {
                 to="#"
                 className="d-block link-dark text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <span className="text-light">Welcome back, {state.first_name} </span>
+                aria-expanded="false"
+              >
+                <span className="text-light">
+                  Welcome back, {state.first_name}{" "}
+                </span>
                 <img
                   src="https://media.istockphoto.com/id/1206439390/photo/silhouette-of-profile-guy-in-shirt-with-white-button-in-aqua-menthe-circle-on-black.jpg?s=170667a&w=0&k=20&c=xIcUug38E_KlqT3HjxDYSQE7ZlMyV0y0vKmkXmr016U="
                   alt="mdo"
@@ -138,8 +151,9 @@ const Navbar = ({ handlelogout }) => {
                 </li>
                 <li>
                   <div
-                  className="text-center makePointerCursor"
-                    onClick={handlelogout}>
+                    className="text-center makePointerCursor"
+                    onClick={() => handlelogout()}
+                  >
                     <div className="text-danger">Logout</div>
                   </div>
                 </li>
