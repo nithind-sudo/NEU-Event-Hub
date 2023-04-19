@@ -47,6 +47,8 @@ function Main() {
           role: fetchData.sessionData.role,
           isActivated: fetchData.sessionData.isActivated,
           isVerified: fetchData.sessionData.isVerified,
+          first_name: fetchData.sessionData.first_name,
+          last_name: fetchData.sessionData.last_name,
         });
       }, 1000);
       return fetchData;

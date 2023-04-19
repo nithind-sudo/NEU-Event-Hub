@@ -107,11 +107,11 @@ export default function SignUp({ ...props }) {
             <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
             <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
               <div className="justify-content-center align-items-center my-4">
-                <div class="card">
-                  <div class="card-body">
+                <div className="card">
+                  <div className="card-body">
                     <div className="row">
                       <div className="text-center">
-                        <h5 class="display-6">Sign Up</h5>
+                        <h5 className="display-6">Sign Up</h5>
                       </div>
                     </div>
                     <div className="row">
@@ -228,12 +228,10 @@ export default function SignUp({ ...props }) {
                                   <label className="lead mt-3 mb-1">Role</label>
                                   <Dropdown
                                     className="custom-dropdown-width"
-                                    onSelect={handleSelect}
-                                  >
+                                    onSelect={handleSelect}>
                                     <Dropdown.Toggle
                                       variant="outline-secondary"
-                                      id="dropdown-basic"
-                                    >
+                                      id="dropdown-basic">
                                       {selectedRole}
                                     </Dropdown.Toggle>
 
@@ -309,8 +307,7 @@ export default function SignUp({ ...props }) {
                             variant="danger"
                             text={"Create Account"}
                             onClick={handleSignUp}
-                            className="signup-button mt-3 mb-1"
-                          ></Button>
+                            className="signup-button mt-3 mb-1"></Button>
                           <CustomLabel>
                             <label className=" mt-3 mb-1">
                               Have an Account?
