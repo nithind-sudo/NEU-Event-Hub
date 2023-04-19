@@ -12,10 +12,10 @@ export default function LandingPage(props) {
     <div className="pb-5">
     <Navbar handlelogout={props.handlelogout} />
       <Container fluid>
+        <CategoryView />
         <MyCarousel className="" carouselData={carouselData} />
         {/* Add Events Happening */}
         {/* Add Categories */}
-        <CategoryView />
         <AllEvents />
       </Container>
     </div>

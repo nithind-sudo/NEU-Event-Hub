@@ -1,3 +1,12 @@
+.setBackGround {
+  background: url("../../assets-pack/login/bckImage.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  height: 100%;
+}
+
 *,
 *::before,
 *::after {
@@ -29,13 +38,11 @@ html, body {
 .login-container {
   display: flex;
   flex-direction: column;
-  /* Center the content in the container */
   justify-content: center;
   align-items: center;
-  /* Add some space between the elements */
   gap: 15px;
   height: 100%;
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 .image-fit {

@@ -1,3 +1,11 @@
+.setBackGroundSignUp {
+  background: url("../../assets-pack/signup/bckImage.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  height: 100%;
+}
 *,
 *::before,
 *::after {
@@ -48,6 +56,13 @@ body {
 }
 
 .form-control.signup-input-personal {
+  width: 21.5rem;
+}
+.form-control.custom-dropdown-width {
+  width: 15rem;
+}
+
+.form-control.signup-input-email {
   width: 31.5rem;
 }
 
