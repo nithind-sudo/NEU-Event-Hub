@@ -83,11 +83,11 @@ export default function Login({ ...props }) {
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
               <div className="justify-content-center align-items-center my-5 py-5">
-                <div class="card">
-                  <div class="card-body">
+                <div className="card">
+                  <div className="card-body">
                     <div className="row">
                       <div className="text-center">
-                        <h5 class="display-6">Sign In</h5>
+                        <h5 className="display-6">Sign In</h5>
                       </div>
                     </div>
                     <Form className="login-content">
@@ -140,8 +140,7 @@ export default function Login({ ...props }) {
                             variant="danger"
                             text={"Sign In"}
                             onClick={handleSignIn}
-                            className="login-button mt-3 mb-1"
-                          ></Button>
+                            className="login-button mt-3 mb-1"></Button>
                           <CustomLabel className="mt-3 mb-1">
                             <label className="">Don't have an account?</label>
                             <Link to="/signup">
@@ -157,7 +156,10 @@ export default function Login({ ...props }) {
                       <MyToast
                         bg={"danger"}
                         show={showAlert}
-                        onClose={() => {setShowAlert(false);setError("")}}
+                        onClose={() => {
+                          setShowAlert(false);
+                          setError("");
+                        }}
                         message={error}
                       />
                     )}

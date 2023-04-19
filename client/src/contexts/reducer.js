@@ -11,6 +11,8 @@ export const initialState = {
   user_id: "",
   isActivated: false,
   isVerified: false,
+  first_name: "",
+  last_name: "",
 };
 
 export function reducer(state, action) {
@@ -29,6 +31,8 @@ export function reducer(state, action) {
         role: action.role,
         isActivated: action.isActivated,
         isVerified: action.isVerified,
+        first_name: action.first_name,
+        last_name: action.last_name,
       };
 
     case ACTIONS.PENDING:
