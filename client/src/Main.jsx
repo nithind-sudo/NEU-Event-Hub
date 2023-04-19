@@ -136,7 +136,10 @@ function Main() {
         ></Route>
 
         <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/createEvent" element={<CreateEvent />}></Route>
+        <Route
+          path="/createEvent"
+          element={<CreateEvent handlelogout={onLogout} />}
+        ></Route>
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/tickets" element={<MyTickets />} />
 
