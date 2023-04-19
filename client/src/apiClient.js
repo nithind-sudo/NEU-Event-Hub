@@ -134,3 +134,14 @@ export const fetchCreateEvent = async (payload) => {
     throw error;
   }
 };
+
+export const getAllEvents = async () => {
+  console.log("Inside GET ALL EVENTS to get all events happening");
+  try {
+    const response = await instance.get("/v1/event/all");
+    console.log("**** RESPONSE from session API ****** : ", response.data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
