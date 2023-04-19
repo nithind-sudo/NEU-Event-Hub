@@ -1,14 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import "./Profile.css";
 import { EventManagementState } from "../../contexts/context";
+import { fetchUserInfo, updateUserInfo } from "../../apiClient";
+import { ACTIONS } from "../../contexts/constants";
 
 export default function Profile({ user }) {
   const { state, dispatch } = EventManagementState();
 
-  const [firstName, setFirstName] = useState("Nithin");
-  const [lastName, setLastName] = useState("Bharadwaj");
-  const [phoneNumber, setPhoneNumber] = useState("8888888888");
+  const [firstName, setFirstName] = useState(state.first_name);
+  const [lastName, setLastName] = useState(state.last_name);
+  const [phoneNumber, setPhoneNumber] = useState(state.phone_number);
+  const [username, setUsername] = useState(state.username);
+  const [role, setRole] = useState(state.role);
+
+  useEffect(() => {
+    fetchUserInfo(state.user_id)
+      .then((response) => {
+        console.log("*** Response from GET User API : ", response);
+        const userProfile = response.data[0];
+        dispatch({
+          type: ACTIONS.GET_USER,
+          first_name: userProfile.first_name,
+          last_name: userProfile.last_name,
+          phone_number: userProfile.phone_number,
+          role: userProfile.role,
+          created_on: userProfile.created_time,
+          events_booked: userProfile.events_booked,
+          favorites: userProfile.favorites,
+        });
+
+        setFirstName(userProfile.first_name);
+        setLastName(userProfile.last_name);
+        setPhoneNumber(userProfile.phone_number);
+        setRole(userProfile.role);
+        setUsername(userProfile.username);
+      })
+      .catch((error) => {
+        console.log("Error while fetching UserInfo inside useEffect ", error);
+      });
+  }, []);
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
@@ -23,7 +54,19 @@ export default function Profile({ user }) {
   };
 
   const handleSaveChanges = () => {
-    // Code to save changes to the user's profile
+    const payload = {
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phoneNumber,
+    };
+
+    updateUserInfo(state.user_id, payload)
+      .then((response) => {
+        console.log("Response after updating User profile : ", response);
+      })
+      .catch((error) => {
+        console.log("Error while updating user info : ", error.message);
+      });
   };
 
   return (
@@ -33,13 +76,13 @@ export default function Profile({ user }) {
           <div className="profile-image-container">
             <img
               src="https://via.placeholder.com/150"
-              alt="Profile Picture"
+              alt=""
               className="profile-image"
             />
           </div>
           <div className="profile-details">
-            <h5>{"nithin@gmail.com"}</h5>
-            <p>{"admin"}</p>
+            <h5>{username}</h5>
+            <p>{role}</p>
           </div>
         </Col>
         <Col md={8}>

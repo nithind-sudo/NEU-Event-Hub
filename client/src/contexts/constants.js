@@ -8,6 +8,7 @@ export const ACTIONS = {
   LOG_IN: "logIn",
   LOG_OUT: "logOut",
   PENDING: "pending",
+  GET_USER : "getUser",
   DISPLAY_DASHBOARD: "displayDashboard",
   REPORT_ERROR: "reportError",
 };

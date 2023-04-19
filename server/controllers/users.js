@@ -42,7 +42,7 @@ exports.getUserInfo = async (req, res) => {
     const userInfo = await userService.getUser(user_id);
     res.status(200).send(userInfo);
   } catch (e) {
-    res.status(400).send({ message: "400 Bad Request", error: error.message });
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
   }
 };
 

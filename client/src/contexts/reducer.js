@@ -38,6 +38,18 @@ export function reducer(state, action) {
         loginStatus: LOGIN_STATUS.PENDING,
       };
 
+    case ACTIONS.GET_USER:
+      return {
+        ...state,
+        first_name: action.first_name,
+        last_name: action.last_name,
+        events_booked: action.events_booked,
+        favorites: action.favorites,
+        role: action.role,
+        phone_number: action.phone_number,
+        created_on: action.created_on,
+      };
+
     case ACTIONS.LOG_OUT:
       return {
         ...state,
@@ -51,7 +63,7 @@ export function reducer(state, action) {
         user_id: "",
         isActivated: false,
         isVerified: false,
-        component : "LogInScreen"
+        component: "LogInScreen",
       };
 
     default:
