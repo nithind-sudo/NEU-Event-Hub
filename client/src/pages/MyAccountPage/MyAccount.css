@@ -1,53 +1,73 @@
 .myAccount-page {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* Makes sure the container occupies the whole view port */
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100vh;
+  padding: 50px;
+}
 
-  .Account-label{
-    font-size: 30px;
-    font-weight: bold;
-    color: #333;
-    display: block;
-    margin-bottom: 10px;
-    margin-left: 50px;
-    margin-top: 20px;
-  }
+.account-ul {
+  list-style: none; /* removes bullet points */
+  padding: 0; /* removes padding */
+  margin: 0; /* removes margin */
+  display: flex; /* enables flexbox layout */
+  flex-direction: column; /* stacks items vertically */
   
+}
 
-  .ticket-card {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 30px;
-    width: 800px;
-    height: 200px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  .ticket-card .title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .ticket-card .description {
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  .ticket-card .footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #666;
-  }
-  .ticket-card myAccount-button{
-    width: 18rem;
-  }
+/* .account-li {
+  margin: 10px;
+} */
+
+.Account-label {
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.ticket-card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 30px;
+  width: 800px;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.ticket-card .title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.ticket-card .description {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.ticket-card .footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #666;
+}
+.ticket-card myAccount-button {
+  width: 18rem;
+}
+
+.flex-column-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item{
+  font-size: 20px;
+  margin: 5px;
+}

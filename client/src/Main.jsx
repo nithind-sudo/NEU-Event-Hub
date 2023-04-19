@@ -13,6 +13,8 @@ import CreateEvent from "./pages/CreateEvent/CreateEvent";
 import Footer from "./components/Layout/Footer";
 import MyAccount from "./pages/MyAccountPage/MyAccount";
 import AllEvents from "./pages/AllEvents/AllEvents";
+import Favorites from "./pages/Favorites/Favorites";
+import MyTickets from "./pages/MyTickets/MyTickets";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -111,7 +113,10 @@ function Main() {
           element={<Category handlelogout={onLogout} />}
         ></Route>
 
-        <Route path="/allEvents" element={<AllEvents handlelogout={onLogout} />}></Route>
+        <Route
+          path="/allEvents"
+          element={<AllEvents handlelogout={onLogout} />}
+        ></Route>
 
         <Route
           path="/login"
@@ -132,6 +137,9 @@ function Main() {
 
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/createEvent" element={<CreateEvent />}></Route>
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/tickets" element={<MyTickets />} />
+
         <Route
           path="/category"
           element={<CategoryView handlelogout={onLogout} />}
@@ -140,7 +148,10 @@ function Main() {
           path="/category/:categoryName"
           element={<Category handlelogout={onLogout} />}
         ></Route>
-        <Route path="/account" element={<MyAccount handlelogout={onLogout} />}></Route>
+        <Route
+          path="/account"
+          element={<MyAccount handlelogout={onLogout} />}
+        ></Route>
         <Route
           path="/login"
           element={

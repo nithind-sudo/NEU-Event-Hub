@@ -22,7 +22,8 @@ html, body {
 .flex-column {
   flex: 1;
   flex-basis: 50%;
-  background-color: blue;
+  /* flex: 0 0 50%; */
+  /* background-color: blue; */
 }
 
 .login-content {

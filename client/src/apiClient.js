@@ -89,3 +89,30 @@ export const fetchSignUp = async (payload) => {
     throw error;
   }
 };
+
+export const fetchUserInfo = async (user_id) => {
+  console.log("Hitting the User GET API for user-id : ", user_id);
+  try {
+    const response = await instance.get(`/v1/user/${user_id}`);
+    console.log("**** RESPONSE from GET USER API ****** : ", response.data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateUserInfo = async (user_id, payload) => {
+  console.log("Hitting the PUT API for user for user-id : ", user_id);
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const response = await instance.patch(`/v1/user/${user_id}`, payload, {
+      headers,
+    });
+    console.log(" **** RESPONSE from PUT USER API ****** : ", response.data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
