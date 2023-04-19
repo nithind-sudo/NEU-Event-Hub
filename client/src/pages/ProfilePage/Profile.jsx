@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import "./Profile.css";
 import { EventManagementState } from "../../contexts/context";
-import { fetchUserInfo, updateUserInfo } from "../../apiClient";
+import { fetchSession, fetchUserInfo, updateUserInfo } from "../../apiClient";
 import { ACTIONS } from "../../contexts/constants";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile({ user }) {
   const { state, dispatch } = EventManagementState();
@@ -13,32 +14,44 @@ export default function Profile({ user }) {
   const [phoneNumber, setPhoneNumber] = useState(state.phone_number);
   const [username, setUsername] = useState(state.username);
   const [role, setRole] = useState(state.role);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchUserInfo(state.user_id)
-      .then((response) => {
-        console.log("*** Response from GET User API : ", response);
-        const userProfile = response.data[0];
-        dispatch({
-          type: ACTIONS.GET_USER,
-          first_name: userProfile.first_name,
-          last_name: userProfile.last_name,
-          phone_number: userProfile.phone_number,
-          role: userProfile.role,
-          created_on: userProfile.created_time,
-          events_booked: userProfile.events_booked,
-          favorites: userProfile.favorites,
-        });
+    console.log("Hitting userInfo for user_id : ", state.user_id);
+    fetchSession().then((sessionResponse) => {
+      if (sessionResponse.data.success) {
+        fetchUserInfo(sessionResponse.data.user_id)
+          .then((response) => {
+            console.log("*** Response from GET User API : ", response);
+            const userProfile = response.data[0];
+            dispatch({
+              type: ACTIONS.GET_USER,
+              first_name: userProfile.first_name,
+              last_name: userProfile.last_name,
+              phone_number: userProfile.phone_number,
+              role: userProfile.role,
+              created_on: userProfile.created_time,
+              events_booked: userProfile.events_booked,
+              favorites: userProfile.favorites,
+            });
 
-        setFirstName(userProfile.first_name);
-        setLastName(userProfile.last_name);
-        setPhoneNumber(userProfile.phone_number);
-        setRole(userProfile.role);
-        setUsername(userProfile.username);
-      })
-      .catch((error) => {
-        console.log("Error while fetching UserInfo inside useEffect ", error);
-      });
+            setFirstName(userProfile.first_name);
+            setLastName(userProfile.last_name);
+            setPhoneNumber(userProfile.phone_number);
+            setRole(userProfile.role);
+            setUsername(userProfile.username);
+          })
+          .catch((error) => {
+            console.log(
+              "Error while fetching UserInfo inside useEffect ",
+              error
+            );
+          });
+      } else {
+        dispatch({ type: ACTIONS.LOG_OUT });
+        navigate("/login");
+      }
+    });
   }, []);
 
   const handleFirstNameChange = (event) => {
