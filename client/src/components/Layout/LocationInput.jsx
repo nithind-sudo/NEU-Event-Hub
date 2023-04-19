@@ -12,11 +12,13 @@ function LocationInput({ onLocationChange }) {
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if (place.geometry) {
+        console.log(place.geometry.location);
         const { lat, lng } = place.geometry.location;
-        const newLocation = `${lat},${lng}`;
+        console.log("LAT LONG INSIDE USER EFFECT", lat(), lng())
+        const newLocation = `${lat()},${lng()}`;
         setTimeout(() => {
           onLocationChange(newLocation);
-        }, 3000);
+        }, 0);
       }
     });
   }, [onLocationChange]);
@@ -25,7 +27,7 @@ function LocationInput({ onLocationChange }) {
     setLocation(event.target.value);
     setTimeout(() => {
       onLocationChange(event.target.value);
-    }, 1000); // set a delay of 1 second
+    }, 0); // set a delay of 1 second
   };
 
   return (

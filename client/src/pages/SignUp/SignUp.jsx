@@ -177,7 +177,6 @@ export default function SignUp() {
                             </Col>
                           </Row>
 
-
                           <Row>
                             <Form.Group controlId="userEmail">
                               <CustomLabel>
@@ -198,8 +197,7 @@ export default function SignUp() {
                           </Row>
 
                           <Row className="justify-content-center">
-                        
-                          <Col>
+                            <Col>
                               <Form.Group controlId="userPhone">
                                 <CustomLabel>
                                   <label className="lead mt-3 mb-1">
@@ -231,10 +229,12 @@ export default function SignUp() {
                                   <label className="lead mt-3 mb-1">Role</label>
                                   <Dropdown
                                     className="custom-dropdown-width"
-                                    onSelect={handleSelect}>
+                                    onSelect={handleSelect}
+                                  >
                                     <Dropdown.Toggle
                                       variant="outline-secondary"
-                                      id="dropdown-basic">
+                                      id="dropdown-basic"
+                                    >
                                       {selectedRole}
                                     </Dropdown.Toggle>
 
@@ -251,7 +251,6 @@ export default function SignUp() {
                               </Form.Group>
                             </Col>
                           </Row>
-
 
                           <Row>
                             <Col>
@@ -311,7 +310,8 @@ export default function SignUp() {
                             variant="danger"
                             text={"Create Account"}
                             onClick={handleSignUp}
-                            className="signup-button mt-3 mb-1"></Button>
+                            className="signup-button mt-3 mb-1"
+                          ></Button>
                           <CustomLabel>
                             <label className=" mt-3 mb-1">
                               Have an Account?
@@ -325,6 +325,14 @@ export default function SignUp() {
                         </div>
                       </Container>
                     </Form>
+                    {showAlert && (
+                      <MyToast
+                        bg={"danger"}
+                        show={showAlert}
+                        onClose={() => setShowAlert(false)}
+                        message={error}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

@@ -124,11 +124,11 @@ export const fetchCreateEvent = async (payload) => {
       "Content-Type": "application/json",
     };
     console.log("FE Event POST payload : ", payload);
-    // const response = await instance.post("/v1/event", payload, {
-    //   headers,
-    // });
-    // console.log("****** Response from EVENT API POST : ", response);
-    const response = { data : {success : true}};
+    const response = await instance.post("/v1/event", payload, {
+      headers,
+    });
+    console.log("****** Response from EVENT API POST : ", response);
+    // const response = { data : {success : true}};
     return response;
   } catch (error) {
     throw error;

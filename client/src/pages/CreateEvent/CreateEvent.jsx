@@ -13,17 +13,19 @@ import LocationInput from "../../components/Layout/LocationInput";
 import Button from "../../components/ui/Button";
 import { fetchCreateEvent } from "../../apiClient";
 import { EventManagementState } from "../../contexts/context";
+import MyToast from "../../components/ui/Toast";
 
 export default function CreateEvent({
   handlelogout,
+  showAlert,
   setShowAlert,
-  setAlertClass,
   setError,
+  error
 }) {
   const schema = Joi.object({
     title: Joi.string().min(2).required(),
     description: Joi.string().min(2).required(),
-    imageUrl: Joi.string().uri().trim().required()
+    imageUrl: Joi.string().uri().trim().required(),
   });
 
   const [formData, setFormData] = useState({
@@ -35,12 +37,14 @@ export default function CreateEvent({
   const [errorValidation, setErrorValidation] = useState("");
   const [selectedTag, setSelectedTag] = useState("Select a Event");
   const [enteredlocation, setEnteredLocation] = useState("");
+  const [alertClass, setAlertClass] = useState("danger");
+
   const navigate = useNavigate();
 
-  const [startDate, setStartDate] = useState(new Date("2022-06-12"));
-  const [startTime, setStartTime] = useState(new Date("2022-06-12T09:00:00"));
-  const [endDate, setEndDate] = useState(new Date("2022-06-12"));
-  const [endTime, setEndTime] = useState(new Date("2022-06-12T10:00:00"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
 
   const { state, dispatch } = EventManagementState();
 
@@ -87,16 +91,22 @@ export default function CreateEvent({
 
   const handleCreateEvent = async (e) => {
     const mapsLocation = enteredlocation;
-    console.log("LAT and LONG for location : ", { lat: parseFloat(mapsLocation.split(",")[0]), lng: parseFloat(mapsLocation.split(",")[1]) });
+    console.log("LAT and LONG for location : ", {
+      lat: parseFloat(mapsLocation.split(",")[0]),
+      lng: parseFloat(mapsLocation.split(",")[1]),
+    });
     e.preventDefault();
     const payload = {
       title: formData.title,
       description: formData.description,
-      location: { lat: mapsLocation.split(",")[0], lng: mapsLocation.split(",")[1] },
+      location: {
+        lat: mapsLocation.split(",")[0],
+        lng: mapsLocation.split(",")[1],
+      },
       category: selectedTag,
-      date: startDate,
-      startTime,
-      endTime,
+      date: startDate.toISOString().substr(0, 10),
+      startTime: startTime.toISOString(),
+      endTime: endTime.toISOString(),
       organizer: state.user_id,
       imageUrl: formData.imageUrl,
     };
@@ -108,7 +118,7 @@ export default function CreateEvent({
       if (response.data.success) {
         setShowAlert(true);
         setAlertClass("success");
-        setError("Account Created Successfully!!!");
+        setError("Event Created Successfully!!!");
         setTimeout(() => {
           navigate("/main");
         }, 2000);
@@ -323,6 +333,14 @@ export default function CreateEvent({
           </div>
         </Container>
       </Form>
+      {showAlert && (
+        <MyToast
+          bg={"danger"}
+          show={showAlert}
+          onClose={() => setShowAlert(false)}
+          message={error}
+        />
+      )}
       <Footer />
     </div>
   );

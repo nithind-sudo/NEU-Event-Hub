@@ -15,6 +15,7 @@ import MyAccount from "./pages/MyAccountPage/MyAccount";
 import AllEvents from "./pages/AllEvents/AllEvents";
 import Favorites from "./pages/Favorites/Favorites";
 import MyTickets from "./pages/MyTickets/MyTickets";
+import MyToast from "./components/ui/Toast";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -141,6 +142,7 @@ function Main() {
           element={
             <CreateEvent
               handlelogout={onLogout}
+              error={error}
               setError={setError}
               showAlert={showAlert}
               setShowAlert={setShowAlert}
