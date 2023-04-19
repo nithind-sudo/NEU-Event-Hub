@@ -140,7 +140,8 @@ export default function Login({ ...props }) {
                             variant="danger"
                             text={"Sign In"}
                             onClick={handleSignIn}
-                            className="login-button mt-3 mb-1"></Button>
+                            className="login-button mt-3 mb-1"
+                          ></Button>
                           <CustomLabel className="mt-3 mb-1">
                             <label className="">Don't have an account?</label>
                             <Link to="/signup">
@@ -152,6 +153,14 @@ export default function Login({ ...props }) {
                         </div>
                       </Container>
                     </Form>
+                    {showAlert && (
+                      <MyToast
+                        bg={"danger"}
+                        show={showAlert}
+                        onClose={() => {setShowAlert(false);setError("")}}
+                        message={error}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

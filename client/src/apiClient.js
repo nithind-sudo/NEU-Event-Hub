@@ -116,3 +116,21 @@ export const updateUserInfo = async (user_id, payload) => {
     throw error;
   }
 };
+
+export const fetchCreateEvent = async (payload) => {
+  console.log("Initial Payload inside Creating Event : ", payload);
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    console.log("FE Event POST payload : ", payload);
+    const response = await instance.post("/v1/event", payload, {
+      headers,
+    });
+    console.log("****** Response from EVENT API POST : ", response);
+    // const response = { data : {success : true}};
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
