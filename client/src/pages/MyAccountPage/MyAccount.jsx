@@ -12,6 +12,14 @@ import Favorites from "../Favorites/Favorites";
 import Profile from "../ProfilePage/Profile";
 import { EventManagementState } from "../../contexts/context";
 import ManageAccounts from "../ManageAccounts/ManageAccounts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faTicketAlt,
+  faHeart,
+  faCog,
+  faUsersCog,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function MyAccount({ handlelogout }) {
   const [selectedNavItem, setSelectedNavItem] = useState("profile");
@@ -48,17 +56,28 @@ export default function MyAccount({ handlelogout }) {
   const navContent = (
     <Nav className="d-flex flex-column-nav" onSelect={handleNavItemSelect}>
       <Nav.Item>
-        <Nav.Link eventKey="profile">Profile</Nav.Link>
+        <Nav.Link eventKey="profile">
+          {" "}
+          <FontAwesomeIcon icon={faUser} /> Profile
+        </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="tickets">My Tickets</Nav.Link>
+        <Nav.Link eventKey="tickets">
+          {" "}
+          <FontAwesomeIcon icon={faTicketAlt} /> My Tickets
+        </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="favorites">Favorites</Nav.Link>
+        <Nav.Link eventKey="favorites">
+          <FontAwesomeIcon icon={faHeart} /> Favorites
+        </Nav.Link>
       </Nav.Item>
       {state.role === "admin" && (
         <Nav.Item>
-          <Nav.Link eventKey="manageAccounts">Manage Accounts</Nav.Link>
+          <Nav.Link eventKey="manageAccounts">
+            {" "}
+            <FontAwesomeIcon icon={faUsersCog} /> Manage Accounts
+          </Nav.Link>
         </Nav.Item>
       )}
     </Nav>
