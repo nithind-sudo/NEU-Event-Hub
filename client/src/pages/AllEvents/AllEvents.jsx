@@ -1,10 +1,15 @@
 import React from "react";
 import Card from "../../components/Card/Card";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Layout/Footer";
+import "./AllEvents.css";
+import { getAllEvents } from "../../apiClient";
 
-const AllEvents = () => {
+const AllEvents = (props) => {
   return (
     <div className="my-3">
-      <div className="container">
+      <Navbar handlelogout={props.handlelogout}/>
+      <div className="container events-container">
         <b>
           <div className="display-6 colorCodeNortheastern">EVENTS</div>
           <blockquote className="blockquote">by Trending List</blockquote>
@@ -32,6 +37,7 @@ const AllEvents = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
