@@ -14,8 +14,8 @@ function LocationInput({ onLocationChange }) {
       if (place.geometry) {
         console.log(place.geometry.location);
         const { lat, lng } = place.geometry.location;
-        console.log("LAT LONG INSIDE USER EFFECT", lat(), lng())
         const newLocation = `${lat()},${lng()}`;
+        setLocation(place.formatted_address || place.name); // Update the location state with the address or name of the selected place
         setTimeout(() => {
           onLocationChange(newLocation);
         }, 0);
