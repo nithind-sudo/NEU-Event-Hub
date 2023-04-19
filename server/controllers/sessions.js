@@ -53,6 +53,8 @@ exports.generateSession = async (req, res) => {
     isActivated: userInfo.isActivated,
     isVerified: userInfo.isVerified,
     sid: req.sessionID,
+    first_name: userInfo.first_name,
+    last_name: userInfo.last_name,
   };
   req.session.user_id = userInfo.user_id;
   req.session.sessionData = sessionData;
@@ -108,7 +110,7 @@ exports.deleteSession = async (req, res) => {
                 message: "Error deleting session",
               });
             } else {
-              res.clearCookie('sid');
+              res.clearCookie("sid");
               res.json({ success: true, message: "Session deleted" });
             }
           });

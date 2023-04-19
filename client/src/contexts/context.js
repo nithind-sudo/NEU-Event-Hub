@@ -27,6 +27,8 @@ const Context = ({ children }) => {
             role: response.data.role,
             isActivated: response.data.isActivated,
             isVerified: response.data.isVerified,
+            first_name: response.data.first_name,
+            last_name: response.data.last_name
           });
         } else {
           dispatch({ type: ACTIONS.LOG_OUT });
