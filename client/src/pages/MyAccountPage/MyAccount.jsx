@@ -9,6 +9,7 @@ import MyAccountCard from "../../components/ui/MyAccountCard";
 import { Nav } from "react-bootstrap";
 import MyTickets from "../MyTickets/MyTickets";
 import Favorites from "../Favorites/Favorites";
+import Profile from "../ProfilePage/Profile";
 import { EventManagementState } from "../../contexts/context";
 import ManageAccounts from "../ManageAccounts/ManageAccounts";
 
@@ -20,7 +21,7 @@ export default function MyAccount({ handlelogout }) {
     setSelectedNavItem(selectedKey);
   };
 
-  const profileContent = <p>This is the profile content.</p>;
+  const profileContent = <Profile />;
   const ticketsContent = <MyTickets />;
   const favoritesContent = <Favorites />;
   const manageAccount = <ManageAccounts />;
