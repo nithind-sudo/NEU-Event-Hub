@@ -116,3 +116,31 @@ export const updateUserInfo = async (user_id, payload) => {
     throw error;
   }
 };
+
+export const fetchCreateEvent = async (payload) => {
+  console.log("Initial Payload inside Creating Event : ", payload);
+  try {
+    const createUserPayload = (() => {
+      const defaultRole = "user";
+      const role = payload.role.toLowerCase();
+
+      if (role !== "user" && role !== "admin") {
+        return { ...payload, role: defaultRole, isVerified: false };
+      } else {
+        return { ...payload, role, isVerified: false };
+      }
+    })();
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    console.log("FE payload : ", createUserPayload);
+    const response = await instance.post("/v1/event", createUserPayload, {
+      headers,
+    });
+    console.log("****** Response from EVENT API POST : ", response);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

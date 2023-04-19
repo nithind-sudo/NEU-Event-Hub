@@ -10,13 +10,15 @@ import { useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { TimeInput, DatePicker } from "react-widgets";
 import LocationInput from "../../components/Layout/LocationInput";
+import Button from "../../components/ui/Button";
+import fetchCreateEvent from "../../apiClient";
 
-const API_KEY = "AIzaSyAE1TXk9IfcTk-cM1B1Oo4ykcmh9EhCu6c";
 
-export default function CreateEvent(props) {
+export default function CreateEvent({handlelogout, setShowAlert, setAlertClass, setError}) {
   const [errorValidation, setErrorValidation] = useState("");
   const [selectedTag, setSelectedTag] = useState("Select a Event");
   const [location, setLocation] = useState("");
+  const navigate = useNavigate();
 
   const handleLocationChange = (value) => {
     setLocation(value);
@@ -53,9 +55,39 @@ export default function CreateEvent(props) {
     }
   };
 
+  const handleCreateEvent = async (e) => {
+    e.preventDefault();
+    const payload = {
+      title: formData.title,
+      description : formData.description
+      
+    };
+    try {
+      const response = await fetchCreateEvent(payload);
+      console.log(` *** Response from Create Event End Point : ${response.data}`);
+      if (response.data.success) {
+        setShowAlert(true);
+        setAlertClass("success");
+        setError("Account Created Successfully!!!");
+        setTimeout(() => {
+          navigate("/main");
+        }, 2000);
+      } else {
+        setAlertClass("Danger");
+        setError("Invalid Data In Form");
+        setShowAlert(true);
+      }
+    } catch (error) {
+      setAlertClass("Danger");
+      setError("Invalid Data In Form");
+      setShowAlert(true);
+    }
+  };
+
+
   return (
     <div>
-      <Navbar handlelogout={props.handlelogout} />
+      <Navbar handlelogout={handlelogout} />
       <Form>
         <Container>
           <div className="create-event-container">
@@ -209,6 +241,12 @@ export default function CreateEvent(props) {
                 </Form.Group>
               </Col>
             </Row>
+            <Button
+              variant="danger"
+              text={"Create Account"}
+              onClick={handleCreateEvent}
+              className="mt-3 mb-1"
+            ></Button>
           </div>
         </Container>
       </Form>

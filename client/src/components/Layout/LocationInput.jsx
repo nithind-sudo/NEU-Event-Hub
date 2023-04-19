@@ -13,14 +13,19 @@ function LocationInput({ onLocationChange }) {
       const place = autocomplete.getPlace();
       if (place.geometry) {
         const { lat, lng } = place.geometry.location;
-        onLocationChange(`${lat},${lng}`);
+        const newLocation = `${lat},${lng}`;
+        setTimeout(() => {
+          onLocationChange(newLocation);
+        }, 3000);
       }
     });
   }, [onLocationChange]);
 
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
-    onLocationChange(event.target.value);
+    setTimeout(() => {
+      onLocationChange(event.target.value);
+    }, 1000); // set a delay of 1 second
   };
 
   return (
