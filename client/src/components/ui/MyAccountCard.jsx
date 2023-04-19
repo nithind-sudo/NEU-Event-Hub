@@ -4,12 +4,12 @@ import { Card, Col, Row } from "react-bootstrap";
 const LeftNavAndContent = ({ navContent, pageContent }) => {
   return (
     <Row>
-      <Col md={3}>
+      <Col md={2}>
         <Card>
           <Card.Body>{navContent}</Card.Body>
         </Card>
       </Col>
-      <Col md={9}>
+      <Col md={10}>
         <Card>
           <Card.Body>{pageContent}</Card.Body>
         </Card>
