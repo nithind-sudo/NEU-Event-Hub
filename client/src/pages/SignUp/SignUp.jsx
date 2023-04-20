@@ -19,7 +19,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 
 export default function SignUp({ ...props }) {
   const navigate = useNavigate();
-  const { error, setError, showAlert, setShowAlert, onLogin } = props;
+  const { error, setError, showAlert, setShowAlert } = props;
 
   const schema = Joi.object({
     firstName: Joi.string().min(2).required(),
