@@ -3,10 +3,16 @@ const User = require("../models/users");
 const router = express.Router();
 
 let getAllUsers = async(req, res, err)=>{
-    let allUsers = await User.find({}).exec();
+    let allUsers = await User.find({"role": "user"}).exec();
     res.send(allUsers);
 }
 
-router.post("/", getAllUsers)
+let deleteUser = async(req, res, err)=>{
+    let deletedUser = await User.deleteOne({"user_id":req.params.user_id}).exec();
+    res.send(deletedUser);
+}
+
+router.post("/", getAllUsers);
+router.delete("/delete/:user_id", deleteUser);
 
 module.exports = router;
