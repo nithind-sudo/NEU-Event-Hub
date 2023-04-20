@@ -7,7 +7,6 @@ import { getAllEvents } from "../../apiClient";
 
 const AllEvents = (props) => {
   let eventArray = props.eventArray;
-  console.log(eventArray);
   return (
     <div className="my-3">
       <Navbar handlelogout={props.handlelogout} />
@@ -19,7 +18,7 @@ const AllEvents = (props) => {
         <div className="row">
           {eventArray.map((eventInfo) => (
             <div
-              className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6"
+              className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"
               key={eventInfo.event_id}>
               <div className="m-2">
                 <Card
@@ -27,6 +26,7 @@ const AllEvents = (props) => {
                   eventID={eventInfo.event_id}
                   eventDescription={eventInfo.description}
                   eventDate={eventInfo.date.toLocaleString().substring(0, 10)}
+                  eventImage={eventInfo.imageUrl}
                 />
               </div>
             </div>

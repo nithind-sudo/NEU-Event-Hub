@@ -12,20 +12,13 @@ import { getAllEvents } from "../../apiClient";
 
 export default function LandingPage(props) {
   const [eventArray, setEventArray] = useState([]);
-  const [eventArraySix, setEventArraySix] = useState([]);
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await getAllEvents();
         console.log("Response for GET Event Array: ", response);
           if (response.data) {
-            setEventArray(response.data.reverse());
-            if(eventArray.length>6) {
-              setEventArraySix(eventArray.slice(0, 5));
-            }
-            else {
-              setEventArraySix(eventArray);
-            }
+            setEventArray(response.data.reverse().slice(0, 5));
           }
       } catch (e) {
         console.error(e);
@@ -51,7 +44,7 @@ export default function LandingPage(props) {
         <MyCarousel className="" carouselData={carouselData} />
         {/* Add Events Happening */}
         {/* Add Categories */}
-        <AllEvents eventArray={eventArraySix} getList={"Top 5 Latest Events List"} />
+        <AllEvents eventArray={eventArray} getList={"Top 5 Latest Events List"} />
       </Container>
     </div>
   );
