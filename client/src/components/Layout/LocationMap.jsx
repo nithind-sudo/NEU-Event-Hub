@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Card, Button } from "react-bootstrap";
 
 const LocationMap = ({ location, google }) => {
   const [showMap, setShowMap] = useState(false);
@@ -11,28 +12,30 @@ const LocationMap = ({ location, google }) => {
   };
 
   return (
-    <div>
-      <div className="d-flex align-items-center">
+    <Card className="mb-4">
+      <Card.Header>
         <FontAwesomeIcon icon={faMapMarkerAlt} className="me-2" />
-        <span>{location.address}</span>
-        <button className="ms-auto" onClick={toggleShowMap}>
+        <span>{location.address}location </span>
+        <Button className="ms-auto" onClick={toggleShowMap}>
           {showMap ? "Hide Map" : "Show Map"}
-        </button>
-      </div>
+        </Button>
+      </Card.Header>
       {showMap && (
-        <Map
-          google={google}
-          zoom={14}
-          initialCenter={{
-            lat: location.lat,
-            lng: location.lng,
-          }}
-          style={{ width: "100%", height: "400px" }}
-        >
-          <Marker position={{ lat: location.lat, lng: location.lng }} />
-        </Map>
+        <Card.Body>
+          <Map
+            google={google}
+            zoom={14}
+            initialCenter={{
+              lat: location.lat,
+              lng: location.lng,
+            }}
+            style={{ width: "100%", height: "400px" }}
+          >
+            <Marker position={{ lat: location.lat, lng: location.lng }} />
+          </Map>
+        </Card.Body>
       )}
-    </div>
+    </Card>
   );
 };
 
