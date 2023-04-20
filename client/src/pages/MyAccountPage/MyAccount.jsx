@@ -178,8 +178,6 @@ export default function MyAccount({ handlelogout }) {
           </div>
         </Container>
       </div>
-
-      <Footer />
     </div>
   );
 }
