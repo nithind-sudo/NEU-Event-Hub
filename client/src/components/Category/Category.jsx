@@ -13,24 +13,44 @@ import scienceOrganized from "../../assets/science.jpeg";
 import managementOrganized from "../../assets/management.jpeg";
 import otherOrganized from "../../assets/holi.jpeg";
 import Footer from "../Layout/Footer";
-import { Navbar } from "react-bootstrap";
+import Navbar from "../../components/Navbar/Navbar";
+import AllEvents from "../../pages/AllEvents/AllEvents";
+import { getAllEventsByCategory } from "../../apiClient";
+import { useStateWithCallbackLazy } from "use-state-with-callback";
 
-const Category = ({ handlelogout }) => {
+const Category = (props) => {
   let { categoryName } = useParams();
-  let [category, setCategory] = useState({});
+  let [category, setCategory] = useStateWithCallbackLazy({});
+  const [eventArray, setEventArray] = useState([]);
   let getCategoryURL =
     "http://localhost:3000/category/getCategories/" + categoryName;
-  useEffect(() => {
+
+  const fetchCategory = () => {
     axios
       .get(getCategoryURL)
       .then((response) => response.data)
       .then((data) => {
         setCategory(data);
       });
-  }, []);
+  };
+  const fetchEventsByCategory = async () => {
+    try {
+      const response = await getAllEventsByCategory(category.name);
+      if (response.data) {
+        setEventArray(response.data.reverse());
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    fetchCategory();
+    fetchEventsByCategory();
+  }, [category, eventArray]);
   return (
     <React.Fragment>
-      <div className="pt-3">
+      <Navbar handlelogout={props.handlelogout} />
+      <div className="pt-3 getPageSizeForCategory">
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
@@ -71,7 +91,8 @@ const Category = ({ handlelogout }) => {
                     alt="Computer Science Organized Image"
                     className="img-thumbnail"
                   />
-                ) : category.name == "College of Engineering Organized Events" ? (
+                ) : category.name ==
+                  "College of Engineering Organized Events" ? (
                   <img
                     src={engineeringOrganized}
                     alt="Engineering Organized Image"
@@ -105,6 +126,9 @@ const Category = ({ handlelogout }) => {
                 )}
               </div>
             </div>
+          </div>
+          <div className="row">
+            <AllEvents eventArray={eventArray} getList={category.name} />
           </div>
         </div>
       </div>

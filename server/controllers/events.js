@@ -20,6 +20,15 @@ exports.getAllEventsInfo = async (req, res) => {
   }
 };
 
+exports.getAllEventsByCategory = async (req, res) => {
+  try {
+    const eventsInfo = await eventService.getAllEventsByCategory(req.params.CategoryName);
+    res.status(200).send(eventsInfo);
+  } catch (e) {
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
+  }
+};
+
 exports.createEvent = async (req, res) => {
   const {
     title,

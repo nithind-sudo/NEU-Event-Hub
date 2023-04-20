@@ -37,6 +37,10 @@ class EventService {
   async getAllEvents() {
     return await Event.find({ }).exec();
   }
+
+  async getAllEventsByCategory(categoryName) {
+    return await Event.find({ category: categoryName }).exec();
+  }
   
 }
 
