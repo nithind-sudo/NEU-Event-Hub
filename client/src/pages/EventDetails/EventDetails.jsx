@@ -20,6 +20,23 @@ const EventDetails = ({ eventInfo }) => {
     new Date(eventInfo.startTime).getTime();
   const durationInHours = Math.round(durationInMillis / (1000 * 60 * 60));
 
+  const formattedTime = `${new Date(eventInfo.startTime).toLocaleDateString(
+    "en-US",
+    {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    }
+  )} · ${new Date(eventInfo.startTime).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    timeZoneName: "short",
+  })} - ${new Date(eventInfo.endTime).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    timeZoneName: "short",
+  })}`;
+
   const imageAddress =
     "https://images.unsplash.com/photo-1498940757830-82f7813bf178?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80";
   const eventPrice = 20;
@@ -75,11 +92,11 @@ const EventDetails = ({ eventInfo }) => {
                     <h5>When and Where</h5>
                     <Col>
                       {/* Date and Time  */}
-                      <FontAwesomeIcon icon={faCalendarAlt} />
+                      <FontAwesomeIcon icon={faCalendarAlt} /> {formattedTime}
                     </Col>
                     <Col>
                       {/* Location  */}
-                      <LocationMap location={eventInfo.location} />
+                      <LocationMap location={eventInfo.location} /> Location
                     </Col>
                   </Row>
 
@@ -106,14 +123,14 @@ const EventDetails = ({ eventInfo }) => {
                     {/* Show Tags */}
                   </Row>
 
-                  <p>Date: {eventInfo.date.substring(0, 10)}</p>
+                  {/* <p>Date: {eventInfo.date.substring(0, 10)}</p>
                   <p>Event ID: {eventInfo.event_id}</p>
                   <p>
                     Star Time of Event : {eventInfo.startTime.substring(11, 19)}
                   </p>
                   <p>
                     End Time of Event : {eventInfo.endTime.substring(11, 19)}
-                  </p>
+                  </p> */}
                 </Card.Body>
               </Card>
             </Col>
