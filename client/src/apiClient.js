@@ -18,6 +18,22 @@ export const fetchSession = async () => {
     throw error;
   }
 };
+export const fetchUsers = async () => {
+  try {
+    const response = await instance.post("/getAllUsers/");
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+export const deleteUser = async (user_id) => {
+  try {
+    const response = await instance.delete("/getAllUsers/delete/"+user_id);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const fetchLogin = async (username, password) => {
   try {

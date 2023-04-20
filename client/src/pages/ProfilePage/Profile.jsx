@@ -76,6 +76,7 @@ export default function Profile({ user }) {
     updateUserInfo(state.user_id, payload)
       .then((response) => {
         console.log("Response after updating User profile : ", response);
+        navigate("/main");
       })
       .catch((error) => {
         console.log("Error while updating user info : ", error.message);
@@ -96,6 +97,7 @@ export default function Profile({ user }) {
             />
           </div>
         </div>
+        <br />
         <div className="display-6">Edit Profile</div>
         <br />
         <div className="row">
