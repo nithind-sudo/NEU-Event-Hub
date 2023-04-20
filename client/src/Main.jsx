@@ -8,7 +8,7 @@ import CategoryView from "./components/CategoryView/CategoryView";
 import Category from "./components/Category/Category";
 import { EventManagementState } from "./contexts/context";
 import { LOGIN_STATUS, ACTIONS } from "./contexts/constants";
-import { fetchLogin, fetchLogOut } from "./apiClient";
+import { fetchLogin, fetchLogOut, getAllEvents } from "./apiClient";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
 import Footer from "./components/Layout/Footer";
 import MyAccount from "./pages/MyAccountPage/MyAccount";
@@ -26,9 +26,20 @@ function Main() {
   const { state, dispatch } = EventManagementState();
 
   const navigate = useNavigate();
-
+  const [eventArray, setEventArray] = useState([]);
   useEffect(() => {
-    document.title = "NEU Events";
+    const fetchEvents = async () => {
+      try {
+        const response = await getAllEvents();
+        console.log("Response for GET Event Array: ", response);
+          if (response.data) {
+            setEventArray(response.data.reverse());
+          }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchEvents();
   }, []);
 
   async function onLogin(username, password) {
@@ -123,7 +134,7 @@ function Main() {
 
           <Route
             path="/allEvents"
-            element={<AllEvents handlelogout={onLogout} />}
+            element={<AllEvents  eventArray={eventArray} getList={""} handlelogout={onLogout} />}
           ></Route>
 
           <Route
