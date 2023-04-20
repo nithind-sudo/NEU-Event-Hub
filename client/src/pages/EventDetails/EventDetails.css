@@ -1,0 +1,44 @@
+.event-details-container {
+  padding: 30px;
+}
+
+.event-date {
+  font-size: 14px;
+}
+
+.event-title {
+  color: #1e0a3c;
+  font-weight: 800;
+  margin-bottom: 16px;
+  margin-bottom: calc(2*var(--base-unit));
+  word-break: break-word;
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+.summary {
+  margin-bottom: 32px;
+  margin-bottom: calc(4*var(--base-unit));
+  word-break: break-word;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.simplified-organizer-info {
+  background: #f8f7fa;
+  border-radius: 8px;
+  border-radius: var(--base-unit);
+  padding: 16px 24px;
+  padding: calc(2*var(--base-unit)) calc(3*var(--base-unit));
+}
+
+h5{
+  padding: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  max-height: 500px; /* Set the maximum height to 500 pixels */
+  object-fit: cover;
+}
