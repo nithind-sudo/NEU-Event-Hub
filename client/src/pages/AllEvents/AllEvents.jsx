@@ -4,12 +4,9 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Layout/Footer";
 import "./AllEvents.css";
 import { getAllEvents } from "../../apiClient";
-import { useLocation } from "react-router-dom";
 
 const AllEvents = (props) => {
   const [eventArray, setEventArray] = useState([]);
-  const location = useLocation();
-  console.log(location);
   useEffect(() => {
     const fetchEvents = async () => {
       try {
