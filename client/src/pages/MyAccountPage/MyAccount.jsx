@@ -133,7 +133,7 @@ export default function MyAccount({ handlelogout }) {
   );
 
   return (
-    <div className="py-5">
+    <div className="py-5 makeBackgroundForMyAccount">
       <Navbar handlelogout={handlelogout} />
       <div className="myAccount-page">
         <Container fluid>
