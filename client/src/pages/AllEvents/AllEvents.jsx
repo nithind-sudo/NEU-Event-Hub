@@ -6,29 +6,15 @@ import "./AllEvents.css";
 import { getAllEvents } from "../../apiClient";
 
 const AllEvents = (props) => {
-  const [eventArray, setEventArray] = useState([]);
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await getAllEvents();
-        console.log("Response for GET Event Array: ", response);
-          if (response.data) {
-            setEventArray(response.data);
-          }
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    fetchEvents();
-  }, []);
-
+  let eventArray = props.eventArray;
+  console.log(eventArray);
   return (
     <div className="my-3">
       <Navbar handlelogout={props.handlelogout} />
       <div className="container events-container">
         <b>
           <div className="display-6 colorCodeNortheastern">EVENTS</div>
-          <blockquote className="blockquote">by Trending List</blockquote>
+          <blockquote className="blockquote">by Trending List {props.getList!=""?`(`+`${props.getList}`+`)`:""}</blockquote>
         </b>
         <div className="row">
           {eventArray.map((eventInfo) => (
