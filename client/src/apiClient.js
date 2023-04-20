@@ -169,6 +169,14 @@ export const getAllEvents = async () => {
     throw error;
   }
 };
+export const getAllEventsByCategory = async (categoryName) => {
+  try {
+    const response = await instance.get("/searchEventsByCategory/"+categoryName);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getEventDetails = async (event_id) => {
   console.log("Inside getEvent Details for Event with Id : ", event_id);

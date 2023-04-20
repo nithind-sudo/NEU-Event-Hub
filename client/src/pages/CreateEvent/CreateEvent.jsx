@@ -205,31 +205,31 @@ export default function CreateEvent({
 
                       <Dropdown.Menu>
                         <Dropdown.Item eventKey="Students Organized Events">
-                          Students Organized Events
+                        Students Organized Events
                         </Dropdown.Item>
-                        <Dropdown.Item eventKey="Professor Organized Events">
-                          Professor Organized Events
+                        <Dropdown.Item eventKey="Professors Organized Events">
+                        Professors Organized Events
                         </Dropdown.Item>
                         <Dropdown.Item eventKey="Speakers Organized Events">
-                          Speakers Organized Events
+                        Speakers Organized Events
                         </Dropdown.Item>
-                        <Dropdown.Item eventKey="Northeastern Management Events">
-                          Northeastern Management Events
+                        <Dropdown.Item eventKey="Northeastern's Management Events">
+                        Northeastern's Management Events
                         </Dropdown.Item>
-                        <Dropdown.Item eventKey="khoury College Events">
-                          khoury College Events
+                        <Dropdown.Item eventKey="Khoury College of Computer Science Organized Events">
+                        Khoury College of Computer Science Organized Events
                         </Dropdown.Item>
-                        <Dropdown.Item eventKey="College of Engineering Events">
-                          College of Engineering Events
+                        <Dropdown.Item eventKey="College of Engineering Organized Events">
+                        College of Engineering Organized Events
                         </Dropdown.Item>
-                        <Dropdown.Item eventKey="College of Professional Studies Events">
-                          College of Professional Studies Events
+                        <Dropdown.Item eventKey="College of Professional Studies Organized Events">
+                        College of Professional Studies Organized Events
                         </Dropdown.Item>
-                        <Dropdown.Item eventKey="College of Science Events">
-                          College of Science Events
+                        <Dropdown.Item eventKey="College of Science Organized Events">
+                        College of Science Organized Events
                         </Dropdown.Item>
-                        <Dropdown.Item eventKey="Business Management Events">
-                          Business Management Events
+                        <Dropdown.Item eventKey="D'Amore College of Management Events">
+                        D'Amore College of Management Events
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
