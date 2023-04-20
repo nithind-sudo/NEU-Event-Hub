@@ -17,9 +17,9 @@ export default function LandingPage(props) {
       try {
         const response = await getAllEvents();
         console.log("Response for GET Event Array: ", response);
-          if (response.data) {
-            setEventArray(response.data.reverse().slice(0, 5));
-          }
+        if (response.data) {
+          setEventArray(response.data.reverse().slice(0, 5));
+        }
       } catch (e) {
         console.error(e);
       }
@@ -40,11 +40,17 @@ export default function LandingPage(props) {
 
       <Navbar handlelogout={props.handlelogout} />
       <Container fluid>
-        <CategoryView />
+        <div id="category">
+          <CategoryView />
+        </div>
+
         <MyCarousel className="" carouselData={carouselData} />
         {/* Add Events Happening */}
         {/* Add Categories */}
-        <AllEvents eventArray={eventArray} getList={"Top 5 Latest Events List"} />
+        <AllEvents
+          eventArray={eventArray}
+          getList={"Top 5 Latest Events List"}
+        />
       </Container>
     </div>
   );
