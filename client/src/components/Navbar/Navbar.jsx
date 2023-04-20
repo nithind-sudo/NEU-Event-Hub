@@ -7,19 +7,27 @@ import { EventManagementState } from "../../contexts/context";
 import LogoutContext from "../../contexts/LogoutContext";
 import { useContext } from "react";
 import { fetchEvents } from "../../apiClient";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = (props) => {
   const { state, dispatch } = EventManagementState();
   const handlelogout = useContext(LogoutContext); // Add this line
   let [events, setEvents] = useState([]);
+  let [eventKey, setEventKey] = useState("");
   let navigate = useNavigate();
-  const handleSearch = (e)=>{
-    fetchEvents(e.target.value).then(response=>response.data).then((data)=>{
-      setEvents(data);
-      navigate("/allEvents", {state:{eventsData: events}})
-    })
-  }
+  const handleEventSearchKey = (e) => {
+    setEventKey(e.target.value);
+  };
+  const handleSearch = () => {
+    fetchEvents(eventKey)
+      .then((response) => response.data)
+      .then((data) => {
+        setEvents(data);
+        console.log("EVENTS CONSOLING");
+        console.log(events);
+      });
+  };
   return (
     <header>
       <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
@@ -65,25 +73,29 @@ const Navbar = (props) => {
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <form>
               <div className="input-group">
-                <span className="input-group-text" id="basic-addon1">
-                  @
-                </span>
                 <input
                   type="text"
                   className="form-control shadow-none"
                   placeholder="Search Events"
                   aria-label="searchEvents"
                   aria-describedby="basic-addon1"
-                  onKeyUp={handleSearch}
+                  onKeyDown={handleEventSearchKey}
                 />
+                <span
+                  className="input-group-text"
+                  id="basic-addon1"
+                  onClick={handleSearch}
+                  data-bs-toggle="modal"
+                  > {/*href="#exampleModalToggle"*/}
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </span>
               </div>
             </form>
             <ul className="navbar-nav me-auto ms-auto mb-2 mb-md-0">
               <li className="nav-item nav-item-width-set">
                 <Link
                   to="/main"
-                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3"
-                >
+                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
                   <span>Home</span>
                 </Link>
               </li>
@@ -119,8 +131,7 @@ const Navbar = (props) => {
                 to="#"
                 className="d-block link-dark text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+                aria-expanded="false">
                 <span className="text-light">
                   Welcome back, {state.first_name}{" "}
                 </span>
@@ -154,9 +165,7 @@ const Navbar = (props) => {
                 <li>
                   <div
                     className="text-center makePointerCursor"
-                    onClick={() => handlelogout()}
-                  >
-                  
+                    onClick={() => handlelogout()}>
                     <div className="text-danger">Logout</div>
                   </div>
                 </li>
