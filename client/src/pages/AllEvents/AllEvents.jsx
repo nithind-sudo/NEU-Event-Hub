@@ -16,9 +16,9 @@ const AllEvents = (props) => {
       try {
         const response = await getAllEvents();
         console.log("Response for GET Event Array: ", response);
-        if (response.data) {
-          setEventArray(response.data);
-        }
+          if (response.data) {
+            setEventArray(response.data);
+          }
       } catch (e) {
         console.error(e);
       }

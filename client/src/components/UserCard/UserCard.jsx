@@ -24,7 +24,9 @@ const UserCard = (props) => {
             <FrontSide
               onClick={() => {
                 ref.current.toggle();
-              }}>
+              }}
+              style={{background:'#eeeeee', color:'#000000', borderRadius: '10px'}}
+              >
               <div className="row">
                 <div className="text-center">
                     <div className="h5">User ID: {props.data.user_id}</div>
@@ -45,7 +47,7 @@ const UserCard = (props) => {
               </div>
             </FrontSide>
 
-            <BackSide>
+            <BackSide style={{background:'#eeeeee', color:'#000000', borderRadius: '10px'}}>
               <div className="row">
                 <div className="text-center">
                     <button className="btn btn-warning mx-5">Edit User</button>

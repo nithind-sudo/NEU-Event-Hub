@@ -138,7 +138,7 @@ export default function Profile({ user }) {
               <br />
               <div className="row">
                 <div className="text-center">
-                  <Button variant="primary" onClick={handleSaveChanges}>
+                  <Button variant="btn btn-warning" onClick={handleSaveChanges}>
                     Save Changes
                   </Button>
                 </div>
