@@ -13,12 +13,21 @@ export default function ManageAccounts() {
       });
   }, []);
   return (
-    <div className="row">
-      {allUsers.map((data, index) => {
-        return (<div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-          <UserCard data={data} />
-        </div>)
-      })}
+    <div>
+      <div className="row">
+        <div className="container">
+          <div className="h4">Manage User Accounts</div>
+        </div>
+      </div>
+      <div className="row">
+        {allUsers.map((data, index) => {
+          return (
+            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+              <UserCard data={data} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

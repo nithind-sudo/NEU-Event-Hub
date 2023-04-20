@@ -52,6 +52,11 @@ const UserCard = (props) => {
                     <button className="btn btn-danger mx-5" onClick={onClickingDelete}>Delete User</button>
                 </div>
               </div>
+              <div className="row">
+                <div className="text-center my-3">
+                    <p className="p text-danger">Area to Avoid! These operations may change or delete the user data having <div className="b text-primary">User ID {props.data.user_id}</div> So be careful while performing these operations</p>
+                </div>
+              </div>
             </BackSide>
           </Flippy>
         </div>
