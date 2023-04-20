@@ -107,7 +107,7 @@ export default function SignUp({ ...props }) {
             <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
             <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
               <div className="justify-content-center align-items-center my-4">
-                <div className="card">
+                <div className="card makeLoginCardBackground">
                   <div className="card-body">
                     <div className="row">
                       <div className="text-center">
