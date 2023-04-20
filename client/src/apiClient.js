@@ -161,3 +161,13 @@ export const getAllEvents = async () => {
     throw error;
   }
 };
+
+export const getEventDetails = async (event_id) => {
+  console.log("Inside getEvent Details for Event with Id : ", event_id);
+  try{
+    const response = await instance.get(`/v1/event/${event_id}`);
+    return response;
+  }catch(error){
+    throw error;
+  }
+}

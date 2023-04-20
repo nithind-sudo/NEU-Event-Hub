@@ -4,8 +4,15 @@ import "./styles/Card.css";
 import crackersImage from "../../assets/images/crackersImage.jpeg";
 import crackersImageNew from "../../assets/images/crackersImageBack.jpeg";
 import crackersImageInsertFlip from "../../assets/images/crackersImageBackNew.jpeg";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ eventName, eventDescription, eventID, eventDate }) => {
+  const navigate = useNavigate();
+
+  const handleViewEvent = () => {
+    navigate(`/event/${eventID}`);
+  };
+
   const ref = React.useRef();
   const cardStyle = {
     width: "500px",
@@ -13,18 +20,19 @@ const Card = ({ eventName, eventDescription, eventID, eventDate }) => {
     borderRadius: "10px",
   };
   const backgroundImageStyle = {
-    backgroundImage: eventID&1?`url(${crackersImage})`:`url(${crackersImageNew})`,
+    backgroundImage:
+      eventID & 1 ? `url(${crackersImage})` : `url(${crackersImageNew})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    borderRadius: "10px"
+    borderRadius: "10px",
   };
   const backgroundImageStyleBack = {
     backgroundImage: `url(${crackersImageInsertFlip})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    borderRadius: "10px"
+    borderRadius: "10px",
   };
   return (
     <Flippy
@@ -32,12 +40,14 @@ const Card = ({ eventName, eventDescription, eventID, eventDate }) => {
       flipOnClick={true}
       flipDirection="horizontal"
       ref={ref}
-      style={cardStyle}>
+      style={cardStyle}
+    >
       <FrontSide
         style={backgroundImageStyle}
         onClick={() => {
           ref.current.toggle();
-        }}>
+        }}
+      >
         <div className="eventName my-1">
           <div className="row text-light">
             <div className="text-center">
@@ -63,7 +73,7 @@ const Card = ({ eventName, eventDescription, eventID, eventDate }) => {
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
               <div className="text-center justify-content-center align-items-center">
-                <button className="btn btn-warning">View Event</button>
+                <button className="btn btn-warning" onClick={handleViewEvent}>View Event</button>
               </div>
             </div>
             <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">

@@ -4,9 +4,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Layout/Footer";
 import "./AllEvents.css";
 import { getAllEvents } from "../../apiClient";
+import { Link } from "react-router-dom";
+import EventDetails from "../EventDetails/EventDetails";
 
 const AllEvents = (props) => {
   const [eventArray, setEventArray] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -23,6 +26,10 @@ const AllEvents = (props) => {
     fetchEvents();
   }, []);
 
+  const handleViewEvent = (eventInfo) => {
+    setSelectedEvent(eventInfo);
+  };
+
   return (
     <div className="my-3">
       <Navbar handlelogout={props.handlelogout} />
@@ -33,18 +40,22 @@ const AllEvents = (props) => {
         </b>
         <div className="row">
           {eventArray.map((eventInfo) => (
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" key={eventInfo.event_id}>
+            <div
+              className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6"
+              key={eventInfo.event_id}
+            >
               <div className="m-2">
                 <Card
                   eventName={eventInfo.title}
                   eventID={eventInfo.event_id}
                   eventDescription={eventInfo.description}
-                  eventDate={eventInfo.date.toLocaleString().substring(0,10)}
+                  eventDate={eventInfo.date.toLocaleString().substring(0, 10)}
                 />
               </div>
             </div>
           ))}
         </div>
+        {selectedEvent && <EventDetails eventInfo={selectedEvent} />}
       </div>
       <Footer />
     </div>
