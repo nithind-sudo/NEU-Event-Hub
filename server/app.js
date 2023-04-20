@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const allUsers = require("../server/routes/allUsers");
+const search = require("./routes/search");
 
 const { mongoose, mongooseConnection } = require("./mongodb/db");
 const categoryRouter = require("./routes/category");
@@ -36,5 +37,6 @@ app.use("/v1/user", userRoutes);
 app.use("/v1/event", eventRoute);
 app.use("/category", categoryRouter);
 app.use("/getAllUsers", allUsers);
+app.use("/search", search);
 
 module.exports = app;

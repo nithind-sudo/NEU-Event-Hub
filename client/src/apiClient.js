@@ -34,6 +34,14 @@ export const deleteUser = async (user_id) => {
     throw error;
   }
 };
+export const fetchEvents = async (event_name) => {
+  try {
+    const response = await instance.get("/search/event/"+event_name);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const fetchLogin = async (username, password) => {
   try {

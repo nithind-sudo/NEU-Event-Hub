@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { fetchUsers } from "../../apiClient";
+import { fetchEvents, fetchUsers } from "../../apiClient";
 import UserCard from "../../components/UserCard/UserCard";
 
 export default function ManageAccounts() {
   let [allUsers, setAllUsers] = useState([]);
+  let handleUserSearch = (e)=>{
+    console.log(e.target.value);
+  }
   useEffect(() => {
     fetchUsers()
       .then((response) => response.data)
@@ -17,6 +20,14 @@ export default function ManageAccounts() {
       <div className="row">
         <div className="container">
           <div className="h4">Manage User Accounts</div>
+          <input
+            type="text"
+            className="form-control shadow-none"
+            placeholder="Search Users by Name / Username / User ID"
+            aria-label="searchEvents"
+            aria-describedby="basic-addon1"
+            onKeyUp={handleUserSearch}
+          />
         </div>
       </div>
       <div className="row">

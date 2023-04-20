@@ -1,17 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Navbar/Navbar.css";
 import { Container } from "react-bootstrap";
 import brandIcon from "../../assets/images/BrandIcon.png";
 import { EventManagementState } from "../../contexts/context";
 import LogoutContext from "../../contexts/LogoutContext";
 import { useContext } from "react";
+import { fetchEvents } from "../../apiClient";
 
 
 const Navbar = (props) => {
   const { state, dispatch } = EventManagementState();
   const handlelogout = useContext(LogoutContext); // Add this line
-
+  let [events, setEvents] = useState([]);
+  let navigate = useNavigate();
+  const handleSearch = (e)=>{
+    fetchEvents(e.target.value).then(response=>response.data).then((data)=>{
+      setEvents(data);
+      navigate("/allEvents", {state:{eventsData: events}})
+    })
+  }
   return (
     <header>
       <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
@@ -66,6 +74,7 @@ const Navbar = (props) => {
                   placeholder="Search Events"
                   aria-label="searchEvents"
                   aria-describedby="basic-addon1"
+                  onKeyUp={handleSearch}
                 />
               </div>
             </form>
