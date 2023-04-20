@@ -4,21 +4,22 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Layout/Footer";
 import "./AllEvents.css";
 import { getAllEvents } from "../../apiClient";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EventDetails from "../EventDetails/EventDetails";
 
 const AllEvents = (props) => {
   const [eventArray, setEventArray] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await getAllEvents();
         console.log("Response for GET Event Array: ", response);
-          if (response.data) {
-            setEventArray(response.data);
-          }
+        if (response.data) {
+          setEventArray(response.data);
+        }
       } catch (e) {
         console.error(e);
       }
@@ -28,6 +29,7 @@ const AllEvents = (props) => {
 
   const handleViewEvent = (eventInfo) => {
     setSelectedEvent(eventInfo);
+    navigate(`/event/${eventInfo.event_id}`);
   };
 
   return (
@@ -49,13 +51,14 @@ const AllEvents = (props) => {
                   eventName={eventInfo.title}
                   eventID={eventInfo.event_id}
                   eventDescription={eventInfo.description}
-                  eventDate={eventInfo.date.toLocaleString().substring(0, 10)}
+                  eventDate={eventInfo.date}
+                  handleViewEvent={() => handleViewEvent(eventInfo)}
                 />
               </div>
             </div>
           ))}
         </div>
-        {selectedEvent && <EventDetails eventInfo={selectedEvent} />}
+        {/* {selectedEvent && <EventDetails eventInfo={selectedEvent} />} */}
       </div>
       <Footer />
     </div>
