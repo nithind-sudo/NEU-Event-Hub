@@ -18,6 +18,7 @@ import MyTickets from "./pages/MyTickets/MyTickets";
 import MyToast from "./components/ui/Toast";
 import LogoutContext from "./contexts/LogoutContext";
 import EventDetailsPage from "./pages/EventDetailsPage/EventDetailsPage";
+import ShowAllEvents from "./pages/ShowAllEvents/ShowAllEvents";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -26,21 +27,6 @@ function Main() {
   const { state, dispatch } = EventManagementState();
 
   const navigate = useNavigate();
-  const [eventArray, setEventArray] = useState([]);
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await getAllEvents();
-        console.log("Response for GET Event Array: ", response);
-          if (response.data) {
-            setEventArray(response.data.reverse());
-          }
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    fetchEvents();
-  }, []);
 
   async function onLogin(username, password) {
     try {
@@ -134,7 +120,7 @@ function Main() {
 
           <Route
             path="/allEvents"
-            element={<AllEvents  eventArray={eventArray} getList={""} handlelogout={onLogout} />}
+            element={<ShowAllEvents handlelogout={onLogout} />}
           ></Route>
 
           <Route

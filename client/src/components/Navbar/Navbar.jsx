@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { fetchEvents } from "../../apiClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { NavHashLink } from "react-router-hash-link";
 
 const Navbar = (props) => {
   const { state, dispatch } = EventManagementState();
@@ -109,11 +110,11 @@ const Navbar = (props) => {
               </li>
 
               <li className="nav-item">
-                <Link
-                  to="/category"
+                <NavHashLink
+                  to="/#category"
                   className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
                   Categories
-                </Link>
+                </NavHashLink>
               </li>
               {state.role === "admin" && (
                 <li className="nav-item">
