@@ -8,6 +8,8 @@ const EventDetailsPage = () => {
   const { eventID } = useParams();
   const [ eventInfo, setEventInfo ]= useState({});
 
+  console.log("selected event Id : ", eventID);
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
