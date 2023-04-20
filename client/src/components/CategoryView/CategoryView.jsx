@@ -26,11 +26,10 @@ const icons = [
   faMicrochip,
   faBook,
   faFlaskVial,
-  faBriefcase
+  faBriefcase,
 ];
 
 const CategoryView = ({ handlelogout }) => {
-
   var [eventCategories, setEventCategories] = useState([]);
   var [eventIcons, setEventIcons] = useState([]);
   var [eventLinks, setEventLinks] = useState([]);
@@ -54,8 +53,7 @@ const CategoryView = ({ handlelogout }) => {
 
   return (
     <React.Fragment>
-    <Navbar handlelogout={handlelogout} />
-
+      <Navbar handlelogout={handlelogout} />
       <div className="pt-3">
         <div className="container">
           <div>
@@ -70,7 +68,9 @@ const CategoryView = ({ handlelogout }) => {
                 className="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3"
                 key={index}>
                 <Link to={eventLinks[index]}>
-                  <div className="card border border-dark mx-2 my-2 card-specs rounded d-flex align-items-center" style={{"--bs-border-opacity": 0.2}}>
+                  <div
+                    className="card border border-dark mx-2 my-2 card-specs rounded d-flex align-items-center"
+                    style={{ "--bs-border-opacity": 0.2 }}>
                     <div className="card-body d-flex align-items-center">
                       <FontAwesomeIcon
                         icon={getIcon(index)}
@@ -92,7 +92,6 @@ const CategoryView = ({ handlelogout }) => {
         </div>
       </div>
       {/* <Footer /> */}
-
     </React.Fragment>
   );
 };
