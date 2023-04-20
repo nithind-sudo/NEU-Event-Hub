@@ -58,8 +58,12 @@ const CategoryView = ({ handlelogout }) => {
         <div className="container">
           <div>
             <b>
-              <div className="display-6 colorCodeNortheastern">EXPLORE</div>
-              <blockquote className="blockquote">by Category</blockquote>
+              <div className="row">
+                <div className="setBackgroundForTitle">
+                  <div className="display-6 colorCodeNortheastern">EXPLORE</div>
+                  <blockquote className="blockquote">by Category</blockquote>
+                </div>
+              </div>
             </b>
           </div>
           <div className="row">

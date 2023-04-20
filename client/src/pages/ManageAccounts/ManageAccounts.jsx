@@ -22,7 +22,7 @@ export default function ManageAccounts() {
           <div className="h4">Manage User Accounts</div>
           <input
             type="text"
-            className="form-control shadow-none"
+            className="form-control shadow-none my-5"
             placeholder="Search Users by Name / Username / User ID"
             aria-label="searchEvents"
             aria-describedby="basic-addon1"
