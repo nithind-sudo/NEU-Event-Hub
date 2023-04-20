@@ -341,7 +341,6 @@ export default function CreateEvent({
           message={error}
         />
       )}
-      <Footer />
     </div>
   );
 }

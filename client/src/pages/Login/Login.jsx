@@ -83,7 +83,7 @@ export default function Login({ ...props }) {
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
               <div className="justify-content-center align-items-center my-5 py-5">
-                <div className="card">
+                <div className="card makeLoginCardBackground">
                   <div className="card-body">
                     <div className="row">
                       <div className="text-center">

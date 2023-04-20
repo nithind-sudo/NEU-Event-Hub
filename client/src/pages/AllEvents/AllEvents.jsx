@@ -47,7 +47,7 @@ const AllEvents = (props) => {
           ))}
         </div>
       </div>
-      <Footer />
+      {/*<Footer />*/}
     </div>
   );
 };
