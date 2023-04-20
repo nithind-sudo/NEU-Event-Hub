@@ -66,7 +66,7 @@ export default function Login({ ...props }) {
         }
       } catch (e) {
         console.log("**** Error while logging in LOGIN COMPONENT:", e);
-        setError("Error while hitting backend login API");
+        setError("Login Failed! Check your account details.");
         setShowAlert(true);
       }
     } else {

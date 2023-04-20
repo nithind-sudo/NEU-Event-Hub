@@ -54,7 +54,7 @@ function Main() {
       return fetchData;
     } catch (error) {
       console.log("**** Error while logging in MAIN COMPONENT:", error);
-      throw new Error("Error while hitting backend login API");
+      throw new Error("Login Failed! Check your account details.");
     }
   }
 
