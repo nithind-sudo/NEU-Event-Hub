@@ -78,7 +78,6 @@ export default function MyAccount({ handlelogout }) {
 
   const profileContent = <Profile />;
   const ticketsContent = <MyTickets />;
-  const favoritesContent = <Favorites />;
   const manageAccount = <ManageAccounts />;
 
   let pageContent;
@@ -90,9 +89,6 @@ export default function MyAccount({ handlelogout }) {
     case "tickets":
       pageContent = ticketsContent;
       break;
-    case "favorites":
-      pageContent = favoritesContent;
-      break;
     case "manageAccounts":
       pageContent = manageAccount;
       break;
@@ -102,12 +98,12 @@ export default function MyAccount({ handlelogout }) {
 
   const navContent = (
     <Nav onSelect={handleNavItemSelect}>
-      <table className="table table-bordered">
+      <table className="table table-bordered border-warning">
         <Nav.Item>
           <tr className="text-center">
             <td className="setSizeForNavBox">
               <Nav.Link eventKey="profile">
-                <span className="setNavText">Profile</span>
+                <span className="setNavText text-light">Profile</span>
               </Nav.Link>
             </td>
           </tr>
@@ -115,14 +111,9 @@ export default function MyAccount({ handlelogout }) {
         <Nav.Item>
           <tr className="text-center">
             <td className="setSizeForNavBox">
-              <Nav.Link eventKey="tickets">Tickets</Nav.Link>
-            </td>
-          </tr>
-        </Nav.Item>
-        <Nav.Item>
-          <tr className="text-center">
-            <td className="setSizeForNavBox">
-              <Nav.Link eventKey="favorites">Favorites</Nav.Link>
+              <Nav.Link eventKey="tickets">
+                <span className="setNavText text-light">Tickets</span>
+              </Nav.Link>
             </td>
           </tr>
         </Nav.Item>
@@ -130,7 +121,9 @@ export default function MyAccount({ handlelogout }) {
           <Nav.Item>
             <tr className="text-center">
               <td className="setSizeForNavBox">
-                <Nav.Link eventKey="manageAccounts">Manage Accounts</Nav.Link>
+                <Nav.Link eventKey="manageAccounts">
+                  <span className="setNavText text-light">Manage Users</span>
+                </Nav.Link>
               </td>
             </tr>
           </Nav.Item>
@@ -145,7 +138,7 @@ export default function MyAccount({ handlelogout }) {
       <div className="myAccount-page">
         <Container fluid>
           <div className="container">
-            <div className="card">
+            <div className="card myCardColorAccount">
               <div className="card-body">
                 <div className="row">
                   <div className="text-center">
@@ -155,15 +148,15 @@ export default function MyAccount({ handlelogout }) {
                 </div>
 
                 <div className="text-center">
-                  <h6 className="card-subtitle mb-2 text-muted">
+                  <h6 className="card-subtitle mb-2 text-warning">
                     {role == "admin" ? "Admin" : "User"} Account
                   </h6>
                   <br />
-                  <h6 className="card-subtitle mb-2 text-muted">
+                  <h6 className="card-subtitle mb-2 text-warning">
                     {firstName} {lastName}
                   </h6>
                   <br />
-                  <h6 className="card-subtitle mb-2 text-muted">
+                  <h6 className="card-subtitle mb-2 text-warning">
                     Username: {username}
                   </h6>
                   <br />
