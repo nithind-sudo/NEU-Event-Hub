@@ -142,7 +142,11 @@ function Main() {
             }
           ></Route>
 
-          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/signup" element={<SignUp handlelogout={onLogout}
+                error={error}
+                setError={setError}
+                showAlert={showAlert}
+                setShowAlert={setShowAlert}/>}></Route>
           <Route
             path="/createEvent"
             element={
