@@ -247,6 +247,7 @@ export default function CreateEvent({
             <Row>
               <LocationInput onLocationChange={handleLocationChange} />
             </Row>
+            <br />
             <Row>
               <h1>Date and time</h1>
               <h6>
@@ -261,6 +262,7 @@ export default function CreateEvent({
                     <label className="lead mt-3 mb-1">
                       Pick Start Date and Time
                     </label>
+                    
                     <div className="">
                       <DatePicker
                         defaultValue={new Date()}
@@ -268,6 +270,7 @@ export default function CreateEvent({
                         onChange={handleStartDateChange}
                         className="w-3/5"
                       />
+                      <br />
                       <TimeInput
                         defaultValue={new Date()}
                         value={startTime}
@@ -292,6 +295,7 @@ export default function CreateEvent({
                         onChange={handleEndDateChange}
                         className="w-3/5"
                       />
+                      <br />
                       <TimeInput
                         defaultValue={new Date()}
                         value={endTime}
