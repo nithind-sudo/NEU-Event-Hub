@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="bg-dark text-white py-5" id="contact">
+    <div className="bg-dark text-white py-4" id="contact">
       <div className="container">
         <div className="row">
           <div className="col-lg-4 col-md-4 col-sm-12 mb-4">
@@ -26,7 +26,9 @@ const Footer = () => {
                 360 Huntington Ave, Boston, MA 02115
                 <br />
                 Email:{" "}
-                <Link to="mailto:events@northeastern.edu" className="text-white">
+                <Link
+                  to="mailto:events@northeastern.edu"
+                  className="text-white">
                   events@northeastern.edu
                 </Link>
               </p>

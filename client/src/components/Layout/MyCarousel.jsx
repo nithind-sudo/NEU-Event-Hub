@@ -34,7 +34,18 @@ export default function MyCarousel({ carouselData }) {
         <Swiper
           modules={[Autoplay, Navigation]}
           scrollbar={{ draggable: true }}
-          slidesPerView={4}
+          slidesPerView={1}
+          spaceBetween={30}
+          breakpoints={{
+            991: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+            767: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            }
+          }}
           loop={true}
           navigation={true}
           centeredSlides={true}

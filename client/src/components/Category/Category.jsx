@@ -12,7 +12,7 @@ import cpsOrganized from "../../assets/professionalStudies.jpeg";
 import scienceOrganized from "../../assets/science.jpeg";
 import managementOrganized from "../../assets/management.jpeg";
 import otherOrganized from "../../assets/holi.jpeg";
-import Footer from "../Layout/Footer";
+import Footer from "../Footer/footer";
 import Navbar from "../../components/Navbar/Navbar";
 import AllEvents from "../../pages/AllEvents/AllEvents";
 import { getAllEventsByCategory } from "../../apiClient";
@@ -48,18 +48,22 @@ const Category = (props) => {
     fetchEventsByCategory();
   }, [category, eventArray]);
   return (
-    <React.Fragment>
+    <>
       <Navbar handlelogout={props.handlelogout} />
       <div className="pt-3 getPageSizeForCategory">
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-              <div className="rounded setJumbotronHeight text-center p-5 my-5">
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div className="rounded setJumbotronHeight text-center p-5 mt-3">
                 <div className="display-6">{category.name}</div>
               </div>
+              <AllEvents eventArray={eventArray} getList={category.name} />
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
-              <div className="rounded my-5">
+          </div>
+          <div className="row">
+            <div className="text-center">
+              <div className="display-6 colorCodeNortheastern"><b>CAPTURED BEST MOMENT</b></div>
+              <div className="rounded mb-5 mt-3">
                 {category.name == "Students Organized Events" ? (
                   <img
                     src={studentsOrganized}
@@ -127,12 +131,10 @@ const Category = (props) => {
               </div>
             </div>
           </div>
-          <div className="row">
-            <AllEvents eventArray={eventArray} getList={category.name} />
-          </div>
         </div>
       </div>
-    </React.Fragment>
+      <Footer />
+    </>
   );
 };
 
