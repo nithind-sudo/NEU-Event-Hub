@@ -17,7 +17,7 @@ const EventDetailsPage = () => {
     const fetchEvent = async () => {
       try {
         const response = await getEventDetails(eventID);
-        console.log("Response for GET Event for Specific event : ", response);
+        console.log("Response for GET Event for Specific event : ", response.data[0]);
         if (response.data) {
           setEventInfo(response.data[0]);
           const selectedEvent = response.data[0];
@@ -31,6 +31,7 @@ const EventDetailsPage = () => {
             eventImage: selectedEvent.imageUrl,
             ticketPrice: selectedEvent.price || 20,
           });
+          console.log("Current state after viewing event : ", state);
         }
       } catch (e) {
         console.error(e);

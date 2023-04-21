@@ -14,7 +14,7 @@ const Checkout = () => {
 
   const [selectedNavItem, setSelectedNavItem] = useState("profile");
   const { state, dispatch } = EventManagementState();
-
+  console.log("Current State inside checkout Page : ", state);
   const [firstName, setFirstName] = useState(state.first_name);
   const [lastName, setLastName] = useState(state.last_name);
   const [phoneNumber, setPhoneNumber] = useState(state.phone_number);
@@ -30,16 +30,16 @@ const Checkout = () => {
     await axios
       .post("http://localhost:3000/stripe/payment", {
         username: username,
-        event: [location.state.event],
-        amount: location.state.ticketPrice * location.state.numberOfSeats,
+        event: [state.event],
+        amount: state.ticketPrice * state.numberOfSeats,
         token: token,
       })
       .then((response) => {
         if (response.status == 200) {
           navigate("/successPayment", {state:{
             username: username,
-            event: [location.state.event],
-            numberOfSeats: location.state.numberOfSeats
+            event: [state.event],
+            numberOfSeats: state.numberOfSeats
           }});
         } else {
           navigate("/badPayment");
@@ -147,33 +147,33 @@ const Checkout = () => {
                       <div className="row">
                         <span className="my-1">
                           <b>Event Title: </b>
-                          <span>{location.state.eventName}</span>
+                          <span>{state.eventName}</span>
                         </span>
                       </div>
                       <div className="row">
                         <span className="my-1">
                           <b>Event ID: </b>
-                          <span>{location.state.eventID}</span>
+                          <span>{state.eventID}</span>
                         </span>
                       </div>
                       <div className="row">
                         <span className="my-1">
                           <b>Event Date: </b>
-                          <span>{location.state.eventDate}</span>
+                          <span>{state.eventDate}</span>
                         </span>
                       </div>
                       <div className="row">
                         <span className="my-1">
                           <b>Number of Tickets: </b>
-                          <span>{location.state.numberOfSeats}</span>
+                          <span>{state.numberOfSeats}</span>
                         </span>
                       </div>
                       <div className="row">
                         <span className="my-1">
                           <b>Total Price: </b>
                           <span>
-                            {location.state.ticketPrice *
-                              location.state.numberOfSeats}
+                            {state.ticketPrice *
+                              state.numberOfSeats}
                           </span>
                         </span>
                       </div>
@@ -189,13 +189,13 @@ const Checkout = () => {
                       billingAddress
                       shippingAddress
                       amount={
-                        location.state.ticketPrice *
-                        location.state.numberOfSeats *
+                        state.ticketPrice *
+                        state.numberOfSeats *
                         100
                       }
                       description={`Your total amount is \$${(
-                        location.state.ticketPrice *
-                        location.state.numberOfSeats
+                        state.ticketPrice *
+                        state.numberOfSeats
                       ).toString()}`}
                       token={payNow}
                     />

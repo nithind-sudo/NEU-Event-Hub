@@ -13,6 +13,14 @@ export const initialState = {
   isVerified: false,
   first_name: "",
   last_name: "",
+  event : {},
+  eventName: "",
+  eventDescription: "",
+  eventID: "",
+  eventDate: "",
+  eventImage: "",
+  ticketPrice: "",
+  numberOfSeats : ""
 };
 
 export function reducer(state, action) {
@@ -63,7 +71,7 @@ export function reducer(state, action) {
         eventID: action.eventID,
         eventDate: action.eventDate,
         eventImage: action.eventImage,
-        ticketPrice: action.price
+        ticketPrice: action.ticketPrice
       };
     
     case ACTIONS.CHECKOUT:

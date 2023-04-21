@@ -56,7 +56,9 @@ const EventDetails = ({ eventInfo, event }) => {
 
   const handleBookEvent = () => {
     // Handle the book event action here
+    console.log("Clicked the book event");
     dispatch({ type: ACTIONS.CHECKOUT, numberOfSeats: ticketCount });
+    console.log("Current state : ", state);
     navigate("/checkout");
   };
 
