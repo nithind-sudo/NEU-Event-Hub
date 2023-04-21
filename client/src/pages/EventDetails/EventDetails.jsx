@@ -14,6 +14,8 @@ import {
 import LocationMap from "../../components/Layout/LocationMap";
 import { deleteEventByEventID } from "../../apiClient";
 import { useNavigate } from "react-router-dom";
+import { EventManagementState } from "../../contexts/context";
+import { ACTIONS } from "../../contexts/constants";
 
 const EventDetails = ({ eventInfo, event }) => {
   // console.log("Event Info : ", eventInfo);
@@ -21,6 +23,7 @@ const EventDetails = ({ eventInfo, event }) => {
     new Date(eventInfo.endTime).getTime() -
     new Date(eventInfo.startTime).getTime();
   const durationInHours = Math.round(durationInMillis / (1000 * 60 * 60));
+  const { state, dispatch } = EventManagementState();
 
   const formattedTime = `${new Date(eventInfo.startTime).toLocaleDateString(
     "en-US",
@@ -45,26 +48,20 @@ const EventDetails = ({ eventInfo, event }) => {
 
   const handleIncrement = () => {
     setTicketCount(ticketCount < 3 ? ticketCount + 1 : 3); // Limit the ticket count to a maximum of 3
+    console.log("After ticket Increment : ", ticketCount);
   };
 
   const handleDecrement = () => {
     setTicketCount(ticketCount > 1 ? ticketCount - 1 : 1); // Limit the ticket count to a minimum of 1
+    console.log("After ticket Decrement : ", ticketCount);
   };
 
   const handleBookEvent = () => {
     // Handle the book event action here
-    navigate("/checkout", {
-      state: {
-        event: event,
-        eventName: eventInfo.title,
-        eventDescription: eventInfo.description,
-        eventID: eventInfo.event_id,
-        eventDate: formattedTime,
-        eventImage: eventInfo.imageUrl,
-        numberOfSeats: ticketCount,
-        ticketPrice: eventPrice
-      },
-    });
+    console.log("Clicked the book event handle with number of seats : ", ticketCount);
+    dispatch({ type: ACTIONS.CHECKOUT, numberOfSeats: ticketCount });
+    console.log("Current state after checkout : ", state);
+    navigate("/checkout");
   };
 
   const navigate = useNavigate();
@@ -153,7 +150,8 @@ const EventDetails = ({ eventInfo, event }) => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={handleDecrement}>
+                      onClick={handleDecrement}
+                    >
                       -
                     </Button>{" "}
                     <span style={{ margin: "0 10px", color: "black" }}>
@@ -162,7 +160,8 @@ const EventDetails = ({ eventInfo, event }) => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={handleIncrement}>
+                      onClick={handleIncrement}
+                    >
                       +
                     </Button>
                   </div>
@@ -215,14 +214,21 @@ const EventDetails = ({ eventInfo, event }) => {
                   </p>
                   <br />
 
-                  <div class="card-subtitle mb-1 text-body-secondary">
-                    <b>Caution</b>
-                  </div>
-                  <p class="card-text">
-                    <button className="btn btn-danger" onClick={deleteEvent}>
-                      Delete Event
-                    </button>
-                  </p>
+                  {state.role === "admin" && (
+                    <>
+                      <div class="card-subtitle mb-1 text-body-secondary">
+                        <b>Caution</b>
+                      </div>
+                      <p class="card-text">
+                        <button
+                          className="btn btn-danger"
+                          onClick={deleteEvent}
+                        >
+                          Delete Event
+                        </button>
+                      </p>
+                    </>
+                  )}
                   <br />
                 </div>
               </div>

@@ -42,17 +42,7 @@ const Card = ({
   let navigate = useNavigate();
 
   const registerForEvent = () => {
-    navigate("/checkout", {
-      state: {
-        eventName: eventName,
-        eventDescription: eventDescription,
-        eventID: eventID,
-        eventDate: eventDate,
-        eventImage: eventImage,
-        numberOfSeats: 1,
-        ticketPrice: 20
-      },
-    });
+    navigate("/checkout");
   };
 
   return (
@@ -61,12 +51,14 @@ const Card = ({
       flipOnClick={true}
       flipDirection="horizontal"
       ref={ref}
-      style={cardStyle}>
+      style={cardStyle}
+    >
       <FrontSide
         style={backgroundImageStyle}
         onClick={() => {
           ref.current.toggle();
-        }}>
+        }}
+      >
         <div className="eventName my-1">
           <div className="row text-light">
             <div className="text-center">
@@ -102,7 +94,8 @@ const Card = ({
                         eventDescription,
                         eventDate,
                       })
-                    }>
+                    }
+                  >
                     View Event
                   </button>
                 </div>
@@ -112,7 +105,8 @@ const Card = ({
               <div className="text-center justify-content-center align-items-center my-1">
                 <button
                   className="btn btn-success setBtnStyleCard"
-                  onClick={registerForEvent}>
+                  onClick={registerForEvent}
+                >
                   Register Now
                 </button>
               </div>
