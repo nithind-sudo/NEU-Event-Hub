@@ -1,4 +1,11 @@
 .cardStyle {
-  width: "400px";
-  height: "250px";
+  width: 400px;
+  height: 250px;
+}
+
+@media (max-width: 576px) {
+  .cardStyle {
+    width: 400px !important;
+    height: 600px !important;
+  }
 }/*# sourceMappingURL=Card.css.map */

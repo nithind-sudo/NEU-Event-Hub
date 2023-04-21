@@ -1,3 +1,8 @@
 .bannerImageStyle {
     background-position: center;
 }
+@media (max-width: 576px) { 
+    .bannerImageStyle {
+        height: 225px;
+    }
+  }

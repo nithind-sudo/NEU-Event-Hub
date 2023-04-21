@@ -17,12 +17,12 @@ export default function Profile({ user }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Hitting userInfo for user_id : ", state.user_id);
+    // console.log("Hitting userInfo for user_id : ", state.user_id);
     fetchSession().then((sessionResponse) => {
       if (sessionResponse.data.success) {
         fetchUserInfo(sessionResponse.data.user_id)
           .then((response) => {
-            console.log("*** Response from GET User API : ", response);
+            // console.log("*** Response from GET User API : ", response);
             const userProfile = response.data[0];
             dispatch({
               type: ACTIONS.GET_USER,
@@ -42,10 +42,10 @@ export default function Profile({ user }) {
             setUsername(userProfile.username);
           })
           .catch((error) => {
-            console.log(
-              "Error while fetching UserInfo inside useEffect ",
-              error
-            );
+            // console.log(
+            //   "Error while fetching UserInfo inside useEffect ",
+            //   error
+            // );
           });
       } else {
         dispatch({ type: ACTIONS.LOG_OUT });
@@ -75,12 +75,14 @@ export default function Profile({ user }) {
 
     updateUserInfo(state.user_id, payload)
       .then((response) => {
-        console.log("Response after updating User profile : ", response);
-        navigate("/main");
+        // console.log("Response after updating User profile : ", response);
+        // navigate("/main");
       })
       .catch((error) => {
-        console.log("Error while updating user info : ", error.message);
+        // console.log("Error while updating user info : ", error.message);
       });
+
+      navigate("/updateAccount", {state: {navigateBackTo: "account"}});
   };
 
   return (

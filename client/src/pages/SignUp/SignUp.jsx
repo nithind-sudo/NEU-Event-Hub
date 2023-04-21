@@ -79,7 +79,7 @@ export default function SignUp({ ...props }) {
     };
     try {
       const response = await fetchSignUp(payload);
-      console.log(` *** Response from SignUp End Point : ${response.data}`);
+      // console.log(` *** Response from SignUp End Point : ${response.data}`);
       if (response.data.success) {
         setShowAlert(true);
         setAlertClass("success");
@@ -104,11 +104,11 @@ export default function SignUp({ ...props }) {
       <div className="setBackGroundSignUp">
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3"></div>
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <div className="justify-content-center align-items-center my-4">
                 <div className="card makeLoginCardBackground">
-                  <div className="card-body">
+                  <div className="card-body p-0">
                     <div className="row">
                       <div className="text-center">
                         <h5 className="display-6">Sign Up</h5>
@@ -118,7 +118,7 @@ export default function SignUp({ ...props }) {
                       <div className="text-center">
                         <img
                           src={loginLogo}
-                          style={{ width: "290px", height: "100px" }}
+                          className="loginLogo"
                           alt="Northeastern-Events"
                         />
                       </div>
@@ -337,7 +337,7 @@ export default function SignUp({ ...props }) {
               </div>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3"></div>
           </div>
         </div>
       </div>

@@ -35,12 +35,12 @@ export default function MyAccount({ handlelogout }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Hitting userInfo for user_id : ", state.user_id);
+    // console.log("Hitting userInfo for user_id : ", state.user_id);
     fetchSession().then((sessionResponse) => {
       if (sessionResponse.data.success) {
         fetchUserInfo(sessionResponse.data.user_id)
           .then((response) => {
-            console.log("*** Response from GET User API : ", response);
+            // console.log("*** Response from GET User API : ", response);
             const userProfile = response.data[0];
             dispatch({
               type: ACTIONS.GET_USER,
@@ -60,17 +60,17 @@ export default function MyAccount({ handlelogout }) {
             setUsername(userProfile.username);
           })
           .catch((error) => {
-            console.log(
-              "Error while fetching UserInfo inside useEffect ",
-              error
-            );
+            // console.log(
+            //   "Error while fetching UserInfo inside useEffect ",
+            //   error
+            // );
           });
       } else {
         dispatch({ type: ACTIONS.LOG_OUT });
         navigate("/login");
       }
     });
-  }, []);
+  }, [firstName, lastName, phoneNumber, username, role]);
 
   const handleNavItemSelect = (selectedKey) => {
     setSelectedNavItem(selectedKey);
@@ -81,7 +81,7 @@ export default function MyAccount({ handlelogout }) {
   const manageAccount = <ManageAccounts />;
 
   let pageContent;
-  console.log("selected Nav Item : ", selectedNavItem);
+  // console.log("selected Nav Item : ", selectedNavItem);
   switch (selectedNavItem) {
     case "profile":
       pageContent = profileContent;

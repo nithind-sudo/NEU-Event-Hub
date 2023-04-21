@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Navbar/Navbar.css";
 import { Container } from "react-bootstrap";
@@ -6,7 +6,7 @@ import brandIcon from "../../assets/images/BrandIcon.png";
 import { EventManagementState } from "../../contexts/context";
 import LogoutContext from "../../contexts/LogoutContext";
 import { useContext } from "react";
-import { fetchEvents } from "../../apiClient";
+import { fetchEvents, getAllEvents } from "../../apiClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { NavHashLink } from "react-router-hash-link";
@@ -15,20 +15,49 @@ const Navbar = (props) => {
   const { state, dispatch } = EventManagementState();
   const handlelogout = useContext(LogoutContext); // Add this line
   let [events, setEvents] = useState([]);
+  let [filteredEvents, setFilteredEvents] = useState([]);
   let [eventKey, setEventKey] = useState("");
   let navigate = useNavigate();
   const handleEventSearchKey = (e) => {
-    setEventKey(e.target.value);
+    let wantedEvents = [];
+    if (
+      e.target.value == "" ||
+      e.target.value == null ||
+      e.target.value == undefined
+    ) {
+      setFilteredEvents(allEventArray);
+    } else {
+      allEventArray
+        .filter((data) => {
+          return data.title
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase());
+        })
+        .map((data) => {
+          wantedEvents.push(data);
+        });
+      setFilteredEvents(wantedEvents);
+    }
   };
   const handleSearch = () => {
-    fetchEvents(eventKey)
-      .then((response) => response.data)
-      .then((data) => {
-        setEvents(data);
-        console.log("EVENTS CONSOLING");
-        console.log(events);
-      });
+    navigate("/searchEvents", { state: { filters: filteredEvents } });
   };
+  const [allEventArray, setAllEventArray] = useState([]);
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await getAllEvents();
+        // console.log("Response for GET Event Array: ", response);
+        if (response.data) {
+          setAllEventArray(response.data);
+          // console.log(allEventArray);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchEvents();
+  }, [allEventArray]);
   return (
     <header>
       <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
@@ -80,14 +109,13 @@ const Navbar = (props) => {
                   placeholder="Search Events"
                   aria-label="searchEvents"
                   aria-describedby="basic-addon1"
-                  onKeyDown={handleEventSearchKey}
+                  onChange={handleEventSearchKey}
                 />
                 <span
                   className="input-group-text"
                   id="basic-addon1"
-                  onClick={handleSearch}
-                  data-bs-toggle="modal"
-                  > {/*href="#exampleModalToggle"*/}
+                  onClick={handleSearch}>
+                  {" "}
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </span>
               </div>

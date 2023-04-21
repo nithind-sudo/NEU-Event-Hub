@@ -59,11 +59,34 @@ body {
   width: 21.5rem;
 }
 .form-control.custom-dropdown-width {
-  width: 15rem;
+  width: 100% !important;
 }
 
 .form-control.signup-input-email {
   width: 31.5rem;
+}
+
+@media (max-width: 767px) { 
+  .form-control.signup-input-email {
+    width: 21rem;
+  }
+  .form-control.signup-input {
+    width: 21rem;
+  }
+  .form-control.signup-input-personal {
+    width: 21rem;
+  }
+}
+@media (max-width: 576px) { 
+  .form-control.signup-input-email {
+    width: 20rem;
+  }
+  .form-control.signup-input {
+    width: 20rem;
+  }
+  .form-control.signup-input-personal {
+    width: 20rem;
+  }
 }
 
 .form-control.custom-dropdown-width .dropdown-menu {

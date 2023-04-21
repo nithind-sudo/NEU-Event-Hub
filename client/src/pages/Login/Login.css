@@ -11,6 +11,11 @@
   color: #000000;
 }
 
+.loginLogo {
+  width: 290px;
+  overflow: unset;
+}
+
 *,
 *::before,
 *::after {

@@ -15,7 +15,7 @@ const Context = ({ children }) => {
   useEffect(() => {
     fetchSession()
       .then((response) => {
-        console.log(" *********** FetchSession Response : ", response);
+        // console.log(" *********** FetchSession Response : ", response);
         if (response.data.success) {
           dispatch({
             type: ACTIONS.LOG_IN,
@@ -28,7 +28,7 @@ const Context = ({ children }) => {
             isActivated: response.data.isActivated,
             isVerified: response.data.isVerified,
             first_name: response.data.first_name,
-            last_name: response.data.last_name
+            last_name: response.data.last_name,
           });
         } else {
           dispatch({ type: ACTIONS.LOG_OUT });
@@ -36,7 +36,7 @@ const Context = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }, []);
 

@@ -41,6 +41,10 @@ class EventService {
   async getAllEventsByCategory(categoryName) {
     return await Event.find({ category: categoryName }).exec();
   }
+
+  async deleteEvent(eventID) {
+    return await Event.deleteOne({ event_id: eventID }).exec();
+  }
   
 }
 

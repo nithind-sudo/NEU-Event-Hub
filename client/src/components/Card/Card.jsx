@@ -74,10 +74,11 @@ const Card = ({
             </div>
           </div>
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <div className="text-center justify-content-center align-items-center">
+            <div className="col-6">
+            <div className="text-center justify-content-center align-items-center">
+              <div className="text-center justify-content-center align-items-center my-1">
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-warning setBtnStyleCard"
                   onClick={() =>
                     handleViewEvent({
                       eventName,
@@ -89,10 +90,11 @@ const Card = ({
                   View Event
                 </button>
               </div>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <div className="text-center justify-content-center align-items-center">
-                <button className="btn btn-success">Register Now</button>
+              </div>
+              </div>
+            <div className="col-6">
+              <div className="text-center justify-content-center align-items-center my-1">
+                <button className="btn btn-success setBtnStyleCard">Register Now</button>
               </div>
             </div>
           </div>

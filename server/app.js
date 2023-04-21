@@ -40,5 +40,6 @@ app.use("/category", categoryRouter);
 app.use("/getAllUsers", allUsers);
 app.use("/search", search);
 app.use("/searchEventsByCategory", eventsByCategory);
+app.use("/deleteEvent", eventsByCategory);
 
 module.exports = app;

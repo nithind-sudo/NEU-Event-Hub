@@ -29,6 +29,15 @@ exports.getAllEventsByCategory = async (req, res) => {
   }
 };
 
+exports.deleteEvent = async (req, res) => {
+  try {
+    const eventsInfo = await eventService.deleteEvent(req.params.event_id);
+    res.status(200).send(eventsInfo);
+  } catch (e) {
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
+  }
+};
+
 exports.createEvent = async (req, res) => {
   const {
     title,

@@ -12,10 +12,10 @@ let mongooseConnection = ""
 console.log("URI of mongodb to connect : ", uri);
 
 async function connectToDB(){
-  console.log(" ******** Inside Connect to DB function ******** ");
+  // console.log(" ******** Inside Connect to DB function ******** ");
   try{
     mongooseConnection = await mongoose.connect(uri);
-    console.log('Connected to DB successfully');
+    // console.log('Connected to DB successfully');
   }catch(error){
     console.error(error);
   }

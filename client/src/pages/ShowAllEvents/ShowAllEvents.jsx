@@ -9,7 +9,7 @@ const ShowAllEvents = (props) => {
     const fetchEvents = async () => {
       try {
         const response = await getAllEvents();
-        console.log("Response for GET Event Array: ", response);
+        // console.log("Response for GET Event Array: ", response);
         if (response.data) {
           setEventArray(response.data.reverse());
         }
@@ -18,7 +18,7 @@ const ShowAllEvents = (props) => {
       }
     };
     fetchEvents();
-  }, []);
+  }, [eventArray]);
   return (
     <div className="allEventsCheck">
       <AllEvents
