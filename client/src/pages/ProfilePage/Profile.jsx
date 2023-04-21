@@ -81,6 +81,8 @@ export default function Profile({ user }) {
       .catch((error) => {
         // console.log("Error while updating user info : ", error.message);
       });
+
+      navigate("/updateAccount", {state: {navigateBackTo: "account"}});
   };
 
   return (

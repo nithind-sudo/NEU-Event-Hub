@@ -70,7 +70,7 @@ export default function MyAccount({ handlelogout }) {
         navigate("/login");
       }
     });
-  }, []);
+  }, [firstName, lastName, phoneNumber, username, role]);
 
   const handleNavItemSelect = (selectedKey) => {
     setSelectedNavItem(selectedKey);

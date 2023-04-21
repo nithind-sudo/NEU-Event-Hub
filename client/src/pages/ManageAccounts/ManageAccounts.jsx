@@ -38,8 +38,9 @@ export default function ManageAccounts() {
       .then((response) => response.data)
       .then((data) => {
         setAllUsers(data);
+        setUserData(data);
       });
-  }, [allUsers]);
+  }, [allUsers, userData]);
   return (
     <div>
       <div className="row">
@@ -58,7 +59,7 @@ export default function ManageAccounts() {
       <div className="row">
         {userData.map((data, index) => {
           return (
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" key={index}>
               <UserCard data={data} />
             </div>
           );
