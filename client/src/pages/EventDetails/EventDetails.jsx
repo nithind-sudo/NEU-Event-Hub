@@ -53,6 +53,17 @@ const EventDetails = ({ eventInfo }) => {
 
   const handleBookEvent = () => {
     // Handle the book event action here
+    navigate("/checkout", {
+      state: {
+        eventName: eventInfo.title,
+        eventDescription: eventInfo.description,
+        eventID: eventInfo.event_id,
+        eventDate: formattedTime,
+        eventImage: eventInfo.imageUrl,
+        numberOfSeats: ticketCount,
+        ticketPrice: eventPrice
+      },
+    });
   };
 
   const navigate = useNavigate();
@@ -81,7 +92,7 @@ const EventDetails = ({ eventInfo }) => {
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
             <div className="container">
-              <div class="card text-dark">
+              <div class="card text-dark my-2 py-3">
                 <div class="card-body">
                   <div class="card-title display-6">
                     {eventInfo.title}
@@ -131,7 +142,7 @@ const EventDetails = ({ eventInfo }) => {
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-            <div className="container">
+            <div className="container my-2 py-3">
               <Card>
                 <Card.Body>
                   <Card.Title style={{ color: "black" }}>
@@ -161,7 +172,7 @@ const EventDetails = ({ eventInfo }) => {
                 </Card.Body>
               </Card>
               <br />
-              <div class="card text-dark locationCardStyle">
+              <div class="card text-dark locationCardStyle my-2 py-3">
                 <div class="card-body">
                   <div class="card-subtitle mb-1 text-body-secondary">
                     <b>Location and Venue</b>
@@ -176,7 +187,7 @@ const EventDetails = ({ eventInfo }) => {
           </div>
           <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div className="container">
-              <div class="card text-dark">
+              <div class="card text-dark my-2 py-3">
                 <div class="card-body">
                   <div class="card-subtitle mb-1 text-body-secondary">
                     <b>Tags:</b>

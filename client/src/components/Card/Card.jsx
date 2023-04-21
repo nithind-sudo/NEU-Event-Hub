@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "./styles/Card.css";
 import crackersImage from "../../assets/images/crackersImage.jpeg";
@@ -39,6 +39,22 @@ const Card = ({
     borderRadius: "10px",
   };
 
+  let navigate = useNavigate();
+
+  const registerForEvent = () => {
+    navigate("/checkout", {
+      state: {
+        eventName: eventName,
+        eventDescription: eventDescription,
+        eventID: eventID,
+        eventDate: eventDate,
+        eventImage: eventImage,
+        numberOfSeats: 1,
+        ticketPrice: 20
+      },
+    });
+  };
+
   return (
     <Flippy
       flipOnHover={false}
@@ -75,26 +91,30 @@ const Card = ({
           </div>
           <div className="row">
             <div className="col-6">
-            <div className="text-center justify-content-center align-items-center">
-              <div className="text-center justify-content-center align-items-center my-1">
-                <button
-                  className="btn btn-warning setBtnStyleCard"
-                  onClick={() =>
-                    handleViewEvent({
-                      eventName,
-                      eventID,
-                      eventDescription,
-                      eventDate,
-                    })
-                  }>
-                  View Event
-                </button>
+              <div className="text-center justify-content-center align-items-center">
+                <div className="text-center justify-content-center align-items-center my-1">
+                  <button
+                    className="btn btn-warning setBtnStyleCard"
+                    onClick={() =>
+                      handleViewEvent({
+                        eventName,
+                        eventID,
+                        eventDescription,
+                        eventDate,
+                      })
+                    }>
+                    View Event
+                  </button>
+                </div>
               </div>
-              </div>
-              </div>
+            </div>
             <div className="col-6">
               <div className="text-center justify-content-center align-items-center my-1">
-                <button className="btn btn-success setBtnStyleCard">Register Now</button>
+                <button
+                  className="btn btn-success setBtnStyleCard"
+                  onClick={registerForEvent}>
+                  Register Now
+                </button>
               </div>
             </div>
           </div>

@@ -23,6 +23,9 @@ import UpcomingEvents from "./pages/UpcomingEvents/UpcomingEvents";
 import AttendedEvents from "./pages/AttendedEvents/AttendedEvents";
 import SearchEvents from "./pages/SearchEvents/SearchEvents";
 import MyAccountEmpty from "./pages/MyAccountPage/MyAccountEmpty";
+import Checkout from "./pages/Checkout/Checkout";
+import BadPayment from "./pages/BadPayment/BadPayment";
+import SuccessPayment from "./pages/SuccessPayment/SuccessPayment";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -188,6 +191,9 @@ function Main() {
           <Route path="/attendedEvents" element={<AttendedEvents />} />
           <Route path="/searchEvents" element={<SearchEvents />} />
           <Route path="/updateAccount" element={<MyAccountEmpty />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/badPayment" element={<BadPayment />} />
+          <Route path="/successPayment" element={<SuccessPayment />} />
         </Routes>
       </LogoutContext.Provider>
     </React.Fragment>

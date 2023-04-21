@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Main from "./Main";
 import "./styles/Colors/Colors.css"
+import Payment from "./pages/Payment/Payment";
 
 function App() {
   useEffect(() => {
