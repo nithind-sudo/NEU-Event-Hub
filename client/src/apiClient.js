@@ -15,7 +15,14 @@ export const fetchSession = async () => {
     // console.log("**** RESPONSE from session API ****** : ", response.data);
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 export const fetchUsers = async () => {
@@ -23,23 +30,44 @@ export const fetchUsers = async () => {
     const response = await instance.post("/getAllUsers/");
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 export const deleteUser = async (user_id) => {
   try {
-    const response = await instance.delete("/getAllUsers/delete/"+user_id);
+    const response = await instance.delete("/getAllUsers/delete/" + user_id);
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 export const fetchEvents = async (event_name) => {
   try {
-    const response = await instance.get("/search/event/"+event_name);
+    const response = await instance.get("/search/event/" + event_name);
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
@@ -63,7 +91,14 @@ export const fetchLogin = async (username, password) => {
 
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
@@ -82,7 +117,14 @@ export const fetchLogOut = async () => {
     }
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
@@ -103,14 +145,19 @@ export const fetchSignUp = async (payload) => {
     const headers = {
       "Content-Type": "application/json",
     };
-    // console.log("FE payload : ", createUserPayload);
     const response = await instance.post("/v1/user", createUserPayload, {
       headers,
     });
-    // console.log("****** Response from user API POST : ", response);
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
@@ -121,7 +168,14 @@ export const fetchUserInfo = async (user_id) => {
     // console.log("**** RESPONSE from GET USER API ****** : ", response.data);
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
@@ -137,7 +191,14 @@ export const updateUserInfo = async (user_id, payload) => {
     // console.log(" **** RESPONSE from PUT USER API ****** : ", response.data);
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
@@ -155,7 +216,14 @@ export const fetchCreateEvent = async (payload) => {
     // const response = { data : {success : true}};
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
@@ -166,36 +234,66 @@ export const getAllEvents = async () => {
     // console.log("**** RESPONSE from session API ****** : ", response.data);
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 export const getAllEventsByCategory = async (categoryName) => {
   try {
-    const response = await instance.get("/searchEventsByCategory/"+categoryName);
+    const response = await instance.get(
+      "/searchEventsByCategory/" + categoryName
+    );
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
 export const deleteEventByEventID = async (eventID) => {
   try {
-    const response = await instance.delete("/deleteEvent/eventID/"+eventID);
+    const response = await instance.delete("/deleteEvent/eventID/" + eventID);
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };
 
 export const getEventDetails = async (event_id) => {
   // console.log("Inside getEvent Details for Event with Id : ", event_id);
-  try{
+  try {
     const response = await instance.get(`/v1/event/${event_id}`);
     return response;
-  }catch(error){
-    throw error;
+  } catch (error) {
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
-}
+};
 
 export const createPaymentRecord = async (payload) => {
   try {
@@ -208,6 +306,13 @@ export const createPaymentRecord = async (payload) => {
     });
     return response;
   } catch (error) {
-    throw error;
+    const data = {
+      success: false,
+      error:
+        error.response.data.message ||
+        error.message ||
+        "Unknown error occurred",
+    };
+    return { data };
   }
 };

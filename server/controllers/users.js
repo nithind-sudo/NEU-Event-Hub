@@ -27,8 +27,8 @@ exports.createUser = async (req, res) => {
       .catch((e) => {
         console.log(e.message);
         res
-          .status(500)
-          .send({ message: "500 Internal Server Error", error: e.message });
+          .status(400)
+          .send({ message: "User Already exists", error: e.message });
       });
   } catch (e) {
     console.log(e.message);
