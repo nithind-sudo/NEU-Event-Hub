@@ -14,7 +14,7 @@ export default function ManageAccounts() {
       .then((data) => {
         setAllUsers(data);
       });
-  }, []);
+  }, [allUsers]);
   return (
     <div>
       <div className="row">
