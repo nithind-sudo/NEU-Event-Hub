@@ -4,7 +4,7 @@ import "./MyAccount.css";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Layout/Footer";
+import Footer from "../../components/Footer/Footer";
 import MyAccountCard from "../../components/ui/MyAccountCard";
 import { Nav } from "react-bootstrap";
 import MyTickets from "../MyTickets/MyTickets";
@@ -133,44 +133,47 @@ export default function MyAccount({ handlelogout }) {
   );
 
   return (
-    <div className="py-5 makeBackgroundForMyAccount">
-      <Navbar handlelogout={handlelogout} />
-      <div className="myAccount-page">
-        <Container fluid>
-          <div className="container">
-            <div className="card myCardColorAccount">
-              <div className="card-body">
-                <div className="row">
-                  <div className="text-center">
-                    <div className="card-title h3">My Account</div>
-                    <hr />
+    <div>
+      <div className="py-5 makeBackgroundForMyAccount">
+        <Navbar handlelogout={handlelogout} />
+        <div className="myAccount-page">
+          <Container fluid>
+            <div className="container">
+              <div className="card myCardColorAccount">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="text-center">
+                      <div className="card-title h3">My Account</div>
+                      <hr />
+                    </div>
                   </div>
-                </div>
 
-                <div className="text-center">
-                  <h6 className="card-subtitle mb-2 text-warning">
-                    {role == "admin" ? "Admin" : "User"} Account
-                  </h6>
-                  <br />
-                  <h6 className="card-subtitle mb-2 text-warning">
-                    {firstName} {lastName}
-                  </h6>
-                  <br />
-                  <h6 className="card-subtitle mb-2 text-warning">
-                    Username: {username}
-                  </h6>
-                  <br />
-                </div>
+                  <div className="text-center">
+                    <h6 className="card-subtitle mb-2 text-warning">
+                      {role == "admin" ? "Admin" : "User"} Account
+                    </h6>
+                    <br />
+                    <h6 className="card-subtitle mb-2 text-warning">
+                      {firstName} {lastName}
+                    </h6>
+                    <br />
+                    <h6 className="card-subtitle mb-2 text-warning">
+                      Username: {username}
+                    </h6>
+                    <br />
+                  </div>
 
-                <MyAccountCard
-                  navContent={navContent}
-                  pageContent={pageContent}
-                />
+                  <MyAccountCard
+                    navContent={navContent}
+                    pageContent={pageContent}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
