@@ -45,7 +45,7 @@ export default function MyTickets() {
                     key={key}>
                     <div class="card h-100 text-dark makeCard">
                       <div class="card-body">
-                        <h5 class="card-title">Registered Events</h5>
+                        <h5 class="card-title">Ticket {key+1}</h5>
                         <p class="card-text">{data.event}</p>
                         <ul class="list-group">
                           <li class="list-group-item">

@@ -187,7 +187,6 @@ function Main() {
               />
             }></Route>
           <Route path="/event/:eventID" element={<EventDetailsPage />} />
-          <Route path="/registeredEvents" element={<UpcomingEvents />} />
           <Route path="/attendedEvents" element={<AttendedEvents />} />
           <Route path="/searchEvents" element={<SearchEvents />} />
           <Route path="/updateAccount" element={<MyAccountEmpty />} />
