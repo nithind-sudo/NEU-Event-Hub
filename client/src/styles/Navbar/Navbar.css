@@ -16,6 +16,10 @@
   scroll-padding-top: 5rem;
 }
 
+.makePointerCursor {
+  cursor: pointer;
+}
+
 .n-item {
   color: #eeeeee;
   text-decoration: none;
@@ -27,7 +31,7 @@
   text-decoration: underline;
   text-decoration-thickness: 6px;
   text-decoration-color: #d5202d;
-  text-underline-offset: 20px;
+  text-underline-offset: 17px;
   cursor: pointer;
 }
 

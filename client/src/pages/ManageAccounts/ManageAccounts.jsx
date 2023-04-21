@@ -7,6 +7,7 @@ export default function ManageAccounts() {
   let [allUsers, setAllUsers] = useState([]);
   let [userData, setUserData] = useState([]);
   let handleUserSearch = (e) => {
+    console.log(e.target.value);
     if (
       e.target.value == "" ||
       e.target.value == null ||
@@ -40,7 +41,7 @@ export default function ManageAccounts() {
         setAllUsers(data);
         setUserData(data);
       });
-  }, [allUsers, userData]);
+  }, []);
   return (
     <div>
       <div className="row">
@@ -59,7 +60,9 @@ export default function ManageAccounts() {
       <div className="row">
         {userData.map((data, index) => {
           return (
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" key={index}>
+            <div
+              className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6"
+              key={index}>
               <UserCard data={data} />
             </div>
           );
