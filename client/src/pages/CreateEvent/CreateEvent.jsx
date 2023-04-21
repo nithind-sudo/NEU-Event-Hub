@@ -113,7 +113,7 @@ export default function CreateEvent({
       organizer: state.user_id,
       imageUrl: formData.imageUrl,
       price: formData.price,
-      numberOfTickets: formData.numberOfTickets
+      numberOfTickets: formData.numberOfTickets,
     };
     try {
       const response = await fetchCreateEvent(payload);
@@ -193,28 +193,7 @@ export default function CreateEvent({
                           />
                         </div>
                       </div>
-                      <Row className="justify-content-center">
-                        <Col>
-                          <Form.Group controlId="price">
-                            <CustomLabel>
-                              <label className="lead mt-3 mb-1">Price</label>
-                              <TextInput
-                                type="number"
-                                value={formData.price}
-                                className=""
-                                onChange={(e) =>
-                                  handleFieldChange("price", e.target.value)
-                                }
-                                onBlur={() => handleFieldBlur("price")}
-                                isInvalid={!!errorValidation.price}
-                                placeholder={
-                                  "Enter the price in decimals. Eg. 10.00"
-                                }
-                              />
-                            </CustomLabel>
-                          </Form.Group>
-                        </Col>
-                      </Row>
+
                       <div className="row">
                         <label className="lead mt-3 mb-1">
                           Who is Organizing this Event?
@@ -223,8 +202,7 @@ export default function CreateEvent({
                           <Dropdown.Toggle
                             variant="outline-secondary"
                             id="dropdown-basic"
-                            style={{ width: "100%" }}
-                          >
+                            style={{ width: "100%" }}>
                             {selectedTag}
                           </Dropdown.Toggle>
                           <Dropdown.Menu>
@@ -382,9 +360,7 @@ export default function CreateEvent({
                         variant="success"
                         text={"Create Event"}
                         onClick={handleCreateEvent}
-                        className="mt-3 mb-1"
-                        ></Button>
-
+                        className="mt-3 mb-1"></Button>
                     </div>
                   </div>
                 </div>

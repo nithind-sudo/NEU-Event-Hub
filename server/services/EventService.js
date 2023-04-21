@@ -12,10 +12,10 @@ class EventService {
     if (!user) {
       throw new Error("User not found");
     }
-    
+
     const event = new Event({
       ...restPayload,
-      organizer : user[0]._id,
+      organizer: user[0]._id,
     });
 
     return await event.save();
@@ -35,17 +35,20 @@ class EventService {
   }
 
   async getAllEvents() {
-    return await Event.find({ }).exec();
+    return await Event.find({}).exec();
   }
 
   async getAllEventsByCategory(categoryName) {
     return await Event.find({ category: categoryName }).exec();
   }
 
+  async updateEventCount(eventID, ticketCount) {
+    return await Event.updateOne({event_id: eventID}, {$inc: {numberOfTickets: -ticketCount}}).exec();
+  }
+
   async deleteEvent(eventID) {
     return await Event.deleteOne({ event_id: eventID }).exec();
   }
-  
 }
 
 module.exports = EventService;

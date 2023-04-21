@@ -5,6 +5,7 @@ const Stripe = require("stripe")(process.env.SECRET_KEY);
 var cors = require("cors");
 const bodyParser = require("body-parser");
 const userController = require("../controllers/users");
+const eventController = require("../controllers/events");
 const Payment = require("../models/payment");
 const EventService = require("../services/EventService");
 const UserService = require("../services/UserService");
@@ -74,5 +75,7 @@ router.post("/paymentrecord", async (req, res, err) => {
 });
 
 router.post("/addEventToUser", userController.updateUserInfo);
+
+router.post("/decreaseEventCount", eventController.updateEvent);
 
 module.exports = router;
