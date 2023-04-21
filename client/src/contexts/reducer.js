@@ -57,6 +57,7 @@ export function reducer(state, action) {
     case ACTIONS.SET_VIEW_EVENT:
       return {
         ...state,
+        event : action.event,
         eventName: action.eventName,
         eventDescription: action.eventDescription,
         eventID: action.eventID,

@@ -17,12 +17,19 @@ const EventDetailsPage = () => {
     const fetchEvent = async () => {
       try {
         const response = await getEventDetails(eventID);
-        // console.log("Response for GET Event for Specific event : ", response);
+        console.log("Response for GET Event for Specific event : ", response);
         if (response.data) {
           setEventInfo(response.data[0]);
+          const selectedEvent = response.data[0];
           dispatch({
             type: ACTIONS.SET_VIEW_EVENT,
-            selectedEvent: response.data[0],
+            event : selectedEvent,
+            eventName: selectedEvent.title,
+            eventDescription: selectedEvent.description,
+            eventID: selectedEvent.event_id,
+            eventDate: selectedEvent.date,
+            eventImage: selectedEvent.imageUrl,
+            ticketPrice: selectedEvent.price || 20,
           });
         }
       } catch (e) {
