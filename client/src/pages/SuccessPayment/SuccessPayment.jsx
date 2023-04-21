@@ -3,6 +3,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import successPayment from "../../assets-pack/successPayment/successPayment.jpeg";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { createPaymentRecord } from "../../apiClient";
+import { EventManagementState } from "../../contexts/context";
 
 const SuccessPayment = () => {
   let navigate = useNavigate();
@@ -11,7 +13,9 @@ const SuccessPayment = () => {
   const getRegisteredEvents = () => {
     navigate("/registeredEvents");
   };
-  
+  const { state, dispatch } = EventManagementState();
+  console.log("Current state in Success Payment : ", state);
+
   // useEffect(() => {
   //   axios.post("http://localhost:3000/stripe/addEventToUser", {
   //     username: location.state.username,

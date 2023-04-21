@@ -27,47 +27,62 @@ const Checkout = () => {
   };
   const payNow = async (token) => {
     console.log(token);
-    await axios
-      .post("http://localhost:3000/stripe/payment", {
-        username: username,
-        event: [state.event],
-        amount: state.ticketPrice * state.numberOfSeats,
-        token: token,
-      })
-      .then((response) => {
-        if (response.status == 200) {
-          // TODO Add a row to payments table with quantity
-          console.log("Payment Success REsponse payload : ", response);
-          const paymentData = response.data;
-          const paymentId = paymentData.token.id;
-          const paymentPayload = {
-            paymentId,
-            paymentMethod: "Stripe",
-            paymentDate: new Date(),
-            amount: paymentData.amount,
-            quantity: state.numberOfSeats,
-            event_id: state.event_id,
-            user_id: state.user_id,
-          };
-          
-          // Update code to use dispatch to update state
-          navigate("/successPayment", {
-            state: {
-              username: username,
-              event: [state.event],
-              numberOfSeats: state.numberOfSeats,
-            },
-          });
-          // Update code to use dispatch to update state
-          navigate("/successPayment", {state:{
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/stripe/payment",
+        {
+          username: username,
+          event: [state.event],
+          amount: state.ticketPrice * state.numberOfSeats,
+          token: token,
+        }
+      );
+      if (response.status == 200) {
+        const paymentData = response.data;
+        dispatch({
+          type: ACTIONS.PAYMENT,
+          paymentId: paymentData.token.id,
+          paymentMethod: "Stripe",
+          paymentDate: new Date(),
+        });
+        // TODO Add a row to payments table with quantity
+        // console.log("Payment Success REsponse payload : ", response);
+        // const paymentData = response.data;
+        // const paymentId = paymentData.token.id;
+        // const paymentPayload = {
+        //   paymentId,
+        //   paymentMethod: "Stripe",
+        //   paymentDate: new Date(),
+        //   amount: paymentData.amount,
+        //   quantity: state.numberOfSeats,
+        //   event_id: state.event_id,
+        //   user_id: state.user_id,
+        // };
+        // const paymentResponse = await createPaymentRecord(paymentPayload);
+        // console.log("Payment Response : ", paymentResponse);
+        // if (paymentResponse.status == 200) {
+        // Update code to use dispatch to update state
+        navigate("/successPayment", {
+          state: {
             username: username,
             event: [state.event],
-            numberOfSeats: state.numberOfSeats
-          }});
-        } else {
-          navigate("/badPayment");
-        }
-      });
+            numberOfSeats: state.numberOfSeats,
+            paymentId: paymentData.token.id,
+            paymentMethod: "Stripe",
+            paymentDate: new Date(),
+          },
+        });
+        // } else {
+        //   console.error("Payment failed:");
+        //   navigate("/badPayment");
+        // }
+      } else {
+        navigate("/badPayment");
+      }
+    } catch (error) {
+      console.error("Payment failed:", error);
+      navigate("/badPayment");
+    }
   };
   useEffect(() => {
     // console.log("Hitting userInfo for user_id : ", state.user_id);
