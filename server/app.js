@@ -30,11 +30,13 @@ const index_routes = require("./routes/index");
 const userRoutes = require("./routes/users");
 const sessionRoutes = require("./routes/sessions");
 const eventRoute = require("./routes/events");
+const paymentRoute = require("./routes/payment");
 
 app.use("/", index_routes);
 app.use("/v1/session", sessionRoutes);
 app.use("/v1/user", userRoutes);
 app.use("/v1/event", eventRoute);
+app.use("/v1/payment", paymentRoute);
 app.use("/category", categoryRouter);
 app.use("/getAllUsers", allUsers);
 app.use("/search", search);

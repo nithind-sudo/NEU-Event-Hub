@@ -196,3 +196,40 @@ export const fetchCheckoutPayment = async (eventId, price) => {
     throw error;
   }
 };
+
+export const fetchPaymentConfig = async () => {
+  try {
+    const response = await instance.get(`/v1/payment/config`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createPaymentIntent = async (amount) => {
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const response = await instance.post(
+      `/v1/payment/create-payment-intent`,
+      { amount },
+      { headers }
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createPayment = async (payload) => {
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const response = await instance.post(`/v1/payment`, payload, { headers });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

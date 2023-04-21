@@ -193,7 +193,7 @@ function Main() {
             }
           ></Route>
           <Route path="/event/:eventID" element={<EventDetailsPage />} />
-          <Route path="/payment" component={<PaymentForm />} />
+          <Route path="/payment" element={<PaymentForm />} />
         </Routes>
       </LogoutContext.Provider>
     </React.Fragment>

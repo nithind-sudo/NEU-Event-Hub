@@ -1,16 +1,50 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "./CheckoutForm";
-
-// Replace with your own Stripe public key
-const stripePromise = loadStripe("pk_test_51MzAUMDqgKv6XfDoCzej2pjscQZAi2I12D7t7vyjscJamt8xcKpTVrowwYz6C75hYGj84vv9fqL83pUxNmRg10G200qDJwlHlj");
+import CheckoutForm from "../CheckOutForm/CheckoutForm";
+import {
+  fetchPaymentConfig,
+  createPaymentIntent,
+  createPayment,
+} from "../../apiClient";
 
 const PaymentForm = () => {
+  console.log("Inside Payment Form");
+  const [stripePromise, setStripePromise] = useState(null);
+  const [clientSecret, setClientSecret] = useState("");
+
+  useEffect(() => {
+    fetchPaymentConfig().then((response) => {
+      const { publishableKey } = response.data;
+      setStripePromise(loadStripe(publishableKey));
+    });
+  }, []);
+
+  useEffect(() => {
+    createPaymentIntent().then((response) => {
+      const { clientSecretFromAPI } = response.data;
+      setClientSecret(clientSecretFromAPI);
+    });
+  }, []);
+
+  const handleSuccess = async (data) => {
+    try {
+      const response = await createPayment(data);
+      console.log("Payment successful:", response);
+    } catch (error) {
+      console.error("Error creating payment:", error);
+    }
+  };
+
   return (
-    <Elements stripe={stripePromise}>
-      <CheckoutForm />
-    </Elements>
+    <React.Fragment>
+      {clientSecret && stripePromise && (
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <CheckoutForm onSuccess={handleSuccess} />
+        </Elements>
+      )}
+    </React.Fragment>
   );
 };
 
