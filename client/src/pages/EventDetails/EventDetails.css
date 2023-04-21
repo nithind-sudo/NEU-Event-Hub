@@ -2,6 +2,10 @@
   padding: 30px;
 }
 
+* {
+  transition: 0.5s;
+}
+
 .event-date {
   font-size: 14px;
 }

@@ -45,6 +45,7 @@ const EventDetails = ({ eventInfo, event }) => {
   const imageAddress = eventInfo.imageUrl;
   const eventPrice = eventInfo.price;
   const [ticketCount, setTicketCount] = useState(1);
+  const [isReserveDisabled, setIsReserveDisabled] = useState(false);
 
   const handleIncrement = () => {
     setTicketCount(ticketCount < 3 ? ticketCount + 1 : 3); // Limit the ticket count to a maximum of 3
@@ -55,6 +56,15 @@ const EventDetails = ({ eventInfo, event }) => {
     setTicketCount(ticketCount > 1 ? ticketCount - 1 : 1); // Limit the ticket count to a minimum of 1
     console.log("After ticket Decrement : ", ticketCount);
   };
+
+  useEffect(()=>{
+    if(ticketCount>eventInfo.numberOfTickets) {
+      setIsReserveDisabled(true);
+    }
+    else {
+      setIsReserveDisabled(false);
+    }
+  }, [ticketCount, isReserveDisabled]);
 
   const handleBookEvent = () => {
     // Handle the book event action here
@@ -166,9 +176,10 @@ const EventDetails = ({ eventInfo, event }) => {
                     </Button>
                   </div>
                   <br />
-                  <Button variant="primary" onClick={handleBookEvent}>
+                  <Button variant="primary" onClick={handleBookEvent} disabled={isReserveDisabled}>
                     Reserve Spot
                   </Button>
+                  {isReserveDisabled?<div className="py-1 text-danger">We're going out of venue capacity!</div>:<div></div>}
                 </Card.Body>
               </Card>
               <br />
