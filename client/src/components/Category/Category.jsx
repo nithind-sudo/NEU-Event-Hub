@@ -12,7 +12,7 @@ import cpsOrganized from "../../assets/professionalStudies.jpeg";
 import scienceOrganized from "../../assets/science.jpeg";
 import managementOrganized from "../../assets/management.jpeg";
 import otherOrganized from "../../assets/holi.jpeg";
-import Footer from "../Layout/Footer";
+import Footer from "../Footer/footer";
 import Navbar from "../../components/Navbar/Navbar";
 import AllEvents from "../../pages/AllEvents/AllEvents";
 import { getAllEventsByCategory } from "../../apiClient";
@@ -48,91 +48,22 @@ const Category = (props) => {
     fetchEventsByCategory();
   }, [category, eventArray]);
   return (
-    <React.Fragment>
+    <>
       <Navbar handlelogout={props.handlelogout} />
       <div className="pt-3 getPageSizeForCategory">
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-              <div className="rounded setJumbotronHeight text-center p-5 my-5">
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div className="rounded setJumbotronHeight text-center p-5 mt-3">
                 <div className="display-6">{category.name}</div>
               </div>
+              <AllEvents eventArray={eventArray} getList={category.name} />
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
-              <div className="rounded my-5">
-                {category.name == "Students Organized Events" ? (
-                  <img
-                    src={studentsOrganized}
-                    alt="Students Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : category.name == "Professors Organized Events" ? (
-                  <img
-                    src={professorsOrganized}
-                    alt="Professors Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : category.name == "Speakers Organized Events" ? (
-                  <img
-                    src={speakersOrganized}
-                    alt="Speakers Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : category.name == "Northeastern's Management Events" ? (
-                  <img
-                    src={universityOrganized}
-                    alt="Northeastern's Management Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : category.name ==
-                  "Khoury College of Computer Science Organized Events" ? (
-                  <img
-                    src={computerScienceOrganized}
-                    alt="Computer Science Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : category.name ==
-                  "College of Engineering Organized Events" ? (
-                  <img
-                    src={engineeringOrganized}
-                    alt="Engineering Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : category.name ==
-                  "College of Professional Studies Organized Events" ? (
-                  <img
-                    src={cpsOrganized}
-                    alt="CPS Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : category.name == "College of Science Organized Events" ? (
-                  <img
-                    src={scienceOrganized}
-                    alt="CPS Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : category.name == "D'Amore College of Management Events" ? (
-                  <img
-                    src={managementOrganized}
-                    alt="Management Organized Image"
-                    className="img-thumbnail"
-                  />
-                ) : (
-                  <img
-                    src={otherOrganized}
-                    alt="Students Organized Image"
-                    className="img-thumbnail"
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <AllEvents eventArray={eventArray} getList={category.name} />
           </div>
         </div>
       </div>
-    </React.Fragment>
+      <Footer />
+    </>
   );
 };
 
