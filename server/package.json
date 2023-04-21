@@ -12,6 +12,7 @@
   "dependencies": {
     "basic-auth": "^2.0.1",
     "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
     "circular-json": "^0.5.9",
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "^1.4.6",
@@ -24,6 +25,7 @@
     "mongoose-sequence": "^5.3.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.21",
+    "stripe": "^12.2.0",
     "uuid": "^9.0.0"
   }
 }
