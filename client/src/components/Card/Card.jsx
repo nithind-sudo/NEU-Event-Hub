@@ -20,7 +20,7 @@ const Card = ({
 
   const cardStyle = {
     width: "320px",
-    height: "390px",
+    height: "210px",
     borderRadius: "10px",
   };
 
@@ -60,7 +60,7 @@ const Card = ({
           ref.current.toggle();
         }}>
         <div className="eventName my-1">
-        <img src={eventImage} className="card-img-top mb-3"/>
+      {/*<img src={eventImage} className="card-img-top mb-3"/>*/}
         <br/>
           <div className="row text-light">
             <div className="text-center">
@@ -112,7 +112,7 @@ const Card = ({
         <div className="description">
           <div className="row text-light">
             <div className="text-center justify-content-center align-items-center">
-              <div className="p">{eventDescription.substr(0, 500)}</div>
+              <div className="p">{eventDescription.substr(0, 200)}...</div>
             </div>
           </div>
         </div>
