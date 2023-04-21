@@ -6,11 +6,11 @@ const Footer = () => {
     <div className="bg-dark text-white py-5">
       <div className="container">
         <div className="row">
-          <div className="col-lg-6">
-            <p>&copy; 2023 Northeastern Events</p>
+          <div className="col-lg-6 col-md-6 col-sm-12">
+            <p className="text-lg-left text-md-left text-center">&copy; 2023 Northeastern Events</p>
           </div>
-          <div className="col-lg-6">
-            <div className="about">
+          <div className="col-lg-6 col-md-6 col-sm-12">
+            <div className="about text-lg-right text-md-right text-center">
               <h4>Contact Us</h4>
               <p>
                 Northeastern University
