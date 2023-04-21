@@ -128,6 +128,7 @@ export default function CreateEvent({
   const handleCreateEvent = async (e) => {
     const mapsLocation = enteredLocation;
     e.preventDefault();
+    console.log("Before If : ", errorValidation);
     if (!Object.keys(errorValidation).length) {
       const payload = {
         title: formData.title,
@@ -137,7 +138,7 @@ export default function CreateEvent({
           lng: mapsLocation.split(",")[1],
         },
         category: selectedTag,
-        date: startDate.toISOString().substr(0, 10),
+        date: startDate.toISOString().substring(0, 10),
         startTime: startTime.toISOString(),
         endTime: endTime.toISOString(),
         organizer: state.user_id,
