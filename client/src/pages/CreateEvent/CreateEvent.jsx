@@ -26,12 +26,14 @@ export default function CreateEvent({
     title: Joi.string().min(2).required(),
     description: Joi.string().min(2).required(),
     imageUrl: Joi.string().uri().trim().required(),
+    price: Joi.number().positive().precision(2).required(),
   });
 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     imageUrl: "",
+    price : 0,
   });
 
   const [errorValidation, setErrorValidation] = useState("");
@@ -109,6 +111,7 @@ export default function CreateEvent({
       endTime: endTime.toISOString(),
       organizer: state.user_id,
       imageUrl: formData.imageUrl,
+      price : formData.price,
     };
     try {
       const response = await fetchCreateEvent(payload);
@@ -182,6 +185,26 @@ export default function CreateEvent({
                       onBlur={() => handleFieldBlur("description")}
                       isInvalid={!!errorValidation.description}
                       placeholder={"Tell attendees who is organizing the event"}
+                    />
+                  </CustomLabel>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="justify-content-center">
+              <Col>
+                <Form.Group controlId="price">
+                  <CustomLabel>
+                    <label className="lead mt-3 mb-1">Price</label>
+                    <TextInput
+                      type="number"
+                      value={formData.price}
+                      className=""
+                      onChange={(e) =>
+                        handleFieldChange("price", e.target.value)
+                      }
+                      onBlur={() => handleFieldBlur("price")}
+                      isInvalid={!!errorValidation.price}
+                      placeholder={"Enter the price in decimals. Eg. 10.00"}
                     />
                   </CustomLabel>
                 </Form.Group>

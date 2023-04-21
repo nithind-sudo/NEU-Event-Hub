@@ -31,6 +31,7 @@ exports.createEvent = async (req, res) => {
     organizer,
     category,
     imageUrl,
+    price
   } = req.body;
   try {
     const payload = {
@@ -43,6 +44,7 @@ exports.createEvent = async (req, res) => {
       organizer,
       category,
       imageUrl,
+      price
     };
     // console.log("Event Payload : ", payload);
     eventService
