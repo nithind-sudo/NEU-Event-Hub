@@ -13,6 +13,8 @@ const Card = ({
   eventDate,
   eventImage,
   handleViewEvent,
+  numberOfTickets,
+  price
 }) => {
   const ref = React.useRef();
 
@@ -50,7 +52,7 @@ const Card = ({
         eventDate: eventDate,
         eventImage: eventImage,
         numberOfSeats: 1,
-        ticketPrice: 20
+        ticketPrice: price
       },
     });
   };
@@ -101,6 +103,8 @@ const Card = ({
                         eventID,
                         eventDescription,
                         eventDate,
+                        numberOfTickets,
+                        price
                       })
                     }>
                     View Event
@@ -112,7 +116,9 @@ const Card = ({
               <div className="text-center justify-content-center align-items-center my-1">
                 <button
                   className="btn btn-success setBtnStyleCard"
-                  onClick={registerForEvent}>
+                  onClick={registerForEvent}
+                  disabled={numberOfTickets?true:false}
+                  >
                   Register Now
                 </button>
               </div>
