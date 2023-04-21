@@ -22,6 +22,7 @@ import ShowAllEvents from "./pages/ShowAllEvents/ShowAllEvents";
 import UpcomingEvents from "./pages/UpcomingEvents/UpcomingEvents";
 import AttendedEvents from "./pages/AttendedEvents/AttendedEvents";
 import SearchEvents from "./pages/SearchEvents/SearchEvents";
+import MyAccountEmpty from "./pages/MyAccountPage/MyAccountEmpty";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -186,6 +187,7 @@ function Main() {
           <Route path="/registeredEvents" element={<UpcomingEvents />} />
           <Route path="/attendedEvents" element={<AttendedEvents />} />
           <Route path="/searchEvents" element={<SearchEvents />} />
+          <Route path="/updateAccount" element={<MyAccountEmpty />} />
         </Routes>
       </LogoutContext.Provider>
     </React.Fragment>
