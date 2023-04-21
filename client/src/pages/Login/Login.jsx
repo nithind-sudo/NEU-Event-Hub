@@ -80,8 +80,8 @@ export default function Login({ ...props }) {
       <div className="setBackGround">
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div className="col-xs-12 col-sm-12 col-md-2 col-lg-4 col-xl-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-8 col-lg-4 col-xl-4">
               <div className="justify-content-center align-items-center my-5 py-5">
                 <div className="card makeLoginCardBackground">
                   <div className="card-body">
@@ -90,12 +90,13 @@ export default function Login({ ...props }) {
                         <h5 className="display-6">Sign In</h5>
                       </div>
                     </div>
+
                     <Form className="login-content">
                       <Container>
                         <div className="login-container">
                           <img
                             src={loginLogo}
-                            style={{ width: "290px", height: "100px" }}
+                            className="loginLogo"
                             alt="Northeastern-Events"
                           />
                           <Form.Group controlId="userEmail">
@@ -167,7 +168,7 @@ export default function Login({ ...props }) {
                 </div>
               </div>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-2 col-lg-4 col-xl-4"></div>
           </div>
         </div>
       </div>
