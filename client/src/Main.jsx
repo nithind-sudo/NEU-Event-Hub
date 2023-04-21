@@ -21,6 +21,7 @@ import EventDetailsPage from "./pages/EventDetailsPage/EventDetailsPage";
 import ShowAllEvents from "./pages/ShowAllEvents/ShowAllEvents";
 import UpcomingEvents from "./pages/UpcomingEvents/UpcomingEvents";
 import AttendedEvents from "./pages/AttendedEvents/AttendedEvents";
+import SearchEvents from "./pages/SearchEvents/SearchEvents";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -184,6 +185,7 @@ function Main() {
           <Route path="/event/:eventID" element={<EventDetailsPage />} />
           <Route path="/registeredEvents" element={<UpcomingEvents />} />
           <Route path="/attendedEvents" element={<AttendedEvents />} />
+          <Route path="/searchEvents" element={<SearchEvents />} />
         </Routes>
       </LogoutContext.Provider>
     </React.Fragment>

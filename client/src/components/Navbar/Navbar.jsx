@@ -20,7 +20,7 @@ const Navbar = (props) => {
   let navigate = useNavigate();
   const handleEventSearchKey = (e) => {
     let wantedEvents = [];
-    if (e.target.value == "") {
+    if (e.target.value == ""||e.target.value==null) {
       setFilteredEvents(allEventArray);
     } else {
       allEventArray
@@ -36,13 +36,7 @@ const Navbar = (props) => {
     }
   };
   const handleSearch = () => {
-    fetchEvents(eventKey)
-      .then((response) => response.data)
-      .then((data) => {
-        setEvents(data);
-        // console.log("EVENTS CONSOLING");
-        // console.log(events);
-      });
+    navigate("/searchEvents", {state: {filters: filteredEvents}});
   };
   const [allEventArray, setAllEventArray] = useState([]);
   useEffect(() => {
@@ -111,15 +105,13 @@ const Navbar = (props) => {
                   placeholder="Search Events"
                   aria-label="searchEvents"
                   aria-describedby="basic-addon1"
-                  onKeyUp={handleEventSearchKey}
+                  onChange={handleEventSearchKey}
                 />
                 <span
                   className="input-group-text"
                   id="basic-addon1"
-                  onClick={handleSearch}
-                  data-bs-toggle="modal">
+                  onClick={handleSearch}>
                   {" "}
-                  {/*href="#exampleModalToggle"*/}
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </span>
               </div>
