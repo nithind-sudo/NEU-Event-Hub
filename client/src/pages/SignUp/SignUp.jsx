@@ -45,6 +45,7 @@ export default function SignUp({ ...props }) {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    role: "",
   });
 
   const handleFieldChange = (name, value) => {
@@ -52,7 +53,8 @@ export default function SignUp({ ...props }) {
   };
 
   const handleSelect = (e) => {
-      setSelectedRole(e);
+    setFormData({ ...formData, role: e });
+    setSelectedRole(e);
   };
 
   const handleFieldBlur = (name) => {
@@ -101,18 +103,51 @@ export default function SignUp({ ...props }) {
       }
     } else {
       console.log("errorValidation", errorValidation);
-      let errorString = "";
-      for (let field in errorValidation) {
-        errorString += `\n${errorValidation[field].replace(
-          /['"]+/g,
-          ""
-        )},`;
-      }
-      errorString = errorString.slice(0, -1);
+      if (
+        errorValidation.hasOwnProperty("role") &&
+        (formData.role === "User" || formData.role === "Admin")
+      ) {
+        // Valid Case
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          username: formData.email,
+          phone_number: formData.phoneNumber,
+          password: formData.password,
+          role: selectedRole,
+        };
+        try {
+          const response = await fetchSignUp(payload);
+          console.log(` *** Response from SignUp End Point : ${response.data}`);
+          if (response.data.success) {
+            setShowAlert(true);
+            setAlertClass("success");
+            setError("Account Created Successfully!!!");
+            setTimeout(() => {
+              navigate("/");
+            }, 1000);
+          } else {
+            setAlertClass("Danger");
+            setError("Invalid Data In Form");
+            setShowAlert(true);
+          }
+        } catch (error) {
+          setAlertClass("Danger");
+          setError("Invalid Data In Form");
+          setShowAlert(true);
+        }
+      } else {
+        console.log(formData);
+        let errorString = "";
+        for (let field in errorValidation) {
+          errorString += `\n${errorValidation[field].replace(/['"]+/g, "")},`;
+        }
+        errorString = errorString.slice(0, -1);
 
-      console.log("Error string : ", errorString);
-      setError(`Please correct the following fields : ${errorString}`);
-      setShowAlert(true);
+        console.log("Error string : ", errorString);
+        setError(`Please correct the following fields : ${errorString}`);
+        setShowAlert(true);
+      }
     }
   };
 
