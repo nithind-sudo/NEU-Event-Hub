@@ -27,6 +27,10 @@ const paymentSchema = new Schema({
     type: String,
     required: true,
   },
+  quantity: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Payment = model("Payment", paymentSchema);

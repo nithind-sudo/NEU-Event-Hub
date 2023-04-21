@@ -36,14 +36,28 @@ const Checkout = () => {
       })
       .then((response) => {
         if (response.status == 200) {
-          // Add a row to payments table
+          // TODO Add a row to payments table with quantity
+          console.log("Payment Success REsponse payload : ", response);
+          const paymentData = response.data;
+          const paymentId = paymentData.token.id;
+          const paymentPayload = {
+            paymentId,
+            paymentMethod: "Stripe",
+            paymentDate: new Date(),
+            amount: paymentData.amount,
+            quantity: state.numberOfSeats,
+            event_id: state.event_id,
+            user_id: state.user_id,
+          };
           
           // Update code to use dispatch to update state
-          navigate("/successPayment", {state:{
-            username: username,
-            event: [state.event],
-            numberOfSeats: state.numberOfSeats
-          }});
+          navigate("/successPayment", {
+            state: {
+              username: username,
+              event: [state.event],
+              numberOfSeats: state.numberOfSeats,
+            },
+          });
         } else {
           navigate("/badPayment");
         }
@@ -126,7 +140,8 @@ const Checkout = () => {
                   <div className="container text-center">
                     <button
                       class="btn btn-warning my-1"
-                      onClick={updateUserData}>
+                      onClick={updateUserData}
+                    >
                       Update Data
                     </button>
                   </div>
@@ -174,10 +189,7 @@ const Checkout = () => {
                       <div className="row">
                         <span className="my-1">
                           <b>Total Price: </b>
-                          <span>
-                            {state.ticketPrice *
-                              state.numberOfSeats}
-                          </span>
+                          <span>{state.ticketPrice * state.numberOfSeats}</span>
                         </span>
                       </div>
                     </div>
@@ -191,14 +203,9 @@ const Checkout = () => {
                       name="Pay with Card"
                       billingAddress
                       shippingAddress
-                      amount={
-                        state.ticketPrice *
-                        state.numberOfSeats *
-                        100
-                      }
+                      amount={state.ticketPrice * state.numberOfSeats * 100}
                       description={`Your total amount is \$${(
-                        state.ticketPrice *
-                        state.numberOfSeats
+                        state.ticketPrice * state.numberOfSeats
                       ).toString()}`}
                       token={payNow}
                     />

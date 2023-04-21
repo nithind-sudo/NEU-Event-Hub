@@ -196,3 +196,17 @@ export const getEventDetails = async (event_id) => {
     throw error;
   }
 }
+
+export const createPaymentRecord = async (payload) => {
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const response = await instance.post("/paymentrecord", payload, {
+      headers,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

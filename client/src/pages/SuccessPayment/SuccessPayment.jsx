@@ -11,12 +11,14 @@ const SuccessPayment = () => {
   const getRegisteredEvents = () => {
     navigate("/registeredEvents");
   };
-  useEffect(() => {
-    axios.post("http://localhost:3000/stripe/addEventToUser", {
-      username: location.state.username,
-      event: location.state.event
-    }).then(response=>console.log(response));
-  }, []);
+  
+  // useEffect(() => {
+  //   axios.post("http://localhost:3000/stripe/addEventToUser", {
+  //     username: location.state.username,
+  //     event: location.state.event
+  //   }).then(response=>console.log(response));
+  // }, []);
+
   return (
     <div>
       <Navbar />

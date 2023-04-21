@@ -15,6 +15,17 @@ router.post("/payment", async (req, res, err) => {
   res.send(req.body);
 });
 
+router.post("/paymentrecord", async (req, res, err) => {
+  const {paymentId,
+    paymentMethod,
+    paymentDate,
+    amount,
+    quantity,
+    event_id,
+    user_id} = req.body;
+  console.log("Payment Record : ", paymentrecord)
+})
+
 router.post(
   "/addEventToUser",
   userController.updateUserInfo
