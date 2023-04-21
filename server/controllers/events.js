@@ -22,7 +22,9 @@ exports.getAllEventsInfo = async (req, res) => {
 
 exports.getAllEventsByCategory = async (req, res) => {
   try {
-    const eventsInfo = await eventService.getAllEventsByCategory(req.params.CategoryName);
+    const eventsInfo = await eventService.getAllEventsByCategory(
+      req.params.CategoryName
+    );
     res.status(200).send(eventsInfo);
   } catch (e) {
     res.status(400).send({ message: "400 Bad Request", error: e.message });
@@ -49,6 +51,8 @@ exports.createEvent = async (req, res) => {
     organizer,
     category,
     imageUrl,
+    price,
+    numberOfTickets,
   } = req.body;
   try {
     const payload = {
@@ -61,6 +65,8 @@ exports.createEvent = async (req, res) => {
       organizer,
       category,
       imageUrl,
+      price,
+      numberOfTickets,
     };
     // console.log("Event Payload : ", payload);
     eventService
