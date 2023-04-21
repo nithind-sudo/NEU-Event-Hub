@@ -41,6 +41,8 @@ const AllEvents = (props) => {
                   eventDate={eventInfo.date}
                   handleViewEvent={() => handleViewEvent(eventInfo)}
                   eventImage={eventInfo.imageUrl}
+                  price={eventInfo.price}
+                  numberOfTickets={eventInfo.numberOfTickets}
                 />
               </div>
             </div>

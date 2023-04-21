@@ -43,10 +43,11 @@ const EventDetails = ({ eventInfo, event }) => {
   })}`;
 
   const imageAddress = eventInfo.imageUrl;
-  const eventPrice = 20;
+  const eventPrice = eventInfo.price;
   const [ticketCount, setTicketCount] = useState(1);
 
   const handleIncrement = () => {
+<<<<<<< HEAD
     setTicketCount(ticketCount < 3 ? ticketCount + 1 : 3); // Limit the ticket count to a maximum of 3
     
   };
@@ -54,6 +55,13 @@ const EventDetails = ({ eventInfo, event }) => {
   const handleDecrement = () => {
     setTicketCount(ticketCount > 1 ? ticketCount - 1 : 1); // Limit the ticket count to a minimum of 1
     // console.log("After ticket Decrement : ", ticketCount);
+=======
+    setTicketCount(ticketCount < 3 && (eventInfo.numberOfTickets-ticketCount)>=0 ? ticketCount + 1 : 3); // Limit the ticket count to a maximum of 3
+  };
+
+  const handleDecrement = () => {
+    setTicketCount(ticketCount > 1 && (eventInfo.numberOfTickets-ticketCount)>=0 ? ticketCount - 1 : 1); // Limit the ticket count to a minimum of 1
+>>>>>>> 36011b3 (Handled Tickets Count)
   };
 
   const handleBookEvent = () => {
@@ -203,6 +211,12 @@ const EventDetails = ({ eventInfo, event }) => {
                     <b>Event ID</b>
                   </div>
                   <p class="card-text">{eventInfo.event_id}</p>
+                  <br />
+
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Tickets Available: </b>
+                  </div>
+                  <p class="card-text">{eventInfo.numberOfTickets}</p>
                   <br />
 
                   <div class="card-subtitle mb-2 text-body-secondary">

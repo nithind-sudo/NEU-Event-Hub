@@ -11,7 +11,8 @@ const EventDetailsPage = () => {
   const [eventInfo, setEventInfo] = useState(null);
   const { state, dispatch } = EventManagementState();
 
-  // console.log("selected event Id : ", eventID);
+  console.log("selected event INfo : ", eventInfo);
+  console.log("selected event Id : ", eventID);
 
   useEffect(() => {
     const fetchEvent = async () => {

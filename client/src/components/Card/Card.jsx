@@ -13,6 +13,8 @@ const Card = ({
   eventDate,
   eventImage,
   handleViewEvent,
+  numberOfTickets,
+  price
 }) => {
   const ref = React.useRef();
 
@@ -42,7 +44,21 @@ const Card = ({
   let navigate = useNavigate();
 
   const registerForEvent = () => {
+<<<<<<< HEAD
     navigate("/checkout");
+=======
+    navigate("/checkout", {
+      state: {
+        eventName: eventName,
+        eventDescription: eventDescription,
+        eventID: eventID,
+        eventDate: eventDate,
+        eventImage: eventImage,
+        numberOfSeats: 1,
+        ticketPrice: price
+      },
+    });
+>>>>>>> 36011b3 (Handled Tickets Count)
   };
 
   return (
@@ -93,6 +109,8 @@ const Card = ({
                         eventID,
                         eventDescription,
                         eventDate,
+                        numberOfTickets,
+                        price
                       })
                     }
                   >
@@ -106,7 +124,12 @@ const Card = ({
                 <button
                   className="btn btn-success setBtnStyleCard"
                   onClick={registerForEvent}
+<<<<<<< HEAD
                 >
+=======
+                  disabled={numberOfTickets?true:false}
+                  >
+>>>>>>> 36011b3 (Handled Tickets Count)
                   Register Now
                 </button>
               </div>
