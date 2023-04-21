@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Layout/Footer";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
@@ -12,6 +12,8 @@ import {
   faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import LocationMap from "../../components/Layout/LocationMap";
+import { deleteEventByEventID } from "../../apiClient";
+import { useNavigate } from "react-router-dom";
 
 const EventDetails = ({ eventInfo }) => {
   console.log("Event Info : ", eventInfo);
@@ -37,8 +39,7 @@ const EventDetails = ({ eventInfo }) => {
     timeZoneName: "short",
   })}`;
 
-  const imageAddress =
-    "https://images.unsplash.com/photo-1498940757830-82f7813bf178?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80";
+  const imageAddress = eventInfo.imageUrl;
   const eventPrice = 20;
   const [ticketCount, setTicketCount] = useState(1);
 
@@ -54,87 +55,81 @@ const EventDetails = ({ eventInfo }) => {
     // Handle the book event action here
   };
 
+  const navigate = useNavigate();
+
+  const deleteEvent = () => {
+    deleteEventByEventID(eventInfo.event_id).then(response=>response.data).then((data)=>{
+      navigate("/allEvents");
+    });
+  }
+
   return (
     <div>
       <Navbar />
-      <Container>
-        <div className="event-details-container">
-          <Row>
+      <div className="container py-4">
+        <div className="container">
+          <div className="row my-1">
             <img
               src={imageAddress}
               alt="event"
               style={{ marginBottom: "25px" }}
             />
-          </Row>
-          <Row>
-            <Col md={8}>
-              <Card>
-                <Card.Body style={{ color: "black" }}>
-                  <Row>
-                    <p className="event-date">
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+            <div className="container">
+              <div class="card text-dark">
+                <div class="card-body">
+                  <div class="card-title display-6">
+                    {eventInfo.title}
+                    <div class="lead">
+                      <span>Registered Date: </span>
                       {new Date(eventInfo.date)
                         .toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
                         })
                         .replace(/\b\w/g, (c) => c.toUpperCase())}
+                    </div>
+                  </div>
+                  <br />
 
-                      <h1 className="event-title">{eventInfo.title}</h1>
-                    </p>
-                  </Row>
-                  <Row>
-                    <p className="summary">{eventInfo.description}</p>
-                  </Row>
-                  <Row>{/* Display Organizer Details */}</Row>
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Event Description</b>
+                  </div>
+                  <p class="card-text">{eventInfo.description}</p>
+                  <br />
 
-                  <Row>
-                    {/* Display Location */}
-                    <h5>When and Where</h5>
-                    <Col>
-                      {/* Date and Time  */}
-                      <FontAwesomeIcon icon={faCalendarAlt} /> {formattedTime}
-                    </Col>
-                    <Col>
-                      {/* Location  */}
-                      <LocationMap location={eventInfo.location} /> Location
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    {/* TotalDuration and Mention Mobile Ticket */}
-                    <h5>About the Event</h5>
-                    <Col>
-                      {" "}
-                      <FontAwesomeIcon icon={faClock} /> {durationInHours} hrs
-                    </Col>
-                    <Col>
-                      {" "}
-                      <FontAwesomeIcon icon={faMobileAlt} /> Mobile Ticket
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <h5>Tags : </h5>
-                    <Col md={1}>
-                      <Badge pill bg="dark" className="mr-2">
-                        {eventInfo.category}
-                      </Badge>
-                    </Col>
-                    {/* Show Tags */}
-                  </Row>
-
-                  {/* <p>Date: {eventInfo.date.substring(0, 10)}</p>
-                  <p>Event ID: {eventInfo.event_id}</p>
-                  <p>
-                    Star Time of Event : {eventInfo.startTime.substring(11, 19)}
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Event Date and Time</b>
+                  </div>
+                  <p class="card-text">
+                    <FontAwesomeIcon icon={faCalendarAlt} /> {formattedTime}
                   </p>
-                  <p>
-                    End Time of Event : {eventInfo.endTime.substring(11, 19)}
-                  </p> */}
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
+                  <br />
+
+                  <div class="card-subtitle mb-2 text-body-secondary">
+                    <b>Duration</b>
+                  </div>
+                  <p class="card-text">
+                    <FontAwesomeIcon icon={faClock} /> {durationInHours} hrs
+                  </p>
+                  <br />
+
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Requirements</b>
+                  </div>
+                  <p class="card-text">
+                    <FontAwesomeIcon icon={faMobileAlt} /> Mobile Ticket
+                  </p>
+                  <br />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div className="container">
               <Card>
                 <Card.Body>
                   <Card.Title style={{ color: "black" }}>
@@ -144,8 +139,7 @@ const EventDetails = ({ eventInfo }) => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={handleDecrement}
-                    >
+                      onClick={handleDecrement}>
                       -
                     </Button>{" "}
                     <span style={{ margin: "0 10px", color: "black" }}>
@@ -154,8 +148,7 @@ const EventDetails = ({ eventInfo }) => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={handleIncrement}
-                    >
+                      onClick={handleIncrement}>
                       +
                     </Button>
                   </div>
@@ -165,12 +158,62 @@ const EventDetails = ({ eventInfo }) => {
                   </Button>
                 </Card.Body>
               </Card>
-            </Col>
-          </Row>
-        </div>
-      </Container>
+              <br />
+              <div class="card text-dark locationCardStyle">
+                <div class="card-body">
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Location and Venue</b>
+                  </div>
+                  <p class="card-text">
+                    <LocationMap location={eventInfo.location} />
+                  </p>
+                  <br />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div className="container">
+              <div class="card text-dark">
+                <div class="card-body">
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Tags:</b>
+                  </div>
+                  <p class="card-text">
+                    <Badge pill bg="dark" className="mr-2">
+                      {eventInfo.category}
+                    </Badge>
+                  </p>
+                  <br />
 
-      <Footer />
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Event ID</b>
+                  </div>
+                  <p class="card-text">{eventInfo.event_id}</p>
+                  <br />
+
+                  <div class="card-subtitle mb-2 text-body-secondary">
+                    <b>Start Time - End Time</b>
+                  </div>
+                  <p class="card-text">
+                    {eventInfo.startTime.substring(11, 19)} -{" "}
+                    {eventInfo.endTime.substring(11, 19)}
+                  </p>
+                  <br />
+
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Caution</b>
+                  </div>
+                  <p class="card-text">
+                    <button className="btn btn-danger" onClick={deleteEvent}>Delete Event</button>
+                  </p>
+                  <br />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
