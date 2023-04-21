@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import EventDetails from "../EventDetails/EventDetails";
 import { getEventDetails } from "../../apiClient";
 
 const EventDetailsPage = () => {
+  const location = useLocation();
   const { eventID } = useParams();
   const [eventInfo, setEventInfo] = useState(null);
 
@@ -24,7 +25,7 @@ const EventDetailsPage = () => {
     fetchEvent();
   }, [eventID]);
 
-  return <div>{eventInfo && <EventDetails eventInfo={eventInfo} />}</div>;
+  return <div>{eventInfo && <EventDetails eventInfo={eventInfo} event={location.state.event} />}</div>;
 };
 
 export default EventDetailsPage;
