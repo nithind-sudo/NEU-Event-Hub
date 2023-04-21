@@ -44,7 +44,7 @@ export default function CreateEvent({
       .required(),
     startDate: Joi.date().min("now").required(),
     endDate: Joi.date().min(Joi.ref("startDate")).required(),
-    location: Joi.string().min(2).required()
+    enteredlocation: Joi.string().min(2).required()
   });
 
   const [formData, setFormData] = useState({
@@ -56,7 +56,7 @@ export default function CreateEvent({
     selectedTag: "",
     startDate: new Date(),
     endDate: new Date(),
-    location : ""
+    enteredlocation : ""
   });
 
   const [errorValidation, setErrorValidation] = useState("");
@@ -90,6 +90,7 @@ export default function CreateEvent({
   };
 
   const handleLocationChange = (value) => {
+    setFormData({ ...formData, enteredlocation: value });
     setEnteredLocation(value);
   };
 
