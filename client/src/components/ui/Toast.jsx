@@ -6,7 +6,7 @@ export default function MyToast({
   onClose,
   message,
   header,
-  delay = 3000,
+  delay = 5000,
 }) {
   return (
     <Toast

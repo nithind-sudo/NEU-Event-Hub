@@ -24,7 +24,7 @@ export default function CreateEvent({
   error,
 }) {
   const schema = Joi.object({
-    title: Joi.string().min(2).required(),
+    title: Joi.string().min(2).required().strict(),
     description: Joi.string().min(2).required(),
     imageUrl: Joi.string().uri().trim().required(),
     price: Joi.number().min(0).required(),
@@ -42,9 +42,11 @@ export default function CreateEvent({
         "D'Amore College of Management Events"
       )
       .required(),
-    startDate: Joi.date().min("now").required(),
-    endDate: Joi.date().min(Joi.ref("startDate")).required(),
-    enteredlocation: Joi.string().min(2).required()
+    startDate: Joi.date().iso().min("now").required(),
+    startTime: Joi.date().iso().required(),
+    endTime : Joi.date().iso().greater(Joi.ref('startTime')).required(),
+    endDate: Joi.date().iso().min(Joi.ref("startDate")).required(),
+    enteredLocation: Joi.string().min(2).required(),
   });
 
   const [formData, setFormData] = useState({
@@ -56,12 +58,12 @@ export default function CreateEvent({
     selectedTag: "",
     startDate: new Date(),
     endDate: new Date(),
-    enteredlocation : ""
+    enteredLocation: "",
   });
 
   const [errorValidation, setErrorValidation] = useState("");
   const [selectedTag, setSelectedTag] = useState("Select a Event");
-  const [enteredlocation, setEnteredLocation] = useState("");
+  const [enteredLocation, setEnteredLocation] = useState("");
   const [alertClass, setAlertClass] = useState("danger");
 
   const navigate = useNavigate();
@@ -74,23 +76,27 @@ export default function CreateEvent({
   const { state, dispatch } = EventManagementState();
 
   const handleStartDateChange = (date) => {
+    setFormData({ ...formData, startDate: new Date(date) });
     setStartDate(date);
   };
 
   const handleStartTimeChange = (time) => {
+    setFormData({ ...formData, startTime: new Date(time) });
     setStartTime(time);
   };
 
   const handleEndDateChange = (date) => {
+    setFormData({ ...formData, endDate: new Date(date) });
     setEndDate(date);
   };
 
   const handleEndTimeChange = (time) => {
+    setFormData({ ...formData, endTime: new Date(time) });
     setEndTime(time);
   };
 
   const handleLocationChange = (value) => {
-    setFormData({ ...formData, enteredlocation: value });
+    setFormData({ ...formData, enteredLocation: value });
     setEnteredLocation(value);
   };
 
@@ -100,6 +106,9 @@ export default function CreateEvent({
   };
 
   const handleFieldChange = (name, value) => {
+    if (name === "startDate" || name === "endDate") {
+      value = new Date(value);
+    }
     setFormData({ ...formData, [name]: value });
   };
 
@@ -117,41 +126,56 @@ export default function CreateEvent({
   };
 
   const handleCreateEvent = async (e) => {
-    const mapsLocation = enteredlocation;
+    const mapsLocation = enteredLocation;
     e.preventDefault();
-    const payload = {
-      title: formData.title,
-      description: formData.description,
-      location: {
-        lat: mapsLocation.split(",")[0],
-        lng: mapsLocation.split(",")[1],
-      },
-      category: selectedTag,
-      date: startDate.toISOString().substr(0, 10),
-      startTime: startTime.toISOString(),
-      endTime: endTime.toISOString(),
-      organizer: state.user_id,
-      imageUrl: formData.imageUrl,
-      price: formData.price,
-      numberOfTickets: formData.numberOfTickets,
-    };
-    try {
-      const response = await fetchCreateEvent(payload);
-      if (response.data.success) {
-        setShowAlert(true);
-        setAlertClass("success");
-        setError("Event Created Successfully!!!");
-        setTimeout(() => {
-          navigate("/main");
-        }, 1000);
-      } else {
-        setAlertClass("danger");
-        setError(response.data.error);
+    if (!Object.keys(errorValidation).length) {
+      const payload = {
+        title: formData.title,
+        description: formData.description,
+        location: {
+          lat: mapsLocation.split(",")[0],
+          lng: mapsLocation.split(",")[1],
+        },
+        category: selectedTag,
+        date: startDate.toISOString().substr(0, 10),
+        startTime: startTime.toISOString(),
+        endTime: endTime.toISOString(),
+        organizer: state.user_id,
+        imageUrl: formData.imageUrl,
+        price: formData.price,
+        numberOfTickets: formData.numberOfTickets,
+      };
+      try {
+        const response = await fetchCreateEvent(payload);
+        if (response.data.success) {
+          setShowAlert(true);
+          setAlertClass("success");
+          setError("Event Created Successfully!!!");
+          setTimeout(() => {
+            navigate("/main");
+          }, 1000);
+        } else {
+          setAlertClass("danger");
+          setError(response.data.error);
+          setShowAlert(true);
+        }
+      } catch (error) {
+        setAlertClass("Danger");
+        setError("Invalid Data In Form");
         setShowAlert(true);
       }
-    } catch (error) {
-      setAlertClass("Danger");
-      setError("Invalid Data In Form");
+    } else {
+      // Validate Start Time, end Time
+      let errorString = "";
+      console.log("Form Data : ", formData);
+      console.log("errorValidation :", errorValidation);
+      for (let field in errorValidation) {
+        errorString += `\n${errorValidation[field].replace(/['"]+/g, "")},`;
+      }
+      errorString = errorString.slice(0, -1);
+
+      console.log("Error string : ", errorString);
+      setError(`Please correct the following fields : ${errorString}`);
       setShowAlert(true);
     }
   };
