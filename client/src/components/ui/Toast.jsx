@@ -12,7 +12,7 @@ export default function MyToast({
     <Toast
       style={{
         position: "fixed",
-        top: 60,
+        top: 55,
         right: 20,
         color : "white"
       }}

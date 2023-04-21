@@ -142,39 +142,35 @@ export default function CreateEvent({
   const handleCreateEvent = async (e) => {
     const mapsLocation = enteredLocation;
     e.preventDefault();
-    console.log("Before If : ", errorValidation);
-    if (!Object.keys(errorValidation).length) {
-      const payload = {
-        title: formData.title,
-        description: formData.description,
-        location: {
-          lat: mapsLocation.split(",")[0],
-          lng: mapsLocation.split(",")[1],
-        },
-        category: selectedTag,
-        date: startDate.substring(0, 10),
-        startTime: startTime,
-        endTime: endTime,
-        organizer: state.user_id,
-        imageUrl: formData.imageUrl,
-        price: formData.price,
-        numberOfTickets: formData.numberOfTickets,
-      };
-      try {
-        const response = await fetchCreateEvent(payload);
-        if (response.data.success) {
-          setShowAlert(true);
-          setAlertClass("success");
-          setError("Event Created Successfully!!!");
-          setTimeout(() => {
-            navigate("/main");
-          }, 1000);
-        } else {
-          setAlertClass("danger");
-          setError(response.data.error);
-          setShowAlert(true);
-        }
-      } catch (error) {
+    const payload = {
+      title: formData.title,
+      description: formData.description,
+      location: {
+        lat: mapsLocation.split(",")[0],
+        lng: mapsLocation.split(",")[1],
+      },
+      category: selectedTag,
+      date: startDate.toISOString().substr(0, 10),
+      startTime: startTime.toISOString(),
+      endTime: endTime.toISOString(),
+      organizer: state.user_id,
+      imageUrl: formData.imageUrl,
+      price: formData.price,
+      numberOfTickets: formData.numberOfTickets,
+    };
+    try {
+      const response = await fetchCreateEvent(payload);
+      // console.log(
+      //   ` *** Response from Create Event End Point : ${response.data}`
+      // );
+      if (response.data.success) {
+        setShowAlert(true);
+        setAlertClass("success");
+        setError("Event Created Successfully!!!");
+        setTimeout(() => {
+          navigate("/main");
+        }, 2000);
+      } else {
         setAlertClass("Danger");
         setError("Invalid Data In Form");
         setShowAlert(true);
