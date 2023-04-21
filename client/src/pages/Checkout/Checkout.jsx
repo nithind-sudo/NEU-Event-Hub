@@ -27,15 +27,22 @@ const Checkout = () => {
   };
   const payNow = async (token) => {
     console.log(token);
-    await axios.post("http://localhost:3000/stripe/payment", {
-        amount: 1,
+    await axios
+      .post("http://localhost:3000/stripe/payment", {
+        username: username,
+        event: [location.state.event],
+        amount: location.state.ticketPrice * location.state.numberOfSeats,
         token: token,
-      }).then(response=>{
-        if(response.status==200) {
-            navigate("/successPayment")
-        }
-        else {
-            navigate("/badPayment")
+      })
+      .then((response) => {
+        if (response.status == 200) {
+          navigate("/successPayment", {state:{
+            username: username,
+            event: [location.state.event],
+            numberOfSeats: location.state.numberOfSeats
+          }});
+        } else {
+          navigate("/badPayment");
         }
       });
   };
@@ -164,7 +171,10 @@ const Checkout = () => {
                       <div className="row">
                         <span className="my-1">
                           <b>Total Price: </b>
-                          <span>{location.state.ticketPrice*location.state.numberOfSeats}</span>
+                          <span>
+                            {location.state.ticketPrice *
+                              location.state.numberOfSeats}
+                          </span>
                         </span>
                       </div>
                     </div>
@@ -178,8 +188,15 @@ const Checkout = () => {
                       name="Pay with Card"
                       billingAddress
                       shippingAddress
-                      amount={location.state.ticketPrice*location.state.numberOfSeats*100}
-                      description={`Your total amount is \$${(location.state.ticketPrice*location.state.numberOfSeats).toString()}`}
+                      amount={
+                        location.state.ticketPrice *
+                        location.state.numberOfSeats *
+                        100
+                      }
+                      description={`Your total amount is \$${(
+                        location.state.ticketPrice *
+                        location.state.numberOfSeats
+                      ).toString()}`}
                       token={payNow}
                     />
                   </div>

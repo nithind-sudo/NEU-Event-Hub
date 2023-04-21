@@ -15,7 +15,7 @@ import LocationMap from "../../components/Layout/LocationMap";
 import { deleteEventByEventID } from "../../apiClient";
 import { useNavigate } from "react-router-dom";
 
-const EventDetails = ({ eventInfo }) => {
+const EventDetails = ({ eventInfo, event }) => {
   // console.log("Event Info : ", eventInfo);
   const durationInMillis =
     new Date(eventInfo.endTime).getTime() -
@@ -55,6 +55,7 @@ const EventDetails = ({ eventInfo }) => {
     // Handle the book event action here
     navigate("/checkout", {
       state: {
+        event: event,
         eventName: eventInfo.title,
         eventDescription: eventInfo.description,
         eventID: eventInfo.event_id,

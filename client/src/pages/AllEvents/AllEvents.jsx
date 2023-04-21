@@ -13,8 +13,10 @@ const AllEvents = (props) => {
   const navigate = useNavigate();
   const handleViewEvent = (eventInfo) => {
     setSelectedEvent(eventInfo);
-    navigate(`/event/${eventInfo.event_id}`);
+    navigate(`/event/${eventInfo.event_id}`, {state:{event: eventInfo}});
   };
+  useEffect(()=>{
+  }, [selectedEvent]);
   return (
     <div className="my-3">
       <Navbar handlelogout={props.handlelogout} />

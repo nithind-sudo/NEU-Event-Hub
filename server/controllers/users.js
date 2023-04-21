@@ -46,6 +46,17 @@ exports.getUserInfo = async (req, res) => {
   }
 };
 
+exports.updateUserInfo = async (req, res) => {
+  let username = req.body.username;
+  let event = req.body.event[0];
+  try {
+    const result = await userService.getUserAndUpdateEvents(username, event);
+    res.status(200).send(result);
+  } catch (e) {
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
+  }
+};
+
 exports.deleteUserInfo = async (req, res) => {
   const { user_id } = req.params;
   console.log("User -id input : ", user_id);
