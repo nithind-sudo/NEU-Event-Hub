@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AllEvents from "../AllEvents/AllEvents";
 import { getAllEvents } from "../../apiClient";
 import "./styles/ShowAllEvents.css";
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/Footer/footer";
 
 const ShowAllEvents = (props) => {
   const [eventArray, setEventArray] = useState([]);
