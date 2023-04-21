@@ -16,12 +16,29 @@ const SuccessPayment = () => {
   const { state, dispatch } = EventManagementState();
   console.log("Current state in Success Payment : ", state);
 
-  // useEffect(() => {
-  //   axios.post("http://localhost:3000/stripe/addEventToUser", {
-  //     username: location.state.username,
-  //     event: location.state.event
-  //   }).then(response=>console.log(response));
-  // }, []);
+  useEffect(() => {
+    const paymentPayload = {
+      paymentMethod: "Stripe",
+      paymentDate: new Date(),
+      amount: location.state.ticketPrice * location.state.numberOfSeats,
+      quantity: location.state.numberOfSeats,
+      event_id: location.state.event_id,
+      user_id: location.state.user_id,
+    };
+    createPaymentRecord(paymentPayload)
+      .then((response) => {
+        console.log("Payment Payload response : ", response);
+        axios
+          .post("http://localhost:3000/stripe/addEventToUser", {
+            username: location.state.username,
+            event: location.state.event,
+          })
+          .then((response) =>
+            console.log("Row entered into User collection : ", response)
+          );
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <div>

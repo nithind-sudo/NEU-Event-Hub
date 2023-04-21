@@ -44,21 +44,7 @@ const Card = ({
   let navigate = useNavigate();
 
   const registerForEvent = () => {
-<<<<<<< HEAD
     navigate("/checkout");
-=======
-    navigate("/checkout", {
-      state: {
-        eventName: eventName,
-        eventDescription: eventDescription,
-        eventID: eventID,
-        eventDate: eventDate,
-        eventImage: eventImage,
-        numberOfSeats: 1,
-        ticketPrice: price
-      },
-    });
->>>>>>> 36011b3 (Handled Tickets Count)
   };
 
   return (
