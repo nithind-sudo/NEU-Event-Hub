@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/footer";
+import Footer from "../../components/Layout/Footer";
 import { Container } from "react-bootstrap";
 import MyCarousel from "../../components/Layout/MyCarousel";
 import carouselData from "./CarouselData.json";
@@ -52,7 +52,6 @@ export default function LandingPage(props) {
           getList={"Top 5 Latest Events List"}
         />
       </Container>
-      <Footer />
     </div>
   );
 }
