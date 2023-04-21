@@ -19,6 +19,8 @@ import MyToast from "./components/ui/Toast";
 import LogoutContext from "./contexts/LogoutContext";
 import EventDetailsPage from "./pages/EventDetailsPage/EventDetailsPage";
 import ShowAllEvents from "./pages/ShowAllEvents/ShowAllEvents";
+import UpcomingEvents from "./pages/UpcomingEvents/UpcomingEvents";
+import AttendedEvents from "./pages/AttendedEvents/AttendedEvents";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -185,6 +187,8 @@ function Main() {
             }
           ></Route>
           <Route path="/event/:eventID" element={<EventDetailsPage />} />
+          <Route path="/registeredEvents" element={<UpcomingEvents />} />
+          <Route path="/attendedEvents" element={<AttendedEvents />} />
         </Routes>
       </LogoutContext.Provider>
     </React.Fragment>
