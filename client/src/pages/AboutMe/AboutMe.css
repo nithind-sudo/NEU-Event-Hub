@@ -1,38 +1,55 @@
-.save-button{
-  width: 10rem;
-  padding: 2px;
-  margin: 10px;
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
-h1{
-  margin: 10px;
-  padding: 20px;
+.about-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #3a3a3a;
+  text-align: center;
 }
-.AccountSettings-input {
-  margin-bottom: 10px;
-  width: 90vh;
-}
-.AccountSettings-input .in{
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
- 
-}
-.AccountSettings-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 10px;
-  margin-top: 20px;
+
+.about-section-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 40px;
   margin-bottom: 20px;
+  color: #3a3a3a;
 }
 
-.AccountSettings-form {
-  width: 800px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.about-text {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #6b6b6b;
+}
+
+.about-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-list-item {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  color: #6b6b6b;
+}
+
+.about-link {
+  color: #0070c9;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.about-link:hover {
+  color: #004b87;
 }
