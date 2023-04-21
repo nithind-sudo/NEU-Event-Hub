@@ -65,6 +65,8 @@ exports.createEvent = async (req, res) => {
       organizer,
       category,
       imageUrl,
+      price,
+      numberOfTickets,
     };
     // console.log("Event Payload : ", payload);
     eventService

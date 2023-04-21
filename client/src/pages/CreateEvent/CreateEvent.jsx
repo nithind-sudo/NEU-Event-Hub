@@ -384,6 +384,7 @@ export default function CreateEvent({
                         onClick={handleCreateEvent}
                         className="mt-3 mb-1"
                         ></Button>
+
                     </div>
                   </div>
                 </div>
