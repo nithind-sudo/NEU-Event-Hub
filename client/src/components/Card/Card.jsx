@@ -110,12 +110,8 @@ const Card = ({
                 <button
                   className="btn btn-success setBtnStyleCard"
                   onClick={registerForEvent}
-<<<<<<< HEAD
-                >
-=======
                   disabled={numberOfTickets?true:false}
                   >
->>>>>>> 36011b3 (Handled Tickets Count)
                   Register Now
                 </button>
               </div>
