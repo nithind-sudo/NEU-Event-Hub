@@ -18,3 +18,10 @@ body {
     /* align-items: center; */
     /* text-align: center; */
 }
+
+.custom-dropdown {
+  background-color: #f1f1f1;
+  border-color: #ccc;
+  color: #333;
+}
+
