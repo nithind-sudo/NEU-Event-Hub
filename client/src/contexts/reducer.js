@@ -54,6 +54,23 @@ export function reducer(state, action) {
         created_on: action.created_on,
       };
 
+    case ACTIONS.SET_VIEW_EVENT:
+      return {
+        ...state,
+        eventName: action.eventName,
+        eventDescription: action.eventDescription,
+        eventID: action.eventID,
+        eventDate: action.eventDate,
+        eventImage: action.eventImage,
+        ticketPrice: action.price
+      };
+    
+    case ACTIONS.CHECKOUT:
+      return {
+        ...state,
+        numberOfSeats : action.numberOfSeats
+      }
+
     case ACTIONS.LOG_OUT:
       return {
         ...state,
