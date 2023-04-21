@@ -25,7 +25,7 @@ export default function LandingPage(props) {
       }
     };
     fetchEvents();
-  }, []);
+  }, [eventArray]);
   return (
     <div className="pb-5">
       <div className="container">

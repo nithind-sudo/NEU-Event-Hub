@@ -52,7 +52,7 @@ const listingSchema = new Schema({
 });
 
 listingSchema.pre('save', async function(next) {
-    console.log("***** Inside pre middleware event collections mongodb *****")
+    // console.log("***** Inside pre middleware event collections mongodb *****")
     if (!this.isNew) {
       return next();
     }
