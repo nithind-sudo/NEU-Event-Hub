@@ -42,6 +42,9 @@ export default function CreateEvent({
         "D'Amore College of Management Events"
       )
       .required(),
+    startDate: Joi.date().min("now").required(),
+    endDate: Joi.date().min(Joi.ref("startDate")).required(),
+    location: Joi.string().min(2).required()
   });
 
   const [formData, setFormData] = useState({
@@ -51,6 +54,9 @@ export default function CreateEvent({
     price: 0,
     numberOfTickets: 0,
     selectedTag: "",
+    startDate: new Date(),
+    endDate: new Date(),
+    location : ""
   });
 
   const [errorValidation, setErrorValidation] = useState("");
