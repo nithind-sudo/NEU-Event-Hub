@@ -27,6 +27,21 @@ export default function CreateEvent({
     title: Joi.string().min(2).required(),
     description: Joi.string().min(2).required(),
     imageUrl: Joi.string().uri().trim().required(),
+    price: Joi.number().min(0).required(),
+    numberOfTickets: Joi.number().integer().min(1).max(1000).required(),
+    selectedTag: Joi.string()
+      .valid(
+        "Students Organized Events",
+        "Professors Organized Events",
+        "Speakers Organized Events",
+        "Northeastern's Management Events",
+        "Khoury College of Computer Science Organized Events",
+        "College of Engineering Organized Events",
+        "College of Professional Studies Organized Events",
+        "College of Science Organized Events",
+        "D'Amore College of Management Events"
+      )
+      .required(),
   });
 
   const [formData, setFormData] = useState({
@@ -35,6 +50,7 @@ export default function CreateEvent({
     imageUrl: "",
     price: 0,
     numberOfTickets: 0,
+    selectedTag: "",
   });
 
   const [errorValidation, setErrorValidation] = useState("");
@@ -72,6 +88,7 @@ export default function CreateEvent({
   };
 
   const handleSelect = (e) => {
+    setFormData({ ...formData, selectedTag: e });
     setSelectedTag(e);
   };
 
@@ -94,10 +111,6 @@ export default function CreateEvent({
 
   const handleCreateEvent = async (e) => {
     const mapsLocation = enteredlocation;
-    // console.log("LAT and LONG for location : ", {
-    //   lat: parseFloat(mapsLocation.split(",")[0]),
-    //   lng: parseFloat(mapsLocation.split(",")[1]),
-    // });
     e.preventDefault();
     const payload = {
       title: formData.title,
