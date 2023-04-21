@@ -13,6 +13,14 @@ export const initialState = {
   isVerified: false,
   first_name: "",
   last_name: "",
+  event : {},
+  eventName: "",
+  eventDescription: "",
+  eventID: "",
+  eventDate: "",
+  eventImage: "",
+  ticketPrice: "",
+  numberOfSeats : ""
 };
 
 export function reducer(state, action) {
@@ -53,6 +61,24 @@ export function reducer(state, action) {
         phone_number: action.phone_number,
         created_on: action.created_on,
       };
+
+    case ACTIONS.SET_VIEW_EVENT:
+      return {
+        ...state,
+        event : action.event,
+        eventName: action.eventName,
+        eventDescription: action.eventDescription,
+        eventID: action.eventID,
+        eventDate: action.eventDate,
+        eventImage: action.eventImage,
+        ticketPrice: action.ticketPrice
+      };
+    
+    case ACTIONS.CHECKOUT:
+      return {
+        ...state,
+        numberOfSeats : action.numberOfSeats
+      }
 
     case ACTIONS.LOG_OUT:
       return {
