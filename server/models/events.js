@@ -46,6 +46,10 @@ const eventSchema = new Schema({
     type: Date,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
   organizer: {
     type: Schema.Types.ObjectId,
     ref: "User",

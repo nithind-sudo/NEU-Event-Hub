@@ -38,6 +38,7 @@ const Checkout = () => {
         if (response.status == 200) {
           // Add a row to payments table
           
+          // Update code to use dispatch to update state
           navigate("/successPayment", {state:{
             username: username,
             event: [state.event],
@@ -185,7 +186,7 @@ const Checkout = () => {
                 <div className="row">
                   <div className="container text-center">
                     <StripeCheckout
-                      stripeKey="pk_test_51MzG5tL5TqKfooRTnFTHU3azUtRcj0p5LddkCevEQSfxAFduTbnpJpdDToDDSJ6RYnutIV4yxdb4FOySiIfovz8E00KSBrXtL1" //public key
+                      stripeKey="pk_test_51MzAUMDqgKv6XfDoCzej2pjscQZAi2I12D7t7vyjscJamt8xcKpTVrowwYz6C75hYGj84vv9fqL83pUxNmRg10G200qDJwlHlj" //public key
                       label="Pay and Register"
                       name="Pay with Card"
                       billingAddress
