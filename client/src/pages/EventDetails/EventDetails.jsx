@@ -43,7 +43,7 @@ const EventDetails = ({ eventInfo, event }) => {
   })}`;
 
   const imageAddress = eventInfo.imageUrl;
-  const eventPrice = 20;
+  const eventPrice = eventInfo.price;
   const [ticketCount, setTicketCount] = useState(1);
 
   const handleIncrement = () => {
@@ -203,6 +203,12 @@ const EventDetails = ({ eventInfo, event }) => {
                     <b>Event ID</b>
                   </div>
                   <p class="card-text">{eventInfo.event_id}</p>
+                  <br />
+
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Tickets Available: </b>
+                  </div>
+                  <p class="card-text">{eventInfo.numberOfTickets}</p>
                   <br />
 
                   <div class="card-subtitle mb-2 text-body-secondary">

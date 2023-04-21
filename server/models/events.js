@@ -81,6 +81,14 @@ const eventSchema = new Schema({
     type: String,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
+  numberOfTickets: {
+    type: Number,
+    required: true,
+  },
 });
 
 eventSchema.pre("save", async function (next) {

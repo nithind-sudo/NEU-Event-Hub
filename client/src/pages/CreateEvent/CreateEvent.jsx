@@ -33,6 +33,8 @@ export default function CreateEvent({
     title: "",
     description: "",
     imageUrl: "",
+    price: 0,
+    numberOfTickets: 0,
   });
 
   const [errorValidation, setErrorValidation] = useState("");
@@ -110,6 +112,8 @@ export default function CreateEvent({
       endTime: endTime.toISOString(),
       organizer: state.user_id,
       imageUrl: formData.imageUrl,
+      price: formData.price,
+      numberOfTickets: formData.numberOfTickets
     };
     try {
       const response = await fetchCreateEvent(payload);
@@ -304,19 +308,65 @@ export default function CreateEvent({
                         </div>
                       </div>
                       <div className="row">
-                        <Button
-                          variant="success"
-                          text={"Create Event"}
-                          onClick={handleCreateEvent}
-                          className="mt-3 mb-1"></Button>
+                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                          <label className="lead mt-3 mb-1">
+                            Price of Ticket
+                          </label>
+                          <div className="">
+                            <TextInput
+                              type="number"
+                              value={formData.price}
+                              className=""
+                              onChange={(e) => {
+                                if (
+                                  e.target.value >= 0 &&
+                                  e.target.value <= 30
+                                ) {
+                                  handleFieldChange("price", e.target.value);
+                                }
+                              }}
+                              onBlur={() => handleFieldBlur("price")}
+                              isInvalid={!!errorValidation.price}
+                              placeholder={"Enter Price of Ticket"}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                          <label className="lead mt-3 mb-1">
+                            Number of Tickets
+                          </label>
+                          <div className="">
+                            <TextInput
+                              type="number"
+                              value={formData.numberOfTickets}
+                              className=""
+                              onChange={(e) => {
+                                handleFieldChange(
+                                  "numberOfTickets",
+                                  e.target.value
+                                );
+                              }}
+                              onBlur={() => handleFieldBlur("numberOfTickets")}
+                              isInvalid={!!errorValidation.numberOfTickets}
+                              placeholder={"Enter the Strength of Venue"}
+                            />
+                          </div>
+                        </div>
                       </div>
+                    </div>
+                    <div className="row">
+                      <Button
+                        variant="success"
+                        text={"Create Event"}
+                        onClick={handleCreateEvent}
+                        className="mt-3 mb-1"></Button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-2 col-lg-3 col-xl-3"></div>
           </div>
+          <div className="col-xs-12 col-sm-12 col-md-2 col-lg-3 col-xl-3"></div>
         </div>
       </div>
       {showAlert && (

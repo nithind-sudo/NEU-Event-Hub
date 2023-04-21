@@ -13,6 +13,8 @@ const Card = ({
   eventDate,
   eventImage,
   handleViewEvent,
+  numberOfTickets,
+  price
 }) => {
   const ref = React.useRef();
 
@@ -93,6 +95,8 @@ const Card = ({
                         eventID,
                         eventDescription,
                         eventDate,
+                        numberOfTickets,
+                        price
                       })
                     }
                   >
