@@ -30,7 +30,7 @@ export default function SignUp({ ...props }) {
     password: Joi.string().min(6).required(),
     confirmPassword: Joi.ref("password"),
     phoneNumber: Joi.string()
-      .pattern(/^[0-9]+$/)
+      .pattern(/^[0-9]{10}$/)
       .required(),
     role: Joi.string().valid("User", "Admin").required(),
   });
@@ -52,15 +52,7 @@ export default function SignUp({ ...props }) {
   };
 
   const handleSelect = (e) => {
-    const formData = { ...this.state.formData, role: e };
-    const { error } = schema.validate(formData);
-    if (error) {
-      setAlertClass("Danger");
-      setError("Please select a role");
-      setShowAlert(true);
-    } else {
       setSelectedRole(e);
-    }
   };
 
   const handleFieldBlur = (name) => {
