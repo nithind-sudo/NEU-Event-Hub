@@ -10,6 +10,10 @@ class UserService{
         return await User.find({ 'user_id' : user_id}).exec();
     }
 
+    async getUserAndUpdateEvents(username, event){
+        return await User.updateOne({ 'username' : username}, {$push: {events_booked: event}}).exec();
+    }
+
     async deleteUser(user_id){
         return await User.deleteOne({ 'user_id' : user_id}).exec();
     }

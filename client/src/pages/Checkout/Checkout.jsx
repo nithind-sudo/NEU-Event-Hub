@@ -30,13 +30,16 @@ const Checkout = () => {
     await axios
       .post("http://localhost:3000/stripe/payment", {
         username: username,
-        event: location.state.event,
+        event: [location.state.event],
         amount: location.state.ticketPrice * location.state.numberOfSeats,
         token: token,
       })
       .then((response) => {
         if (response.status == 200) {
-          navigate("/successPayment");
+          navigate("/successPayment", {state:{
+            username: username,
+            event: [location.state.event]
+          }});
         } else {
           navigate("/badPayment");
         }
