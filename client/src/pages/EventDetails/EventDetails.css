@@ -6,6 +6,10 @@
   font-size: 14px;
 }
 
+.locationCardStyle {
+  min-height: 270px;
+}
+
 .event-title {
   color: #1e0a3c;
   font-weight: 800;

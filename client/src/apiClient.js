@@ -178,6 +178,15 @@ export const getAllEventsByCategory = async (categoryName) => {
   }
 };
 
+export const deleteEventByEventID = async (eventID) => {
+  try {
+    const response = await instance.delete("/deleteEvent/eventID/"+eventID);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getEventDetails = async (event_id) => {
   console.log("Inside getEvent Details for Event with Id : ", event_id);
   try{

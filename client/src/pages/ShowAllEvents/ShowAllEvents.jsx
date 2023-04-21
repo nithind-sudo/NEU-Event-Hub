@@ -18,7 +18,7 @@ const ShowAllEvents = (props) => {
       }
     };
     fetchEvents();
-  }, []);
+  }, [eventArray]);
   return (
     <div className="allEventsCheck">
       <AllEvents

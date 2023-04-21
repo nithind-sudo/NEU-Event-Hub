@@ -13,28 +13,16 @@ const LocationMap = ({ location, google }) => {
 
   return (
     <Card className="mb-4">
-      <Card.Header>
-        <FontAwesomeIcon icon={faMapMarkerAlt} className="me-2" />
-        <span>{location.address}location </span>
-        <Button className="ms-auto" onClick={toggleShowMap}>
-          {showMap ? "Hide Map" : "Show Map"}
-        </Button>
-      </Card.Header>
-      {showMap && (
-        <Card.Body>
-          <Map
-            google={google}
-            zoom={14}
-            initialCenter={{
-              lat: location.lat,
-              lng: location.lng,
-            }}
-            style={{ width: "100%", height: "400px" }}
-          >
-            <Marker position={{ lat: location.lat, lng: location.lng }} />
-          </Map>
-        </Card.Body>
-      )}
+      <Map
+        google={google}
+        zoom={12}
+        initialCenter={{
+          lat: location.lat,
+          lng: location.lng,
+        }}
+        style={{ width: "100%", height: "200px" }}>
+        <Marker position={{ lat: location.lat, lng: location.lng }} />
+      </Map>
     </Card>
   );
 };
