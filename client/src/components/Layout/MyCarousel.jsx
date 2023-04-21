@@ -35,6 +35,7 @@ export default function MyCarousel({ carouselData }) {
           modules={[Autoplay, Navigation]}
           scrollbar={{ draggable: true }}
           slidesPerView={1}
+          spaceBetween={30}
           breakpoints={{
             991: {
               slidesPerView: 4,
