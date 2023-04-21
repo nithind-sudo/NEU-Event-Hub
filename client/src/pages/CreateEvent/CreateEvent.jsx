@@ -91,10 +91,10 @@ export default function CreateEvent({
 
   const handleCreateEvent = async (e) => {
     const mapsLocation = enteredlocation;
-    console.log("LAT and LONG for location : ", {
-      lat: parseFloat(mapsLocation.split(",")[0]),
-      lng: parseFloat(mapsLocation.split(",")[1]),
-    });
+    // console.log("LAT and LONG for location : ", {
+    //   lat: parseFloat(mapsLocation.split(",")[0]),
+    //   lng: parseFloat(mapsLocation.split(",")[1]),
+    // });
     e.preventDefault();
     const payload = {
       title: formData.title,
@@ -112,9 +112,9 @@ export default function CreateEvent({
     };
     try {
       const response = await fetchCreateEvent(payload);
-      console.log(
-        ` *** Response from Create Event End Point : ${response.data}`
-      );
+      // console.log(
+      //   ` *** Response from Create Event End Point : ${response.data}`
+      // );
       if (response.data.success) {
         setShowAlert(true);
         setAlertClass("success");

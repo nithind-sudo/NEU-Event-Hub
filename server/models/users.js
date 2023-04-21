@@ -91,7 +91,7 @@ const userSchema = new Schema({
 });
 
 userSchema.pre("save", async function (next) {
-  console.log("***** Inside pre middleware mongodb *****");
+  // console.log("***** Inside pre middleware mongodb *****");
   if (!this.isNew) {
     return next();
   }

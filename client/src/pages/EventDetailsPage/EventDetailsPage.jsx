@@ -7,13 +7,13 @@ const EventDetailsPage = () => {
   const { eventID } = useParams();
   const [eventInfo, setEventInfo] = useState(null);
 
-  console.log("selected event Id : ", eventID);
+  // console.log("selected event Id : ", eventID);
 
   useEffect(() => {
     const fetchEvent = async () => {
       try {
         const response = await getEventDetails(eventID);
-        console.log("Response for GET Event for Specific event : ", response);
+        // console.log("Response for GET Event for Specific event : ", response);
         if (response.data) {
           setEventInfo(response.data[0]);
         }

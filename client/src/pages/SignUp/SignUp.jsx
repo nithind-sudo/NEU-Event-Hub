@@ -79,7 +79,7 @@ export default function SignUp({ ...props }) {
     };
     try {
       const response = await fetchSignUp(payload);
-      console.log(` *** Response from SignUp End Point : ${response.data}`);
+      // console.log(` *** Response from SignUp End Point : ${response.data}`);
       if (response.data.success) {
         setShowAlert(true);
         setAlertClass("success");

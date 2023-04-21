@@ -16,7 +16,7 @@ export default function LandingPage(props) {
     const fetchEvents = async () => {
       try {
         const response = await getAllEvents();
-        console.log("Response for GET Event Array: ", response);
+        // console.log("Response for GET Event Array: ", response);
         if (response.data) {
           setEventArray(response.data.reverse().slice(0, 5));
         }
@@ -25,7 +25,7 @@ export default function LandingPage(props) {
       }
     };
     fetchEvents();
-  }, []);
+  }, [eventArray]);
   return (
     <div className="pb-5">
       <div className="container">
