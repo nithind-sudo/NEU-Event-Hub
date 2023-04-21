@@ -7,6 +7,7 @@ import axios from "axios";
 const SuccessPayment = () => {
   let navigate = useNavigate();
   let location = useLocation();
+  location.state.event[0].numberOfTickets = location.state.numberOfSeats;
   const getRegisteredEvents = () => {
     navigate("/registeredEvents");
   };

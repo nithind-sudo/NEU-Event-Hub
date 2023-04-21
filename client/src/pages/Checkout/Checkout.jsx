@@ -38,7 +38,8 @@ const Checkout = () => {
         if (response.status == 200) {
           navigate("/successPayment", {state:{
             username: username,
-            event: [location.state.event]
+            event: [location.state.event],
+            numberOfSeats: location.state.numberOfSeats
           }});
         } else {
           navigate("/badPayment");
