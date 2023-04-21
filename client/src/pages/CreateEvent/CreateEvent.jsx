@@ -193,7 +193,7 @@ export default function CreateEvent({
                   <CustomLabel>
                     <label className="lead mt-3 mb-1">Event Tag</label>
                     <Dropdown
-                      className="custom-dropdown-width"
+                      className="custom-dropdown custom-dropdown-width"
                       onSelect={handleSelect}
                     >
                       <Dropdown.Toggle
