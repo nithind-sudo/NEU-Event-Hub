@@ -117,19 +117,16 @@ export default function CreateEvent({
     };
     try {
       const response = await fetchCreateEvent(payload);
-      // console.log(
-      //   ` *** Response from Create Event End Point : ${response.data}`
-      // );
       if (response.data.success) {
         setShowAlert(true);
         setAlertClass("success");
         setError("Event Created Successfully!!!");
         setTimeout(() => {
           navigate("/main");
-        }, 2000);
+        }, 1000);
       } else {
-        setAlertClass("Danger");
-        setError("Invalid Data In Form");
+        setAlertClass("danger");
+        setError(response.data.error);
         setShowAlert(true);
       }
     } catch (error) {
@@ -202,7 +199,8 @@ export default function CreateEvent({
                           <Dropdown.Toggle
                             variant="outline-secondary"
                             id="dropdown-basic"
-                            style={{ width: "100%" }}>
+                            style={{ width: "100%" }}
+                          >
                             {selectedTag}
                           </Dropdown.Toggle>
                           <Dropdown.Menu>
@@ -360,7 +358,8 @@ export default function CreateEvent({
                         variant="success"
                         text={"Create Event"}
                         onClick={handleCreateEvent}
-                        className="mt-3 mb-1"></Button>
+                        className="mt-3 mb-1"
+                      ></Button>
                     </div>
                   </div>
                 </div>
@@ -372,7 +371,7 @@ export default function CreateEvent({
       </div>
       {showAlert && (
         <MyToast
-          bg={"danger"}
+          bg={alertClass}
           show={showAlert}
           onClose={() => {
             setShowAlert(false);
