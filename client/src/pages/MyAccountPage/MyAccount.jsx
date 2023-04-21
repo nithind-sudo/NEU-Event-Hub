@@ -4,7 +4,7 @@ import "./MyAccount.css";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/Footer/footer";
 import MyAccountCard from "../../components/ui/MyAccountCard";
 import { Nav } from "react-bootstrap";
 import MyTickets from "../MyTickets/MyTickets";

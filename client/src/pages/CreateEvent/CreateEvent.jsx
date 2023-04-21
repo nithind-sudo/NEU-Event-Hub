@@ -1,5 +1,5 @@
 import "./CreateEvent.css";
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/Footer/footer";
 import { Row, Col, Container, Form, Dropdown } from "react-bootstrap";
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
