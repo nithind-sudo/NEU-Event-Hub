@@ -1,5 +1,5 @@
 import "./CreateEvent.css";
-import Footer from "../../components/Layout/Footer";
+import Footer from "../../components/Footer/Footer";
 import { Row, Col, Container, Form, Dropdown } from "react-bootstrap";
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
@@ -193,12 +193,11 @@ export default function CreateEvent({
                         <label className="lead mt-3 mb-1">
                           Who is Organizing this Event?
                         </label>
-                        <Dropdown
-                          className=""
-                          onSelect={handleSelect}>
+                        <Dropdown className="" onSelect={handleSelect}>
                           <Dropdown.Toggle
                             variant="outline-secondary"
-                            id="dropdown-basic" style={{width: '100%'}}>
+                            id="dropdown-basic"
+                            style={{ width: "100%" }}>
                             {selectedTag}
                           </Dropdown.Toggle>
                           <Dropdown.Menu>
@@ -331,6 +330,7 @@ export default function CreateEvent({
           message={error}
         />
       )}
+      <Footer />
     </div>
   );
 }

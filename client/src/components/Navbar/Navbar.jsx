@@ -153,6 +153,13 @@ const Navbar = (props) => {
                   </Link>
                 </li>
               )}
+              <li className="nav-item">
+                <NavHashLink
+                  to="/#contact"
+                  className="n-item mx-xs-0 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-3">
+                  Contact
+                </NavHashLink>
+              </li>
             </ul>
 
             <div className="flex-shrink-0 dropdown">
