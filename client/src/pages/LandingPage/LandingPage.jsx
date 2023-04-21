@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Layout/Footer";
+import Footer from "../../components/Footer/footer";
 import { Container } from "react-bootstrap";
 import MyCarousel from "../../components/Layout/MyCarousel";
 import carouselData from "./CarouselData.json";
@@ -16,7 +16,7 @@ export default function LandingPage(props) {
     const fetchEvents = async () => {
       try {
         const response = await getAllEvents();
-        console.log("Response for GET Event Array: ", response);
+        // console.log("Response for GET Event Array: ", response);
         if (response.data) {
           setEventArray(response.data.reverse().slice(0, 5));
         }
@@ -25,33 +25,36 @@ export default function LandingPage(props) {
       }
     };
     fetchEvents();
-  }, []);
+  }, [eventArray]);
   return (
-    <div className="pb-5">
-      <div className="container">
-        <div className="row">
-          <img
-            src={bannerImage}
-            alt="Banner Image"
-            className="bannerImageStyle mt-5 pt-4"
+    <div>
+      <div className="pb-5">
+        <div className="container">
+          <div className="row">
+            <img
+              src={bannerImage}
+              alt="Banner Image"
+              className="bannerImageStyle mt-5 pt-4"
+            />
+          </div>
+        </div>
+
+        <Navbar handlelogout={props.handlelogout} />
+        <Container fluid>
+          <div id="category">
+            <CategoryView />
+          </div>
+
+          <MyCarousel className="" carouselData={carouselData} />
+          {/* Add Events Happening */}
+          {/* Add Categories */}
+          <AllEvents
+            eventArray={eventArray}
+            getList={"Top 5 Latest Events List"}
           />
-        </div>
+        </Container>
       </div>
-
-      <Navbar handlelogout={props.handlelogout} />
-      <Container fluid>
-        <div id="category">
-          <CategoryView />
-        </div>
-
-        <MyCarousel className="" carouselData={carouselData} />
-        {/* Add Events Happening */}
-        {/* Add Categories */}
-        <AllEvents
-          eventArray={eventArray}
-          getList={"Top 5 Latest Events List"}
-        />
-      </Container>
+      <Footer />
     </div>
   );
 }

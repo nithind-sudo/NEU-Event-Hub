@@ -5,16 +5,43 @@ import UserCard from "../../components/UserCard/UserCard";
 
 export default function ManageAccounts() {
   let [allUsers, setAllUsers] = useState([]);
-  let handleUserSearch = (e)=>{
+  let [userData, setUserData] = useState([]);
+  let handleUserSearch = (e) => {
     console.log(e.target.value);
-  }
+    if (
+      e.target.value == "" ||
+      e.target.value == null ||
+      e.target.value == undefined
+    ) {
+      setUserData(allUsers);
+    } else {
+      let usersData = [];
+      allUsers
+        .filter((data) => {
+          return (
+            data.first_name
+              .toLowerCase()
+              .includes(e.target.value.toLowerCase()) ||
+            data.last_name
+              .toLowerCase()
+              .includes(e.target.value.toLowerCase()) ||
+            data.user_id.toString().includes(e.target.value.toLowerCase())
+          );
+        })
+        .map((data) => {
+          usersData.push(data);
+        });
+      setUserData(usersData);
+    }
+  };
   useEffect(() => {
     fetchUsers()
       .then((response) => response.data)
       .then((data) => {
         setAllUsers(data);
+        setUserData(data);
       });
-  }, [allUsers]);
+  }, []);
   return (
     <div>
       <div className="row">
@@ -31,9 +58,11 @@ export default function ManageAccounts() {
         </div>
       </div>
       <div className="row">
-        {allUsers.map((data, index) => {
+        {userData.map((data, index) => {
           return (
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div
+              className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6"
+              key={index}>
               <UserCard data={data} />
             </div>
           );

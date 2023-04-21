@@ -8,9 +8,12 @@ export const ACTIONS = {
   LOG_IN: "logIn",
   LOG_OUT: "logOut",
   PENDING: "pending",
-  GET_USER : "getUser",
+  GET_USER: "getUser",
+  SET_VIEW_EVENT: "setEvent",
   DISPLAY_DASHBOARD: "displayDashboard",
   REPORT_ERROR: "reportError",
+  CHECKOUT: "checkout",
+  PAYMENT: "payment",
 };
 
 export const COMPONENT = {

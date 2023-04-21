@@ -14,13 +14,16 @@ import {
 import LocationMap from "../../components/Layout/LocationMap";
 import { deleteEventByEventID } from "../../apiClient";
 import { useNavigate } from "react-router-dom";
+import { EventManagementState } from "../../contexts/context";
+import { ACTIONS } from "../../contexts/constants";
 
-const EventDetails = ({ eventInfo }) => {
-  console.log("Event Info : ", eventInfo);
+const EventDetails = ({ eventInfo, event }) => {
+  // console.log("Event Info : ", eventInfo);
   const durationInMillis =
     new Date(eventInfo.endTime).getTime() -
     new Date(eventInfo.startTime).getTime();
   const durationInHours = Math.round(durationInMillis / (1000 * 60 * 60));
+  const { state, dispatch } = EventManagementState();
 
   const formattedTime = `${new Date(eventInfo.startTime).toLocaleDateString(
     "en-US",
@@ -40,28 +43,47 @@ const EventDetails = ({ eventInfo }) => {
   })}`;
 
   const imageAddress = eventInfo.imageUrl;
-  const eventPrice = 20;
+  const eventPrice = eventInfo.price;
   const [ticketCount, setTicketCount] = useState(1);
+  const [isReserveDisabled, setIsReserveDisabled] = useState(false);
 
   const handleIncrement = () => {
     setTicketCount(ticketCount < 3 ? ticketCount + 1 : 3); // Limit the ticket count to a maximum of 3
+    
+    
   };
 
   const handleDecrement = () => {
     setTicketCount(ticketCount > 1 ? ticketCount - 1 : 1); // Limit the ticket count to a minimum of 1
+    console.log("After ticket Decrement : ", ticketCount);
   };
+
+  useEffect(()=>{
+    if(ticketCount>eventInfo.numberOfTickets) {
+      setIsReserveDisabled(true);
+    }
+    else {
+      setIsReserveDisabled(false);
+    }
+  }, [ticketCount, isReserveDisabled]);
 
   const handleBookEvent = () => {
     // Handle the book event action here
+    // console.log("Clicked the book event handle with number of seats : ", ticketCount);
+    dispatch({ type: ACTIONS.CHECKOUT, numberOfSeats: ticketCount });
+    console.log("Current state after checkout : ", state);
+    navigate("/checkout");
   };
 
   const navigate = useNavigate();
 
   const deleteEvent = () => {
-    deleteEventByEventID(eventInfo.event_id).then(response=>response.data).then((data)=>{
-      navigate("/allEvents");
-    });
-  }
+    deleteEventByEventID(eventInfo.event_id)
+      .then((response) => response.data)
+      .then((data) => {
+        navigate("/allEvents");
+      });
+  };
 
   return (
     <div>
@@ -79,7 +101,7 @@ const EventDetails = ({ eventInfo }) => {
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
             <div className="container">
-              <div class="card text-dark">
+              <div class="card text-dark my-2 py-3">
                 <div class="card-body">
                   <div class="card-title display-6">
                     {eventInfo.title}
@@ -129,7 +151,7 @@ const EventDetails = ({ eventInfo }) => {
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-            <div className="container">
+            <div className="container my-2 py-3">
               <Card>
                 <Card.Body>
                   <Card.Title style={{ color: "black" }}>
@@ -139,7 +161,8 @@ const EventDetails = ({ eventInfo }) => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={handleDecrement}>
+                      onClick={handleDecrement}
+                    >
                       -
                     </Button>{" "}
                     <span style={{ margin: "0 10px", color: "black" }}>
@@ -148,18 +171,20 @@ const EventDetails = ({ eventInfo }) => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={handleIncrement}>
+                      onClick={handleIncrement}
+                    >
                       +
                     </Button>
                   </div>
                   <br />
-                  <Button variant="primary" onClick={handleBookEvent}>
+                  <Button variant="primary" onClick={handleBookEvent} disabled={isReserveDisabled}>
                     Reserve Spot
                   </Button>
+                  {isReserveDisabled?<div className="py-1 text-danger">We're going out of venue capacity!</div>:<div></div>}
                 </Card.Body>
               </Card>
               <br />
-              <div class="card text-dark locationCardStyle">
+              <div class="card text-dark locationCardStyle my-2 py-3">
                 <div class="card-body">
                   <div class="card-subtitle mb-1 text-body-secondary">
                     <b>Location and Venue</b>
@@ -174,7 +199,7 @@ const EventDetails = ({ eventInfo }) => {
           </div>
           <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div className="container">
-              <div class="card text-dark">
+              <div class="card text-dark my-2 py-3">
                 <div class="card-body">
                   <div class="card-subtitle mb-1 text-body-secondary">
                     <b>Tags:</b>
@@ -192,6 +217,12 @@ const EventDetails = ({ eventInfo }) => {
                   <p class="card-text">{eventInfo.event_id}</p>
                   <br />
 
+                  <div class="card-subtitle mb-1 text-body-secondary">
+                    <b>Tickets Available: </b>
+                  </div>
+                  <p class="card-text">{eventInfo.numberOfTickets}</p>
+                  <br />
+
                   <div class="card-subtitle mb-2 text-body-secondary">
                     <b>Start Time - End Time</b>
                   </div>
@@ -201,12 +232,21 @@ const EventDetails = ({ eventInfo }) => {
                   </p>
                   <br />
 
-                  <div class="card-subtitle mb-1 text-body-secondary">
-                    <b>Caution</b>
-                  </div>
-                  <p class="card-text">
-                    <button className="btn btn-danger" onClick={deleteEvent}>Delete Event</button>
-                  </p>
+                  {state.role === "admin" && (
+                    <>
+                      <div class="card-subtitle mb-1 text-body-secondary">
+                        <b>Caution</b>
+                      </div>
+                      <p class="card-text">
+                        <button
+                          className="btn btn-danger"
+                          onClick={deleteEvent}
+                        >
+                          Delete Event
+                        </button>
+                      </p>
+                    </>
+                  )}
                   <br />
                 </div>
               </div>

@@ -1,5 +1,19 @@
 .backgroundAdjust {
-  background-color: #FFF5EE;
+  color: #FFF5EE;
+  background: #5C258D; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4389A2, #5C258D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.setBackgroundForCreateEvent {
+  color: #FFF5EE;
+  background: #5C258D; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4389A2, #5C258D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  min-height: 100vh;
+}
+
+* {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 .makePointerCursor {
@@ -17,7 +31,7 @@
   text-decoration: underline;
   text-decoration-thickness: 6px;
   text-decoration-color: #d5202d;
-  text-underline-offset: 18px;
+  text-underline-offset: 17px;
   cursor: pointer;
 }
 

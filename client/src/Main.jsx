@@ -19,6 +19,13 @@ import MyToast from "./components/ui/Toast";
 import LogoutContext from "./contexts/LogoutContext";
 import EventDetailsPage from "./pages/EventDetailsPage/EventDetailsPage";
 import ShowAllEvents from "./pages/ShowAllEvents/ShowAllEvents";
+import UpcomingEvents from "./pages/UpcomingEvents/UpcomingEvents";
+import AttendedEvents from "./pages/AttendedEvents/AttendedEvents";
+import SearchEvents from "./pages/SearchEvents/SearchEvents";
+import MyAccountEmpty from "./pages/MyAccountPage/MyAccountEmpty";
+import Checkout from "./pages/Checkout/Checkout";
+import BadPayment from "./pages/BadPayment/BadPayment";
+import SuccessPayment from "./pages/SuccessPayment/SuccessPayment";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -31,11 +38,11 @@ function Main() {
   async function onLogin(username, password) {
     try {
       const response = await fetchLogin(username, password);
-      console.log("Got Data from RESPONSE : ", response);
+      // console.log("Got Data from RESPONSE : ", response);
       const fetchData = response.data;
       dispatch({ type: ACTIONS.PENDING });
       setTimeout(() => {
-        console.log("Got Data from fetch LOGIN : ", fetchData);
+        // console.log("Got Data from fetch LOGIN : ", fetchData);
         dispatch({
           type: ACTIONS.LOG_IN,
           username: fetchData.sessionData.username,
@@ -52,13 +59,13 @@ function Main() {
       }, 1000);
       return fetchData;
     } catch (error) {
-      console.log("**** Error while logging in MAIN COMPONENT:", error);
+      // console.log("**** Error while logging in MAIN COMPONENT:", error);
       throw new Error("Login Failed! Check your account details.");
     }
   }
 
   async function onLogout() {
-    console.log("onLogout called"); // Add this line
+    // console.log("onLogout called"); // Add this line
 
     try {
       dispatch({ type: ACTIONS.PENDING });
@@ -89,8 +96,7 @@ function Main() {
                   setShowAlert={setShowAlert}
                 />
               )
-            }
-          ></Route>
+            }></Route>
 
           <Route
             path="/main"
@@ -106,22 +112,18 @@ function Main() {
                   setShowAlert={setShowAlert}
                 />
               )
-            }
-          ></Route>
+            }></Route>
 
           <Route
             path="/category"
-            element={<CategoryView handlelogout={onLogout} />}
-          ></Route>
+            element={<CategoryView handlelogout={onLogout} />}></Route>
           <Route
             path="/category/:categoryName"
-            element={<Category handlelogout={onLogout} />}
-          ></Route>
+            element={<Category handlelogout={onLogout} />}></Route>
 
           <Route
             path="/allEvents"
-            element={<ShowAllEvents handlelogout={onLogout} />}
-          ></Route>
+            element={<ShowAllEvents handlelogout={onLogout} />}></Route>
 
           <Route
             path="/login"
@@ -137,14 +139,19 @@ function Main() {
                   setShowAlert={setShowAlert}
                 />
               )
-            }
-          ></Route>
+            }></Route>
 
-          <Route path="/signup" element={<SignUp handlelogout={onLogout}
+          <Route
+            path="/signup"
+            element={
+              <SignUp
+                handlelogout={onLogout}
                 error={error}
                 setError={setError}
                 showAlert={showAlert}
-                setShowAlert={setShowAlert}/>}></Route>
+                setShowAlert={setShowAlert}
+              />
+            }></Route>
           <Route
             path="/createEvent"
             element={
@@ -155,23 +162,19 @@ function Main() {
                 showAlert={showAlert}
                 setShowAlert={setShowAlert}
               />
-            }
-          ></Route>
+            }></Route>
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/tickets" element={<MyTickets />} />
 
           <Route
             path="/category"
-            element={<CategoryView handlelogout={onLogout} />}
-          ></Route>
+            element={<CategoryView handlelogout={onLogout} />}></Route>
           <Route
             path="/category/:categoryName"
-            element={<Category handlelogout={onLogout} />}
-          ></Route>
+            element={<Category handlelogout={onLogout} />}></Route>
           <Route
             path="/account"
-            element={<MyAccount handlelogout={onLogout} />}
-          ></Route>
+            element={<MyAccount handlelogout={onLogout} />}></Route>
           <Route
             path="/login"
             element={
@@ -182,9 +185,15 @@ function Main() {
                 showAlert={showAlert}
                 setShowAlert={setShowAlert}
               />
-            }
-          ></Route>
+            }></Route>
           <Route path="/event/:eventID" element={<EventDetailsPage />} />
+          <Route path="/registeredEvents" element={<UpcomingEvents />} />
+          <Route path="/attendedEvents" element={<AttendedEvents />} />
+          <Route path="/searchEvents" element={<SearchEvents />} />
+          <Route path="/updateAccount" element={<MyAccountEmpty />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/badPayment" element={<BadPayment />} />
+          <Route path="/successPayment" element={<SuccessPayment />} />
         </Routes>
       </LogoutContext.Provider>
     </React.Fragment>

@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const allUsers = require("../server/routes/allUsers");
 const search = require("./routes/search");
 const eventsByCategory = require("./routes/eventsByCategory");
+const payment = require("./routes/payment");
 
 const { mongoose, mongooseConnection } = require("./mongodb/db");
 const categoryRouter = require("./routes/category");
@@ -41,5 +42,6 @@ app.use("/getAllUsers", allUsers);
 app.use("/search", search);
 app.use("/searchEventsByCategory", eventsByCategory);
 app.use("/deleteEvent", eventsByCategory);
+app.use("/stripe", payment);
 
 module.exports = app;

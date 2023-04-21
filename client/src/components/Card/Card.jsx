@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "./styles/Card.css";
 import crackersImage from "../../assets/images/crackersImage.jpeg";
@@ -13,6 +13,8 @@ const Card = ({
   eventDate,
   eventImage,
   handleViewEvent,
+  numberOfTickets,
+  price
 }) => {
   const ref = React.useRef();
 
@@ -39,18 +41,26 @@ const Card = ({
     borderRadius: "10px",
   };
 
+  let navigate = useNavigate();
+
+  const registerForEvent = () => {
+    navigate("/checkout");
+  };
+
   return (
     <Flippy
       flipOnHover={false}
       flipOnClick={true}
       flipDirection="horizontal"
       ref={ref}
-      style={cardStyle}>
+      style={cardStyle}
+    >
       <FrontSide
         style={backgroundImageStyle}
         onClick={() => {
           ref.current.toggle();
-        }}>
+        }}
+      >
         <div className="eventName my-1">
           <div className="row text-light">
             <div className="text-center">
@@ -74,25 +84,36 @@ const Card = ({
             </div>
           </div>
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div className="col-6">
               <div className="text-center justify-content-center align-items-center">
-                <button
-                  className="btn btn-warning"
-                  onClick={() =>
-                    handleViewEvent({
-                      eventName,
-                      eventID,
-                      eventDescription,
-                      eventDate,
-                    })
-                  }>
-                  View Event
-                </button>
+                <div className="text-center justify-content-center align-items-center my-1">
+                  <button
+                    className="btn btn-warning setBtnStyleCard"
+                    onClick={() =>
+                      handleViewEvent({
+                        eventName,
+                        eventID,
+                        eventDescription,
+                        eventDate,
+                        numberOfTickets,
+                        price
+                      })
+                    }
+                  >
+                    View Event
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <div className="text-center justify-content-center align-items-center">
-                <button className="btn btn-success">Register Now</button>
+            <div className="col-6">
+              <div className="text-center justify-content-center align-items-center my-1">
+                <button
+                  className="btn btn-success setBtnStyleCard"
+                  onClick={registerForEvent}
+                  disabled={numberOfTickets?true:false}
+                  >
+                  Register Now
+                </button>
               </div>
             </div>
           </div>

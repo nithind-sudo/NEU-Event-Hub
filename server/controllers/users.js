@@ -27,8 +27,8 @@ exports.createUser = async (req, res) => {
       .catch((e) => {
         console.log(e.message);
         res
-          .status(500)
-          .send({ message: "500 Internal Server Error", error: e.message });
+          .status(400)
+          .send({ message: "User Already exists", error: e.message });
       });
   } catch (e) {
     console.log(e.message);
@@ -41,6 +41,17 @@ exports.getUserInfo = async (req, res) => {
   try {
     const userInfo = await userService.getUser(user_id);
     res.status(200).send(userInfo);
+  } catch (e) {
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
+  }
+};
+
+exports.updateUserInfo = async (req, res) => {
+  let username = req.body.username;
+  let event = req.body.event[0];
+  try {
+    const result = await userService.getUserAndUpdateEvents(username, event);
+    res.status(200).send(result);
   } catch (e) {
     res.status(400).send({ message: "400 Bad Request", error: e.message });
   }

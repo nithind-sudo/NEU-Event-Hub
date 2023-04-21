@@ -53,9 +53,9 @@ export default function Login({ ...props }) {
     if (!Object.keys(errorValidation).length) {
       try {
         // const response = await login(formData.email, formData.password);
-        // console.log(` *** Response from Login End Point : ${response.data}`);
+        // // console.log(` *** Response from Login End Point : ${response.data}`);
         const response = await onLogin(formData.email, formData.password);
-        console.log("Response after calling onLogin function : ", response);
+        // console.log("Response after calling onLogin function : ", response);
         if (response.success) {
           // props.onLogin(response.data.user);
           setShowAlert(false);
@@ -65,7 +65,7 @@ export default function Login({ ...props }) {
           setShowAlert(true);
         }
       } catch (e) {
-        console.log("**** Error while logging in LOGIN COMPONENT:", e);
+        // console.log("**** Error while logging in LOGIN COMPONENT:", e);
         setError("Login Failed! Check your account details.");
         setShowAlert(true);
       }
@@ -80,8 +80,8 @@ export default function Login({ ...props }) {
       <div className="setBackGround">
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div className="col-xs-12 col-sm-12 col-md-2 col-lg-4 col-xl-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-8 col-lg-4 col-xl-4">
               <div className="justify-content-center align-items-center my-5 py-5">
                 <div className="card makeLoginCardBackground">
                   <div className="card-body">
@@ -90,12 +90,13 @@ export default function Login({ ...props }) {
                         <h5 className="display-6">Sign In</h5>
                       </div>
                     </div>
+
                     <Form className="login-content">
                       <Container>
                         <div className="login-container">
                           <img
                             src={loginLogo}
-                            style={{ width: "290px", height: "100px" }}
+                            className="loginLogo"
                             alt="Northeastern-Events"
                           />
                           <Form.Group controlId="userEmail">
@@ -167,7 +168,7 @@ export default function Login({ ...props }) {
                 </div>
               </div>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
+            <div className="col-xs-12 col-sm-12 col-md-2 col-lg-4 col-xl-4"></div>
           </div>
         </div>
       </div>

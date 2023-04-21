@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 const UserCard = (props) => {
   const ref = React.useRef();
   const navigate = useNavigate();
-  console.log(props.data);
-  let onClickingDelete = ()=>{
-    deleteUser(props.data.user_id).then(response=>response.data).then(data=>{
+  // console.log(props.data);
+  let onClickingDelete = () => {
+    deleteUser(props.data.user_id)
+      .then((response) => response.data)
+      .then((data) => {
         navigate("/account");
-    })
-  }
+      });
+  };
   return (
     <div className="my-3">
       <div className="container">
@@ -25,38 +27,63 @@ const UserCard = (props) => {
               onClick={() => {
                 ref.current.toggle();
               }}
-              style={{background:'#eeeeee', color:'#000000', borderRadius: '10px'}}
-              >
+              style={{
+                background: "#eeeeee",
+                color: "#000000",
+                borderRadius: "10px",
+              }}>
               <div className="row">
                 <div className="text-center">
-                    <div className="h5">User ID: {props.data.user_id}</div>
+                  <div className="h5">User ID: {props.data.user_id}</div>
                 </div>
-                <br/>
+                <br />
                 <div className="text">
-                    <div className="h6">Name: {props.data.first_name} {props.data.last_name}</div>
-                </div>
-                <div className="text">
-                    <div className="h6">Role: {props.data.role}</div>
-                </div>
-                <div className="text">
-                    <div className="h6">Phone Number: {props.data.phone_number}</div>
+                  <div className="h6">
+                    Name: {props.data.first_name} {props.data.last_name}
+                  </div>
                 </div>
                 <div className="text">
-                    <div className="h6">Number of Events: {props.data.events_booked.length}</div>
+                  <div className="h6">Role: {props.data.role}</div>
+                </div>
+                <div className="text">
+                  <div className="h6">
+                    Phone Number: {props.data.phone_number}
+                  </div>
+                </div>
+                <div className="text">
+                  <div className="h6">
+                    Number of Events: {props.data.events_booked.length}
+                  </div>
                 </div>
               </div>
             </FrontSide>
 
-            <BackSide style={{background:'#eeeeee', color:'#000000', borderRadius: '10px'}}>
+            <BackSide
+              style={{
+                background: "#eeeeee",
+                color: "#000000",
+                borderRadius: "10px",
+              }}>
               <div className="row">
                 <div className="text-center">
-                    <button className="btn btn-warning mx-5">Edit User</button>
-                    <button className="btn btn-danger mx-5" onClick={onClickingDelete}>Delete User</button>
+                  <button className="btn btn-warning mx-5">Edit User</button>
+                  <button
+                    className="btn btn-danger mx-5"
+                    onClick={onClickingDelete}>
+                    Delete User
+                  </button>
                 </div>
               </div>
               <div className="row">
                 <div className="text-center my-3">
-                    <p className="p text-danger">Area to Avoid! These operations may change or delete the user data having <div className="b text-primary">User ID {props.data.user_id}</div> So be careful while performing these operations</p>
+                  <p className="p text-danger">
+                    Area to Avoid! These operations may change or delete the
+                    user data having{" "}
+                    <div className="b text-primary">
+                      User ID {props.data.user_id}
+                    </div>{" "}
+                    So be careful while performing these operations
+                  </p>
                 </div>
               </div>
             </BackSide>

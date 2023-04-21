@@ -13,8 +13,10 @@ const AllEvents = (props) => {
   const navigate = useNavigate();
   const handleViewEvent = (eventInfo) => {
     setSelectedEvent(eventInfo);
-    navigate(`/event/${eventInfo.event_id}`);
+    navigate(`/event/${eventInfo.event_id}`, {state:{event: eventInfo}});
   };
+  useEffect(()=>{
+  }, [selectedEvent]);
   return (
     <div className="my-3">
       <Navbar handlelogout={props.handlelogout} />
@@ -29,7 +31,7 @@ const AllEvents = (props) => {
         <div className="row">
           {eventArray.map((eventInfo) => (
             <div
-              className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"
+              className="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               key={eventInfo.event_id}>
               <div className="m-2">
                 <Card
@@ -39,6 +41,8 @@ const AllEvents = (props) => {
                   eventDate={eventInfo.date}
                   handleViewEvent={() => handleViewEvent(eventInfo)}
                   eventImage={eventInfo.imageUrl}
+                  price={eventInfo.price}
+                  numberOfTickets={eventInfo.numberOfTickets}
                 />
               </div>
             </div>

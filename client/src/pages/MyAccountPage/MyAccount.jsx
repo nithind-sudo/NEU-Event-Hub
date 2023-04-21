@@ -4,7 +4,7 @@ import "./MyAccount.css";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Layout/Footer";
+import Footer from "../../components/Footer/footer";
 import MyAccountCard from "../../components/ui/MyAccountCard";
 import { Nav } from "react-bootstrap";
 import MyTickets from "../MyTickets/MyTickets";
@@ -35,12 +35,12 @@ export default function MyAccount({ handlelogout }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Hitting userInfo for user_id : ", state.user_id);
+    // console.log("Hitting userInfo for user_id : ", state.user_id);
     fetchSession().then((sessionResponse) => {
       if (sessionResponse.data.success) {
         fetchUserInfo(sessionResponse.data.user_id)
           .then((response) => {
-            console.log("*** Response from GET User API : ", response);
+            // console.log("*** Response from GET User API : ", response);
             const userProfile = response.data[0];
             dispatch({
               type: ACTIONS.GET_USER,
@@ -60,17 +60,17 @@ export default function MyAccount({ handlelogout }) {
             setUsername(userProfile.username);
           })
           .catch((error) => {
-            console.log(
-              "Error while fetching UserInfo inside useEffect ",
-              error
-            );
+            // console.log(
+            //   "Error while fetching UserInfo inside useEffect ",
+            //   error
+            // );
           });
       } else {
         dispatch({ type: ACTIONS.LOG_OUT });
         navigate("/login");
       }
     });
-  }, []);
+  }, [firstName, lastName, phoneNumber, username, role]);
 
   const handleNavItemSelect = (selectedKey) => {
     setSelectedNavItem(selectedKey);
@@ -81,7 +81,7 @@ export default function MyAccount({ handlelogout }) {
   const manageAccount = <ManageAccounts />;
 
   let pageContent;
-  console.log("selected Nav Item : ", selectedNavItem);
+  // console.log("selected Nav Item : ", selectedNavItem);
   switch (selectedNavItem) {
     case "profile":
       pageContent = profileContent;
@@ -133,44 +133,47 @@ export default function MyAccount({ handlelogout }) {
   );
 
   return (
-    <div className="py-5 makeBackgroundForMyAccount">
-      <Navbar handlelogout={handlelogout} />
-      <div className="myAccount-page">
-        <Container fluid>
-          <div className="container">
-            <div className="card myCardColorAccount">
-              <div className="card-body">
-                <div className="row">
-                  <div className="text-center">
-                    <div className="card-title h3">My Account</div>
-                    <hr />
+    <div>
+      <div className="py-5 makeBackgroundForMyAccount">
+        <Navbar handlelogout={handlelogout} />
+        <div className="myAccount-page">
+          <Container fluid>
+            <div className="container">
+              <div className="card myCardColorAccount">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="text-center">
+                      <div className="card-title h3">My Account</div>
+                      <hr />
+                    </div>
                   </div>
-                </div>
 
-                <div className="text-center">
-                  <h6 className="card-subtitle mb-2 text-warning">
-                    {role == "admin" ? "Admin" : "User"} Account
-                  </h6>
-                  <br />
-                  <h6 className="card-subtitle mb-2 text-warning">
-                    {firstName} {lastName}
-                  </h6>
-                  <br />
-                  <h6 className="card-subtitle mb-2 text-warning">
-                    Username: {username}
-                  </h6>
-                  <br />
-                </div>
+                  <div className="text-center">
+                    <h6 className="card-subtitle mb-2 text-warning">
+                      {role == "admin" ? "Admin" : "User"} Account
+                    </h6>
+                    <br />
+                    <h6 className="card-subtitle mb-2 text-warning">
+                      {firstName} {lastName}
+                    </h6>
+                    <br />
+                    <h6 className="card-subtitle mb-2 text-warning">
+                      Username: {username}
+                    </h6>
+                    <br />
+                  </div>
 
-                <MyAccountCard
-                  navContent={navContent}
-                  pageContent={pageContent}
-                />
+                  <MyAccountCard
+                    navContent={navContent}
+                    pageContent={pageContent}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
