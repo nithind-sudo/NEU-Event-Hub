@@ -11,7 +11,7 @@ express().use(cors());
 
 router.post("/payment", async(req, res, err)=>{
     console.log(req.body);
-    
+    res.send(req.body);
 });
 
 module.exports = router;

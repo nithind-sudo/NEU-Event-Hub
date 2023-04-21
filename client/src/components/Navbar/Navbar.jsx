@@ -187,12 +187,7 @@ const Navbar = (props) => {
                 </li>
                 <li>
                   <Link className="dropdown-item" to="/registeredEvents">
-                    Upcoming Events
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/attendedEvents">
-                    Attended Events
+                    Registered Events
                   </Link>
                 </li>
                 <li>
