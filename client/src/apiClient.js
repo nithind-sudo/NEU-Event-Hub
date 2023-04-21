@@ -196,3 +196,18 @@ export const getEventDetails = async (event_id) => {
     throw error;
   }
 }
+
+export const createPaymentRecord = async (payload) => {
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    console.log("Hitting paymentrecord POST API with payload : ", payload);
+    const response = await instance.post("/stripe/paymentrecord", payload, {
+      headers,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

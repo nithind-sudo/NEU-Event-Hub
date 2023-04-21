@@ -48,7 +48,8 @@ const EventDetails = ({ eventInfo, event }) => {
 
   const handleIncrement = () => {
     setTicketCount(ticketCount < 3 ? ticketCount + 1 : 3); // Limit the ticket count to a maximum of 3
-    console.log("After ticket Increment : ", ticketCount);
+    
+    
   };
 
   const handleDecrement = () => {
@@ -58,7 +59,7 @@ const EventDetails = ({ eventInfo, event }) => {
 
   const handleBookEvent = () => {
     // Handle the book event action here
-    console.log("Clicked the book event handle with number of seats : ", ticketCount);
+    // console.log("Clicked the book event handle with number of seats : ", ticketCount);
     dispatch({ type: ACTIONS.CHECKOUT, numberOfSeats: ticketCount });
     console.log("Current state after checkout : ", state);
     navigate("/checkout");

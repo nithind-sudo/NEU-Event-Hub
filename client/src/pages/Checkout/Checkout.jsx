@@ -27,26 +27,62 @@ const Checkout = () => {
   };
   const payNow = async (token) => {
     console.log(token);
-    await axios
-      .post("http://localhost:3000/stripe/payment", {
-        username: username,
-        event: [state.event],
-        amount: state.ticketPrice * state.numberOfSeats,
-        token: token,
-      })
-      .then((response) => {
-        if (response.status == 200) {
-          // Add a row to payments table
-          
-          navigate("/successPayment", {state:{
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/stripe/payment",
+        {
+          username: username,
+          event: [state.event],
+          amount: state.ticketPrice * state.numberOfSeats,
+          token: token,
+        }
+      );
+      if (response.status == 200) {
+        const paymentData = response.data;
+        dispatch({
+          type: ACTIONS.PAYMENT,
+          paymentId: paymentData.token.id,
+          paymentMethod: "Stripe",
+          paymentDate: new Date(),
+        });
+        // TODO Add a row to payments table with quantity
+        // console.log("Payment Success REsponse payload : ", response);
+        // const paymentData = response.data;
+        // const paymentId = paymentData.token.id;
+        // const paymentPayload = {
+        //   paymentId,
+        //   paymentMethod: "Stripe",
+        //   paymentDate: new Date(),
+        //   amount: paymentData.amount,
+        //   quantity: state.numberOfSeats,
+        //   event_id: state.event_id,
+        //   user_id: state.user_id,
+        // };
+        // const paymentResponse = await createPaymentRecord(paymentPayload);
+        // console.log("Payment Response : ", paymentResponse);
+        // if (paymentResponse.status == 200) {
+        // Update code to use dispatch to update state
+        navigate("/successPayment", {
+          state: {
             username: username,
             event: [state.event],
-            numberOfSeats: state.numberOfSeats
-          }});
-        } else {
-          navigate("/badPayment");
-        }
-      });
+            numberOfSeats: state.numberOfSeats,
+            paymentId: paymentData.token.id,
+            paymentMethod: "Stripe",
+            paymentDate: new Date(),
+          },
+        });
+        // } else {
+        //   console.error("Payment failed:");
+        //   navigate("/badPayment");
+        // }
+      } else {
+        navigate("/badPayment");
+      }
+    } catch (error) {
+      console.error("Payment failed:", error);
+      navigate("/badPayment");
+    }
   };
   useEffect(() => {
     // console.log("Hitting userInfo for user_id : ", state.user_id);
@@ -125,7 +161,8 @@ const Checkout = () => {
                   <div className="container text-center">
                     <button
                       class="btn btn-warning my-1"
-                      onClick={updateUserData}>
+                      onClick={updateUserData}
+                    >
                       Update Data
                     </button>
                   </div>
@@ -173,10 +210,7 @@ const Checkout = () => {
                       <div className="row">
                         <span className="my-1">
                           <b>Total Price: </b>
-                          <span>
-                            {state.ticketPrice *
-                              state.numberOfSeats}
-                          </span>
+                          <span>{state.ticketPrice * state.numberOfSeats}</span>
                         </span>
                       </div>
                     </div>
@@ -185,19 +219,14 @@ const Checkout = () => {
                 <div className="row">
                   <div className="container text-center">
                     <StripeCheckout
-                      stripeKey="pk_test_51MzG5tL5TqKfooRTnFTHU3azUtRcj0p5LddkCevEQSfxAFduTbnpJpdDToDDSJ6RYnutIV4yxdb4FOySiIfovz8E00KSBrXtL1" //public key
+                      stripeKey="pk_test_51MzAUMDqgKv6XfDoCzej2pjscQZAi2I12D7t7vyjscJamt8xcKpTVrowwYz6C75hYGj84vv9fqL83pUxNmRg10G200qDJwlHlj" //public key
                       label="Pay and Register"
                       name="Pay with Card"
                       billingAddress
                       shippingAddress
-                      amount={
-                        state.ticketPrice *
-                        state.numberOfSeats *
-                        100
-                      }
+                      amount={state.ticketPrice * state.numberOfSeats * 100}
                       description={`Your total amount is \$${(
-                        state.ticketPrice *
-                        state.numberOfSeats
+                        state.ticketPrice * state.numberOfSeats
                       ).toString()}`}
                       token={payNow}
                     />
