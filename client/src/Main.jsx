@@ -19,6 +19,7 @@ import MyToast from "./components/ui/Toast";
 import LogoutContext from "./contexts/LogoutContext";
 import EventDetailsPage from "./pages/EventDetailsPage/EventDetailsPage";
 import ShowAllEvents from "./pages/ShowAllEvents/ShowAllEvents";
+import PaymentForm from "./pages/PaymentForm/PaymentForm";
 
 function Main() {
   const [error, setError] = useState(null);
@@ -140,11 +141,18 @@ function Main() {
             }
           ></Route>
 
-          <Route path="/signup" element={<SignUp handlelogout={onLogout}
+          <Route
+            path="/signup"
+            element={
+              <SignUp
+                handlelogout={onLogout}
                 error={error}
                 setError={setError}
                 showAlert={showAlert}
-                setShowAlert={setShowAlert}/>}></Route>
+                setShowAlert={setShowAlert}
+              />
+            }
+          ></Route>
           <Route
             path="/createEvent"
             element={
@@ -185,6 +193,7 @@ function Main() {
             }
           ></Route>
           <Route path="/event/:eventID" element={<EventDetailsPage />} />
+          <Route path="/payment" component={<PaymentForm />} />
         </Routes>
       </LogoutContext.Provider>
     </React.Fragment>

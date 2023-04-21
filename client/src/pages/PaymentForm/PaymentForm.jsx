@@ -1,64 +1,16 @@
-import React, { useState } from "react";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { Button, Form, FormGroup, Alert } from "react-bootstrap";
-import "./PaymentForm.css";
+import React from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
-const PaymentForm = ({ eventInfo }) => {
-  const [paymentError, setPaymentError] = useState(null);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const stripe = useStripe();
-  const elements = useElements();
+// Replace with your own Stripe public key
+const stripePromise = loadStripe("pk_test_51MzAUMDqgKv6XfDoCzej2pjscQZAi2I12D7t7vyjscJamt8xcKpTVrowwYz6C75hYGj84vv9fqL83pUxNmRg10G200qDJwlHlj");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
-    });
-
-    if (error) {
-      setIsLoading(false);
-      setPaymentError(error.message);
-    } else {
-      const { id } = paymentMethod;
-      const response = await fetch("/api/payments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amount: eventInfo.price * 100, // amount in cents
-          eventId: eventInfo._id,
-          paymentMethodId: id,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setIsLoading(false);
-        setPaymentSuccess(true);
-      } else {
-        setIsLoading(false);
-        setPaymentError("Payment failed. Please try again later.");
-      }
-    }
-  };
-
+const PaymentForm = () => {
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormGroup>
-        <CardElement options={{ style: { base: { fontSize: "16px" } } }} />
-      </FormGroup>
-      <Button type="submit" disabled={!stripe || isLoading}>
-        Pay ${eventInfo.price}
-      </Button>
-      {paymentError && <Alert variant="danger">{paymentError}</Alert>}
-      {paymentSuccess && <Alert variant="success">Payment successful!</Alert>}
-    </Form>
+    <Elements stripe={stripePromise}>
+      <CheckoutForm />
+    </Elements>
   );
 };
 

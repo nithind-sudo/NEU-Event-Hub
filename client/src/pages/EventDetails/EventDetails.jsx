@@ -12,9 +12,12 @@ import {
   faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import LocationMap from "../../components/Layout/LocationMap";
+import { useNavigate } from "react-router-dom";
 
 const EventDetails = ({ eventInfo }) => {
   console.log("Event Info : ", eventInfo);
+  const navigate = useNavigate();
+
   const durationInMillis =
     new Date(eventInfo.endTime).getTime() -
     new Date(eventInfo.startTime).getTime();
@@ -51,7 +54,7 @@ const EventDetails = ({ eventInfo }) => {
   };
 
   const handleBookEvent = () => {
-    // Handle the book event action here
+    navigate("/payment");
   };
 
   return (
