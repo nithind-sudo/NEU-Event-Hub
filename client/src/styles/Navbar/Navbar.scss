@@ -1,5 +1,9 @@
 @import "../Colors/Colors.scss";
 
+.makePointerCursor {
+    cursor: pointer;
+  }
+
 .n-item {
     color: $primary-light;
     text-decoration: none;
@@ -11,7 +15,7 @@
     text-decoration: underline;
     text-decoration-thickness: 6px;
     text-decoration-color: $primary-red;
-    text-underline-offset: 20px;
+    text-underline-offset: 17px;
     cursor: pointer;
 }
 
