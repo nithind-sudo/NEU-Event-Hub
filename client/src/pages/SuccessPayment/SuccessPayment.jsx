@@ -20,18 +20,20 @@ const SuccessPayment = () => {
     const paymentPayload = {
       paymentMethod: "Stripe",
       paymentDate: new Date(),
-      amount: location.state.ticketPrice * location.state.numberOfSeats,
-      quantity: location.state.numberOfSeats,
-      event_id: location.state.event_id,
-      user_id: location.state.user_id,
+      amount: state.ticketPrice * state.numberOfSeats,
+      quantity: state.numberOfSeats,
+      event_id: state.eventID,
+      user_id: state.user_id,
+      paymentId : location.state.paymentId
     };
+    console.log("Payment Payload inside useEffect : ", paymentPayload);
     createPaymentRecord(paymentPayload)
       .then((response) => {
         console.log("Payment Payload response : ", response);
         axios
           .post("http://localhost:3000/stripe/addEventToUser", {
-            username: location.state.username,
-            event: location.state.event,
+            username: state.username,
+            event: state.event,
           })
           .then((response) =>
             console.log("Row entered into User collection : ", response)

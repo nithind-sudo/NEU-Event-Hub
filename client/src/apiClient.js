@@ -203,7 +203,7 @@ export const createPaymentRecord = async (payload) => {
       "Content-Type": "application/json",
     };
     console.log("Hitting paymentrecord POST API with payload : ", payload);
-    const response = await instance.post("/paymentrecord", payload, {
+    const response = await instance.post("/stripe/paymentrecord", payload, {
       headers,
     });
     return response;

@@ -32,16 +32,25 @@ router.post("/paymentrecord", async (req, res, err) => {
       event_id,
       user_id,
     } = req.body;
-    const eventPromise = eventService.getEventInfo(event_id);
-    const userPromise = userService.getUserById(user_id);
-    const [event, user] = await Promise.all([eventPromise, userPromise]);
-
+    const eventInfo = await eventService.getEventInfo(event_id);
+    const userInfo = await userService.getUserById(user_id);
+    const event = eventInfo[0];
+    const user = userInfo[0];
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
     }
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
+    console.log("Payment record being created : ", {
+      user: user._id,
+      event: event._id,
+      quantity,
+      amount: amount,
+      paymentDate: paymentDate,
+      paymentMethod: paymentMethod,
+      paymentId: paymentId,
+    });
     const payment = new Payment({
       user: user._id,
       event: event._id,
@@ -55,14 +64,12 @@ router.post("/paymentrecord", async (req, res, err) => {
     await payment.save();
 
     res.status(200).json({
-      paymentId: paymentIntent.id,
-      eventId,
-      user_id,
       success: true,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
+    process.exit(1);
   }
 });
 
