@@ -20,7 +20,11 @@ const Navbar = (props) => {
   let navigate = useNavigate();
   const handleEventSearchKey = (e) => {
     let wantedEvents = [];
-    if (e.target.value == ""||e.target.value==null) {
+    if (
+      e.target.value == "" ||
+      e.target.value == null ||
+      e.target.value == undefined
+    ) {
       setFilteredEvents(allEventArray);
     } else {
       allEventArray
@@ -36,7 +40,7 @@ const Navbar = (props) => {
     }
   };
   const handleSearch = () => {
-    navigate("/searchEvents", {state: {filters: filteredEvents}});
+    navigate("/searchEvents", { state: { filters: filteredEvents } });
   };
   const [allEventArray, setAllEventArray] = useState([]);
   useEffect(() => {
