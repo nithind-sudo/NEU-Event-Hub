@@ -83,7 +83,7 @@ export default function SignUp({ ...props }) {
       };
       try {
         const response = await fetchSignUp(payload);
-        // console.log(` *** Response from SignUp End Point : ${response.data}`);
+        console.log(` *** Response from SignUp End Point : ${response.data}`);
         if (response.data.success) {
           setShowAlert(true);
           setAlertClass("success");
@@ -92,13 +92,13 @@ export default function SignUp({ ...props }) {
             navigate("/");
           }, 1000);
         } else {
-          setAlertClass("Danger");
-          setError("Invalid Data In Form");
+          setAlertClass("danger");
+          setError(response.data.error);
           setShowAlert(true);
         }
       } catch (error) {
-        setAlertClass("Danger");
-        setError("Invalid Data In Form");
+        setAlertClass("danger");
+        setError("Invalid Data in Form");
         setShowAlert(true);
       }
     } else {
@@ -137,13 +137,12 @@ export default function SignUp({ ...props }) {
           setShowAlert(true);
         }
       } else {
-        console.log(formData);
         let errorString = "";
         for (let field in errorValidation) {
           errorString += `\n${errorValidation[field].replace(/['"]+/g, "")},`;
         }
         errorString = errorString.slice(0, -1);
-
+        
         console.log("Error string : ", errorString);
         setError(`Please correct the following fields : ${errorString}`);
         setShowAlert(true);
