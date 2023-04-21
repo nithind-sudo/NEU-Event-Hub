@@ -1,5 +1,7 @@
 # NEU-Event-Hub
 A One stop solution to display events in and around Northeastern University so that students can socialize and network
+Our mission is to connect students with live entertainment experiences and to make it easier for them to enjoy their favorite events, whether it's a music concert, a sports game, a theater show, or any other type of live event. 
+We provide a secure, reliable, and user-friendly platform for buying and selling tickets, and we offer a wide range of services to help students get the most out of their event experience.
 
 ## Frontend Architecture
 
@@ -32,3 +34,10 @@ A One stop solution to display events in and around Northeastern University so t
 * In second terminal run `npm run dev` this will run the frontend application
 * Command `npm run build` will build the application with the necessary static files
 * If above build command was used, `npm start` will start the front and backend application which will be running on same port
+
+### Contributors
+- Sai tej Sunkara
+- Nithin Dornipadu
+- Akhilesh Kavitkar
+- Kaustubh Lawale
+
