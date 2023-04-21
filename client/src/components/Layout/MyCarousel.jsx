@@ -19,7 +19,7 @@ import React from "react";
 import "./Carousel.css";
 
 export default function MyCarousel({ carouselData }) {
-  console.log("carousel Data :", carouselData);
+  // console.log("carousel Data :", carouselData);
   return (
     <div className="my-3">
       <div className="mt-5">

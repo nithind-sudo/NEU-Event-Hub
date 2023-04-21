@@ -20,15 +20,18 @@ const Navbar = (props) => {
   let navigate = useNavigate();
   const handleEventSearchKey = (e) => {
     let wantedEvents = [];
-    if(e.target.value=="") {
+    if (e.target.value == "") {
       setFilteredEvents(allEventArray);
-    }
-    else {
-      allEventArray.filter((data)=>{
-        return data.title.toLowerCase().includes(e.target.value.toLowerCase());
-      }).map((data)=>{
-        wantedEvents.push(data);
-      });
+    } else {
+      allEventArray
+        .filter((data) => {
+          return data.title
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase());
+        })
+        .map((data) => {
+          wantedEvents.push(data);
+        });
       setFilteredEvents(wantedEvents);
     }
   };
@@ -37,26 +40,25 @@ const Navbar = (props) => {
       .then((response) => response.data)
       .then((data) => {
         setEvents(data);
-        console.log("EVENTS CONSOLING");
-        console.log(events);
+        // console.log("EVENTS CONSOLING");
+        // console.log(events);
       });
   };
   const [allEventArray, setAllEventArray] = useState([]);
-  useEffect(()=>{
+  useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await getAllEvents();
-        console.log("Response for GET Event Array: ", response);
+        // console.log("Response for GET Event Array: ", response);
         if (response.data) {
           setAllEventArray(response.data);
-          console.log(allEventArray);
+          // console.log(allEventArray);
         }
       } catch (e) {
         console.error(e);
       }
     };
     fetchEvents();
-    
   }, [allEventArray]);
   return (
     <header>
@@ -115,8 +117,9 @@ const Navbar = (props) => {
                   className="input-group-text"
                   id="basic-addon1"
                   onClick={handleSearch}
-                  data-bs-toggle="modal"
-                  > {/*href="#exampleModalToggle"*/}
+                  data-bs-toggle="modal">
+                  {" "}
+                  {/*href="#exampleModalToggle"*/}
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </span>
               </div>

@@ -12,7 +12,7 @@ function LocationInput({ onLocationChange }) {
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if (place.geometry) {
-        console.log(place.geometry.location);
+        // console.log(place.geometry.location);
         const { lat, lng } = place.geometry.location;
         const newLocation = `${lat()},${lng()}`;
         setLocation(place.formatted_address || place.name); // Update the location state with the address or name of the selected place

@@ -53,9 +53,9 @@ export default function Login({ ...props }) {
     if (!Object.keys(errorValidation).length) {
       try {
         // const response = await login(formData.email, formData.password);
-        // console.log(` *** Response from Login End Point : ${response.data}`);
+        // // console.log(` *** Response from Login End Point : ${response.data}`);
         const response = await onLogin(formData.email, formData.password);
-        console.log("Response after calling onLogin function : ", response);
+        // console.log("Response after calling onLogin function : ", response);
         if (response.success) {
           // props.onLogin(response.data.user);
           setShowAlert(false);
@@ -65,7 +65,7 @@ export default function Login({ ...props }) {
           setShowAlert(true);
         }
       } catch (e) {
-        console.log("**** Error while logging in LOGIN COMPONENT:", e);
+        // console.log("**** Error while logging in LOGIN COMPONENT:", e);
         setError("Login Failed! Check your account details.");
         setShowAlert(true);
       }

@@ -5,9 +5,9 @@ import UserCard from "../../components/UserCard/UserCard";
 
 export default function ManageAccounts() {
   let [allUsers, setAllUsers] = useState([]);
-  let handleUserSearch = (e)=>{
-    console.log(e.target.value);
-  }
+  let handleUserSearch = (e) => {
+    // console.log(e.target.value);
+  };
   useEffect(() => {
     fetchUsers()
       .then((response) => response.data)

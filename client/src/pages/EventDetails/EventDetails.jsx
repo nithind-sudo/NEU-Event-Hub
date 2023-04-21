@@ -16,7 +16,7 @@ import { deleteEventByEventID } from "../../apiClient";
 import { useNavigate } from "react-router-dom";
 
 const EventDetails = ({ eventInfo }) => {
-  console.log("Event Info : ", eventInfo);
+  // console.log("Event Info : ", eventInfo);
   const durationInMillis =
     new Date(eventInfo.endTime).getTime() -
     new Date(eventInfo.startTime).getTime();
@@ -58,10 +58,12 @@ const EventDetails = ({ eventInfo }) => {
   const navigate = useNavigate();
 
   const deleteEvent = () => {
-    deleteEventByEventID(eventInfo.event_id).then(response=>response.data).then((data)=>{
-      navigate("/allEvents");
-    });
-  }
+    deleteEventByEventID(eventInfo.event_id)
+      .then((response) => response.data)
+      .then((data) => {
+        navigate("/allEvents");
+      });
+  };
 
   return (
     <div>
@@ -205,7 +207,9 @@ const EventDetails = ({ eventInfo }) => {
                     <b>Caution</b>
                   </div>
                   <p class="card-text">
-                    <button className="btn btn-danger" onClick={deleteEvent}>Delete Event</button>
+                    <button className="btn btn-danger" onClick={deleteEvent}>
+                      Delete Event
+                    </button>
                   </p>
                   <br />
                 </div>
