@@ -78,4 +78,9 @@ router.post("/addEventToUser", userController.updateUserInfo);
 
 router.post("/decreaseEventCount", eventController.updateEvent);
 
+router.post("/getAllPaymentsInfo", async (req, res)=>{
+  let response = await Payment.find({user: req.body.userID}).exec();
+  res.send(response);
+});
+
 module.exports = router;
