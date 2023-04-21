@@ -12,7 +12,7 @@ exports.getConfig = async (req, res) => {
 exports.createPaymentIntent = async (req, res) => {
   try {
     const { amount } = req.body;
-
+    console.log();
     // Validate required parameters
     if (!amount) {
       return res

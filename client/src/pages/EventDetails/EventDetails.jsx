@@ -14,6 +14,7 @@ import {
 import LocationMap from "../../components/Layout/LocationMap";
 import { useNavigate } from "react-router-dom";
 
+
 const EventDetails = ({ eventInfo }) => {
   console.log("Event Info : ", eventInfo);
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const EventDetails = ({ eventInfo }) => {
 
   const imageAddress =
     "https://images.unsplash.com/photo-1498940757830-82f7813bf178?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80";
-  const eventPrice = 20;
+  const eventPrice = eventInfo.eventPrice;
   const [ticketCount, setTicketCount] = useState(1);
 
   const handleIncrement = () => {

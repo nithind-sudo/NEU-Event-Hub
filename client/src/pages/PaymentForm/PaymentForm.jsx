@@ -8,11 +8,13 @@ import {
   createPaymentIntent,
   createPayment,
 } from "../../apiClient";
+import { EventManagementState } from "../../contexts/context";
 
 const PaymentForm = () => {
   console.log("Inside Payment Form");
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
+  const { state, dispatch } = EventManagementState();
 
   useEffect(() => {
     fetchPaymentConfig().then((response) => {
@@ -22,9 +24,12 @@ const PaymentForm = () => {
   }, []);
 
   useEffect(() => {
-    createPaymentIntent().then((response) => {
-      const { clientSecretFromAPI } = response.data;
-      setClientSecret(clientSecretFromAPI);
+    // Need to add amount to call createPaymentIntent()
+    createPaymentIntent(state.selectedEvent.price).then((response) => {
+      console.log(response);
+      const { clientSecret } = response.data;
+      console.log(clientSecret);
+      setClientSecret(clientSecret);
     });
   }, []);
 

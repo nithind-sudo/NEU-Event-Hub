@@ -24,13 +24,15 @@ const CheckoutForm = ({ onSuccess, eventId, user_id }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/completion`,
+        return_url: `${window.location.origin}/main`
+        // success_url: `${window.location.origin}/main`,
       },
     });
     if (error) {
       if (error.type === "card_error" || error.type === "validation_error") {
         setMessage(error.message);
       } else {
+        console.log(error.message);
         setMessage("An unexpected error occured.");
       }
     } else {
@@ -66,14 +68,18 @@ const CheckoutForm = ({ onSuccess, eventId, user_id }) => {
 
   return (
     <>
-      <Form id="payment-form" onSubmit={handleSubmit}>
+      <Form>
         <Container>
           <PaymentElement id="payment-element" />
-          <button disabled={isProcessing || !stripe || !elements} id="submit">
+          <Button
+            disabled={isProcessing || !stripe || !elements}
+            id="submit"
+            onClick={handleSubmit}
+          >
             <span id="button-text">
               {isProcessing ? "Processing ... " : "Pay now"}
             </span>
-          </button>
+          </Button>
           {/* Show any error or success messages */}
           {message && <div id="payment-message">{message}</div>}
         </Container>

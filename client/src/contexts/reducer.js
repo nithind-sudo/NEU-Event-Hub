@@ -13,6 +13,7 @@ export const initialState = {
   isVerified: false,
   first_name: "",
   last_name: "",
+  selectedEvent : {}
 };
 
 export function reducer(state, action) {
@@ -52,6 +53,12 @@ export function reducer(state, action) {
         role: action.role,
         phone_number: action.phone_number,
         created_on: action.created_on,
+      };
+    
+    case ACTIONS.SET_VIEW_EVENT:
+      return {
+        ...state,
+        selectedEvent : action.selectedEvent
       };
 
     case ACTIONS.LOG_OUT:
