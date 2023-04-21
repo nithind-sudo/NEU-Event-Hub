@@ -42,18 +42,7 @@ const Card = ({
   let navigate = useNavigate();
 
   const registerForEvent = () => {
-    // TODO : Add a dispatch here - for checkout
-    navigate("/checkout", {
-      state: {
-        eventName: eventName,
-        eventDescription: eventDescription,
-        eventID: eventID,
-        eventDate: eventDate,
-        eventImage: eventImage,
-        numberOfSeats: 1,
-        ticketPrice: 20,
-      },
-    });
+    navigate("/checkout");
   };
 
   return (

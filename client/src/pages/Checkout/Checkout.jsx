@@ -36,6 +36,8 @@ const Checkout = () => {
       })
       .then((response) => {
         if (response.status == 200) {
+          // Add a row to payments table
+          
           navigate("/successPayment", {state:{
             username: username,
             event: [state.event],
