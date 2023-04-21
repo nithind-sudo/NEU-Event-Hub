@@ -28,7 +28,7 @@ export const fetchUsers = async () => {
 };
 export const deleteUser = async (user_id) => {
   try {
-    const response = await instance.delete("/getAllUsers/delete/"+user_id);
+    const response = await instance.delete("/getAllUsers/delete/" + user_id);
     return response;
   } catch (error) {
     throw error;
@@ -36,7 +36,7 @@ export const deleteUser = async (user_id) => {
 };
 export const fetchEvents = async (event_name) => {
   try {
-    const response = await instance.get("/search/event/"+event_name);
+    const response = await instance.get("/search/event/" + event_name);
     return response;
   } catch (error) {
     throw error;
@@ -172,10 +172,27 @@ export const getAllEvents = async () => {
 
 export const getEventDetails = async (event_id) => {
   console.log("Inside getEvent Details for Event with Id : ", event_id);
-  try{
+  try {
     const response = await instance.get(`/v1/event/${event_id}`);
     return response;
-  }catch(error){
+  } catch (error) {
     throw error;
   }
-}
+};
+
+export const fetchCheckoutPayment = async (eventId, price) => {
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const payload = { eventId, price };
+    const response = await instance.post("/v1/payment", payload, {
+      withCredentials: true,
+      headers,
+    });
+    console.log("**** RESPONSE from POST Payment API ****** : ", response.data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -23,6 +23,10 @@ const paymentSchema = new Schema({
     type: String,
     required: true,
   },
+  paymentId: {
+    type: String,
+    required: true,
+  },
 });
 
 const Payment = model("Payment", paymentSchema);
