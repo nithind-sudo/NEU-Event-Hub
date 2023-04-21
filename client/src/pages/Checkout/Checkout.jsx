@@ -58,6 +58,12 @@ const Checkout = () => {
               numberOfSeats: state.numberOfSeats,
             },
           });
+          // Update code to use dispatch to update state
+          navigate("/successPayment", {state:{
+            username: username,
+            event: [state.event],
+            numberOfSeats: state.numberOfSeats
+          }});
         } else {
           navigate("/badPayment");
         }

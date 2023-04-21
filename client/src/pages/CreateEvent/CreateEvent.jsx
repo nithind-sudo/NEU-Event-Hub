@@ -382,7 +382,8 @@ export default function CreateEvent({
                         variant="success"
                         text={"Create Event"}
                         onClick={handleCreateEvent}
-                        className="mt-3 mb-1"></Button>
+                        className="mt-3 mb-1"
+                        ></Button>
                     </div>
                   </div>
                 </div>

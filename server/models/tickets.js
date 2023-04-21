@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const paymentSchema = new Schema({
+const ticketSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -11,20 +11,8 @@ const paymentSchema = new Schema({
     ref: "Event",
     required: true,
   },
-  amount: {
+  price: {
     type: Number,
-    required: true,
-  },
-  paymentDate: {
-    type: Date,
-    required: true,
-  },
-  paymentMethod: {
-    type: String,
-    required: true,
-  },
-  paymentId: {
-    type: String,
     required: true,
   },
   quantity: {
@@ -33,8 +21,6 @@ const paymentSchema = new Schema({
   },
 });
 
-const Payment = model("Payment", paymentSchema);
+const Ticket = model("Ticket", ticketSchema);
 
-module.exports = Payment;
-
-module.exports = Payment;
+module.exports = Ticket;

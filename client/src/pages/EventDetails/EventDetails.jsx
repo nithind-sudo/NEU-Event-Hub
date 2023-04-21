@@ -47,21 +47,14 @@ const EventDetails = ({ eventInfo, event }) => {
   const [ticketCount, setTicketCount] = useState(1);
 
   const handleIncrement = () => {
-<<<<<<< HEAD
     setTicketCount(ticketCount < 3 ? ticketCount + 1 : 3); // Limit the ticket count to a maximum of 3
+    
     
   };
 
   const handleDecrement = () => {
     setTicketCount(ticketCount > 1 ? ticketCount - 1 : 1); // Limit the ticket count to a minimum of 1
-    // console.log("After ticket Decrement : ", ticketCount);
-=======
-    setTicketCount(ticketCount < 3 && (eventInfo.numberOfTickets-ticketCount)>=0 ? ticketCount + 1 : 3); // Limit the ticket count to a maximum of 3
-  };
-
-  const handleDecrement = () => {
-    setTicketCount(ticketCount > 1 && (eventInfo.numberOfTickets-ticketCount)>=0 ? ticketCount - 1 : 1); // Limit the ticket count to a minimum of 1
->>>>>>> 36011b3 (Handled Tickets Count)
+    console.log("After ticket Decrement : ", ticketCount);
   };
 
   const handleBookEvent = () => {
