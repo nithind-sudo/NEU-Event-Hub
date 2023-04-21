@@ -60,6 +60,77 @@ const Category = (props) => {
               <AllEvents eventArray={eventArray} getList={category.name} />
             </div>
           </div>
+          <div className="row">
+            <div className="text-center">
+              <div className="display-6 colorCodeNortheastern"><b>CAPTURED BEST MOMENT</b></div>
+              <div className="rounded mb-5 mt-3">
+                {category.name == "Students Organized Events" ? (
+                  <img
+                    src={studentsOrganized}
+                    alt="Students Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : category.name == "Professors Organized Events" ? (
+                  <img
+                    src={professorsOrganized}
+                    alt="Professors Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : category.name == "Speakers Organized Events" ? (
+                  <img
+                    src={speakersOrganized}
+                    alt="Speakers Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : category.name == "Northeastern's Management Events" ? (
+                  <img
+                    src={universityOrganized}
+                    alt="Northeastern's Management Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : category.name ==
+                  "Khoury College of Computer Science Organized Events" ? (
+                  <img
+                    src={computerScienceOrganized}
+                    alt="Computer Science Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : category.name ==
+                  "College of Engineering Organized Events" ? (
+                  <img
+                    src={engineeringOrganized}
+                    alt="Engineering Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : category.name ==
+                  "College of Professional Studies Organized Events" ? (
+                  <img
+                    src={cpsOrganized}
+                    alt="CPS Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : category.name == "College of Science Organized Events" ? (
+                  <img
+                    src={scienceOrganized}
+                    alt="CPS Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : category.name == "D'Amore College of Management Events" ? (
+                  <img
+                    src={managementOrganized}
+                    alt="Management Organized Image"
+                    className="img-thumbnail"
+                  />
+                ) : (
+                  <img
+                    src={otherOrganized}
+                    alt="Students Organized Image"
+                    className="img-thumbnail"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <Footer />
