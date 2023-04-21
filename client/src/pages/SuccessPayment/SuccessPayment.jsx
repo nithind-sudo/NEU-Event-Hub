@@ -24,7 +24,7 @@ const SuccessPayment = () => {
       quantity: state.numberOfSeats,
       event_id: state.eventID,
       user_id: state.user_id,
-      paymentId : location.state.paymentId
+      paymentId: location.state.paymentId,
     };
     console.log("Payment Payload inside useEffect : ", paymentPayload);
     createPaymentRecord(paymentPayload)
@@ -36,11 +36,25 @@ const SuccessPayment = () => {
             event: state.event,
           })
           .then((response) =>
-            console.log("Row entered into User collection : ", response)
+            axios
+              .post("http://localhost:3000/stripe/decreaseEventCount", {
+                eventID: state.eventID,
+                ticketsCount: state.numberOfSeats,
+              })
+              .then((res) =>
+                console.log("Responsesssdasdakndbsj,fnsakfansfgkjnfsa", res)
+              )
           );
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [
+    state.ticketPrice,
+    state.numberOfSeats,
+    state.eventID,
+    state.user_id,
+    location.state.paymentId,
+    createPaymentRecord,
+  ]);
 
   return (
     <div>

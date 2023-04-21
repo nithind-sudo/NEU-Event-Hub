@@ -76,8 +76,6 @@ router.post("/paymentrecord", async (req, res, err) => {
 
 router.post("/addEventToUser", userController.updateUserInfo);
 
-router.post("/decreaseEventCount", (req, res)=>{
-  res.send(req.body);
-})
+router.post("/decreaseEventCount", eventController.updateEvent);
 
 module.exports = router;
