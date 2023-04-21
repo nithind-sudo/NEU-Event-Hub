@@ -59,7 +59,7 @@ body {
   width: 21.5rem;
 }
 .form-control.custom-dropdown-width {
-  width: 15rem;
+  width: 100% !important;
 }
 
 .form-control.signup-input-email {
