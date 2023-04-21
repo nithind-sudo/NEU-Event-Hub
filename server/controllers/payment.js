@@ -32,6 +32,7 @@ exports.createPayment = async (req, res) => {
       amount: paymentIntent.amount / 100,
       paymentDate: new Date(),
       paymentMethod: "Stripe",
+      paymentId : paymentIntent.id
     });
 
     await payment.save();
@@ -39,8 +40,8 @@ exports.createPayment = async (req, res) => {
     res
       .status(200)
       .json({
-        message: "Payment successful",
-        client_secret: paymentIntent.client_secret,
+        paymentId : paymentIntent.id,
+        amount, eventId, user_id, success : true
       });
   } catch (error) {
     console.error(error);
