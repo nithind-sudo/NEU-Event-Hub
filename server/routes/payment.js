@@ -5,6 +5,7 @@ const Stripe = require("stripe")(process.env.SECRET_KEY);
 var cors = require("cors");
 const bodyParser = require("body-parser");
 const userController = require("../controllers/users");
+const eventController = require("../controllers/events");
 
 express().use(bodyParser.json());
 express().use(bodyParser.urlencoded({ extended: true }));
@@ -19,5 +20,9 @@ router.post(
   "/addEventToUser",
   userController.updateUserInfo
 );
+
+router.post("/decreaseEventCount", (req, res)=>{
+  res.send(req.body);
+})
 
 module.exports = router;

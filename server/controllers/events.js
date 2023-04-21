@@ -31,6 +31,16 @@ exports.getAllEventsByCategory = async (req, res) => {
   }
 };
 
+exports.updateEvent = async (req, res) => {
+  try {
+    let eventID = Number(req.body.eventID);
+    let ticketsCount = Number(req.body.ticketsCount);
+    await eventService.updateEventCount(eventID, ticketsCount).then(response=>res.send(response));
+  } catch (e) {
+    res.status(400).send({ message: "400 Bad Request", error: e.message });
+  }
+};
+
 exports.deleteEvent = async (req, res) => {
   try {
     const eventsInfo = await eventService.deleteEvent(req.params.event_id);
