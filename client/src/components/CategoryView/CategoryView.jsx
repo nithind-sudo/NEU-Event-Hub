@@ -73,7 +73,7 @@ const CategoryView = ({ handlelogout }) => {
                 key={index}>
                 <Link to={eventLinks[index]}>
                   <div
-                    className="card border border-dark mx-2 my-2 card-specs rounded d-flex align-items-center"
+                    className="card border border-dark mx-2 my-2 card-specs rounded d-flex"
                     style={{ "--bs-border-opacity": 0.2 }}>
                     <div className="card-body d-flex align-items-center">
                       <FontAwesomeIcon
