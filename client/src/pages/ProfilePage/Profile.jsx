@@ -13,8 +13,16 @@ const schema = Joi.object({
   phone_number: Joi.string()
     .pattern(/^[0-9]{10}$/)
     .required(),
-  first_name: Joi.string().min(2).required().strict(),
-  last_name: Joi.string().min(2).required().strict(),
+  first_name: Joi.string()
+    .min(2)
+    .regex(/^[A-Za-z]+$/)
+    .required()
+    .strict(),
+  last_name: Joi.string()
+    .min(2)
+    .regex(/^[A-Za-z]+$/)
+    .required()
+    .strict(),
 });
 
 export default function Profile() {
