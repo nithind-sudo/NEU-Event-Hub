@@ -54,10 +54,10 @@ export default function CreateEvent({
         "D'Amore College of Management Events"
       )
       .required(),
-    startDate: Joi.date().iso().min("now").required(),
-    endDate: Joi.date().iso().min(Joi.ref("startDate")).required(),
-    startTime: Joi.date().min(Joi.ref("startDate")).required(),
-    endTime: Joi.date().greater(Joi.ref("startTime")).required(),
+    // startDate: Joi.date().iso().min("now").required(),
+    // endDate: Joi.date().iso().min(Joi.ref("startDate")).required(),
+    // startTime: Joi.date().min(Joi.ref("startDate")).required(),
+    // endTime: Joi.date().greater(Joi.ref("startTime")).required(),
     enteredLocation: Joi.string().min(2).required(),
   });
 
@@ -152,7 +152,7 @@ export default function CreateEvent({
           lng: mapsLocation.split(",")[1],
         },
         category: selectedTag,
-        date: formData.startDate.substring(0, 10),
+        date: startDate.substring(0, 10),
         startTime: startTime,
         endTime: endTime,
         organizer: state.user_id,
@@ -194,9 +194,9 @@ export default function CreateEvent({
             lng: mapsLocation.split(",")[1],
           },
           category: selectedTag,
-          date: formData.startDate.substring(0, 10),
-          startTime: formData.startDate,
-          endTime: formData.endDate,
+          date: startDate.substring(0, 10),
+          startTime: startTime,
+          endTime: endTime,
           organizer: state.user_id,
           imageUrl: formData.imageUrl,
           price: formData.price,
