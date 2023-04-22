@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="row">
           <div className="col-lg-4 col-md-4 col-sm-12 mb-4">
             <p className="text-lg-left text-md-left text-center">
-              &copy; 2023 Northeastern Events
+              &copy; Northeastern Events 2023
             </p>
             <ul className="list-unstyled text-lg-left text-md-left text-center">
               <li>Terms of Service</li>
@@ -40,7 +40,7 @@ const Footer = () => {
                   <input
                     type="email"
                     className="form-control"
-                    placeholder="Enter your Email ID"
+                    placeholder="Enter your Email ID!"
                     name="email"
                     required
                   />
