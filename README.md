@@ -39,5 +39,5 @@ We provide a secure, reliable, and user-friendly platform for buying and selling
 - Sai tej Sunkara
 - Nithin Dornipadu
 - Akhilesh Kavitkar
-- Kaustubh Lawale
+- Kaustubh lawale
 
