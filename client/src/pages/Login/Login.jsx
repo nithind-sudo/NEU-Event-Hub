@@ -109,7 +109,7 @@ export default function Login({ ...props }) {
                                 onChange={(e) =>
                                   handleFieldChange("email", e.target.value)
                                 }
-                                placeholder={"Enter your Email ID"}
+                                placeholder={"Please Enter your Email ID"}
                                 onBlur={() => handleFieldBlur("email")}
                                 isInvalid={!!errorValidation.email}
                               />
@@ -125,7 +125,7 @@ export default function Login({ ...props }) {
                                 type="password"
                                 value={formData.password}
                                 className="login-input"
-                                placeholder={"Enter your Password"}
+                                placeholder={"Please Enter your Password"}
                                 onChange={(e) =>
                                   handleFieldChange("password", e.target.value)
                                 }

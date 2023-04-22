@@ -186,7 +186,6 @@ export default function MyAccount({
           </Container>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

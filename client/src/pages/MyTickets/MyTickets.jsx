@@ -3,10 +3,12 @@ import "./MyTickets.css";
 import axios from "axios";
 import { fetchSession, fetchUserInfo } from "../../apiClient";
 import QRCode from "qrcode.react";
+import { getAllEvents } from "../../apiClient";
 
 export default function MyTickets() {
   const [events, setEvents] = useState([]);
   const [userID, setUserID] = useState(null);
+  const [allEvents, setAllEvents] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -20,8 +22,11 @@ export default function MyTickets() {
           { userID }
         );
 
+        const fetchAllEvents = await getAllEvents();
+
         setUserID(userID);
         setEvents(paymentsInfoResponse.data.reverse());
+        setAllEvents(fetchAllEvents.data);
       }
     }
 
@@ -30,6 +35,19 @@ export default function MyTickets() {
 
   console.log(events);
   console.log(userID);
+  console.log(allEvents);
+
+  function createHashmap(events) {
+    let hashmap = {};
+    events.map((data, key) => {
+      let hashKey = data._id;
+      let hashValue = data.title;
+      hashmap[hashKey] = hashValue;
+    });
+    return hashmap;
+  }
+
+  const hashmap = createHashmap(allEvents);
 
   return (
     <div>
@@ -39,26 +57,27 @@ export default function MyTickets() {
             {events
               .filter((data) => userID == data.user)
               .map((data, key) => {
+                const eventTitle = hashmap[data.event];
                 return (
                   <div
                     className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-3"
                     key={key}>
-                    <div class="card h-100 text-dark makeCard">
-                      <div class="card-body">
-                        <h5 class="card-title">Ticket {key + 1}</h5>
-                        <p class="card-text">{data.event}</p>
-                        <ul class="list-group">
-                          <li class="list-group-item">
+                    <div className="card h-100 text-dark makeCard">
+                      <div className="card-body">
+                        <h5 className="card-title">Ticket {key + 1}</h5>
+                        <p className="card-text">{eventTitle}</p>
+                        <ul className="list-group">
+                          <li className="list-group-item">
                             <b>Transaction:</b> {data.paymentId}
                           </li>
-                          <li class="list-group-item">
+                          <li className="list-group-item">
                             <b>Amount:</b> {data.amount}
                           </li>
-                          <li class="list-group-item">
+                          <li className="list-group-item">
                             <b>Payment Date:</b>{" "}
                             {new Date(data.paymentDate).toDateString()}
                           </li>
-                          <li class="list-group-item">
+                          <li className="list-group-item">
                             <b>Number of People:</b> {data.quantity}
                           </li>
                         </ul>
