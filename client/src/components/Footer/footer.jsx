@@ -67,7 +67,7 @@ const Footer = () => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Company"
+                    placeholder="Company Name"
                     name="company"
                   />
                 </div>
