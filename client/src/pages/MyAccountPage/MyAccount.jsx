@@ -173,7 +173,6 @@ export default function MyAccount({ handlelogout }) {
           </Container>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
