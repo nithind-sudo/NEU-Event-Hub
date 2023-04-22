@@ -54,10 +54,6 @@ export default function CreateEvent({
         "D'Amore College of Management Events"
       )
       .required(),
-    // startDate: Joi.date().iso().min("now").required(),
-    // endDate: Joi.date().iso().min(Joi.ref("startDate")).required(),
-    // startTime: Joi.date().min(Joi.ref("startDate")).required(),
-    // endTime: Joi.date().greater(Joi.ref("startTime")).required(),
     enteredLocation: Joi.string().min(2).required(),
   });
 
@@ -68,10 +64,6 @@ export default function CreateEvent({
     price: 0,
     numberOfTickets: 0,
     selectedTag: "",
-    // startDate: new Date().toISOString(),
-    // endDate: new Date().toISOString(),
-    // startTime: "",
-    // endTime: "",
     enteredLocation: "",
   });
 
@@ -142,35 +134,47 @@ export default function CreateEvent({
   const handleCreateEvent = async (e) => {
     const mapsLocation = enteredLocation;
     e.preventDefault();
-    const payload = {
-      title: formData.title,
-      description: formData.description,
-      location: {
-        lat: mapsLocation.split(",")[0],
-        lng: mapsLocation.split(",")[1],
-      },
-      category: selectedTag,
-      date: startDate.toISOString().substr(0, 10),
-      startTime: startTime.toISOString(),
-      endTime: endTime.toISOString(),
-      organizer: state.user_id,
-      imageUrl: formData.imageUrl,
-      price: formData.price,
-      numberOfTickets: formData.numberOfTickets,
-    };
-    try {
-      const response = await fetchCreateEvent(payload);
-      // console.log(
-      //   ` *** Response from Create Event End Point : ${response.data}`
-      // );
-      if (response.data.success) {
-        setShowAlert(true);
-        setAlertClass("success");
-        setError("Event Created Successfully!!!");
-        setTimeout(() => {
-          navigate("/main");
-        }, 2000);
-      } else {
+    console.log("Before If : ", errorValidation);
+    console.log("StartDate : ", startDate);
+    console.log("endDate : ", endDate);
+    if(errorValidation.hasOwnProperty("startDate")){
+      delete errorValidation.startDate;
+    }
+    if(errorValidation.hasOwnProperty("endDate")){
+      delete errorValidation.endDate;
+    }
+    if (!Object.keys(errorValidation).length) {
+      const payload = {
+        title: formData.title,
+        description: formData.description,
+        location: {
+          lat: mapsLocation.IsoString().split(",")[0],
+          lng: mapsLocation.split(",")[1],
+        },
+        category: selectedTag,
+        date: startDate.toLocaleString().substring(0, 10),
+        startTime: startTime.toLocaleString().substring(11,),
+        endTime: endTime.toLocaleString().substring(11,),
+        organizer: state.user_id,
+        imageUrl: formData.imageUrl,
+        price: formData.price,
+        numberOfTickets: formData.numberOfTickets,
+      };
+      try {
+        const response = await fetchCreateEvent(payload);
+        if (response.data.success) {
+          setShowAlert(true);
+          setAlertClass("success");
+          setError("Event Created Successfully!!!");
+          setTimeout(() => {
+            navigate("/main");
+          }, 1000);
+        } else {
+          setAlertClass("danger");
+          setError(response.data.error);
+          setShowAlert(true);
+        }
+      } catch (error) {
         setAlertClass("Danger");
         setError("Invalid Data In Form");
         setShowAlert(true);
