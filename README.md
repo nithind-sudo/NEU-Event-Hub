@@ -38,9 +38,3 @@ We provide a secure, reliable, and user-friendly platform for buying and selling
 * Command `npm run build` will build the application with the necessary static files
 * If above build command was used, `npm start` will start the front and backend application which will be running on same port
 
-### Contributors
-- Sai tej Sunkara
-- Nithin Dornipadu
-- Akhilesh Kavitkar
-- Kaustubh lawale
-
