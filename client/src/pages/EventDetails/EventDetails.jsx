@@ -22,7 +22,7 @@ const EventDetails = ({ eventInfo, event }) => {
   const durationInMillis =
     new Date(eventInfo.endTime).getTime() -
     new Date(eventInfo.startTime).getTime();
-  const durationInHours = Math.round(durationInMillis / (1000 * 60 * 60));
+  const durationInHours = Math.abs(Math.round(durationInMillis / (1000 * 60 * 60)));
   const { state, dispatch } = EventManagementState();
 
   const formattedTime = `${new Date(eventInfo.startTime).toLocaleDateString(

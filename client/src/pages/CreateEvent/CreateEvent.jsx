@@ -75,15 +75,23 @@ export default function CreateEvent({
   const navigate = useNavigate();
 
   const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
 
   const { state, dispatch } = EventManagementState();
 
   const handleStartDateChange = (date) => {
-    setFormData({ ...formData, startDate: new Date(date) });
-    setStartDate(date);
+    if (new Date() > new Date(date)) {
+      setFormData({ ...formData, startDate: new Date() });
+      setStartDate(new Date());
+    } else {
+      setFormData({ ...formData, startDate: new Date(date) });
+      setStartDate(date);
+    }
+    if(new Date(endDate)<new Date(date)) {
+      setEndDate(date);
+    }
   };
 
   const handleStartTimeChange = (time) => {
@@ -92,8 +100,13 @@ export default function CreateEvent({
   };
 
   const handleEndDateChange = (date) => {
-    setFormData({ ...formData, endDate: new Date(date) });
-    setEndDate(date);
+    if (new Date(date) > new Date(startDate)) {
+      setFormData({ ...formData, endDate: new Date(date) });
+      setEndDate(date);
+    } else {
+      setFormData({ ...formData, endDate: new Date(startDate) });
+      setEndDate(startDate);
+    }
   };
 
   const handleEndTimeChange = (time) => {
@@ -137,10 +150,10 @@ export default function CreateEvent({
     console.log("Before If : ", errorValidation);
     console.log("StartDate : ", startDate);
     console.log("endDate : ", endDate);
-    if(errorValidation.hasOwnProperty("startDate")){
+    if (errorValidation.hasOwnProperty("startDate")) {
       delete errorValidation.startDate;
     }
-    if(errorValidation.hasOwnProperty("endDate")){
+    if (errorValidation.hasOwnProperty("endDate")) {
       delete errorValidation.endDate;
     }
     if (!Object.keys(errorValidation).length) {
@@ -148,13 +161,13 @@ export default function CreateEvent({
         title: formData.title,
         description: formData.description,
         location: {
-          lat: mapsLocation.IsoString().split(",")[0],
+          lat: mapsLocation.split(",")[0],
           lng: mapsLocation.split(",")[1],
         },
         category: selectedTag,
-        date: startDate.toLocaleString().substring(0, 10),
-        startTime: startTime.toLocaleString().substring(11,),
-        endTime: endTime.toLocaleString().substring(11,),
+        date: startDate.toISOString().substring(0, 10),
+        startTime: startTime.toISOString().substring(),
+        endTime: endTime.toISOString().substring(),
         organizer: state.user_id,
         imageUrl: formData.imageUrl,
         price: formData.price,
@@ -300,8 +313,7 @@ export default function CreateEvent({
                           <Dropdown.Toggle
                             variant="outline-secondary"
                             id="dropdown-basic"
-                            style={{ width: "100%" }}
-                          >
+                            style={{ width: "100%" }}>
                             {selectedTag}
                           </Dropdown.Toggle>
                           <Dropdown.Menu>
@@ -412,6 +424,7 @@ export default function CreateEvent({
                           <label className="lead mt-3 mb-1">
                             Price of Ticket
                           </label>
+                          <h6>(At most $30 for Students)</h6>
                           <div className="">
                             <TextInput
                               type="number"
@@ -459,8 +472,7 @@ export default function CreateEvent({
                         variant="success"
                         text={"Create Event"}
                         onClick={handleCreateEvent}
-                        className="mt-3 mb-1"
-                      ></Button>
+                        className="mt-3 mb-1"></Button>
                     </div>
                   </div>
                 </div>
