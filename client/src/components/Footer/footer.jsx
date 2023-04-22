@@ -25,6 +25,7 @@ const Footer = () => {
                 <br />
                 360 Huntington Ave, Boston, MA 02115
                 <br />
+                <br />
                 Email:{" "}
                 <Link
                   to="mailto:events@northeastern.edu"
