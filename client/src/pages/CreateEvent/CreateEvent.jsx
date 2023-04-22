@@ -23,10 +23,38 @@ export default function CreateEvent({
   setError,
   error,
 }) {
+  const eventTags = [
+    "Students Organized Events",
+    "Professors Organized Events",
+    "Speakers Organized Events",
+    "Northeastern's Management Events",
+    "Khoury College of Computer Science Organized Events",
+    "College of Engineering Organized Events",
+    "College of Professional Studies Organized Events",
+    "College of Science Organized Events",
+    "D'Amore College of Management Events",
+  ];
+
   const schema = Joi.object({
-    title: Joi.string().min(2).required(),
+    title: Joi.string().min(2).required().strict(),
     description: Joi.string().min(2).required(),
     imageUrl: Joi.string().uri().trim().required(),
+    price: Joi.number().min(0).required(),
+    numberOfTickets: Joi.number().integer().min(1).max(1000).required(),
+    selectedTag: Joi.string()
+      .valid(
+        "Students Organized Events",
+        "Professors Organized Events",
+        "Speakers Organized Events",
+        "Northeastern's Management Events",
+        "Khoury College of Computer Science Organized Events",
+        "College of Engineering Organized Events",
+        "College of Professional Studies Organized Events",
+        "College of Science Organized Events",
+        "D'Amore College of Management Events"
+      )
+      .required(),
+    enteredLocation: Joi.string().min(2).required(),
   });
 
   const [formData, setFormData] = useState({
@@ -35,47 +63,71 @@ export default function CreateEvent({
     imageUrl: "",
     price: 0,
     numberOfTickets: 0,
+    selectedTag: "",
+    enteredLocation: "",
   });
 
   const [errorValidation, setErrorValidation] = useState("");
   const [selectedTag, setSelectedTag] = useState("Select a Event");
-  const [enteredlocation, setEnteredLocation] = useState("");
+  const [enteredLocation, setEnteredLocation] = useState("");
   const [alertClass, setAlertClass] = useState("danger");
 
   const navigate = useNavigate();
 
   const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
 
   const { state, dispatch } = EventManagementState();
 
   const handleStartDateChange = (date) => {
-    setStartDate(date);
+    if (new Date() > new Date(date)) {
+      setFormData({ ...formData, startDate: new Date() });
+      setStartDate(new Date());
+    } else {
+      setFormData({ ...formData, startDate: new Date(date) });
+      setStartDate(date);
+    }
+    if(new Date(endDate)<new Date(date)) {
+      setEndDate(date);
+    }
   };
 
   const handleStartTimeChange = (time) => {
+    setFormData({ ...formData, startTime: new Date(time) });
     setStartTime(time);
   };
 
   const handleEndDateChange = (date) => {
-    setEndDate(date);
+    if (new Date(date) > new Date(startDate)) {
+      setFormData({ ...formData, endDate: new Date(date) });
+      setEndDate(date);
+    } else {
+      setFormData({ ...formData, endDate: new Date(startDate) });
+      setEndDate(startDate);
+    }
   };
 
   const handleEndTimeChange = (time) => {
+    setFormData({ ...formData, endTime: new Date(time) });
     setEndTime(time);
   };
 
   const handleLocationChange = (value) => {
+    setFormData({ ...formData, enteredLocation: value });
     setEnteredLocation(value);
   };
 
   const handleSelect = (e) => {
+    setFormData({ ...formData, selectedTag: e });
     setSelectedTag(e);
   };
 
   const handleFieldChange = (name, value) => {
+    if (name === "startDate" || name === "endDate") {
+      value = new Date(value);
+    }
     setFormData({ ...formData, [name]: value });
   };
 
@@ -93,48 +145,107 @@ export default function CreateEvent({
   };
 
   const handleCreateEvent = async (e) => {
-    const mapsLocation = enteredlocation;
-    // console.log("LAT and LONG for location : ", {
-    //   lat: parseFloat(mapsLocation.split(",")[0]),
-    //   lng: parseFloat(mapsLocation.split(",")[1]),
-    // });
+    const mapsLocation = enteredLocation;
     e.preventDefault();
-    const payload = {
-      title: formData.title,
-      description: formData.description,
-      location: {
-        lat: mapsLocation.split(",")[0],
-        lng: mapsLocation.split(",")[1],
-      },
-      category: selectedTag,
-      date: startDate.toISOString().substr(0, 10),
-      startTime: startTime.toISOString(),
-      endTime: endTime.toISOString(),
-      organizer: state.user_id,
-      imageUrl: formData.imageUrl,
-      price: formData.price,
-      numberOfTickets: formData.numberOfTickets,
-    };
-    try {
-      const response = await fetchCreateEvent(payload);
-      // console.log(
-      //   ` *** Response from Create Event End Point : ${response.data}`
-      // );
-      if (response.data.success) {
-        setShowAlert(true);
-        setAlertClass("success");
-        setError("Event Created Successfully!!!");
-        setTimeout(() => {
-          navigate("/main");
-        }, 2000);
-      } else {
+    console.log("Before If : ", errorValidation);
+    console.log("StartDate : ", startDate);
+    console.log("endDate : ", endDate);
+    if (errorValidation.hasOwnProperty("startDate")) {
+      delete errorValidation.startDate;
+    }
+    if (errorValidation.hasOwnProperty("endDate")) {
+      delete errorValidation.endDate;
+    }
+    if (!Object.keys(errorValidation).length) {
+      const payload = {
+        title: formData.title,
+        description: formData.description,
+        location: {
+          lat: mapsLocation.split(",")[0],
+          lng: mapsLocation.split(",")[1],
+        },
+        category: selectedTag,
+        date: startDate.toISOString().substring(0, 10),
+        startTime: startTime.toISOString().substring(),
+        endTime: endTime.toISOString().substring(),
+        organizer: state.user_id,
+        imageUrl: formData.imageUrl,
+        price: formData.price,
+        numberOfTickets: formData.numberOfTickets,
+      };
+      try {
+        const response = await fetchCreateEvent(payload);
+        if (response.data.success) {
+          setShowAlert(true);
+          setAlertClass("success");
+          setError("Event Created Successfully!!!");
+          setTimeout(() => {
+            navigate("/main");
+          }, 1000);
+        } else {
+          setAlertClass("danger");
+          setError(response.data.error);
+          setShowAlert(true);
+        }
+      } catch (error) {
         setAlertClass("Danger");
         setError("Invalid Data In Form");
         setShowAlert(true);
       }
-    } catch (error) {
-      setAlertClass("Danger");
-      setError("Invalid Data In Form");
+    } else {
+      // Validate Start Time, end Time
+      if (
+        errorValidation.hasOwnProperty("selectedTag") &&
+        eventTags.includes(formData.selectedTag)
+      ) {
+        delete errorValidation.selectedTag;
+        const payload = {
+          title: formData.title,
+          description: formData.description,
+          location: {
+            lat: mapsLocation.split(",")[0],
+            lng: mapsLocation.split(",")[1],
+          },
+          category: selectedTag,
+          date: startDate.substring(0, 10),
+          startTime: startTime,
+          endTime: endTime,
+          organizer: state.user_id,
+          imageUrl: formData.imageUrl,
+          price: formData.price,
+          numberOfTickets: formData.numberOfTickets,
+        };
+        try {
+          const response = await fetchCreateEvent(payload);
+          if (response.data.success) {
+            setShowAlert(true);
+            setAlertClass("success");
+            setError("Event Created Successfully!!!");
+            setTimeout(() => {
+              navigate("/main");
+            }, 1000);
+          } else {
+            setAlertClass("danger");
+            setError(response.data.error);
+            setShowAlert(true);
+          }
+        } catch (error) {
+          setAlertClass("Danger");
+          setError("Invalid Data In Form");
+          setShowAlert(true);
+        }
+      }
+
+      let errorString = "";
+      console.log("Form Data : ", formData);
+      console.log("errorValidation :", errorValidation);
+      for (let field in errorValidation) {
+        errorString += `\n${errorValidation[field].replace(/['"]+/g, "")},`;
+      }
+      errorString = errorString.slice(0, -1);
+
+      console.log("Error string : ", errorString);
+      setError(`Please correct the following fields : ${errorString}`);
       setShowAlert(true);
     }
   };
@@ -313,6 +424,7 @@ export default function CreateEvent({
                           <label className="lead mt-3 mb-1">
                             Price of Ticket
                           </label>
+                          <h6>(At most $30 for Students)</h6>
                           <div className="">
                             <TextInput
                               type="number"
@@ -372,7 +484,7 @@ export default function CreateEvent({
       </div>
       {showAlert && (
         <MyToast
-          bg={"danger"}
+          bg={alertClass}
           show={showAlert}
           onClose={() => {
             setShowAlert(false);

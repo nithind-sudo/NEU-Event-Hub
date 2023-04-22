@@ -78,7 +78,7 @@ exports.createEvent = async (req, res) => {
       price,
       numberOfTickets,
     };
-    // console.log("Event Payload : ", payload);
+    console.log("Event Payload : ", payload);
     eventService
       .createEvent(payload)
       .then((eventRow) => {
