@@ -28,5 +28,5 @@ const LocationMap = ({ location, google }) => {
 };
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAE1TXk9IfcTk-cM1B1Oo4ykcmh9EhCu6c",
+  apiKey: "AIzaSyCp5wKCi6eIOoNPxLEIm74_JDa0l4v1mxc",
 })(LocationMap);
