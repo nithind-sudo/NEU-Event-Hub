@@ -30,8 +30,9 @@ export default function SignUp({ ...props }) {
     password: Joi.string().min(6).required(),
     confirmPassword: Joi.ref("password"),
     phoneNumber: Joi.string()
-      .pattern(/^[0-9]+$/)
+      .pattern(/^[0-9]{10}$/)
       .required(),
+    role: Joi.string().valid("User", "Admin").required(),
   });
 
   const [selectedRole, setSelectedRole] = useState("Select a Role");
@@ -44,6 +45,7 @@ export default function SignUp({ ...props }) {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    role: "",
   });
 
   const handleFieldChange = (name, value) => {
@@ -51,6 +53,7 @@ export default function SignUp({ ...props }) {
   };
 
   const handleSelect = (e) => {
+    setFormData({ ...formData, role: e });
     setSelectedRole(e);
   };
 
@@ -69,33 +72,81 @@ export default function SignUp({ ...props }) {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const payload = {
-      first_name: formData.firstName,
-      last_name: formData.lastName,
-      username: formData.email,
-      phone_number: formData.phoneNumber,
-      password: formData.password,
-      role: selectedRole,
-    };
-    try {
-      const response = await fetchSignUp(payload);
-      // console.log(` *** Response from SignUp End Point : ${response.data}`);
-      if (response.data.success) {
-        setShowAlert(true);
-        setAlertClass("success");
-        setError("Account Created Successfully!!!");
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      } else {
-        setAlertClass("Danger");
-        setError("Invalid Data In Form");
+    if (!Object.keys(errorValidation).length) {
+      const payload = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        username: formData.email,
+        phone_number: formData.phoneNumber,
+        password: formData.password,
+        role: selectedRole,
+      };
+      try {
+        const response = await fetchSignUp(payload);
+        console.log(` *** Response from SignUp End Point : ${response.data}`);
+        if (response.data.success) {
+          setShowAlert(true);
+          setAlertClass("success");
+          setError("Account Created Successfully!!!");
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        } else {
+          setAlertClass("danger");
+          setError(response.data.error);
+          setShowAlert(true);
+        }
+      } catch (error) {
+        setAlertClass("danger");
+        setError("Invalid Data in Form");
         setShowAlert(true);
       }
-    } catch (error) {
-      setAlertClass("Danger");
-      setError("Invalid Data In Form");
-      setShowAlert(true);
+    } else {
+      console.log("errorValidation", errorValidation);
+      if (
+        errorValidation.hasOwnProperty("role") &&
+        (formData.role === "User" || formData.role === "Admin")
+      ) {
+        // Valid Case
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          username: formData.email,
+          phone_number: formData.phoneNumber,
+          password: formData.password,
+          role: selectedRole,
+        };
+        try {
+          const response = await fetchSignUp(payload);
+          console.log(` *** Response from SignUp End Point : ${response.data}`);
+          if (response.data.success) {
+            setShowAlert(true);
+            setAlertClass("success");
+            setError("Account Created Successfully!!!");
+            setTimeout(() => {
+              navigate("/");
+            }, 1000);
+          } else {
+            setAlertClass("Danger");
+            setError("Invalid Data In Form");
+            setShowAlert(true);
+          }
+        } catch (error) {
+          setAlertClass("Danger");
+          setError("Invalid Data In Form");
+          setShowAlert(true);
+        }
+      } else {
+        let errorString = "";
+        for (let field in errorValidation) {
+          errorString += `\n${errorValidation[field].replace(/['"]+/g, "")},`;
+        }
+        errorString = errorString.slice(0, -1);
+        
+        console.log("Error string : ", errorString);
+        setError(`Please correct the following fields : ${errorString}`);
+        setShowAlert(true);
+      }
     }
   };
 
@@ -159,7 +210,7 @@ export default function SignUp({ ...props }) {
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="row my-3">
                           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label className="lead mt-3 mb-1">Email</label>
@@ -199,7 +250,8 @@ export default function SignUp({ ...props }) {
                             </div>
                           </div>
                         </div>
-                        <br/><br/>
+                        <br />
+                        <br />
                         <div className="row my-3">
                           <label className="lead mt-3 mb-1">Role</label>
                           <div className="container">
@@ -207,7 +259,8 @@ export default function SignUp({ ...props }) {
                               <Dropdown.Toggle
                                 variant="outline-secondary"
                                 style={{ width: "100%" }}
-                                id="dropdown-basic">
+                                id="dropdown-basic"
+                              >
                                 {selectedRole}
                               </Dropdown.Toggle>
 
@@ -222,7 +275,8 @@ export default function SignUp({ ...props }) {
                             </Dropdown>
                           </div>
                         </div>
-                        <br/><br/>
+                        <br />
+                        <br />
                         <div className="row my-3">
                           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label className="lead mt-3 mb-1">Password</label>
@@ -264,7 +318,8 @@ export default function SignUp({ ...props }) {
                             </div>
                           </div>
                         </div>
-                        <br/><br/>
+                        <br />
+                        <br />
                         <div className="row my-3">
                           <div className="container">
                             <div className="text-center justify-content-center align-items-center">
@@ -272,7 +327,8 @@ export default function SignUp({ ...props }) {
                                 variant="success"
                                 text={"Create Account"}
                                 onClick={handleSignUp}
-                                className="mt-3 mb-1"></Button>
+                                className="mt-3 mb-1"
+                              ></Button>
                               <br />
                               <label className=" mt-3 mb-1">
                                 Have an Account?
@@ -290,7 +346,7 @@ export default function SignUp({ ...props }) {
 
                     {showAlert && (
                       <MyToast
-                        bg={"danger"}
+                        bg={alertClass}
                         show={showAlert}
                         onClose={() => {
                           setShowAlert(false);

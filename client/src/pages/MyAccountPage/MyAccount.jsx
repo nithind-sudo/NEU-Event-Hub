@@ -23,7 +23,13 @@ import {
 import { fetchSession, fetchUserInfo } from "../../apiClient";
 import { ACTIONS } from "../../contexts/constants";
 
-export default function MyAccount({ handlelogout }) {
+export default function MyAccount({
+  handlelogout,
+  showAlert,
+  setShowAlert,
+  setError,
+  error,
+}) {
   const [selectedNavItem, setSelectedNavItem] = useState("profile");
   const { state, dispatch } = EventManagementState();
 
@@ -76,7 +82,14 @@ export default function MyAccount({ handlelogout }) {
     setSelectedNavItem(selectedKey);
   };
 
-  const profileContent = <Profile />;
+  const profileContent = (
+    <Profile
+      error={error}
+      setError={setError}
+      showAlert={showAlert}
+      setShowAlert={setShowAlert}
+    />
+  );
   const ticketsContent = <MyTickets />;
   const manageAccount = <ManageAccounts />;
 
