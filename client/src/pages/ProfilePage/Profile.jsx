@@ -1,13 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import "./Profile.css";
 import { EventManagementState } from "../../contexts/context";
 import { fetchSession, fetchUserInfo, updateUserInfo } from "../../apiClient";
 import { ACTIONS } from "../../contexts/constants";
 import { useNavigate } from "react-router-dom";
+import MyToast from "../../components/ui/Toast";
+import Joi from "joi";
+import { AlertContext } from "../../contexts/AlertContext";
 
-export default function Profile({ user }) {
+const schema = Joi.object({
+  phone_number: Joi.string()
+    .pattern(/^[0-9]{10}$/)
+    .required(),
+  first_name: Joi.string().min(2).required().strict(),
+  last_name: Joi.string().min(2).required().strict(),
+});
+
+export default function Profile() {
   const { state, dispatch } = EventManagementState();
+  const [alertClass, setAlertClass] = useState("danger");
 
   const [firstName, setFirstName] = useState(state.first_name);
   const [lastName, setLastName] = useState(state.last_name);
@@ -15,6 +27,8 @@ export default function Profile({ user }) {
   const [username, setUsername] = useState(state.username);
   const [role, setRole] = useState(state.role);
   const navigate = useNavigate();
+  const { error, setError, showAlert, showAlertFunction, hideAlertFunction } =
+    useContext(AlertContext);
 
   useEffect(() => {
     // console.log("Hitting userInfo for user_id : ", state.user_id);
@@ -73,16 +87,28 @@ export default function Profile({ user }) {
       phone_number: phoneNumber,
     };
 
-    updateUserInfo(state.user_id, payload)
-      .then((response) => {
-        // console.log("Response after updating User profile : ", response);
-        // navigate("/main");
-      })
-      .catch((error) => {
-        // console.log("Error while updating user info : ", error.message);
-      });
+    const { error } = schema.validate(payload, { abortEarly: false });
+    if (error) {
+      const errorMessage = error.details
+        .map((detail) => detail.message)
+        .join(", ");
+      setError(errorMessage);
+      showAlertFunction();
+    } else {
+      updateUserInfo(state.user_id, payload)
+        .then((response) => {
+          setError("Updated successfully");
+          setAlertClass("success");
+          showAlert(true);
+          // console.log("Response after updating User profile : ", response);
+          // navigate("/main");
+        })
+        .catch((error) => {
+          // console.log("Error while updating user info : ", error.message);
+        });
 
-      navigate("/updateAccount", {state: {navigateBackTo: "account"}});
+      navigate("/updateAccount", { state: { navigateBackTo: "account" } });
+    }
   };
 
   return (
@@ -146,6 +172,17 @@ export default function Profile({ user }) {
                 </div>
               </div>
             </Form>
+            {showAlert && (
+              <MyToast
+                bg={alertClass}
+                show={showAlert}
+                onClose={() => {
+                  hideAlertFunction();
+                  setError("");
+                }}
+                message={error}
+              />
+            )}
           </div>
         </div>
       </div>
