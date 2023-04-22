@@ -23,6 +23,18 @@ export default function CreateEvent({
   setError,
   error,
 }) {
+  const eventTags = [
+    "Students Organized Events",
+    "Professors Organized Events",
+    "Speakers Organized Events",
+    "Northeastern's Management Events",
+    "Khoury College of Computer Science Organized Events",
+    "College of Engineering Organized Events",
+    "College of Professional Studies Organized Events",
+    "College of Science Organized Events",
+    "D'Amore College of Management Events",
+  ];
+
   const schema = Joi.object({
     title: Joi.string().min(2).required().strict(),
     description: Joi.string().min(2).required(),
@@ -43,9 +55,9 @@ export default function CreateEvent({
       )
       .required(),
     startDate: Joi.date().iso().min("now").required(),
-    startTime: Joi.date().iso().required(),
-    endTime : Joi.date().iso().greater(Joi.ref('startTime')).required(),
     endDate: Joi.date().iso().min(Joi.ref("startDate")).required(),
+    startTime: Joi.date().min(Joi.ref("startDate")).required(),
+    endTime: Joi.date().greater(Joi.ref("startTime")).required(),
     enteredLocation: Joi.string().min(2).required(),
   });
 
@@ -56,8 +68,10 @@ export default function CreateEvent({
     price: 0,
     numberOfTickets: 0,
     selectedTag: "",
-    startDate: new Date(),
-    endDate: new Date(),
+    // startDate: new Date().toISOString(),
+    // endDate: new Date().toISOString(),
+    // startTime: "",
+    // endTime: "",
     enteredLocation: "",
   });
 
@@ -138,9 +152,9 @@ export default function CreateEvent({
           lng: mapsLocation.split(",")[1],
         },
         category: selectedTag,
-        date: startDate.toISOString().substring(0, 10),
-        startTime: startTime.toISOString(),
-        endTime: endTime.toISOString(),
+        date: formData.startDate.substring(0, 10),
+        startTime: startTime,
+        endTime: endTime,
         organizer: state.user_id,
         imageUrl: formData.imageUrl,
         price: formData.price,
@@ -167,6 +181,48 @@ export default function CreateEvent({
       }
     } else {
       // Validate Start Time, end Time
+      if (
+        errorValidation.hasOwnProperty("selectedTag") &&
+        eventTags.includes(formData.selectedTag)
+      ) {
+        delete errorValidation.selectedTag;
+        const payload = {
+          title: formData.title,
+          description: formData.description,
+          location: {
+            lat: mapsLocation.split(",")[0],
+            lng: mapsLocation.split(",")[1],
+          },
+          category: selectedTag,
+          date: formData.startDate.substring(0, 10),
+          startTime: formData.startDate,
+          endTime: formData.endDate,
+          organizer: state.user_id,
+          imageUrl: formData.imageUrl,
+          price: formData.price,
+          numberOfTickets: formData.numberOfTickets,
+        };
+        try {
+          const response = await fetchCreateEvent(payload);
+          if (response.data.success) {
+            setShowAlert(true);
+            setAlertClass("success");
+            setError("Event Created Successfully!!!");
+            setTimeout(() => {
+              navigate("/main");
+            }, 1000);
+          } else {
+            setAlertClass("danger");
+            setError(response.data.error);
+            setShowAlert(true);
+          }
+        } catch (error) {
+          setAlertClass("Danger");
+          setError("Invalid Data In Form");
+          setShowAlert(true);
+        }
+      }
+
       let errorString = "";
       console.log("Form Data : ", formData);
       console.log("errorValidation :", errorValidation);
