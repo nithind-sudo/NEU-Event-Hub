@@ -17,6 +17,7 @@ import Favorites from "./pages/Favorites/Favorites";
 import MyTickets from "./pages/MyTickets/MyTickets";
 import MyToast from "./components/ui/Toast";
 import LogoutContext from "./contexts/LogoutContext";
+import { AlertProvider } from "./contexts/AlertContext";
 import EventDetailsPage from "./pages/EventDetailsPage/EventDetailsPage";
 import ShowAllEvents from "./pages/ShowAllEvents/ShowAllEvents";
 import UpcomingEvents from "./pages/UpcomingEvents/UpcomingEvents";
@@ -80,14 +81,124 @@ function Main() {
 
   return (
     <React.Fragment>
-      <LogoutContext.Provider value={onLogout}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-                <LandingPage handlelogout={onLogout} />
-              ) : (
+      <AlertProvider>
+        <LogoutContext.Provider value={onLogout}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
+                  <LandingPage handlelogout={onLogout} />
+                ) : (
+                  <Login
+                    onLogin={onLogin}
+                    error={error}
+                    setError={setError}
+                    showAlert={showAlert}
+                    setShowAlert={setShowAlert}
+                  />
+                )
+              }
+            ></Route>
+
+            <Route
+              path="/main"
+              element={
+                state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
+                  <LandingPage handlelogout={onLogout} />
+                ) : (
+                  <Login
+                    onLogin={onLogin}
+                    error={error}
+                    setError={setError}
+                    showAlert={showAlert}
+                    setShowAlert={setShowAlert}
+                  />
+                )
+              }
+            ></Route>
+
+            <Route
+              path="/category"
+              element={<CategoryView handlelogout={onLogout} />}
+            ></Route>
+            <Route
+              path="/category/:categoryName"
+              element={<Category handlelogout={onLogout} />}
+            ></Route>
+
+            <Route
+              path="/allEvents"
+              element={<ShowAllEvents handlelogout={onLogout} />}
+            ></Route>
+
+            <Route
+              path="/login"
+              element={
+                state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
+                  <LandingPage handlelogout={onLogout} />
+                ) : (
+                  <Login
+                    onLogin={onLogin}
+                    error={error}
+                    setError={setError}
+                    showAlert={showAlert}
+                    setShowAlert={setShowAlert}
+                  />
+                )
+              }
+            ></Route>
+
+            <Route
+              path="/signup"
+              element={
+                <SignUp
+                  handlelogout={onLogout}
+                  error={error}
+                  setError={setError}
+                  showAlert={showAlert}
+                  setShowAlert={setShowAlert}
+                />
+              }
+            ></Route>
+            <Route
+              path="/createEvent"
+              element={
+                <CreateEvent
+                  handlelogout={onLogout}
+                  error={error}
+                  setError={setError}
+                  showAlert={showAlert}
+                  setShowAlert={setShowAlert}
+                />
+              }
+            ></Route>
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/tickets" element={<MyTickets />} />
+
+            <Route
+              path="/category"
+              element={<CategoryView handlelogout={onLogout} />}
+            ></Route>
+            <Route
+              path="/category/:categoryName"
+              element={<Category handlelogout={onLogout} />}
+            ></Route>
+            <Route
+              path="/account"
+              element={
+                <MyAccount
+                  handlelogout={onLogout}
+                  error={error}
+                  setError={setError}
+                  showAlert={showAlert}
+                  setShowAlert={setShowAlert}
+                />
+              }
+            ></Route>
+            <Route
+              path="/login"
+              element={
                 <Login
                   onLogin={onLogin}
                   error={error}
@@ -95,106 +206,18 @@ function Main() {
                   showAlert={showAlert}
                   setShowAlert={setShowAlert}
                 />
-              )
-            }></Route>
-
-          <Route
-            path="/main"
-            element={
-              state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-                <LandingPage handlelogout={onLogout} />
-              ) : (
-                <Login
-                  onLogin={onLogin}
-                  error={error}
-                  setError={setError}
-                  showAlert={showAlert}
-                  setShowAlert={setShowAlert}
-                />
-              )
-            }></Route>
-
-          <Route
-            path="/category"
-            element={<CategoryView handlelogout={onLogout} />}></Route>
-          <Route
-            path="/category/:categoryName"
-            element={<Category handlelogout={onLogout} />}></Route>
-
-          <Route
-            path="/allEvents"
-            element={<ShowAllEvents handlelogout={onLogout} />}></Route>
-
-          <Route
-            path="/login"
-            element={
-              state.loginStatus === LOGIN_STATUS.IS_LOGGED_IN ? (
-                <LandingPage handlelogout={onLogout} />
-              ) : (
-                <Login
-                  onLogin={onLogin}
-                  error={error}
-                  setError={setError}
-                  showAlert={showAlert}
-                  setShowAlert={setShowAlert}
-                />
-              )
-            }></Route>
-
-          <Route
-            path="/signup"
-            element={
-              <SignUp
-                handlelogout={onLogout}
-                error={error}
-                setError={setError}
-                showAlert={showAlert}
-                setShowAlert={setShowAlert}
-              />
-            }></Route>
-          <Route
-            path="/createEvent"
-            element={
-              <CreateEvent
-                handlelogout={onLogout}
-                error={error}
-                setError={setError}
-                showAlert={showAlert}
-                setShowAlert={setShowAlert}
-              />
-            }></Route>
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/tickets" element={<MyTickets />} />
-
-          <Route
-            path="/category"
-            element={<CategoryView handlelogout={onLogout} />}></Route>
-          <Route
-            path="/category/:categoryName"
-            element={<Category handlelogout={onLogout} />}></Route>
-          <Route
-            path="/account"
-            element={<MyAccount handlelogout={onLogout} />}></Route>
-          <Route
-            path="/login"
-            element={
-              <Login
-                onLogin={onLogin}
-                error={error}
-                setError={setError}
-                showAlert={showAlert}
-                setShowAlert={setShowAlert}
-              />
-            }></Route>
-          <Route path="/event/:eventID" element={<EventDetailsPage />} />
-          <Route path="/attendedEvents" element={<AttendedEvents />} />
-          <Route path="/searchEvents" element={<SearchEvents />} />
-          <Route path="/updateAccount" element={<MyAccountEmpty />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/badPayment" element={<BadPayment />} />
-          <Route path="/successPayment" element={<SuccessPayment />} />
-        </Routes>
-      </LogoutContext.Provider>
+              }
+            ></Route>
+            <Route path="/event/:eventID" element={<EventDetailsPage />} />
+            <Route path="/attendedEvents" element={<AttendedEvents />} />
+            <Route path="/searchEvents" element={<SearchEvents />} />
+            <Route path="/updateAccount" element={<MyAccountEmpty />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/badPayment" element={<BadPayment />} />
+            <Route path="/successPayment" element={<SuccessPayment />} />
+          </Routes>
+        </LogoutContext.Provider>
+      </AlertProvider>
     </React.Fragment>
   );
 }
