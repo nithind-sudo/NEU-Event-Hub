@@ -11,7 +11,7 @@ const SuccessPayment = () => {
   let location = useLocation();
   location.state.event[0].numberOfTickets = location.state.numberOfSeats;
   const getRegisteredEvents = () => {
-    navigate("/registeredEvents");
+    navigate("/account");
   };
   const { state, dispatch } = EventManagementState();
   console.log("Current state in Success Payment : ", state);
